@@ -16,6 +16,41 @@ Formato de cada entrada:
 
 ---
 
+## 2026-09-28 — Fase 1: agente de macOS
+
+**Hecho:** `macos/` completo: `Selector`, `Corpus`, `Store`, `Scheduler`, `CardPanel`,
+`MenuBarController` y `main.swift`, más `build.sh`, `install.sh` y `uninstall.sh`.
+Compila con `swiftc` contra el SDK de Command Line Tools, sin Xcode, y produce un
+`TagsCC.app` firmado ad-hoc.
+
+**Verificado ejecutando, no asumido:**
+- La app arranca, carga el corpus, elige una tarjeta y registra el estado.
+- **Swift y JavaScript dan el mismo índice en las seis ventanas horarias de un día.**
+  Es la prueba que valida todo el diseño sin servidor (ADR 0003): se corrió el selector
+  de Swift en un arnés aparte y se comparó con la implementación JS de `pipeline/lib.mjs`.
+- La tarjeta se ve correctamente en modo oscuro y el ejemplo se puede seleccionar.
+
+**Decidido:**
+- El código del nivel superior obligó a nombrar el punto de entrada `main.swift`; Swift no
+  lo permite en otros archivos.
+- El menú de la barra ofrece "Explorar" por categoría en lugar de un campo de búsqueda:
+  para un corpus de 12–150 tarjetas es más útil y no necesita una ventana propia.
+- `build.sh` escribe la ruta del repo en el `Info.plist` (`TCCCorpusPath`), así editar una
+  tarjeta y correr `build.mjs` se ve sin recompilar la app.
+
+**Dos defectos encontrados al mirar la pantalla, no el código:**
+1. El bloque `example` se truncaba a una línea: le faltaba `fixedSize` vertical.
+2. El `body` conservaba los saltos de línea del YAML y quebraba frases a la mitad. Se
+   resolvió normalizando en `build.mjs` con semántica de markdown (salto simple = espacio,
+   línea en blanco = párrafo), no en los clientes: si cada cliente reflowara por su
+   cuenta, Mac e iPhone podrían partir el texto distinto. `example` se deja intacto.
+
+**Abierto:** la notificación de desbloqueo `com.apple.screenIsUnlocked` no se pudo probar
+de forma automatizada; requiere bloquear la pantalla a mano. El timer de intervalo, que es
+el disparador garantizado, sí quedó verificado.
+
+---
+
 ## 2026-09-28 — Fase 0: repo y documentación técnica
 
 **Hecho:** Se creó el repo con `CLAUDE.md`, `docs/ARCHITECTURE.md`, `docs/SDD.md`, esta

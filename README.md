@@ -40,5 +40,5 @@ Para el iPhone: ver [ios/INSTALACION-IPHONE.md](ios/INSTALACION-IPHONE.md)
 
 ## Estado
 
-Fase 0 completa: documentación, schema, pipeline y 12 tarjetas semilla.
-Siguiente: el agente de macOS.
+Fases 0 y 1 completas: documentación, pipeline, 12 tarjetas y el agente de macOS.
+Siguiente: pipeline de contenido y widget de iPhone.

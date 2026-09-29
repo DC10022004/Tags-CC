@@ -21,12 +21,28 @@ try {
 
 // Orden por id: es parte del contrato, porque la selección determinista usa el índice
 // del arreglo (SDD §1.2 y ADR 0003). Reordenar cambiaría qué tag se muestra.
+/**
+ * Reflow del body con semántica de markdown: un salto de línea simple es un corte
+ * blando (se une con espacio) y una línea en blanco es un párrafo.
+ * Se hace acá, una sola vez, y no en cada cliente: si cada uno reflowara por su cuenta,
+ * Mac y iPhone podrían partir el texto distinto. `example` NO se toca, porque ahí los
+ * saltos de línea sí son significativos.
+ */
+function reflow(text) {
+  return text
+    .split(/\n\s*\n/)
+    .map((p) => p.split("\n").map((l) => l.trim()).filter(Boolean).join(" "))
+    .filter(Boolean)
+    .join("\n\n");
+}
+
 const tags = loadCards()
   .map(({ data }) => {
     const t = {};
     for (const f of FIELDS) {
       if (data[f] === undefined || data[f] === "") continue;
-      t[f] = typeof data[f] === "string" ? data[f].trim() : data[f];
+      if (typeof data[f] !== "string") { t[f] = data[f]; continue; }
+      t[f] = f === "example" ? data[f].replace(/\s+$/, "") : reflow(data[f]);
     }
     return t;
   })

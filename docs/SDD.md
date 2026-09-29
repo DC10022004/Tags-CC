@@ -249,6 +249,12 @@ ya tiene Diego instalados). Registra nombres y rutas, nunca valores de configura
 nada de lo que lee entra al corpus publicado. Es una precaución deliberada: el repo es
 público.
 
+`build.mjs` normaliza `body` con semántica de markdown antes de publicarlo: un salto de
+línea simple se une con espacio, una línea en blanco separa párrafos. Se hace en el build
+y no en los clientes a propósito — si cada cliente reflowara por su cuenta, Mac e iPhone
+podrían partir el mismo texto de forma distinta. `example` se deja intacto, porque ahí los
+saltos de línea son parte del comando.
+
 El parser de YAML es propio y **mínimo** por el invariante de cero dependencias: soporta
 solo el subconjunto que usan las tarjetas (claves de primer nivel, strings, listas `[a, b]`
 y bloques `|`). No es un YAML completo; si una tarjeta necesita más, se simplifica la

@@ -26,7 +26,15 @@ frecuentemente lo será. Empieza por el verbo o por lo que la cosa *es*.
 Si no cabe en 120 caracteres, el problema casi nunca es la redacción: es que la tarjeta
 abarca dos conceptos. Pártela.
 
-**`body`** — Tres a seis líneas. Qué es, cómo funciona, y el límite o la trampa que
+**`body`** — Tres a seis líneas. Puedes cortar las líneas donde te resulte cómodo
+escribir: el build las reflowa con semántica de markdown, así que un salto simple se une
+con espacio y una línea en blanco separa párrafos. Si quieres un corte de verdad, deja
+una línea en blanco.
+
+En `example` es al revés: los saltos de línea se respetan tal cual, porque ahí son parte
+del comando.
+
+Tres a seis líneas. Qué es, cómo funciona, y el límite o la trampa que
 importa. La trampa es lo que hace útil la tarjeta: "los hooks corren con tu shell y sin
 confirmación" vale más que otra frase describiendo la sintaxis.
 
