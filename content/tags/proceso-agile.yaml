@@ -1,0 +1,14 @@
+id: proceso-agile
+term: Desarrollo ágil (agile)
+category: proceso
+level: basico
+summary: "Entregar software en incrementos pequeños y frecuentes, ajustando el plan con lo que se aprende en cada uno."
+body: |
+  Nace del Manifiesto Ágil de 2001: software funcionando y respuesta al cambio por encima
+  de planes detallados y documentación exhaustiva.
+  La trampa: adoptar las ceremonias (reuniones diarias, tableros) sin entregar
+  incrementos reales. Ágil es acortar el ciclo de aprendizaje, no hacer reuniones.
+why: "Pensar en entregas pequeñas y verificables funciona igual para proyectos personales."
+source: https://agilemanifesto.org/iso/es/manifesto.html
+related: [proceso-scrum, infra-devops]
+updated: 2026-09-29

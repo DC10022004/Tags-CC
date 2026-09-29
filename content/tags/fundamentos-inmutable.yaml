@@ -1,0 +1,18 @@
+id: fundamentos-inmutable
+term: Inmutable
+category: fundamentos
+level: intermedio
+summary: "Un valor que no cambia después de creado: para 'modificarlo' se crea una copia nueva."
+body: |
+  Los strings son inmutables en casi todos los lenguajes. Un objeto inmutable se puede
+  compartir sin miedo a que otra parte del código lo altere.
+  La trampa en JavaScript: `Object.freeze` es superficial; los objetos anidados siguen
+  siendo modificables. Y `const` no hace nada inmutable.
+example: |
+  const original = [1, 2];
+  const nueva = [...original, 3];  // copia, no modifica
+  console.log(original, nueva);    // [1, 2] [1, 2, 3]
+why: "Muchos bugs de 'se cambió solo' vienen de dos partes del código compartiendo un objeto mutable."
+source: https://developer.mozilla.org/en-US/docs/Glossary/Immutable
+related: [fundamentos-variable, paradigmas-funcional, algoritmos-tupla]
+updated: 2026-09-29

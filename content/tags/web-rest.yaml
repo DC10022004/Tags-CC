@@ -1,0 +1,16 @@
+id: web-rest
+term: REST / API RESTful
+category: web
+level: intermedio
+summary: "Un estilo de API donde cada URL es un recurso y los métodos HTTP dicen qué hacer con él."
+body: |
+  `GET /tags/42` lee, `DELETE /tags/42` borra. Sin estado: cada petición lleva todo lo
+  necesario, incluida la autenticación.
+  La trampa: usar GET para acciones que modifican datos. Los navegadores, cachés y bots
+  asumen que GET es seguro de repetir y pueden dispararlo solos.
+example: |
+  curl -s "https://api.github.com/repos/git/git/pulls?per_page=1" | head -3
+why: "Casi toda API pública es REST; entender el patrón permite adivinar sus endpoints."
+source: https://developer.mozilla.org/en-US/docs/Glossary/REST
+related: [web-http, web-api, web-graphql, datos-crud]
+updated: 2026-09-29

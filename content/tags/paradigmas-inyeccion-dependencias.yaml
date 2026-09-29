@@ -1,0 +1,19 @@
+id: paradigmas-inyeccion-dependencias
+term: Inyección de dependencias
+category: paradigmas
+level: avanzado
+summary: "Pasarle a un objeto lo que necesita desde fuera, en vez de que lo cree por dentro."
+body: |
+  Una función que recibe el reloj como parámetro se puede probar con una fecha fija; una
+  que llama a `new Date()` por dentro, no.
+  No hace falta un framework: casi siempre basta con recibir la dependencia como
+  parámetro del constructor o de la función.
+example: |
+  function saludo(ahora = new Date()) {
+    return ahora.getHours() < 12 ? "buenos días" : "buenas tardes";
+  }
+  console.log(saludo(new Date(2026, 8, 29, 9))); // test con hora fija
+why: "Es lo que permite probar código que depende del tiempo, la red o una base de datos."
+source: https://en.wikipedia.org/wiki/Dependency_injection
+related: [paradigmas-singleton, proceso-mock, proceso-test-unitario]
+updated: 2026-09-29

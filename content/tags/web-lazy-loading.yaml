@@ -1,0 +1,16 @@
+id: web-lazy-loading
+term: Lazy loading
+category: web
+level: intermedio
+summary: "Cargar un recurso solo cuando se necesita, no al inicio, para que lo primero aparezca antes."
+body: |
+  Las imágenes fuera de pantalla se cargan al acercarse con el scroll; el código de una
+  sección, al entrar en ella.
+  La trampa: aplicarlo a lo que se ve de entrada lo hace más lento, porque el navegador
+  espera para descubrir que sí lo necesitaba.
+example: |
+  <img src="diagrama.png" loading="lazy" alt="Arquitectura">
+why: "Mejora el tiempo de carga sin quitar contenido, solo reordenando cuándo llega."
+source: https://developer.mozilla.org/en-US/docs/Web/Performance/Guides/Lazy_loading
+related: [web-renderizado, arquitectura-latencia]
+updated: 2026-09-29

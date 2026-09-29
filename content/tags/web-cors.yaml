@@ -1,0 +1,16 @@
+id: web-cors
+term: CORS
+category: web
+level: avanzado
+summary: "Regla del navegador que bloquea peticiones a otro dominio salvo que ese servidor lo permita con cabeceras."
+body: |
+  Si tu página en `localhost:3000` llama a `api.otro.com`, el navegador pregunta y solo
+  entrega la respuesta si el servidor responde con `Access-Control-Allow-Origin`.
+  La trampa: CORS lo aplica el navegador, no el servidor. curl o un backend no tienen
+  CORS. Por eso "en Postman funciona pero en el navegador no".
+example: |
+  curl -sI -H "Origin: https://ejemplo.com" https://api.github.com | grep -i access-control-allow-origin
+why: "Cuando una petición funciona en curl y falla en el navegador, casi siempre es CORS."
+source: https://developer.mozilla.org/en-US/docs/Web/HTTP/CORS
+related: [web-http, arquitectura-backend, web-localhost]
+updated: 2026-09-29

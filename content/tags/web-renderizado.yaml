@@ -1,0 +1,14 @@
+id: web-renderizado
+term: Renderizado (CSR y SSR)
+category: web
+level: avanzado
+summary: "Generar el HTML que ves: en el navegador con JavaScript (CSR) o en el servidor antes de enviarlo (SSR)."
+body: |
+  Con CSR la página llega casi vacía y JavaScript la arma; con SSR llega completa y
+  aparece antes. Next.js mezcla ambos por página o por componente.
+  La trampa del SSR: el código corre en dos sitios. Usar `window` o `localStorage` en un
+  componente de servidor falla, porque en el servidor no existen.
+why: "Explica errores como 'window is not defined' en frameworks como Next.js."
+source: https://developer.mozilla.org/en-US/docs/Glossary/SSR
+related: [web-nextjs, web-dom, arquitectura-frontend]
+updated: 2026-09-29

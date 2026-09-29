@@ -1,0 +1,15 @@
+id: datos-json
+term: JSON
+category: datos
+level: basico
+summary: "Formato de texto para intercambiar datos: objetos {}, listas [], strings, números, true/false y null."
+body: |
+  Es el idioma común de las APIs web y el contrato de este proyecto (`dist/tags.json`).
+  La trampa: es estricto. No admite comentarios ni comas finales, y las claves van
+  siempre entre comillas dobles. Un solo carácter fuera de lugar invalida el archivo.
+example: |
+  node -e 'console.log(JSON.stringify({ id: "git-commit", related: [] }, null, 2))'
+why: "Si un JSON 'no carga', busca una coma de más al final o comillas simples."
+source: https://developer.mozilla.org/en-US/docs/Glossary/JSON
+related: [datos-yaml, datos-serializacion, fundamentos-parsing]
+updated: 2026-09-29

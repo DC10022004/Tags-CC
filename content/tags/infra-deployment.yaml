@@ -1,0 +1,17 @@
+id: infra-deployment
+term: Deployment (despliegue)
+category: infra
+level: basico
+summary: "Publicar una versión de la app en un servidor para que otros la usen desde una URL."
+body: |
+  En plataformas como Vercel, cada deploy genera una URL propia, y uno se marca como
+  producción. Un redeploy vuelve a publicar la misma versión, por ejemplo tras cambiar
+  una variable de entorno.
+  La trampa: cambiar una variable de entorno no afecta al deploy en curso. Hace falta un
+  redeploy para que la tome.
+example: |
+  vercel --prod
+why: "Explica por qué cambiar una variable en el panel 'no hace nada' hasta redesplegar."
+source: https://vercel.com/docs/deployments
+related: [infra-deploy-automatico, infra-root-directory, infra-paas]
+updated: 2026-09-29

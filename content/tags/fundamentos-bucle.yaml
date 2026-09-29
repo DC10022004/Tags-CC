@@ -1,0 +1,18 @@
+id: fundamentos-bucle
+term: Bucle (loop) e iteración
+category: fundamentos
+level: basico
+summary: "Repite un bloque mientras se cumpla una condición; cada vuelta es una iteración."
+body: |
+  `for` cuando sabes cuántas vueltas, `while` cuando depende de algo que cambia, y
+  `for...of` para recorrer una colección.
+  Las trampas: el bucle infinito (la condición nunca se vuelve falsa) y el error por uno
+  (off-by-one), que recorre un elemento de más o de menos por usar `<=` en vez de `<`.
+example: |
+  const tags = ["hooks", "git", "sql"];
+  for (const t of tags) console.log(t);
+  for (let i = 0; i < tags.length; i++) console.log(i, tags[i]); // < y no <=
+why: "El off-by-one es de los bugs más comunes al recorrer listas; saber buscarlo ahorra tiempo."
+source: https://developer.mozilla.org/en-US/docs/Web/JavaScript/Guide/Loops_and_iteration
+related: [fundamentos-recursion, algoritmos-array, fundamentos-nested]
+updated: 2026-09-29

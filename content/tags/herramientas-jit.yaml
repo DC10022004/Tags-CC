@@ -1,0 +1,14 @@
+id: herramientas-jit
+term: Compilador JIT
+category: herramientas
+level: avanzado
+summary: "Compila el código mientras el programa corre, optimizando las partes que más se usan."
+body: |
+  Los motores de JavaScript como V8 (Node, Chrome) empiezan interpretando y compilan a
+  código máquina las funciones que se ejecutan muchas veces.
+  Por eso un benchmark de JS da tiempos distintos en las primeras vueltas: el código
+  todavía se está "calentando".
+why: "Explica por qué JavaScript, siendo interpretado, puede ser tan rápido."
+source: https://en.wikipedia.org/wiki/Just-in-time_compilation
+related: [herramientas-compilador, herramientas-runtime, fundamentos-javascript]
+updated: 2026-09-29

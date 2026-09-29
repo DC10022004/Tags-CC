@@ -1,0 +1,19 @@
+id: fundamentos-sincrono-asincrono
+term: Síncrono vs asíncrono
+category: fundamentos
+level: intermedio
+summary: "Síncrono espera a que cada paso termine; asíncrono lanza una tarea lenta y sigue mientras llega el resultado."
+body: |
+  Leer un archivo o llamar a una API es lento. En modo asíncrono el programa no se
+  congela mientras espera.
+  La trampa: olvidar `await`. La función sigue sin esperar y la variable queda con una
+  `Promise` pendiente en vez del dato.
+example: |
+  const esperar = (ms) => new Promise((r) => setTimeout(r, ms));
+  console.log("1");
+  esperar(100).then(() => console.log("3"));
+  console.log("2");   // imprime 1, 2, 3
+why: "Explica por qué un console.log muestra 'Promise { <pending> }' en vez del dato."
+source: https://developer.mozilla.org/en-US/docs/Glossary/Asynchronous
+related: [fundamentos-promesa, fundamentos-callback, arquitectura-concurrencia]
+updated: 2026-09-29

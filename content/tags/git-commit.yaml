@@ -1,0 +1,17 @@
+id: git-commit
+term: Commit
+category: git
+level: basico
+summary: "Una foto guardada de tus cambios con un mensaje que explica qué hiciste; queda solo en tu computadora."
+body: |
+  Primero eliges qué entra con `git add` (staging) y luego `git commit` guarda la foto.
+  Un buen mensaje dice por qué, no solo qué.
+  La trampa: commitear no es subir. Hasta que haces push, el commit existe solo en tu
+  máquina y nadie más lo ve.
+example: |
+  git add content/tags/git-commit.yaml
+  git commit -m "Agrega tarjeta de commit"
+why: "Commits pequeños con buenos mensajes hacen fácil encontrar y revertir un cambio que rompió algo."
+source: https://git-scm.com/docs/git-commit
+related: [git-push, git-status, git-control-versiones]
+updated: 2026-09-29

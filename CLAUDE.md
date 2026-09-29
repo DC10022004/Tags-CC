@@ -1,8 +1,9 @@
 # Tags CC
 
-Sistema de microaprendizaje que muestra un concepto de Claude Code (un "tag") en una
-tarjeta al desbloquear la Mac y cada pocas horas, y el mismo concepto como widget en la
-pantalla de bloqueo del iPhone.
+Sistema de microaprendizaje que muestra un concepto de Claude Code o de programación
+general (un "tag") en una tarjeta al desbloquear la Mac y cada pocas horas, y el mismo
+concepto como widget en la pantalla de bloqueo del iPhone. El corpus de programación
+general se sumó en el ADR 0005.
 
 El objetivo no es documentar Claude Code. Es **provocar recuerdo espaciado**: que Diego
 tropiece con un concepto que no domina, en un momento en que puede aplicarlo.

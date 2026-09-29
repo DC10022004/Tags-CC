@@ -1,0 +1,15 @@
+id: herramientas-archivo-oculto
+term: Archivo oculto
+category: herramientas
+level: basico
+summary: "Archivo cuyo nombre empieza con punto, como .env o .gitignore; el sistema no lo muestra por defecto."
+body: |
+  Se ocultan para no borrarlos por accidente, no por seguridad: cualquiera puede verlos.
+  En Finder se muestran con `Cmd + Shift + .`. En la terminal, `ls -a`. VS Code sí los
+  muestra en el explorador.
+example: |
+  ls -a
+why: "Si 'no encuentras' el .env o la carpeta .claude, probablemente solo está oculta."
+source: https://en.wikipedia.org/wiki/Hidden_file_and_hidden_directory
+related: [seguridad-env-file, git-gitignore, cli-claude-directory]
+updated: 2026-09-29

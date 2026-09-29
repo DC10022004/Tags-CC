@@ -1,0 +1,14 @@
+id: proceso-scrum
+term: Scrum
+category: proceso
+level: intermedio
+summary: "Un marco ágil que organiza el trabajo en sprints de 1 a 4 semanas, cada uno con un incremento usable."
+body: |
+  Tiene tres roles (Product Owner, Scrum Master, equipo de desarrollo) y eventos fijos:
+  planificación, reunión diaria, revisión y retrospectiva.
+  La trampa: tratar el sprint como un plazo de entrega fijo e intocable. Su propósito es
+  inspeccionar y adaptar, no comprometerse con todo por adelantado.
+why: "Es el marco de trabajo más común en equipos de software; conocer su vocabulario ayuda a integrarse."
+source: https://scrumguides.org/scrum-guide.html
+related: [proceso-agile]
+updated: 2026-09-29

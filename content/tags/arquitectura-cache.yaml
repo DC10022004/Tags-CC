@@ -1,0 +1,16 @@
+id: arquitectura-cache
+term: Caché
+category: arquitectura
+level: intermedio
+summary: "Guardar una copia de un resultado costoso para reutilizarla en vez de volver a calcularlo o descargarlo."
+body: |
+  Existe en todos los niveles: el navegador, el CDN, la base de datos, la CPU.
+  La trampa: servir datos viejos. Por eso toda caché necesita una regla de invalidación.
+  GitHub raw cachea unos minutos, así que un cambio al corpus no aparece en el iPhone al
+  instante.
+example: |
+  curl -sI https://raw.githubusercontent.com/git/git/master/README.md | grep -i cache-control
+why: "Si 'ya lo cambié pero sigue igual', probablemente estás viendo una copia en caché."
+source: https://developer.mozilla.org/en-US/docs/Web/HTTP/Caching
+related: [arquitectura-latencia, algoritmos-buffer, infra-deployment]
+updated: 2026-09-29

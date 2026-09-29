@@ -1,0 +1,17 @@
+id: herramientas-nodejs
+term: Node.js
+category: herramientas
+level: basico
+summary: "El runtime que ejecuta JavaScript fuera del navegador: en tu terminal o en un servidor."
+body: |
+  Trae módulos para archivos, red y procesos (`node:fs`, `node:http`). El pipeline de
+  este proyecto corre en Node 22 sin paquetes externos.
+  La trampa: la versión. Un proyecto puede exigir una versión concreta; si tienes otra,
+  falla con errores confusos. Revisa `node -v` primero.
+example: |
+  node -v
+  node pipeline/validate.mjs
+why: "Muchos errores raros de un proyecto JS se deben a una versión de Node distinta."
+source: https://nodejs.org/en/learn/getting-started/introduction-to-nodejs
+related: [herramientas-npm, herramientas-runtime, fundamentos-javascript]
+updated: 2026-09-29

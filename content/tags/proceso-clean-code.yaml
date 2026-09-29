@@ -1,0 +1,14 @@
+id: proceso-clean-code
+term: Código limpio (clean code)
+category: proceso
+level: intermedio
+summary: "Código fácil de leer y cambiar: nombres claros, funciones cortas, sin duplicación ni complejidad innecesaria."
+body: |
+  El código se lee muchas más veces de las que se escribe; optimizar para el lector es
+  optimizar el costo real.
+  La trampa: convertirlo en dogma. Partir todo en funciones de tres líneas o abstraer
+  algo usado una sola vez también empeora la lectura.
+why: "Un código claro es también más fácil de revisar cuando lo escribe Claude."
+source: https://en.wikipedia.org/wiki/Robert_C._Martin
+related: [proceso-refactorizacion, proceso-estilo-codigo, fundamentos-funcion]
+updated: 2026-09-29

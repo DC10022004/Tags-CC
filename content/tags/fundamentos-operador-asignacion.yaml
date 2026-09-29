@@ -1,0 +1,19 @@
+id: fundamentos-operador-asignacion
+term: Operador de asignación
+category: fundamentos
+level: basico
+summary: "= guarda un valor en una variable; no compara. Para comparar en JavaScript se usa ===."
+body: |
+  `=` asigna, `==` compara convirtiendo tipos, `===` compara sin convertir.
+  Hay atajos: `+=`, `-=`, `??=` (asigna solo si está vacío).
+  La trampa: `==` hace `0 == ""` verdadero. En JavaScript usa siempre `===` salvo que
+  sepas exactamente por qué no.
+example: |
+  let n = 5;
+  n += 2;                  // 7
+  console.log(0 == "");    // true  (convierte tipos)
+  console.log(0 === "");   // false
+why: "Confundir = con === dentro de un if es un bug que no da error: simplemente hace otra cosa."
+source: https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Operators#assignment_operators
+related: [fundamentos-operador-aritmetico, fundamentos-variable]
+updated: 2026-09-29

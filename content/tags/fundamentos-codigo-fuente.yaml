@@ -1,0 +1,14 @@
+id: fundamentos-codigo-fuente
+term: Código fuente (source code)
+category: fundamentos
+level: basico
+summary: "El texto legible por personas en el que se escribe un programa, antes de compilarlo o ejecutarlo."
+body: |
+  Son los archivos `.js`, `.py`, `.swift` que editas. La máquina no los entiende
+  directamente: un compilador los traduce o un intérprete los ejecuta.
+  Lo que se versiona con Git es el código fuente, no el resultado compilado. Este proyecto
+  es una excepción deliberada: `dist/` se commitea porque el iPhone no puede compilar.
+why: "Distinguir fuente de artefacto generado te dice qué archivos editar y cuáles regenerar."
+source: https://es.wikipedia.org/wiki/C%C3%B3digo_fuente
+related: [herramientas-compilador, herramientas-compilacion, git-repositorio]
+updated: 2026-09-29

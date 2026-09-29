@@ -1,0 +1,16 @@
+id: proceso-linter
+term: Linter
+category: proceso
+level: intermedio
+summary: "Una herramienta que revisa el código sin ejecutarlo y avisa de errores probables y malas prácticas."
+body: |
+  ESLint para JavaScript, Ruff para Python, SwiftLint para Swift. Detecta variables sin
+  usar, comparaciones sospechosas, imports rotos.
+  La diferencia con un formateador (Prettier): el linter encuentra problemas; el
+  formateador solo acomoda espacios y saltos de línea.
+example: |
+  npx eslint .
+why: "Detecta en segundos errores que en una revisión humana pasarían desapercibidos."
+source: https://es.wikipedia.org/wiki/Lint
+related: [proceso-estilo-codigo, proceso-clean-code, hooks-posttooluse]
+updated: 2026-09-29

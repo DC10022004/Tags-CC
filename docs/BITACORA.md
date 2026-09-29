@@ -16,6 +16,37 @@ Formato de cada entrada:
 
 ---
 
+## 2026-09-29 — Corpus v2: programación general (207 tarjetas nuevas)
+
+**Hecho:** se sumaron 207 tarjetas en 12 categorías nuevas (ADR 0005), a partir del
+glosario de 200 términos de MoureDev (PDF) y del diccionario técnico de Diego en Notion.
+El corpus pasa de 60 a 267 tarjetas y de 10 a 22 categorías.
+
+**Decidido:**
+- Las fuentes eligen los conceptos; el texto es propio y sigue la guía editorial. Las
+  definiciones del PDF son de una línea y no dicen la trampa.
+- `source` apunta a documentación pública (MDN, git-scm, Node, Supabase, Vercel,
+  Wikipedia). Se comprobaron las 207 URLs: 3 daban 404/403 y se reemplazaron.
+- Los términos de Notion se generalizaron: nada de nombres de repos, usuarios ni
+  proyectos ajenos, porque el repo es público.
+- Se fusionaron duplicados del PDF (*Build*/*Compilación*, *Cola*/*FIFO*, *Pila*/*LIFO*,
+  *REST*/*API RESTful*, *Big O*/*Análisis de complejidad*/*Eficiencia*,
+  *Balanceador*/*Balanceo de carga*, *Iteración*/*Bucle*, *Elemento*/*Índice*/*Array*,
+  *Binario*/*Bit*, *Alto*/*Bajo nivel*/*Ensamblador*, *Compresión*/*Zip*,
+  *Serialización*/*Deserialización*, *UI*/*GUI*, *Carga*/*Escalabilidad*). *Workflow* quedó
+  cubierto dentro de `infra-pipeline`.
+
+**Verificado:** los ejemplos en JavaScript se ejecutaron uno por uno con Node 22 y su
+salida coincide con los comentarios; los de shell, Python y Swift que no modifican nada
+también se corrieron. Se corrigieron tres: un JWT sin padding que perdía la llave final,
+una URL con `?` que zsh rompía sin comillas, y un repo de ejemplo con licencia "Other".
+
+**Abierto:** la dilución. Con selección uniforme, una tarjeta de Claude Code aparece ~23 %
+de las veces. Si molesta, la salida propuesta es un filtro de categorías en la Mac
+(ADR 0005).
+
+---
+
 ## 2026-09-28 — El build no era tan determinista como decía
 
 **Hecho:** `manifest.json` se reescribía en cada corrida porque `generated_at` avanzaba

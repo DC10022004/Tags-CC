@@ -1,0 +1,19 @@
+id: algoritmos-array
+term: Array (arreglo)
+category: algoritmos
+level: basico
+summary: "Una lista ordenada de elementos a los que accedes por su índice, que empieza en 0."
+body: |
+  Leer por índice es instantáneo; buscar un valor sin conocer su índice obliga a
+  recorrerla. Cada valor guardado es un elemento.
+  La trampa del índice: el último elemento es `length - 1`. Pedir `arr[arr.length]`
+  no da error en JavaScript, devuelve `undefined`, y el bug se propaga en silencio.
+example: |
+  const tags = ["hooks", "git", "sql"];
+  console.log(tags[0]);               // "hooks"
+  console.log(tags[tags.length - 1]); // "sql"
+  console.log(tags[3]);               // undefined, sin error
+why: "La selección de tarjetas de este proyecto es literalmente tags[índice]; el orden importa."
+source: https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Array
+related: [fundamentos-bucle, algoritmos-tupla, algoritmos-big-o]
+updated: 2026-09-29

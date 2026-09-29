@@ -1,0 +1,14 @@
+id: seguridad-oauth
+term: OAuth
+category: seguridad
+level: avanzado
+summary: "El protocolo detrás de 'Iniciar sesión con Google': das acceso limitado a una app sin darle tu contraseña."
+body: |
+  La app te redirige al proveedor, apruebas los permisos (scopes) y el proveedor le
+  entrega a la app un token con solo esos permisos.
+  La trampa: aceptar scopes sin leerlos. Un permiso de "leer y escribir todo tu correo"
+  es muy distinto de "ver tu email".
+why: "Es cómo se conectan los conectores de Claude a Gmail o Notion sin compartir tu contraseña."
+source: https://oauth.net/2/
+related: [seguridad-token, seguridad-jwt, mcp-connector]
+updated: 2026-09-29

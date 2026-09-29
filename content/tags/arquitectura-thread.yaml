@@ -1,0 +1,14 @@
+id: arquitectura-thread
+term: Thread (hilo)
+category: arquitectura
+level: avanzado
+summary: "Una línea de ejecución dentro de un programa; varios hilos comparten la misma memoria."
+body: |
+  Compartir memoria es rápido y peligroso: dos hilos escribiendo el mismo dato a la vez
+  lo corrompen si no se sincronizan.
+  En apps de Apple, la interfaz solo se puede actualizar desde el hilo principal; hacerlo
+  desde otro produce errores extraños o cierres de la app.
+why: "En apps de Mac y iPhone, tocar la interfaz fuera del hilo principal produce fallos intermitentes."
+source: https://en.wikipedia.org/wiki/Thread_(computing)
+related: [arquitectura-concurrencia, arquitectura-paralelismo]
+updated: 2026-09-29

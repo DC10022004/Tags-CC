@@ -1,0 +1,14 @@
+id: infra-balanceador-carga
+term: Balanceador de carga
+category: infra
+level: avanzado
+summary: "Reparte las peticiones entre varios servidores iguales para que ninguno se sature y la app siga si uno cae."
+body: |
+  Es lo que permite escalar horizontalmente: agregas servidores detrás y el balanceador
+  les distribuye el tráfico.
+  La trampa: guardar la sesión en la memoria de un servidor. La siguiente petición puede
+  ir a otro servidor que no la conoce. El estado compartido va en una base o caché común.
+why: "Explica por qué las apps escalables no guardan estado de usuario en la memoria del servidor."
+source: https://en.wikipedia.org/wiki/Load_balancing_(computing)
+related: [arquitectura-escalabilidad, web-servidor-web]
+updated: 2026-09-29

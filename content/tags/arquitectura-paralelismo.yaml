@@ -1,0 +1,16 @@
+id: arquitectura-paralelismo
+term: Paralelismo
+category: arquitectura
+level: avanzado
+summary: "Ejecutar varias tareas literalmente al mismo tiempo, en distintos núcleos o máquinas."
+body: |
+  Concurrencia es organizar tareas que se intercalan; paralelismo es ejecutarlas a la
+  vez. Un CPU de 8 núcleos puede correr 8 cosas en paralelo.
+  El paralelismo solo ayuda en trabajo de cálculo. Si las tareas pasan el tiempo
+  esperando red o disco, con concurrencia basta.
+example: |
+  sysctl -n hw.ncpu
+why: "Varios subagentes o worktrees en paralelo son el mismo principio aplicado a Claude."
+source: https://en.wikipedia.org/wiki/Parallel_computing
+related: [arquitectura-concurrencia, arquitectura-thread, subagentes-agent-teams]
+updated: 2026-09-29

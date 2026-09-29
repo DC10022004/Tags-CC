@@ -1,0 +1,14 @@
+id: ia-big-data
+term: Big data
+category: ia
+level: intermedio
+summary: "Datos tan grandes, rápidos o variados que no caben en una sola máquina ni en herramientas normales."
+body: |
+  Se describe con las "V": volumen, velocidad y variedad.
+  La trampa: la mayoría de los problemas que parecen big data caben en una laptop. Unos
+  millones de filas se manejan bien con SQLite o pandas; montar infraestructura
+  distribuida sin necesitarla es complejidad gratuita.
+why: "Evita sobredimensionar: probar con herramientas simples antes de montar infraestructura grande."
+source: https://es.wikipedia.org/wiki/Macrodatos
+related: [ia-data-science, arquitectura-batch-processing, arquitectura-escalabilidad]
+updated: 2026-09-29

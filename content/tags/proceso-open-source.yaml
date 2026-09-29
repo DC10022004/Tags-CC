@@ -1,0 +1,16 @@
+id: proceso-open-source
+term: Open source (código abierto)
+category: proceso
+level: basico
+summary: "Software cuyo código es público y se puede usar, modificar y redistribuir según su licencia."
+body: |
+  Git, Linux, Python y Node son open source.
+  La trampa: público no significa "sin reglas". La licencia manda: MIT permite casi
+  todo; GPL obliga a publicar tus cambios si distribuyes el software. Un repo sin
+  licencia, legalmente, no te da permiso de reutilizarlo.
+example: |
+  gh repo view facebook/react --json licenseInfo
+why: "Antes de copiar código de un repo, revisa la licencia: sin ella no tienes permiso."
+source: https://opensource.org/osd
+related: [git-github, herramientas-biblioteca]
+updated: 2026-09-29

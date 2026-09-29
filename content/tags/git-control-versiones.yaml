@@ -1,0 +1,16 @@
+id: git-control-versiones
+term: Control de versiones (Git)
+category: git
+level: basico
+summary: "Un sistema que guarda el historial de cada cambio de un proyecto; Git es el más usado."
+body: |
+  Es como el "control de cambios" de Word, pero para carpetas enteras: puedes ver quién
+  cambió qué, cuándo y por qué, y volver atrás.
+  Git es distribuido: cada copia tiene el historial completo, así que funciona sin
+  internet. Lo que no está commiteado, Git no lo protege.
+example: |
+  git log --oneline -5
+why: "Con historial puedes experimentar sin miedo: cualquier cambio commiteado se puede recuperar."
+source: https://git-scm.com/book/es/v2/Inicio---Sobre-el-Control-de-Versiones-Acerca-del-Control-de-Versiones
+related: [git-repositorio, git-commit, git-github]
+updated: 2026-09-29

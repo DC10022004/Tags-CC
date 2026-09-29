@@ -1,0 +1,16 @@
+id: seguridad-token
+term: Token de acceso
+category: seguridad
+level: intermedio
+summary: "Un valor que prueba que ya te autenticaste; se envía en cada petición en lugar de la contraseña."
+body: |
+  Suele ir en la cabecera `Authorization: Bearer <token>` y expirar tras un tiempo.
+  "Token" también nombra otras cosas: la unidad mínima de un lenguaje para su parser, y
+  el fragmento de texto que procesa un LLM. Por el contexto se sabe cuál.
+  La trampa: un token robado sirve igual que la contraseña hasta que expire.
+example: |
+  gh auth token | cut -c1-4
+why: "Tokens de vida corta limitan el daño si alguno se filtra."
+source: https://developer.mozilla.org/en-US/docs/Web/HTTP/Headers/Authorization
+related: [seguridad-jwt, seguridad-oauth, web-cookie-sesion, ia-llm]
+updated: 2026-09-29

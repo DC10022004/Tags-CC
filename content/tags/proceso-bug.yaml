@@ -1,0 +1,13 @@
+id: proceso-bug
+term: Bug
+category: proceso
+level: basico
+summary: "Un error en el código que hace que el programa se comporte distinto de lo esperado."
+body: |
+  Un buen reporte de bug tiene tres partes: qué hiciste, qué esperabas y qué pasó.
+  La trampa: arreglar el síntoma en vez de la causa. Si un valor llega vacío, añadir un
+  `if` que lo esquive oculta el problema; hay que encontrar por qué llega vacío.
+why: "Describirle un bug a Claude con esperado vs obtenido ahorra varias vueltas de preguntas."
+source: https://es.wikipedia.org/wiki/Error_de_software
+related: [proceso-debugging, fundamentos-stack-trace, proceso-testing]
+updated: 2026-09-29

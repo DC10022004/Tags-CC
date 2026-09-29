@@ -1,0 +1,20 @@
+id: paradigmas-override
+term: Override (sobrescritura)
+category: paradigmas
+level: intermedio
+summary: "Una subclase redefine un método que heredó, para cambiar su comportamiento."
+body: |
+  Swift exige escribir `override`, así un error de tipeo no crea un método nuevo por
+  accidente. JavaScript no lo exige.
+  La trampa: al sobrescribir, olvidar llamar a `super.metodo()` cuando la versión del
+  padre hacía algo necesario, como inicializar estado.
+example: |
+  class Base { saludo() { return "hola"; } }
+  class Formal extends Base {
+    saludo() { return super.saludo() + ", buenos días"; }
+  }
+  console.log(new Formal().saludo());
+why: "Olvidar super() al sobrescribir es una causa típica de objetos a medio inicializar."
+source: https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Operators/super
+related: [paradigmas-herencia, paradigmas-overloading]
+updated: 2026-09-29

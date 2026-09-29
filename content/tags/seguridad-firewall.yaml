@@ -1,0 +1,16 @@
+id: seguridad-firewall
+term: Firewall
+category: seguridad
+level: intermedio
+summary: "Un filtro que permite o bloquea tráfico de red según reglas: qué puertos, desde dónde, hacia dónde."
+body: |
+  Protege una máquina o una red de conexiones no deseadas. macOS trae uno en Ajustes >
+  Red.
+  La trampa: un firewall no protege de lo que ya dejaste entrar. Si un servicio expuesto
+  tiene una vulnerabilidad, el firewall lo dejará pasar porque el puerto está permitido.
+example: |
+  /usr/libexec/ApplicationFirewall/socketfilterfw --getglobalstate
+why: "Explica por qué un servidor no responde aunque el programa esté corriendo: un puerto bloqueado."
+source: https://es.wikipedia.org/wiki/Cortafuegos_(inform%C3%A1tica)
+related: [permisos-sandboxing, seguridad-zero-day]
+updated: 2026-09-29

@@ -1,0 +1,14 @@
+id: proceso-ui
+term: UI y GUI (interfaz de usuario)
+category: proceso
+level: basico
+summary: "Lo que el usuario ve y usa para interactuar: botones, menús, pantallas. Una GUI es una UI gráfica."
+body: |
+  Una CLI también es una interfaz, pero de texto. La GUI usa ventanas, iconos y el
+  ratón o el dedo.
+  UI es cómo se ve y se opera; UX es cómo se siente usarla. Una interfaz bonita puede
+  ser confusa.
+why: "Distinguir UI de UX ayuda a dar feedback preciso: 'se ve mal' no es lo mismo que 'no se entiende'."
+source: https://developer.mozilla.org/en-US/docs/Glossary/UI
+related: [proceso-ux, proceso-wireframe, herramientas-cli]
+updated: 2026-09-29

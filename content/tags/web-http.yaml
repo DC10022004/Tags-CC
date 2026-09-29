@@ -1,0 +1,17 @@
+id: web-http
+term: HTTP
+category: web
+level: basico
+summary: "El protocolo de la web: el cliente envía una petición (método + URL) y el servidor responde con un código y datos."
+body: |
+  Los métodos dicen la intención: GET lee, POST crea, PUT/PATCH actualizan, DELETE borra.
+  Los códigos dicen el resultado: 2xx bien, 3xx redirección, 4xx error tuyo (400, 401,
+  404), 5xx error del servidor.
+  La trampa: HTTP no tiene memoria entre peticiones; las sesiones se simulan con cookies o
+  tokens.
+example: |
+  curl -sI https://code.claude.com/docs/en/hooks.md | head -1
+why: "Leer el código de estado te dice si el error es tuyo (4xx) o del servidor (5xx)."
+source: https://developer.mozilla.org/en-US/docs/Web/HTTP/Overview
+related: [web-https, web-url, web-rest, web-cookie-sesion]
+updated: 2026-09-29

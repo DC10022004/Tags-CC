@@ -1,0 +1,15 @@
+id: datos-clave
+term: Clave primaria y foránea (key)
+category: datos
+level: intermedio
+summary: "La clave primaria identifica cada fila sin repetirse; la foránea apunta a la primaria de otra tabla."
+body: |
+  Es lo que conecta tablas: `procesos.candidato_id` apunta a `candidatos.id`.
+  La trampa: usar como clave algo que puede cambiar, como un email o un nombre. Cuando
+  cambia, se rompen todas las referencias. Este proyecto trata el `id` de cada tarjeta
+  como permanente por la misma razón.
+  En estructuras de datos, "key" es lo que da acceso a un valor en un mapa.
+why: "Explica por qué renombrar un id rompe el progreso y los related de otras tarjetas."
+source: https://en.wikipedia.org/wiki/Primary_key
+related: [datos-base-datos, datos-normalizacion, algoritmos-hash]
+updated: 2026-09-29

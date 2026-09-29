@@ -1,0 +1,19 @@
+id: arquitectura-middleware
+term: Middleware
+category: arquitectura
+level: avanzado
+summary: "Código que se ejecuta entre la petición y la respuesta: autenticación, logs, redirecciones."
+body: |
+  Cada petición atraviesa una cadena de middlewares antes de llegar a su destino. Cada
+  uno puede dejarla pasar, modificarla o cortarla (por ejemplo, con un 401).
+  La trampa: el orden importa. Un middleware de logs antes del de autenticación registra
+  también las peticiones rechazadas; al revés, no.
+example: |
+  // Next.js: middleware.ts en la raíz del proyecto
+  export function middleware(req) {
+    if (!req.cookies.get("sesion")) return Response.redirect(new URL("/login", req.url));
+  }
+why: "Centraliza en un solo lugar reglas que aplican a todas las rutas, como exigir sesión."
+source: https://en.wikipedia.org/wiki/Middleware
+related: [arquitectura-backend, paradigmas-wrapper, hooks-pretooluse]
+updated: 2026-09-29

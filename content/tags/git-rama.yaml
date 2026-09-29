@@ -1,0 +1,17 @@
+id: git-rama
+term: Rama (branch) y main
+category: git
+level: basico
+summary: "Una línea de trabajo paralela: cambias en tu rama sin afectar a main hasta que decidas mezclarla."
+body: |
+  `main` es la rama principal, la que el equipo da por buena y, a menudo, la que se
+  publica sola en producción.
+  La trampa: trabajar directo sobre `main`. Una rama por tarea mantiene main siempre
+  funcional y permite descartar un experimento sin rastro.
+example: |
+  git switch -c mejora-tarjetas
+  git branch --show-current
+why: "Una rama por cambio te deja probar sin arriesgar lo que ya está publicado."
+source: https://git-scm.com/book/es/v2/Ramificaciones-en-Git-%C2%BFQu%C3%A9-es-una-rama%3F
+related: [git-merge, git-pull-request, workflow-worktrees]
+updated: 2026-09-29

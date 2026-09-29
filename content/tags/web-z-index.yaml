@@ -1,0 +1,18 @@
+id: web-z-index
+term: z-index
+category: web
+level: intermedio
+summary: "Propiedad CSS que decide qué elemento queda encima cuando se superponen; mayor valor, más arriba."
+body: |
+  Solo funciona en elementos posicionados (`position` distinto de `static`) o dentro de
+  flex y grid.
+  La trampa: el contexto de apilamiento. Un hijo con `z-index: 9999` no puede salir por
+  encima de algo que tapa a su padre. Subir el número no lo arregla; hay que revisar el
+  padre.
+example: |
+  .modal { position: fixed; z-index: 10; }
+  .overlay { position: fixed; z-index: 9; }
+why: "Explica por qué un modal queda detrás de otro elemento aunque tenga z-index enorme."
+source: https://developer.mozilla.org/en-US/docs/Web/CSS/z-index
+related: [web-css]
+updated: 2026-09-29

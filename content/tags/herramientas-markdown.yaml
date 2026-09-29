@@ -1,0 +1,20 @@
+id: herramientas-markdown
+term: Markdown
+category: herramientas
+level: basico
+summary: "Formato de texto plano con símbolos simples (# títulos, ** negrita, - listas) que se muestra con formato."
+body: |
+  Se lee bien incluso sin renderizar, por eso lo usan los README, CLAUDE.md y la
+  documentación de este proyecto.
+  La trampa: un salto de línea simple no crea un párrafo nuevo; hace falta una línea en
+  blanco. El build de este proyecto aplica la misma regla al `body` de las tarjetas.
+example: |
+  # Título
+  Texto con **negrita** y `código`.
+
+  - un punto
+  - otro punto
+why: "Es el formato de CLAUDE.md y de casi toda la documentación que lee Claude."
+source: https://commonmark.org/help/
+related: [contexto-claude-md, datos-yaml]
+updated: 2026-09-29

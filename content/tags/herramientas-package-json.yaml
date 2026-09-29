@@ -1,0 +1,16 @@
+id: herramientas-package-json
+term: package.json
+category: herramientas
+level: basico
+summary: "La ficha técnica de un proyecto de Node: nombre, dependencias y los comandos disponibles en scripts."
+body: |
+  La sección `scripts` es el menú del proyecto: `npm run dev`, `npm test`, `npm run build`.
+  Mirarla es lo primero al abrir un repo ajeno.
+  `dependencies` son las que necesita en producción; `devDependencies`, solo para
+  desarrollar y probar.
+example: |
+  node -e 'console.log(require("./package.json").scripts)'
+why: "Leer scripts en package.json te dice cómo arrancar, probar y compilar cualquier proyecto JS."
+source: https://docs.npmjs.com/cli/configuring-npm/package-json
+related: [herramientas-npm, herramientas-dependencia]
+updated: 2026-09-29

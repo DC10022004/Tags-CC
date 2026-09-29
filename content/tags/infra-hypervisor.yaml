@@ -1,0 +1,13 @@
+id: infra-hypervisor
+term: Hypervisor
+category: infra
+level: avanzado
+summary: "El software que crea y reparte el hardware entre máquinas virtuales."
+body: |
+  Tipo 1 corre directo sobre el hardware (servidores de la nube); tipo 2 corre como una
+  app dentro de tu sistema operativo (UTM o Parallels en una Mac).
+  Es lo que impide que una máquina virtual vea la memoria de otra.
+why: "Completa el mapa de cómo la nube comparte una máquina física entre muchos clientes."
+source: https://es.wikipedia.org/wiki/Hipervisor
+related: [infra-virtualizacion]
+updated: 2026-09-29

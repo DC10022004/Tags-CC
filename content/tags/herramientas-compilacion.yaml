@@ -1,0 +1,16 @@
+id: herramientas-compilacion
+term: Build (compilación)
+category: herramientas
+level: basico
+summary: "El proceso que convierte el código fuente en algo ejecutable o publicable: compila, empaqueta y optimiza."
+body: |
+  En este proyecto hay dos: `node pipeline/build.mjs` convierte los YAML en
+  `dist/tags.json`, y `./macos/build.sh` compila la app.
+  La trampa: editar el resultado del build a mano. Se sobrescribe en el siguiente build.
+  Siempre se edita la fuente y se vuelve a construir.
+example: |
+  node pipeline/build.mjs
+why: "Si un cambio 'desaparece', probablemente editaste un archivo generado en vez de su fuente."
+source: https://en.wikipedia.org/wiki/Software_build
+related: [herramientas-compilador, fundamentos-codigo-fuente, infra-pipeline]
+updated: 2026-09-29

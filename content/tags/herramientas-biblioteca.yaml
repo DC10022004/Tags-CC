@@ -1,0 +1,16 @@
+id: herramientas-biblioteca
+term: Biblioteca (library)
+category: herramientas
+level: basico
+summary: "Código reutilizable escrito por otros que tu programa llama cuando lo necesita."
+body: |
+  La diferencia con un framework: a una biblioteca la llamas tú; un framework te llama
+  a ti y decide la estructura (inversión de control).
+  La trampa: cada biblioteca es código que no escribiste ni revisaste. Este proyecto
+  prohíbe dependencias externas a propósito (invariante 3) para no heredar ese riesgo.
+example: |
+  node -e 'const { join } = require("node:path"); console.log(join("a", "b"))'
+why: "Antes de agregar una librería, pregunta si la biblioteca estándar ya lo resuelve."
+source: https://en.wikipedia.org/wiki/Library_(computing)
+related: [herramientas-framework, herramientas-dependencia, fundamentos-modulo]
+updated: 2026-09-29

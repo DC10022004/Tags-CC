@@ -1,0 +1,15 @@
+id: herramientas-servidor-desarrollo
+term: Servidor de desarrollo
+category: herramientas
+level: basico
+summary: "Un servidor local que muestra tu app mientras la editas y la recarga sola al guardar cambios."
+body: |
+  Se enciende con algo como `npm run dev` y se abre en `http://localhost:3000`.
+  La trampa: el servidor de desarrollo no es producción. Es más lento, muestra errores
+  detallados y omite optimizaciones. Algo que funciona ahí puede fallar en el build real.
+example: |
+  npm run dev
+why: "Correr el build de producción localmente antes de publicar detecta lo que el modo dev oculta."
+source: https://nextjs.org/docs/app/api-reference/cli/next#next-dev-options
+related: [web-localhost, herramientas-compilacion, infra-deployment]
+updated: 2026-09-29

@@ -1,0 +1,18 @@
+id: fundamentos-lambda
+term: Lambda (función anónima)
+category: fundamentos
+level: intermedio
+summary: "Una función sin nombre, escrita en línea, para usarla una sola vez como argumento."
+body: |
+  En JavaScript son las funciones flecha `(x) => x * 2`; en Python, `lambda x: x * 2`.
+  Brillan en `map`, `filter` y `sort`.
+  El límite: si la lambda pasa de una línea o se repite, dale nombre. Además, en los
+  stack traces aparece como "anonymous", lo que complica depurar.
+example: |
+  const tags = [{ term: "SQL" }, { term: "Git" }];
+  tags.sort((a, b) => a.term.localeCompare(b.term));
+  console.log(tags.map((t) => t.term)); // [ 'Git', 'SQL' ]
+why: "Son la forma idiomática de ordenar y filtrar listas en JS y Python."
+source: https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Functions/Arrow_functions
+related: [fundamentos-callback, fundamentos-closure, paradigmas-funcional]
+updated: 2026-09-29

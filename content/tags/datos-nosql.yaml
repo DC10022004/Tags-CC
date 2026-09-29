@@ -1,0 +1,14 @@
+id: datos-nosql
+term: NoSQL
+category: datos
+level: intermedio
+summary: "Bases de datos que no usan tablas relacionales: documentos, clave-valor, grafos. Más flexibles, menos garantías."
+body: |
+  MongoDB guarda documentos tipo JSON; Redis, pares clave-valor en memoria.
+  La trampa: "sin esquema" no significa que no haya esquema; significa que la base no lo
+  valida y tu código tiene que hacerlo. Si tus datos tienen muchas relaciones, una base
+  relacional suele ser mejor elección.
+why: "Ayuda a elegir: relaciones y consistencia apuntan a SQL; datos sueltos y velocidad, a NoSQL."
+source: https://en.wikipedia.org/wiki/NoSQL
+related: [datos-base-datos, datos-sql, datos-esquema]
+updated: 2026-09-29

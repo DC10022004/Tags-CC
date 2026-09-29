@@ -1,0 +1,16 @@
+id: arquitectura-monorepo
+term: Monorepo
+category: arquitectura
+level: intermedio
+summary: "Un solo repositorio que contiene varios proyectos en carpetas distintas."
+body: |
+  Facilita compartir código y cambiar varias piezas en un solo commit.
+  La trampa en el despliegue: el servicio de hosting tiene que saber qué carpeta es cada
+  app (en Vercel, el "Root Directory"). Y un cambio en una carpeta puede disparar
+  deploys de proyectos que no tocaste.
+example: |
+  ls -d */
+why: "Explica por qué al desplegar un monorepo hay que indicar la carpeta raíz de cada app."
+source: https://en.wikipedia.org/wiki/Monorepo
+related: [git-repositorio, infra-root-directory, arquitectura-monolito]
+updated: 2026-09-29

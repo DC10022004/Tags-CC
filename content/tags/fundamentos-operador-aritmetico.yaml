@@ -1,0 +1,18 @@
+id: fundamentos-operador-aritmetico
+term: Operador aritmético
+category: fundamentos
+level: basico
+summary: "Los símbolos + - * / % para calcular; % da el resto de una división, no un porcentaje."
+body: |
+  `%` (módulo) sirve para ciclos: `i % 2` dice si un número es par, `n % 12` da la
+  posición en una rueda de 12.
+  La trampa: los decimales en binario no son exactos. `0.1 + 0.2` no da `0.3`. Para dinero
+  se usan enteros (centavos), nunca decimales.
+example: |
+  console.log(7 % 3);          // 1
+  console.log(0.1 + 0.2);      // 0.30000000000000004
+  console.log((10 + 20) / 100); // 0.3: calcular en centavos
+why: "Este proyecto usa % para elegir la tarjeta: fnv1a32(clave) % count da un índice válido."
+source: https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Operators#arithmetic_operators
+related: [fundamentos-operador-asignacion, fundamentos-binario-bit]
+updated: 2026-09-29

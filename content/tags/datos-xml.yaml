@@ -1,0 +1,16 @@
+id: datos-xml
+term: XML
+category: datos
+level: intermedio
+summary: "Formato de datos con etiquetas <como><estas>, más verboso que JSON; común en sistemas antiguos y configuración."
+body: |
+  Los `.plist` de macOS, como el `Info.plist` de la app de este proyecto, son XML. También
+  lo usan RSS, SVG y muchas integraciones empresariales.
+  La trampa: los caracteres `<` y `&` dentro de un valor deben escaparse (`&lt;`, `&amp;`)
+  o el archivo queda inválido.
+example: |
+  plutil -p macos/build/TagsCC.app/Contents/Info.plist
+why: "Aparece en configuración de macOS y en integraciones empresariales que no usan JSON."
+source: https://developer.mozilla.org/en-US/docs/Web/XML/Guides/XML_introduction
+related: [datos-json, datos-yaml]
+updated: 2026-09-29

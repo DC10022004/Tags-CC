@@ -1,0 +1,16 @@
+id: ia-data-science
+term: Data science (ciencia de datos)
+category: ia
+level: intermedio
+summary: "Usar estadística y programación para sacar conclusiones útiles de los datos."
+body: |
+  El trabajo real es sobre todo limpiar datos: nulos, duplicados, formatos distintos.
+  Python con pandas es la herramienta habitual.
+  La trampa: correlación no es causalidad. Que dos cosas suban juntas no prueba que una
+  cause la otra.
+example: |
+  python3 -c 'import statistics as s; print(s.mean([3, 5, 7]), s.median([1, 9, 2]))'
+why: "Te protege de sacar conclusiones falsas de un dashboard que muestra dos curvas juntas."
+source: https://en.wikipedia.org/wiki/Data_science
+related: [ia-data-mining, ia-big-data, fundamentos-python]
+updated: 2026-09-29

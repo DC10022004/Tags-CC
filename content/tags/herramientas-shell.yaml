@@ -1,0 +1,16 @@
+id: herramientas-shell
+term: Shell
+category: herramientas
+level: basico
+summary: "El programa que interpreta lo que escribes en la terminal y ejecuta los comandos; en tu Mac es zsh."
+body: |
+  Terminal es la ventana; shell es el intérprete que corre dentro. zsh y bash son
+  shells distintos con sintaxis casi igual.
+  Conceptos clave: `|` pasa la salida de un comando a otro, `>` la guarda en un archivo y
+  `&&` ejecuta el siguiente solo si el anterior tuvo éxito.
+example: |
+  ls content/tags | grep '^git-' | wc -l
+why: "Combinar comandos con | resuelve en una línea tareas que parecen necesitar un script."
+source: https://es.wikipedia.org/wiki/Shell_(inform%C3%A1tica)
+related: [herramientas-cli, fundamentos-script, fundamentos-entrada-salida]
+updated: 2026-09-29

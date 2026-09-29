@@ -1,0 +1,14 @@
+id: fundamentos-keyword
+term: Palabra reservada (keyword)
+category: fundamentos
+level: basico
+summary: "Palabras que el lenguaje reserva para su sintaxis, como if, return o class; no sirven como nombres."
+body: |
+  Cada lenguaje tiene su lista: en JavaScript `const`, `function`, `await`; en Python
+  `def`, `lambda`, `None`.
+  La trampa aparece al nombrar campos: una propiedad llamada `class` o `default` puede
+  dar errores de sintaxis en algunos contextos y obliga a usar comillas.
+why: "Si un nombre de variable da un error de sintaxis inexplicable, revisa que no esté reservado."
+source: https://developer.mozilla.org/en-US/docs/Glossary/Keyword
+related: [fundamentos-variable, fundamentos-parsing]
+updated: 2026-09-29

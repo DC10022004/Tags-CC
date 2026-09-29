@@ -1,0 +1,16 @@
+id: web-dom
+term: DOM
+category: web
+level: intermedio
+summary: "El árbol de objetos que el navegador construye a partir del HTML; JavaScript lo modifica para cambiar la página."
+body: |
+  Cada etiqueta es un nodo. `document.querySelector` encuentra nodos y cambiarlos
+  actualiza lo que ves.
+  La trampa: el HTML que ves con "ver código fuente" no es el DOM actual. En apps hechas
+  con JavaScript, el DOM real solo se ve en el inspector del navegador.
+example: |
+  document.querySelector("h1").textContent = "Tags CC";
+why: "Explica por qué el HTML descargado y lo que ves en pantalla pueden ser distintos."
+source: https://developer.mozilla.org/en-US/docs/Web/API/Document_Object_Model
+related: [web-html, web-renderizado, web-scraping]
+updated: 2026-09-29

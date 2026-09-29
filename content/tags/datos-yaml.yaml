@@ -1,0 +1,18 @@
+id: datos-yaml
+term: YAML
+category: datos
+level: basico
+summary: "Formato de datos legible que usa sangría en vez de llaves; común en archivos de configuración."
+body: |
+  Es más fácil de escribir a mano que JSON y admite comentarios. Cada tarjeta de este
+  proyecto es un archivo YAML.
+  La trampa: la sangría es sintaxis. Un espacio de más cambia el significado, y valores
+  sin comillas se interpretan solos: `no` puede leerse como `false`.
+example: |
+  id: git-commit
+  level: basico
+  related: [git-push, git-rama]
+why: "Poner comillas en valores ambiguos evita que YAML los convierta en booleanos o números."
+source: https://yaml.org/spec/1.2.2/
+related: [datos-json, configuracion-frontmatter, fundamentos-parsing]
+updated: 2026-09-29

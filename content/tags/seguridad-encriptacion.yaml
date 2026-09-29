@@ -1,0 +1,16 @@
+id: seguridad-encriptacion
+term: Cifrado (encriptación)
+category: seguridad
+level: intermedio
+summary: "Transformar datos para que solo quien tenga la clave pueda leerlos; a diferencia de un hash, se puede revertir."
+body: |
+  Simétrico: la misma clave cifra y descifra. Asimétrico: una clave pública cifra y solo
+  la privada descifra; así funcionan HTTPS y SSH.
+  La trampa: inventar tu propio cifrado. Usa las librerías estándar del lenguaje y, para
+  contraseñas, no cifres: aplica un hash lento como bcrypt o argon2.
+example: |
+  echo "hola" | openssl enc -aes-256-cbc -pbkdf2 -pass pass:demo -base64
+why: "Distinguir cifrar de hashear evita guardar contraseñas de forma recuperable."
+source: https://developer.mozilla.org/en-US/docs/Glossary/Encryption
+related: [algoritmos-hash, web-https, seguridad-ssh]
+updated: 2026-09-29

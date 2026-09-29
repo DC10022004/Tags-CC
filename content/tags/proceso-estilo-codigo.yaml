@@ -1,0 +1,16 @@
+id: proceso-estilo-codigo
+term: Estilo de código
+category: proceso
+level: basico
+summary: "Las convenciones de un proyecto sobre nombres, formato y estructura, para que todo parezca escrito por una persona."
+body: |
+  Lo que importa no es qué estilo, sino que sea consistente. Un formateador automático
+  (Prettier, `swift-format`) termina las discusiones.
+  Al pedir cambios a Claude, "sigue el estilo del archivo" suele dar mejor resultado que
+  describir las reglas una por una.
+example: |
+  npx prettier --check .
+why: "Un estilo automático hace que los diffs muestren solo cambios reales, no espacios."
+source: https://en.wikipedia.org/wiki/Programming_style
+related: [proceso-linter, proceso-clean-code]
+updated: 2026-09-29

@@ -1,0 +1,16 @@
+id: web-query-string
+term: Query string
+category: web
+level: basico
+summary: "La parte de la URL después de ?, con pares clave=valor separados por &: ?id=1&nivel=basico."
+body: |
+  Se usa para filtros, búsquedas y paginación en peticiones GET.
+  La trampa: va visible en la URL, en el historial y en los logs del servidor. Nunca
+  pongas contraseñas ni API keys en la query string.
+example: |
+  const p = new URLSearchParams({ q: "hooks y skills", page: "2" });
+  console.log(p.toString()); // q=hooks+y+skills&page=2
+why: "Para construir URLs con parámetros sin romperlas por espacios o caracteres especiales."
+source: https://developer.mozilla.org/en-US/docs/Web/API/URLSearchParams
+related: [web-url, seguridad-api-key]
+updated: 2026-09-29

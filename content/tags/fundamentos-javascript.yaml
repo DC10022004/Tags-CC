@@ -1,0 +1,16 @@
+id: fundamentos-javascript
+term: JavaScript
+category: fundamentos
+level: basico
+summary: "El lenguaje de los navegadores; con Node.js también corre en servidores y en la terminal."
+body: |
+  Es de tipado dinámico e interpretado (con compilación JIT por debajo). TypeScript le
+  añade tipos estáticos y compila a JavaScript.
+  La trampa: su historia deja rarezas como la coerción de tipos y `==`. Usar `===`,
+  `const`/`let` y módulos ES evita la mayoría.
+example: |
+  node -e 'console.log([3, 1, 2].sort())'
+why: "Es el lenguaje del pipeline de este proyecto y del script del iPhone."
+source: https://developer.mozilla.org/en-US/docs/Web/JavaScript
+related: [herramientas-nodejs, fundamentos-tipado-dinamico, herramientas-jit]
+updated: 2026-09-29

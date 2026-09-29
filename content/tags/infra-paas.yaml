@@ -1,0 +1,14 @@
+id: infra-paas
+term: PaaS (Platform as a Service)
+category: infra
+level: intermedio
+summary: "Una plataforma donde subes tu código y ella se encarga de servidores y escalado: Vercel, Heroku, Railway."
+body: |
+  No administras máquinas ni sistema operativo; configuras variables de entorno y
+  comandos de build.
+  La trampa: los límites de la plataforma, como el tiempo máximo por función o el
+  tamaño del build. Aparecen tarde y a veces obligan a rediseñar.
+why: "Te deja publicar una app sin saber administrar servidores."
+source: https://es.wikipedia.org/wiki/Plataforma_como_servicio
+related: [infra-cloud, infra-deployment, infra-baas]
+updated: 2026-09-29

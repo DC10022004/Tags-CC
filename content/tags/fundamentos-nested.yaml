@@ -1,0 +1,18 @@
+id: fundamentos-nested
+term: Código anidado (nested)
+category: fundamentos
+level: basico
+summary: "Un bloque dentro de otro: un if dentro de un for dentro de otro for. Cada nivel suma complejidad."
+body: |
+  Dos bucles anidados sobre la misma lista recorren n × n elementos: con 10 000 datos son
+  100 millones de pasos.
+  Más de tres niveles de sangría suele indicar que conviene extraer una función o salir
+  temprano con `return` o `continue`.
+example: |
+  for (const fila of [[1, 2], [3, 4]]) {
+    for (const celda of fila) console.log(celda);
+  }
+why: "Un doble for sobre datos grandes es la causa típica de que algo 'se cuelgue' sin error."
+source: https://es.wikipedia.org/wiki/Anidamiento_(inform%C3%A1tica)
+related: [fundamentos-bucle, algoritmos-big-o, proceso-clean-code]
+updated: 2026-09-29

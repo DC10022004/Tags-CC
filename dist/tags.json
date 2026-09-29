@@ -1,8 +1,431 @@
 {
  "schema": 1,
- "version": "2026-09-28.4",
- "count": 60,
+ "version": "2026-09-29.1",
+ "count": 267,
  "tags": [
+  {
+   "id": "algoritmos-array",
+   "term": "Array (arreglo)",
+   "category": "algoritmos",
+   "level": "basico",
+   "summary": "Una lista ordenada de elementos a los que accedes por su índice, que empieza en 0.",
+   "body": "Leer por índice es instantáneo; buscar un valor sin conocer su índice obliga a recorrerla. Cada valor guardado es un elemento. La trampa del índice: el último elemento es `length - 1`. Pedir `arr[arr.length]` no da error en JavaScript, devuelve `undefined`, y el bug se propaga en silencio.",
+   "example": "const tags = [\"hooks\", \"git\", \"sql\"];\nconsole.log(tags[0]);               // \"hooks\"\nconsole.log(tags[tags.length - 1]); // \"sql\"\nconsole.log(tags[3]);               // undefined, sin error",
+   "why": "La selección de tarjetas de este proyecto es literalmente tags[índice]; el orden importa.",
+   "source": "https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Array",
+   "related": [
+    "fundamentos-bucle",
+    "algoritmos-tupla",
+    "algoritmos-big-o"
+   ],
+   "updated": "2026-09-29"
+  },
+  {
+   "id": "algoritmos-big-o",
+   "term": "Big O y complejidad",
+   "category": "algoritmos",
+   "level": "intermedio",
+   "summary": "Describe cómo crece el tiempo o la memoria de un algoritmo cuando crece la entrada: O(1), O(n), O(n²).",
+   "body": "No mide segundos, mide la forma de la curva. O(n) con el doble de datos tarda el doble; O(n²) tarda cuatro veces más. La trampa: con pocos datos todo es rápido, así que el problema aparece recién en producción. `includes` dentro de un bucle es O(n²) disfrazado; un `Set` lo baja a O(n).",
+   "example": "const ids = [\"a\", \"b\", \"c\"];\nconst vistos = new Set(ids);        // búsqueda O(1)\nconsole.log(vistos.has(\"b\"));        // true, sin recorrer la lista",
+   "why": "Para detectar por qué algo que iba bien con 100 datos se arrastra con 100 000.",
+   "source": "https://es.wikipedia.org/wiki/Cota_superior_asint%C3%B3tica",
+   "related": [
+    "fundamentos-algoritmo",
+    "fundamentos-nested",
+    "algoritmos-hash"
+   ],
+   "updated": "2026-09-29"
+  },
+  {
+   "id": "algoritmos-buffer",
+   "term": "Buffer",
+   "category": "algoritmos",
+   "level": "intermedio",
+   "summary": "Un espacio temporal de memoria donde se acumulan datos mientras pasan de un lado a otro.",
+   "body": "Escribir de a un byte es lento; juntar datos en un buffer y enviarlos en bloque es mucho más eficiente. La trampa: la salida puede quedarse en el buffer sin mostrarse. Por eso un script que termina abruptamente a veces no imprime sus últimos mensajes.",
+   "example": "const b = Buffer.from(\"hola\", \"utf8\");\nconsole.log(b);            // <Buffer 68 6f 6c 61>\nconsole.log(b.toString()); // \"hola\"",
+   "why": "Explica por qué los logs aparecen tarde o incompletos cuando un proceso se cae.",
+   "source": "https://es.wikipedia.org/wiki/B%C3%BAfer_de_datos",
+   "related": [
+    "fundamentos-entrada-salida",
+    "arquitectura-cache"
+   ],
+   "updated": "2026-09-29"
+  },
+  {
+   "id": "algoritmos-cola",
+   "term": "Cola (queue) y FIFO",
+   "category": "algoritmos",
+   "level": "intermedio",
+   "summary": "Estructura FIFO: el primero en entrar es el primero en salir, como la fila de un banco.",
+   "body": "Se usa para procesar trabajo en orden de llegada: tareas pendientes, mensajes, eventos. La trampa en JavaScript: `shift()` en un array grande es O(n) porque reacomoda todos los elementos. Para colas grandes conviene un índice de lectura o una estructura dedicada.",
+   "example": "const cola = [];\ncola.push(\"tarea1\"); cola.push(\"tarea2\");\nconsole.log(cola.shift()); // \"tarea1\": sale la primera en entrar",
+   "why": "Los sistemas de procesamiento en segundo plano son colas; FIFO garantiza el orden de llegada.",
+   "source": "https://es.wikipedia.org/wiki/Cola_(inform%C3%A1tica)",
+   "related": [
+    "algoritmos-pila",
+    "arquitectura-batch-processing"
+   ],
+   "updated": "2026-09-29"
+  },
+  {
+   "id": "algoritmos-compresion",
+   "term": "Compresión de datos (zip)",
+   "category": "algoritmos",
+   "level": "basico",
+   "summary": "Reduce el tamaño de un archivo; sin pérdida (zip, gzip) se recupera exacto, con pérdida (JPEG, MP3) no.",
+   "body": "La compresión sin pérdida busca patrones repetidos; por eso el texto comprime muy bien y un archivo ya comprimido casi no se achica. `zip` agrupa y comprime varios archivos en uno. Los servidores web comprimen con gzip o brotli al vuelo para enviar menos datos.",
+   "example": "zip -r respaldo.zip content/ && unzip -l respaldo.zip | tail -1",
+   "why": "Para saber cuándo comprimir sirve (texto, JSON) y cuándo es inútil (fotos, videos).",
+   "source": "https://es.wikipedia.org/wiki/Compresi%C3%B3n_de_datos",
+   "related": [
+    "fundamentos-binario-bit"
+   ],
+   "updated": "2026-09-29"
+  },
+  {
+   "id": "algoritmos-hash",
+   "term": "Hash (función hash)",
+   "category": "algoritmos",
+   "level": "intermedio",
+   "summary": "Convierte datos de cualquier tamaño en un valor de tamaño fijo; la misma entrada da siempre el mismo hash.",
+   "body": "Sirve para buscar rápido (tablas hash), detectar cambios (comparar hashes) y guardar contraseñas. La trampa: un hash no es cifrado. No se \"desencripta\"; es de una vía. Y no todos sirven para seguridad: FNV-1a, el de este proyecto, se eligió por portabilidad, no por ser criptográfico.",
+   "example": "node -e 'const c=require(\"node:crypto\");console.log(c.createHash(\"sha256\").update(\"tags-cc\").digest(\"hex\"))'",
+   "why": "El manifest usa un hash del contenido para saber si el corpus cambió sin comparar archivo por archivo.",
+   "source": "https://developer.mozilla.org/en-US/docs/Glossary/Hash_function",
+   "related": [
+    "seguridad-encriptacion",
+    "algoritmos-big-o",
+    "datos-clave"
+   ],
+   "updated": "2026-09-29"
+  },
+  {
+   "id": "algoritmos-heap",
+   "term": "Heap (montículo)",
+   "category": "algoritmos",
+   "level": "avanzado",
+   "summary": "Un árbol que mantiene siempre el elemento de mayor prioridad en la raíz; base de las colas de prioridad.",
+   "body": "Insertar y sacar el máximo cuesta O(log n), mucho mejor que ordenar la lista entera cada vez. La trampa del nombre: \"heap\" también es la zona de memoria donde viven los objetos (heap memory). Son conceptos distintos que comparten palabra.",
+   "example": "python3 -c 'import heapq; h=[5,1,3]; heapq.heapify(h); print(heapq.heappop(h))'",
+   "why": "Cuando necesitas 'el siguiente más urgente' repetidamente, un heap evita reordenar todo.",
+   "source": "https://docs.python.org/3/library/heapq.html",
+   "related": [
+    "algoritmos-cola",
+    "algoritmos-big-o",
+    "herramientas-garbage-collection"
+   ],
+   "updated": "2026-09-29"
+  },
+  {
+   "id": "algoritmos-pila",
+   "term": "Pila (stack) y LIFO",
+   "category": "algoritmos",
+   "level": "intermedio",
+   "summary": "Estructura LIFO: el último en entrar es el primero en salir, como una pila de platos.",
+   "body": "El botón \"deshacer\" es una pila: se revierte primero lo último que hiciste. El caso más importante es la pila de llamadas (call stack): cada función que llamas se apila y se desapila al terminar. De ahí vienen el stack trace y el stack overflow.",
+   "example": "const pila = [];\npila.push(\"a\"); pila.push(\"b\");\nconsole.log(pila.pop()); // \"b\": sale el último que entró",
+   "why": "Entender la pila de llamadas es lo que permite leer un stack trace.",
+   "source": "https://es.wikipedia.org/wiki/Pila_(inform%C3%A1tica)",
+   "related": [
+    "algoritmos-cola",
+    "algoritmos-stack-overflow",
+    "fundamentos-stack-trace"
+   ],
+   "updated": "2026-09-29"
+  },
+  {
+   "id": "algoritmos-stack-overflow",
+   "term": "Stack overflow (desbordamiento)",
+   "category": "algoritmos",
+   "level": "intermedio",
+   "summary": "Error que ocurre cuando la pila de llamadas se llena, casi siempre por una recursión sin fin.",
+   "body": "Cada llamada ocupa espacio en la pila; si una función se llama a sí misma sin llegar nunca al caso base, el espacio se agota y el programa cae. En JavaScript aparece como `RangeError: Maximum call stack size exceeded`. La solución es arreglar el caso base, no agrandar la pila.",
+   "example": "function infinita() { return infinita(); }\ntry { infinita(); } catch (e) { console.log(e.message); }",
+   "why": "Si ves 'Maximum call stack size exceeded', busca una función que se llama a sí misma.",
+   "source": "https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Errors/Too_much_recursion",
+   "related": [
+    "fundamentos-recursion",
+    "algoritmos-pila"
+   ],
+   "updated": "2026-09-29"
+  },
+  {
+   "id": "algoritmos-tupla",
+   "term": "Tupla",
+   "category": "algoritmos",
+   "level": "intermedio",
+   "summary": "Una colección ordenada, de tamaño fijo e inmutable; en Python se escribe con paréntesis.",
+   "body": "Sirve para agrupar valores que van juntos, como una coordenada `(x, y)` o un par `(clave, valor)`. Una lista puede crecer y cambiar; una tupla no. La trampa en Python: una tupla de un elemento necesita coma. `(5)` es un número; `(5,)` es una tupla.",
+   "example": "python3 -c 'p = (3, 4); x, y = p; print(x, y, type((5)), type((5,)))'",
+   "why": "Aparecen en Python al devolver varios valores de una función y al desempaquetarlos.",
+   "source": "https://docs.python.org/3/tutorial/datastructures.html#tuples-and-sequences",
+   "related": [
+    "algoritmos-array",
+    "fundamentos-inmutable"
+   ],
+   "updated": "2026-09-29"
+  },
+  {
+   "id": "arquitectura-backend",
+   "term": "Backend",
+   "category": "arquitectura",
+   "level": "basico",
+   "summary": "La parte que trabaja detrás: guarda datos, aplica reglas de negocio y habla con otros servicios. El usuario no la ve.",
+   "body": "Expone su funcionalidad al frontend mediante una API. Es donde viven los secretos y las validaciones que importan, porque el usuario no puede alterarlo. Este proyecto decidió no tener backend (ADR 0002): Git y GitHub raw cumplen ese papel.",
+   "why": "Saber qué necesita backend y qué no evita montar servidores que nadie necesita.",
+   "source": "https://en.wikipedia.org/wiki/Front_end_and_back_end",
+   "related": [
+    "arquitectura-frontend",
+    "web-api",
+    "infra-baas"
+   ],
+   "updated": "2026-09-29"
+  },
+  {
+   "id": "arquitectura-batch-processing",
+   "term": "Batch processing (por lotes)",
+   "category": "arquitectura",
+   "level": "intermedio",
+   "summary": "Agrupar muchas tareas y procesarlas juntas más tarde, en vez de una a una en tiempo real.",
+   "body": "Facturación nocturna, reportes, reindexar datos: todo lo que no necesita respuesta inmediata. La trampa: si un elemento falla a mitad del lote, hay que saber cuáles ya se procesaron. Diseña los lotes para que puedan reintentarse sin duplicar trabajo.",
+   "example": "for f in content/tags/*.yaml; do grep -q \"^source:\" \"$f\" || echo \"falta source: $f\"; done",
+   "why": "Procesar en lote es más barato y simple cuando nadie espera la respuesta en el momento.",
+   "source": "https://en.wikipedia.org/wiki/Batch_processing",
+   "related": [
+    "algoritmos-cola",
+    "infra-pipeline"
+   ],
+   "updated": "2026-09-29"
+  },
+  {
+   "id": "arquitectura-cache",
+   "term": "Caché",
+   "category": "arquitectura",
+   "level": "intermedio",
+   "summary": "Guardar una copia de un resultado costoso para reutilizarla en vez de volver a calcularlo o descargarlo.",
+   "body": "Existe en todos los niveles: el navegador, el CDN, la base de datos, la CPU. La trampa: servir datos viejos. Por eso toda caché necesita una regla de invalidación. GitHub raw cachea unos minutos, así que un cambio al corpus no aparece en el iPhone al instante.",
+   "example": "curl -sI https://raw.githubusercontent.com/git/git/master/README.md | grep -i cache-control",
+   "why": "Si 'ya lo cambié pero sigue igual', probablemente estás viendo una copia en caché.",
+   "source": "https://developer.mozilla.org/en-US/docs/Web/HTTP/Caching",
+   "related": [
+    "arquitectura-latencia",
+    "algoritmos-buffer",
+    "infra-deployment"
+   ],
+   "updated": "2026-09-29"
+  },
+  {
+   "id": "arquitectura-concurrencia",
+   "term": "Concurrencia",
+   "category": "arquitectura",
+   "level": "avanzado",
+   "summary": "Manejar varias tareas que avanzan en el mismo periodo, intercalándose; no implica que corran al mismo tiempo.",
+   "body": "Node es concurrente con un solo hilo: mientras espera una respuesta de red, atiende otra cosa. La trampa son las condiciones de carrera (race conditions): dos tareas leen un valor, ambas lo modifican y una pisa a la otra. El resultado depende de quién llegó primero.",
+   "example": "const esperar = (ms, v) => new Promise((r) => setTimeout(() => r(v), ms));\nPromise.all([esperar(200, \"a\"), esperar(100, \"b\")]).then(console.log); // ~200 ms, no 300",
+   "why": "Promise.all ejecuta esperas a la vez: es la forma más simple de acelerar llamadas de red.",
+   "source": "https://en.wikipedia.org/wiki/Concurrency_(computer_science)",
+   "related": [
+    "arquitectura-paralelismo",
+    "arquitectura-thread",
+    "fundamentos-sincrono-asincrono"
+   ],
+   "updated": "2026-09-29"
+  },
+  {
+   "id": "arquitectura-escalabilidad",
+   "term": "Escalabilidad y carga",
+   "category": "arquitectura",
+   "level": "intermedio",
+   "summary": "La capacidad de atender más carga (usuarios, peticiones, datos) agregando recursos sin rediseñar.",
+   "body": "Vertical: una máquina más grande. Horizontal: más máquinas iguales detrás de un balanceador. La carga es cuánto trabajo recibe el sistema en un momento dado. La trampa: optimizar para una escala que no tienes. Mide primero dónde se satura; casi siempre el cuello de botella es la base de datos, no el servidor.",
+   "why": "Evita diseñar para millones de usuarios cuando el problema real es una query lenta.",
+   "source": "https://en.wikipedia.org/wiki/Scalability",
+   "related": [
+    "infra-balanceador-carga",
+    "arquitectura-cache",
+    "ia-big-data"
+   ],
+   "updated": "2026-09-29"
+  },
+  {
+   "id": "arquitectura-frontend",
+   "term": "Frontend",
+   "category": "arquitectura",
+   "level": "basico",
+   "summary": "La parte de una app que el usuario ve y toca: pantallas, botones, formularios. Corre en su navegador o dispositivo.",
+   "body": "Se construye con HTML, CSS y JavaScript, o con frameworks como React. La regla de oro: todo lo que está en el frontend es visible y modificable por el usuario. Validar solo en el frontend no protege nada; el backend debe volver a validar.",
+   "why": "Explica por qué las validaciones y claves secretas nunca pueden vivir solo en el frontend.",
+   "source": "https://developer.mozilla.org/en-US/docs/Learn_web_development/Getting_started/Web_standards/How_the_web_works",
+   "related": [
+    "arquitectura-backend",
+    "arquitectura-fullstack",
+    "web-renderizado"
+   ],
+   "updated": "2026-09-29"
+  },
+  {
+   "id": "arquitectura-fullstack",
+   "term": "Fullstack",
+   "category": "arquitectura",
+   "level": "basico",
+   "summary": "Quien trabaja (o el framework que cubre) frontend y backend a la vez.",
+   "body": "Frameworks como Next.js son fullstack: un solo proyecto tiene pantallas y endpoints. La ventaja es moverse rápido. La trampa es perder de vista en qué lado corre cada pieza, y terminar con un secreto en código que llega al navegador.",
+   "why": "En un proyecto fullstack, preguntarse '¿esto corre en servidor o en navegador?' evita fugas.",
+   "source": "https://en.wikipedia.org/wiki/Solution_stack",
+   "related": [
+    "arquitectura-frontend",
+    "arquitectura-backend",
+    "web-nextjs"
+   ],
+   "updated": "2026-09-29"
+  },
+  {
+   "id": "arquitectura-latencia",
+   "term": "Latencia",
+   "category": "arquitectura",
+   "level": "intermedio",
+   "summary": "El tiempo que tarda una petición en recibir respuesta; distinto del ancho de banda, que es cuánto cabe por segundo.",
+   "body": "Una conexión puede tener mucho ancho de banda y alta latencia, como un camión grande que tarda en llegar. La trampa: muchas peticiones pequeñas en serie suman latencia en cada una. Diez llamadas de 100 ms una tras otra tardan un segundo; en paralelo, cerca de 100 ms.",
+   "example": "curl -o /dev/null -s -w \"%{time_total}s\\n\" https://github.com",
+   "why": "Agrupar o paralelizar llamadas suele acelerar más que optimizar el código de cada una.",
+   "source": "https://developer.mozilla.org/en-US/docs/Web/Performance/Guides/Understanding_latency",
+   "related": [
+    "arquitectura-cache",
+    "arquitectura-timeout",
+    "arquitectura-concurrencia"
+   ],
+   "updated": "2026-09-29"
+  },
+  {
+   "id": "arquitectura-microservicios",
+   "term": "Microservicios",
+   "category": "arquitectura",
+   "level": "avanzado",
+   "summary": "Dividir una app en servicios pequeños e independientes que se despliegan por separado y se hablan por red.",
+   "body": "Permite que equipos distintos avancen sin coordinarse en cada deploy y escalar solo la parte que lo necesita. El costo: cada llamada entre servicios puede fallar o tardar, y depurar un error que cruza cinco servicios es mucho más difícil. Tiene sentido con equipos grandes, no con una o dos personas.",
+   "why": "Para reconocer que su complejidad solo se justifica cuando hay varios equipos.",
+   "source": "https://en.wikipedia.org/wiki/Microservices",
+   "related": [
+    "arquitectura-monolito",
+    "arquitectura-latencia",
+    "infra-contenedor"
+   ],
+   "updated": "2026-09-29"
+  },
+  {
+   "id": "arquitectura-middleware",
+   "term": "Middleware",
+   "category": "arquitectura",
+   "level": "avanzado",
+   "summary": "Código que se ejecuta entre la petición y la respuesta: autenticación, logs, redirecciones.",
+   "body": "Cada petición atraviesa una cadena de middlewares antes de llegar a su destino. Cada uno puede dejarla pasar, modificarla o cortarla (por ejemplo, con un 401). La trampa: el orden importa. Un middleware de logs antes del de autenticación registra también las peticiones rechazadas; al revés, no.",
+   "example": "// Next.js: middleware.ts en la raíz del proyecto\nexport function middleware(req) {\n  if (!req.cookies.get(\"sesion\")) return Response.redirect(new URL(\"/login\", req.url));\n}",
+   "why": "Centraliza en un solo lugar reglas que aplican a todas las rutas, como exigir sesión.",
+   "source": "https://en.wikipedia.org/wiki/Middleware",
+   "related": [
+    "arquitectura-backend",
+    "paradigmas-wrapper",
+    "hooks-pretooluse"
+   ],
+   "updated": "2026-09-29"
+  },
+  {
+   "id": "arquitectura-monolito",
+   "term": "Monolito",
+   "category": "arquitectura",
+   "level": "intermedio",
+   "summary": "Una aplicación donde todo vive en un solo código y se despliega como una sola unidad.",
+   "body": "Es la forma más simple de empezar: un repo, un deploy, una base de datos. \"Monolito\" suele decirse con desprecio, pero es la opción correcta para la mayoría de proyectos pequeños. El problema real es un monolito sin módulos internos claros, no el monolito en sí.",
+   "why": "Evita dividir en microservicios antes de tiempo, que multiplica la complejidad sin beneficio.",
+   "source": "https://en.wikipedia.org/wiki/Monolithic_application",
+   "related": [
+    "arquitectura-microservicios",
+    "arquitectura-monorepo"
+   ],
+   "updated": "2026-09-29"
+  },
+  {
+   "id": "arquitectura-monorepo",
+   "term": "Monorepo",
+   "category": "arquitectura",
+   "level": "intermedio",
+   "summary": "Un solo repositorio que contiene varios proyectos en carpetas distintas.",
+   "body": "Facilita compartir código y cambiar varias piezas en un solo commit. La trampa en el despliegue: el servicio de hosting tiene que saber qué carpeta es cada app (en Vercel, el \"Root Directory\"). Y un cambio en una carpeta puede disparar deploys de proyectos que no tocaste.",
+   "example": "ls -d */",
+   "why": "Explica por qué al desplegar un monorepo hay que indicar la carpeta raíz de cada app.",
+   "source": "https://en.wikipedia.org/wiki/Monorepo",
+   "related": [
+    "git-repositorio",
+    "infra-root-directory",
+    "arquitectura-monolito"
+   ],
+   "updated": "2026-09-29"
+  },
+  {
+   "id": "arquitectura-orquestador",
+   "term": "Orquestador",
+   "category": "arquitectura",
+   "level": "avanzado",
+   "summary": "La pieza que recibe una petición y decide qué herramienta o agente la resuelve; no hace el trabajo, lo reparte.",
+   "body": "En sistemas con IA, el orquestador interpreta lo que pide el usuario y activa la herramienta o subagente correcto. La trampa: meter lógica de negocio en el orquestador. Si empieza a hacer el trabajo en vez de delegarlo, se vuelve el lugar donde todo se enreda.",
+   "why": "Es el rol del agente principal de Claude Code cuando delega en subagentes.",
+   "source": "https://en.wikipedia.org/wiki/Orchestration_(computing)",
+   "related": [
+    "subagentes-subagent",
+    "arquitectura-microservicios"
+   ],
+   "updated": "2026-09-29"
+  },
+  {
+   "id": "arquitectura-paralelismo",
+   "term": "Paralelismo",
+   "category": "arquitectura",
+   "level": "avanzado",
+   "summary": "Ejecutar varias tareas literalmente al mismo tiempo, en distintos núcleos o máquinas.",
+   "body": "Concurrencia es organizar tareas que se intercalan; paralelismo es ejecutarlas a la vez. Un CPU de 8 núcleos puede correr 8 cosas en paralelo. El paralelismo solo ayuda en trabajo de cálculo. Si las tareas pasan el tiempo esperando red o disco, con concurrencia basta.",
+   "example": "sysctl -n hw.ncpu",
+   "why": "Varios subagentes o worktrees en paralelo son el mismo principio aplicado a Claude.",
+   "source": "https://en.wikipedia.org/wiki/Parallel_computing",
+   "related": [
+    "arquitectura-concurrencia",
+    "arquitectura-thread",
+    "subagentes-agent-teams"
+   ],
+   "updated": "2026-09-29"
+  },
+  {
+   "id": "arquitectura-thread",
+   "term": "Thread (hilo)",
+   "category": "arquitectura",
+   "level": "avanzado",
+   "summary": "Una línea de ejecución dentro de un programa; varios hilos comparten la misma memoria.",
+   "body": "Compartir memoria es rápido y peligroso: dos hilos escribiendo el mismo dato a la vez lo corrompen si no se sincronizan. En apps de Apple, la interfaz solo se puede actualizar desde el hilo principal; hacerlo desde otro produce errores extraños o cierres de la app.",
+   "why": "En apps de Mac y iPhone, tocar la interfaz fuera del hilo principal produce fallos intermitentes.",
+   "source": "https://en.wikipedia.org/wiki/Thread_(computing)",
+   "related": [
+    "arquitectura-concurrencia",
+    "arquitectura-paralelismo"
+   ],
+   "updated": "2026-09-29"
+  },
+  {
+   "id": "arquitectura-timeout",
+   "term": "Timeout",
+   "category": "arquitectura",
+   "level": "intermedio",
+   "summary": "El tiempo máximo que se espera una operación antes de darla por fallida y cancelarla.",
+   "body": "Sin timeout, una petición a un servidor que no responde puede dejar tu programa colgado para siempre. La trampa: un timeout no significa que la operación no ocurrió. Un pago que dio timeout pudo haberse procesado; reintentar a ciegas puede cobrar dos veces.",
+   "example": "const r = await fetch(\"https://github.com\", { signal: AbortSignal.timeout(5000) });\nconsole.log(r.status);",
+   "why": "Poner timeout a cada llamada de red evita procesos colgados sin error visible.",
+   "source": "https://developer.mozilla.org/en-US/docs/Web/API/AbortSignal/timeout_static",
+   "related": [
+    "arquitectura-latencia",
+    "fundamentos-promesa"
+   ],
+   "updated": "2026-09-29"
+  },
   {
    "id": "cli-agentic-loop",
    "term": "Agentic loop",
@@ -392,6 +815,1576 @@
    "updated": "2026-09-28"
   },
   {
+   "id": "datos-base-datos",
+   "term": "Base de datos",
+   "category": "datos",
+   "level": "basico",
+   "summary": "Un sistema para guardar datos de forma ordenada y consultarlos rápido; relacional (SQL) o no relacional (NoSQL).",
+   "body": "Una relacional organiza en tablas con filas y columnas, parecidas a hojas de Excel pero con reglas: tipos, relaciones y restricciones. La trampa: guardar datos en archivos sueltos \"por ahora\". En cuanto dos procesos escriben a la vez o necesitas buscar, reinventas mal una base de datos.",
+   "example": "sqlite3 prueba.db \"create table tags(id text primary key); insert into tags values('git-commit'); select * from tags;\"",
+   "why": "Saber cuándo un archivo JSON basta y cuándo hace falta una base de datos de verdad.",
+   "source": "https://es.wikipedia.org/wiki/Base_de_datos",
+   "related": [
+    "datos-sql",
+    "datos-nosql",
+    "datos-esquema",
+    "infra-baas"
+   ],
+   "updated": "2026-09-29"
+  },
+  {
+   "id": "datos-clave",
+   "term": "Clave primaria y foránea (key)",
+   "category": "datos",
+   "level": "intermedio",
+   "summary": "La clave primaria identifica cada fila sin repetirse; la foránea apunta a la primaria de otra tabla.",
+   "body": "Es lo que conecta tablas: `procesos.candidato_id` apunta a `candidatos.id`. La trampa: usar como clave algo que puede cambiar, como un email o un nombre. Cuando cambia, se rompen todas las referencias. Este proyecto trata el `id` de cada tarjeta como permanente por la misma razón. En estructuras de datos, \"key\" es lo que da acceso a un valor en un mapa.",
+   "why": "Explica por qué renombrar un id rompe el progreso y los related de otras tarjetas.",
+   "source": "https://en.wikipedia.org/wiki/Primary_key",
+   "related": [
+    "datos-base-datos",
+    "datos-normalizacion",
+    "algoritmos-hash"
+   ],
+   "updated": "2026-09-29"
+  },
+  {
+   "id": "datos-crud",
+   "term": "CRUD",
+   "category": "datos",
+   "level": "basico",
+   "summary": "Las cuatro operaciones básicas sobre datos: Create, Read, Update, Delete.",
+   "body": "Se mapean directo a SQL (INSERT, SELECT, UPDATE, DELETE) y a HTTP (POST, GET, PUT/PATCH, DELETE). Muchas apps son \"solo un CRUD\" con pantallas encima. La trampa es el Delete: borrar de verdad es irreversible; muchas apps marcan un campo `borrado_en` (soft delete).",
+   "why": "Pensar en CRUD es la forma más rápida de listar qué pantallas y endpoints necesita una app.",
+   "source": "https://developer.mozilla.org/en-US/docs/Glossary/CRUD",
+   "related": [
+    "datos-sql",
+    "web-rest"
+   ],
+   "updated": "2026-09-29"
+  },
+  {
+   "id": "datos-esquema",
+   "term": "Esquema (schema)",
+   "category": "datos",
+   "level": "intermedio",
+   "summary": "La definición de cómo se organizan los datos: qué tablas o campos hay, de qué tipo y con qué reglas.",
+   "body": "En una base de datos son las tablas, columnas, tipos y relaciones. En este proyecto, el SDD define el schema de cada tarjeta y `validate.mjs` lo hace cumplir. La trampa: cambiar un esquema con datos existentes. Renombrar un campo rompe a todo lo que lo lee; por eso los cambios de esquema van en migraciones.",
+   "why": "Un esquema validado convierte errores de datos en errores de build, antes de llegar al usuario.",
+   "source": "https://en.wikipedia.org/wiki/Database_schema",
+   "related": [
+    "datos-migracion",
+    "datos-base-datos",
+    "datos-normalizacion"
+   ],
+   "updated": "2026-09-29"
+  },
+  {
+   "id": "datos-json",
+   "term": "JSON",
+   "category": "datos",
+   "level": "basico",
+   "summary": "Formato de texto para intercambiar datos: objetos {}, listas [], strings, números, true/false y null.",
+   "body": "Es el idioma común de las APIs web y el contrato de este proyecto (`dist/tags.json`). La trampa: es estricto. No admite comentarios ni comas finales, y las claves van siempre entre comillas dobles. Un solo carácter fuera de lugar invalida el archivo.",
+   "example": "node -e 'console.log(JSON.stringify({ id: \"git-commit\", related: [] }, null, 2))'",
+   "why": "Si un JSON 'no carga', busca una coma de más al final o comillas simples.",
+   "source": "https://developer.mozilla.org/en-US/docs/Glossary/JSON",
+   "related": [
+    "datos-yaml",
+    "datos-serializacion",
+    "fundamentos-parsing"
+   ],
+   "updated": "2026-09-29"
+  },
+  {
+   "id": "datos-migracion",
+   "term": "Migración de base de datos",
+   "category": "datos",
+   "level": "intermedio",
+   "summary": "Un archivo fechado con los cambios de estructura de la base, para aplicarlos en orden en cualquier entorno.",
+   "body": "Crear una tabla o agregar una columna va en una migración versionada con Git, no se hace a mano en el panel. Así la base de pruebas y la de producción quedan iguales. La trampa: editar una migración que ya se aplicó. No se vuelve a correr; se escribe una migración nueva que corrija.",
+   "example": "supabase migration new agregar_columna_nivel",
+   "why": "Cambios hechos a mano en el panel no quedan registrados y la otra base nunca los recibe.",
+   "source": "https://supabase.com/docs/guides/deployment/database-migrations",
+   "related": [
+    "datos-esquema",
+    "git-commit",
+    "infra-baas"
+   ],
+   "updated": "2026-09-29"
+  },
+  {
+   "id": "datos-normalizacion",
+   "term": "Normalización",
+   "category": "datos",
+   "level": "avanzado",
+   "summary": "Organizar tablas para que cada dato se guarde en un solo lugar y se referencie en vez de copiarse.",
+   "body": "Si el nombre de la universidad está copiado en cada candidato, cambiarlo exige tocar cien filas y alguna quedará distinta. Normalizado, vive en una tabla y los candidatos apuntan a ella. El límite: normalizar de más obliga a unir muchas tablas para leer algo simple. A veces se desnormaliza a propósito por rendimiento.",
+   "why": "Datos duplicados terminan desincronizados; normalizar evita que la misma cosa tenga dos valores.",
+   "source": "https://es.wikipedia.org/wiki/Normalizaci%C3%B3n_de_bases_de_datos",
+   "related": [
+    "datos-clave",
+    "datos-esquema"
+   ],
+   "updated": "2026-09-29"
+  },
+  {
+   "id": "datos-nosql",
+   "term": "NoSQL",
+   "category": "datos",
+   "level": "intermedio",
+   "summary": "Bases de datos que no usan tablas relacionales: documentos, clave-valor, grafos. Más flexibles, menos garantías.",
+   "body": "MongoDB guarda documentos tipo JSON; Redis, pares clave-valor en memoria. La trampa: \"sin esquema\" no significa que no haya esquema; significa que la base no lo valida y tu código tiene que hacerlo. Si tus datos tienen muchas relaciones, una base relacional suele ser mejor elección.",
+   "why": "Ayuda a elegir: relaciones y consistencia apuntan a SQL; datos sueltos y velocidad, a NoSQL.",
+   "source": "https://en.wikipedia.org/wiki/NoSQL",
+   "related": [
+    "datos-base-datos",
+    "datos-sql",
+    "datos-esquema"
+   ],
+   "updated": "2026-09-29"
+  },
+  {
+   "id": "datos-orm",
+   "term": "ORM",
+   "category": "datos",
+   "level": "avanzado",
+   "summary": "Una librería que te deja leer y escribir en la base de datos con objetos de tu lenguaje en vez de SQL.",
+   "body": "Prisma, Drizzle o SQLAlchemy traducen `usuario.save()` a un INSERT. La trampa clásica es el problema N+1: recorrer 100 objetos y acceder a una relación dispara 101 queries sin que se vea en el código. Revisa las queries que genera.",
+   "why": "Cuando una página con ORM está lenta, lo primero es contar cuántas queries dispara.",
+   "source": "https://en.wikipedia.org/wiki/Object%E2%80%93relational_mapping",
+   "related": [
+    "datos-sql",
+    "datos-query",
+    "paradigmas-poo"
+   ],
+   "updated": "2026-09-29"
+  },
+  {
+   "id": "datos-query",
+   "term": "Query (consulta)",
+   "category": "datos",
+   "level": "basico",
+   "summary": "Una petición a una base de datos para leer o modificar datos, normalmente escrita en SQL.",
+   "body": "Una query lenta casi siempre es una query que recorre toda la tabla porque le falta un índice sobre la columna del `WHERE`. La trampa de seguridad: armar la query concatenando texto del usuario abre la puerta a inyección SQL. Siempre parámetros: `where id = $1`.",
+   "example": "sqlite3 :memory: \"create table t(id text); insert into t values('a');\" \\\n  \".param set :id 'a'\" \"select count(*) from t where id = :id;\"",
+   "why": "Las consultas parametrizadas son la defensa contra inyección SQL, uno de los ataques más comunes.",
+   "source": "https://owasp.org/www-community/attacks/SQL_Injection",
+   "related": [
+    "datos-sql",
+    "datos-orm",
+    "datos-clave"
+   ],
+   "updated": "2026-09-29"
+  },
+  {
+   "id": "datos-rpc",
+   "term": "RPC (llamada a procedimiento remoto)",
+   "category": "datos",
+   "level": "avanzado",
+   "summary": "Llamar a una función que vive en otro sistema como si fuera local; en Postgres, una función guardada en la base.",
+   "body": "En Supabase, una función SQL guardada en la base se llama por nombre desde la app con `supabase.rpc(\"nombre\")` y devuelve un resultado ya armado en una sola ida. Ventaja: junta varias consultas en una. La trampa: la lógica queda en la base, fuera del código de la app, y hay que versionarla con migraciones para no perderla de vista.",
+   "why": "Explica por qué parte de la lógica de una app con Supabase puede no estar en el repo de código.",
+   "source": "https://supabase.com/docs/reference/javascript/rpc",
+   "related": [
+    "datos-migracion",
+    "web-api",
+    "infra-baas"
+   ],
+   "updated": "2026-09-29"
+  },
+  {
+   "id": "datos-serializacion",
+   "term": "Serialización y deserialización",
+   "category": "datos",
+   "level": "intermedio",
+   "summary": "Convertir un objeto en texto o bytes para guardarlo o enviarlo (serializar), y reconstruirlo al recibirlo.",
+   "body": "`JSON.stringify` serializa; `JSON.parse` deserializa. Swift usa `Codable` para lo mismo. La trampa: no todo sobrevive el viaje. Las fechas vuelven como texto, las funciones se pierden y los `undefined` desaparecen. Y deserializar datos no confiables sin validarlos es un riesgo de seguridad.",
+   "example": "const s = JSON.stringify({ fecha: new Date(0), f: () => 1 });\nconsole.log(s);                       // {\"fecha\":\"1970-01-01T00:00:00.000Z\"}\nconsole.log(typeof JSON.parse(s).fecha); // \"string\", ya no es Date",
+   "why": "Explica por qué una fecha que guardaste llega como texto y hay que convertirla de nuevo.",
+   "source": "https://developer.mozilla.org/en-US/docs/Glossary/Serialization",
+   "related": [
+    "datos-json",
+    "fundamentos-parsing"
+   ],
+   "updated": "2026-09-29"
+  },
+  {
+   "id": "datos-sql",
+   "term": "SQL",
+   "category": "datos",
+   "level": "intermedio",
+   "summary": "El lenguaje para consultar y modificar bases de datos relacionales: SELECT, INSERT, UPDATE, DELETE.",
+   "body": "Es declarativo: describes qué datos quieres y el motor decide cómo buscarlos. La trampa más cara: un `UPDATE` o `DELETE` sin `WHERE` afecta a todas las filas. Escribe primero el `SELECT` con el mismo `WHERE`, revisa lo que devuelve, y recién después cámbialo por `UPDATE`.",
+   "example": "SELECT id, term FROM tags WHERE level = 'basico' ORDER BY id LIMIT 5;",
+   "why": "Probar el WHERE con un SELECT antes de un UPDATE evita borrar o cambiar la tabla entera.",
+   "source": "https://developer.mozilla.org/en-US/docs/Glossary/SQL",
+   "related": [
+    "datos-query",
+    "datos-crud",
+    "datos-base-datos",
+    "datos-orm"
+   ],
+   "updated": "2026-09-29"
+  },
+  {
+   "id": "datos-xml",
+   "term": "XML",
+   "category": "datos",
+   "level": "intermedio",
+   "summary": "Formato de datos con etiquetas <como><estas>, más verboso que JSON; común en sistemas antiguos y configuración.",
+   "body": "Los `.plist` de macOS, como el `Info.plist` de la app de este proyecto, son XML. También lo usan RSS, SVG y muchas integraciones empresariales. La trampa: los caracteres `<` y `&` dentro de un valor deben escaparse (`&lt;`, `&amp;`) o el archivo queda inválido.",
+   "example": "plutil -p macos/build/TagsCC.app/Contents/Info.plist",
+   "why": "Aparece en configuración de macOS y en integraciones empresariales que no usan JSON.",
+   "source": "https://developer.mozilla.org/en-US/docs/Web/XML/Guides/XML_introduction",
+   "related": [
+    "datos-json",
+    "datos-yaml"
+   ],
+   "updated": "2026-09-29"
+  },
+  {
+   "id": "datos-yaml",
+   "term": "YAML",
+   "category": "datos",
+   "level": "basico",
+   "summary": "Formato de datos legible que usa sangría en vez de llaves; común en archivos de configuración.",
+   "body": "Es más fácil de escribir a mano que JSON y admite comentarios. Cada tarjeta de este proyecto es un archivo YAML. La trampa: la sangría es sintaxis. Un espacio de más cambia el significado, y valores sin comillas se interpretan solos: `no` puede leerse como `false`.",
+   "example": "id: git-commit\nlevel: basico\nrelated: [git-push, git-rama]",
+   "why": "Poner comillas en valores ambiguos evita que YAML los convierta en booleanos o números.",
+   "source": "https://yaml.org/spec/1.2.2/",
+   "related": [
+    "datos-json",
+    "configuracion-frontmatter",
+    "fundamentos-parsing"
+   ],
+   "updated": "2026-09-29"
+  },
+  {
+   "id": "fundamentos-algoritmo",
+   "term": "Algoritmo",
+   "category": "fundamentos",
+   "level": "basico",
+   "summary": "Una secuencia finita de pasos precisos que resuelve un problema, independiente del lenguaje.",
+   "body": "El algoritmo es la idea; el código es una forma de escribirla. El mismo algoritmo de ordenamiento se puede implementar en Python, Swift o a mano con cartas. La trampa: \"funciona\" no es lo mismo que \"es un buen algoritmo\". Dos algoritmos correctos pueden tardar uno un milisegundo y el otro una hora con los mismos datos.",
+   "example": "// Búsqueda lineal: revisar uno por uno hasta encontrarlo\nconst buscar = (lista, x) => lista.findIndex((v) => v === x);\nconsole.log(buscar([4, 8, 15, 16], 15)); // 2",
+   "why": "Para pedirle a Claude la solución describiendo los pasos, no solo el resultado que esperas.",
+   "source": "https://developer.mozilla.org/en-US/docs/Glossary/Algorithm",
+   "related": [
+    "algoritmos-big-o",
+    "fundamentos-pseudocodigo",
+    "fundamentos-diagrama-flujo"
+   ],
+   "updated": "2026-09-29"
+  },
+  {
+   "id": "fundamentos-alto-bajo-nivel",
+   "term": "Lenguaje de alto y bajo nivel",
+   "category": "fundamentos",
+   "level": "basico",
+   "summary": "Alto nivel se parece al lenguaje humano (Python, JS); bajo nivel se acerca al procesador (C, ensamblador).",
+   "body": "El ensamblador traduce instrucciones casi uno a uno a código máquina. C da control de la memoria. Python o JavaScript la gestionan por ti. El intercambio: más alto nivel es más rápido de escribir y más seguro, a cambio de menos control y, a veces, menos rendimiento.",
+   "why": "Ayuda a elegir herramienta: Python para un script, Swift o C cuando el rendimiento importa.",
+   "source": "https://es.wikipedia.org/wiki/Lenguaje_de_alto_nivel",
+   "related": [
+    "herramientas-compilador",
+    "fundamentos-binario-bit",
+    "herramientas-garbage-collection"
+   ],
+   "updated": "2026-09-29"
+  },
+  {
+   "id": "fundamentos-binario-bit",
+   "term": "Bit y sistema binario",
+   "category": "fundamentos",
+   "level": "basico",
+   "summary": "Un bit es un 0 o un 1; el binario representa cualquier número solo con esos dos dígitos.",
+   "body": "8 bits forman un byte, que puede tomar 256 valores. Todo lo que maneja una computadora (texto, imágenes, código) termina siendo bits. La consecuencia práctica: muchos decimales no tienen representación exacta en binario, y por eso `0.1 + 0.2` no da exactamente `0.3`.",
+   "example": "console.log((10).toString(2));     // \"1010\"\nconsole.log(parseInt(\"1010\", 2));  // 10",
+   "why": "Entender bits explica límites como 2^32 en hashes o el error de redondeo en decimales.",
+   "source": "https://es.wikipedia.org/wiki/Bit",
+   "related": [
+    "fundamentos-operador-aritmetico",
+    "fundamentos-utf-8"
+   ],
+   "updated": "2026-09-29"
+  },
+  {
+   "id": "fundamentos-booleano",
+   "term": "Booleano",
+   "category": "fundamentos",
+   "level": "basico",
+   "summary": "Un tipo con solo dos valores, true y false; es lo que evalúa cada if.",
+   "body": "Los operadores `&&` (y), `||` (o) y `!` (no) combinan booleanos. La trampa en JavaScript: `if` acepta cualquier valor y lo convierte. `0`, `\"\"`, `null`, `undefined` y `NaN` cuentan como falsos (\"falsy\"). Un contador en 0 hace fallar un `if (contador)` aunque el contador exista.",
+   "example": "const contador = 0;\nif (contador) console.log(\"hay\");        // no imprime: 0 es falsy\nif (contador !== undefined) console.log(\"existe\"); // imprime",
+   "why": "Evita el bug de tratar un 0 o un texto vacío como si el dato no existiera.",
+   "source": "https://developer.mozilla.org/en-US/docs/Glossary/Boolean",
+   "related": [
+    "fundamentos-condicional",
+    "fundamentos-null"
+   ],
+   "updated": "2026-09-29"
+  },
+  {
+   "id": "fundamentos-bucle",
+   "term": "Bucle (loop) e iteración",
+   "category": "fundamentos",
+   "level": "basico",
+   "summary": "Repite un bloque mientras se cumpla una condición; cada vuelta es una iteración.",
+   "body": "`for` cuando sabes cuántas vueltas, `while` cuando depende de algo que cambia, y `for...of` para recorrer una colección. Las trampas: el bucle infinito (la condición nunca se vuelve falsa) y el error por uno (off-by-one), que recorre un elemento de más o de menos por usar `<=` en vez de `<`.",
+   "example": "const tags = [\"hooks\", \"git\", \"sql\"];\nfor (const t of tags) console.log(t);\nfor (let i = 0; i < tags.length; i++) console.log(i, tags[i]); // < y no <=",
+   "why": "El off-by-one es de los bugs más comunes al recorrer listas; saber buscarlo ahorra tiempo.",
+   "source": "https://developer.mozilla.org/en-US/docs/Web/JavaScript/Guide/Loops_and_iteration",
+   "related": [
+    "fundamentos-recursion",
+    "algoritmos-array",
+    "fundamentos-nested"
+   ],
+   "updated": "2026-09-29"
+  },
+  {
+   "id": "fundamentos-callback",
+   "term": "Callback",
+   "category": "fundamentos",
+   "level": "intermedio",
+   "summary": "Una función que le pasas a otra para que la llame después, cuando termine algo o ocurra un evento.",
+   "body": "`map`, `filter` y los manejadores de eventos reciben callbacks. También era la forma clásica de manejar código asíncrono. La trampa: callbacks dentro de callbacks forman el \"callback hell\", difícil de leer y de manejar errores. Las promesas y `async/await` nacieron para eso.",
+   "example": "const nums = [1, 2, 3];\nconsole.log(nums.map((n) => n * 10)); // [10, 20, 30]\nsetTimeout(() => console.log(\"después\"), 100);",
+   "why": "Es la base para entender promesas, eventos y casi cualquier API de JavaScript.",
+   "source": "https://developer.mozilla.org/en-US/docs/Glossary/Callback_function",
+   "related": [
+    "fundamentos-promesa",
+    "fundamentos-lambda",
+    "fundamentos-evento"
+   ],
+   "updated": "2026-09-29"
+  },
+  {
+   "id": "fundamentos-closure",
+   "term": "Closure (clausura)",
+   "category": "fundamentos",
+   "level": "avanzado",
+   "summary": "Una función que recuerda las variables del lugar donde se creó, aunque se ejecute en otro sitio.",
+   "body": "Permite estado privado sin clases: la variable vive mientras la función que la usa siga existiendo. La trampa: la función captura la variable, no su valor en ese momento. Con `var` en un bucle, todas las funciones ven el último valor; con `let` cada vuelta tiene la suya.",
+   "example": "function contador() {\n  let n = 0;\n  return () => ++n;\n}\nconst c = contador();\nc(); c();\nconsole.log(c()); // 3",
+   "why": "Explica por qué un callback 've' variables que parecían fuera de su alcance.",
+   "source": "https://developer.mozilla.org/en-US/docs/Web/JavaScript/Guide/Closures",
+   "related": [
+    "fundamentos-scope",
+    "fundamentos-callback",
+    "fundamentos-lambda"
+   ],
+   "updated": "2026-09-29"
+  },
+  {
+   "id": "fundamentos-codigo-fuente",
+   "term": "Código fuente (source code)",
+   "category": "fundamentos",
+   "level": "basico",
+   "summary": "El texto legible por personas en el que se escribe un programa, antes de compilarlo o ejecutarlo.",
+   "body": "Son los archivos `.js`, `.py`, `.swift` que editas. La máquina no los entiende directamente: un compilador los traduce o un intérprete los ejecuta. Lo que se versiona con Git es el código fuente, no el resultado compilado. Este proyecto es una excepción deliberada: `dist/` se commitea porque el iPhone no puede compilar.",
+   "why": "Distinguir fuente de artefacto generado te dice qué archivos editar y cuáles regenerar.",
+   "source": "https://es.wikipedia.org/wiki/C%C3%B3digo_fuente",
+   "related": [
+    "herramientas-compilador",
+    "herramientas-compilacion",
+    "git-repositorio"
+   ],
+   "updated": "2026-09-29"
+  },
+  {
+   "id": "fundamentos-condicional",
+   "term": "Condicional (if / else)",
+   "category": "fundamentos",
+   "level": "basico",
+   "summary": "Ejecuta un bloque u otro según si una condición es verdadera; es cómo un programa toma decisiones.",
+   "body": "`if`, `else if` y `else` evalúan en orden y se quedan con la primera rama verdadera. La trampa es el orden: si pones primero la condición más general, las específicas nunca se alcanzan. Las \"guard clauses\" (salir temprano con `return`) evitan pirámides de `if` anidados.",
+   "example": "function nivel(n) {\n  if (n >= 90) return \"avanzado\";\n  if (n >= 50) return \"intermedio\";\n  return \"basico\";\n}\nconsole.log(nivel(70)); // \"intermedio\"",
+   "why": "Salir temprano con return hace que el código que lees tenga una sola ruta principal.",
+   "source": "https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Statements/if...else",
+   "related": [
+    "fundamentos-switch",
+    "fundamentos-booleano",
+    "fundamentos-nested"
+   ],
+   "updated": "2026-09-29"
+  },
+  {
+   "id": "fundamentos-diagrama-flujo",
+   "term": "Diagrama de flujo",
+   "category": "fundamentos",
+   "level": "basico",
+   "summary": "Dibujo de un proceso con cajas y flechas: rombos para decisiones, rectángulos para acciones.",
+   "body": "Muestra por dónde puede ir la ejecución y en qué punto se bifurca. Es útil cuando un proceso tiene muchas decisiones encadenadas y el texto ya no se entiende. Su límite: no escala. Un diagrama con más de una página suele indicar que el proceso debería partirse en funciones más pequeñas, no que falta un diagrama más grande.",
+   "why": "Para ver de un vistazo en qué decisión se rompe un proceso antes de tocar código.",
+   "source": "https://es.wikipedia.org/wiki/Diagrama_de_flujo",
+   "related": [
+    "fundamentos-pseudocodigo",
+    "fundamentos-condicional"
+   ],
+   "updated": "2026-09-29"
+  },
+  {
+   "id": "fundamentos-entrada-salida",
+   "term": "Entrada y salida (I/O)",
+   "category": "fundamentos",
+   "level": "basico",
+   "summary": "Los datos que un programa recibe (teclado, archivo, red) y los que produce (pantalla, archivo, respuesta).",
+   "body": "En la terminal hay tres canales: stdin (entrada), stdout (salida normal) y stderr (errores). Separarlos permite redirigir solo los errores a un archivo. La I/O es la parte lenta de casi todo programa: leer disco o red tarda miles de veces más que calcular en memoria.",
+   "example": "echo '{\"tool\":\"Bash\"}' | node -e 'process.stdin.on(\"data\", d => console.log(JSON.parse(d).tool))'",
+   "why": "Los hooks de Claude Code reciben el evento por stdin y responden por stdout: es I/O pura.",
+   "source": "https://es.wikipedia.org/wiki/Entrada/salida",
+   "related": [
+    "herramientas-shell",
+    "fundamentos-sincrono-asincrono",
+    "algoritmos-buffer"
+   ],
+   "updated": "2026-09-29"
+  },
+  {
+   "id": "fundamentos-evento",
+   "term": "Evento",
+   "category": "fundamentos",
+   "level": "basico",
+   "summary": "Algo que ocurre (un clic, un desbloqueo, un archivo nuevo) y dispara el código que está escuchando.",
+   "body": "El código registra un \"listener\" y el sistema lo llama cuando el evento sucede. Es programación dirigida por eventos: el programa espera en vez de preguntar en bucle. La trampa: registrar el mismo listener dos veces hace que todo ocurra dos veces.",
+   "example": "const { EventEmitter } = require(\"node:events\");\nconst bus = new EventEmitter();\nbus.on(\"unlock\", () => console.log(\"mostrar tarjeta\"));\nbus.emit(\"unlock\");",
+   "why": "La app de Mac funciona así: escucha el evento de desbloqueo de pantalla para mostrar la tarjeta.",
+   "source": "https://developer.mozilla.org/en-US/docs/Web/API/Event",
+   "related": [
+    "fundamentos-callback",
+    "hooks-eventos"
+   ],
+   "updated": "2026-09-29"
+  },
+  {
+   "id": "fundamentos-excepcion",
+   "term": "Excepción (exception)",
+   "category": "fundamentos",
+   "level": "intermedio",
+   "summary": "Un error en tiempo de ejecución que corta el flujo normal hasta que un try/catch lo atrapa.",
+   "body": "Si nadie la atrapa, el programa termina y muestra un stack trace. La trampa es el `catch` vacío: atrapar un error y no hacer nada lo vuelve invisible. Solo atrapa lo que sabes manejar; lo demás, déjalo subir.",
+   "example": "try {\n  JSON.parse(\"{ roto\");\n} catch (e) {\n  console.error(\"JSON inválido:\", e.message);\n}",
+   "why": "Un catch que se traga errores es la razón típica de un fallo 'silencioso' imposible de rastrear.",
+   "source": "https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Statements/try...catch",
+   "related": [
+    "fundamentos-stack-trace",
+    "proceso-debugging",
+    "fundamentos-null"
+   ],
+   "updated": "2026-09-29"
+  },
+  {
+   "id": "fundamentos-funcion",
+   "term": "Función",
+   "category": "fundamentos",
+   "level": "basico",
+   "summary": "Un bloque de código con nombre que recibe datos, hace una tarea y puede devolver un resultado.",
+   "body": "Evita repetir código y le pone nombre a una intención: `validarTarjeta()` se entiende sin leer su interior. La regla práctica: una función, una tarea. Si su nombre necesita \"y\" (`leerYValidar`), probablemente son dos funciones.",
+   "example": "function saludar(nombre) {\n  return `Hola, ${nombre}`;\n}\nconsole.log(saludar(\"Diego\"));",
+   "why": "Pedirle a Claude funciones pequeñas con nombres claros hace el código más fácil de revisar.",
+   "source": "https://developer.mozilla.org/en-US/docs/Glossary/Function",
+   "related": [
+    "fundamentos-parametro-argumento",
+    "fundamentos-return",
+    "paradigmas-metodo"
+   ],
+   "updated": "2026-09-29"
+  },
+  {
+   "id": "fundamentos-inmutable",
+   "term": "Inmutable",
+   "category": "fundamentos",
+   "level": "intermedio",
+   "summary": "Un valor que no cambia después de creado: para 'modificarlo' se crea una copia nueva.",
+   "body": "Los strings son inmutables en casi todos los lenguajes. Un objeto inmutable se puede compartir sin miedo a que otra parte del código lo altere. La trampa en JavaScript: `Object.freeze` es superficial; los objetos anidados siguen siendo modificables. Y `const` no hace nada inmutable.",
+   "example": "const original = [1, 2];\nconst nueva = [...original, 3];  // copia, no modifica\nconsole.log(original, nueva);    // [1, 2] [1, 2, 3]",
+   "why": "Muchos bugs de 'se cambió solo' vienen de dos partes del código compartiendo un objeto mutable.",
+   "source": "https://developer.mozilla.org/en-US/docs/Glossary/Immutable",
+   "related": [
+    "fundamentos-variable",
+    "paradigmas-funcional",
+    "algoritmos-tupla"
+   ],
+   "updated": "2026-09-29"
+  },
+  {
+   "id": "fundamentos-javascript",
+   "term": "JavaScript",
+   "category": "fundamentos",
+   "level": "basico",
+   "summary": "El lenguaje de los navegadores; con Node.js también corre en servidores y en la terminal.",
+   "body": "Es de tipado dinámico e interpretado (con compilación JIT por debajo). TypeScript le añade tipos estáticos y compila a JavaScript. La trampa: su historia deja rarezas como la coerción de tipos y `==`. Usar `===`, `const`/`let` y módulos ES evita la mayoría.",
+   "example": "node -e 'console.log([3, 1, 2].sort())'",
+   "why": "Es el lenguaje del pipeline de este proyecto y del script del iPhone.",
+   "source": "https://developer.mozilla.org/en-US/docs/Web/JavaScript",
+   "related": [
+    "herramientas-nodejs",
+    "fundamentos-tipado-dinamico",
+    "herramientas-jit"
+   ],
+   "updated": "2026-09-29"
+  },
+  {
+   "id": "fundamentos-keyword",
+   "term": "Palabra reservada (keyword)",
+   "category": "fundamentos",
+   "level": "basico",
+   "summary": "Palabras que el lenguaje reserva para su sintaxis, como if, return o class; no sirven como nombres.",
+   "body": "Cada lenguaje tiene su lista: en JavaScript `const`, `function`, `await`; en Python `def`, `lambda`, `None`. La trampa aparece al nombrar campos: una propiedad llamada `class` o `default` puede dar errores de sintaxis en algunos contextos y obliga a usar comillas.",
+   "why": "Si un nombre de variable da un error de sintaxis inexplicable, revisa que no esté reservado.",
+   "source": "https://developer.mozilla.org/en-US/docs/Glossary/Keyword",
+   "related": [
+    "fundamentos-variable",
+    "fundamentos-parsing"
+   ],
+   "updated": "2026-09-29"
+  },
+  {
+   "id": "fundamentos-lambda",
+   "term": "Lambda (función anónima)",
+   "category": "fundamentos",
+   "level": "intermedio",
+   "summary": "Una función sin nombre, escrita en línea, para usarla una sola vez como argumento.",
+   "body": "En JavaScript son las funciones flecha `(x) => x * 2`; en Python, `lambda x: x * 2`. Brillan en `map`, `filter` y `sort`. El límite: si la lambda pasa de una línea o se repite, dale nombre. Además, en los stack traces aparece como \"anonymous\", lo que complica depurar.",
+   "example": "const tags = [{ term: \"SQL\" }, { term: \"Git\" }];\ntags.sort((a, b) => a.term.localeCompare(b.term));\nconsole.log(tags.map((t) => t.term)); // [ 'Git', 'SQL' ]",
+   "why": "Son la forma idiomática de ordenar y filtrar listas en JS y Python.",
+   "source": "https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Functions/Arrow_functions",
+   "related": [
+    "fundamentos-callback",
+    "fundamentos-closure",
+    "paradigmas-funcional"
+   ],
+   "updated": "2026-09-29"
+  },
+  {
+   "id": "fundamentos-modulo",
+   "term": "Módulo",
+   "category": "fundamentos",
+   "level": "basico",
+   "summary": "Un archivo de código que expone solo lo que exporta; el resto queda privado.",
+   "body": "En JavaScript moderno se usa `export` e `import` (ES modules, archivos `.mjs` en este proyecto). En Python, cada archivo `.py` es un módulo. La trampa: dos módulos que se importan entre sí (dependencia circular) pueden recibir valores `undefined` porque uno todavía no terminó de cargarse.",
+   "example": "// lib.mjs\nexport const SUMMARY_MAX = 120;\n// validate.mjs\nimport { SUMMARY_MAX } from \"./lib.mjs\";",
+   "why": "pipeline/lib.mjs es un módulo compartido: así build y validate usan las mismas reglas.",
+   "source": "https://developer.mozilla.org/en-US/docs/Web/JavaScript/Guide/Modules",
+   "related": [
+    "fundamentos-namespace",
+    "herramientas-biblioteca",
+    "paradigmas-encapsulacion"
+   ],
+   "updated": "2026-09-29"
+  },
+  {
+   "id": "fundamentos-namespace",
+   "term": "Namespace (espacio de nombres)",
+   "category": "fundamentos",
+   "level": "intermedio",
+   "summary": "Un prefijo que agrupa nombres para que dos cosas llamadas igual no choquen.",
+   "body": "`Math.max` y un `max` tuyo conviven porque uno vive en el namespace `Math`. En Python cada módulo es su propio namespace; en Swift, cada módulo y cada tipo. El `id` de las tarjetas usa la misma idea: `hooks-eventos` y `git-...` no chocan porque el prefijo de categoría actúa como namespace.",
+   "example": "import { join } from \"node:path\";\nconsole.log(join(\"content\", \"tags\"));  // join de path, no de Array",
+   "why": "Explica por qué importar dos cosas con el mismo nombre rompe, y cómo renombrar al importar.",
+   "source": "https://developer.mozilla.org/en-US/docs/Glossary/Namespace",
+   "related": [
+    "fundamentos-modulo",
+    "fundamentos-scope"
+   ],
+   "updated": "2026-09-29"
+  },
+  {
+   "id": "fundamentos-nested",
+   "term": "Código anidado (nested)",
+   "category": "fundamentos",
+   "level": "basico",
+   "summary": "Un bloque dentro de otro: un if dentro de un for dentro de otro for. Cada nivel suma complejidad.",
+   "body": "Dos bucles anidados sobre la misma lista recorren n × n elementos: con 10 000 datos son 100 millones de pasos. Más de tres niveles de sangría suele indicar que conviene extraer una función o salir temprano con `return` o `continue`.",
+   "example": "for (const fila of [[1, 2], [3, 4]]) {\n  for (const celda of fila) console.log(celda);\n}",
+   "why": "Un doble for sobre datos grandes es la causa típica de que algo 'se cuelgue' sin error.",
+   "source": "https://es.wikipedia.org/wiki/Anidamiento_(inform%C3%A1tica)",
+   "related": [
+    "fundamentos-bucle",
+    "algoritmos-big-o",
+    "proceso-clean-code"
+   ],
+   "updated": "2026-09-29"
+  },
+  {
+   "id": "fundamentos-null",
+   "term": "Null",
+   "category": "fundamentos",
+   "level": "basico",
+   "summary": "Un valor que significa 'aquí no hay nada'; leer una propiedad de null es de los errores más comunes.",
+   "body": "En JavaScript conviven `null` (vacío a propósito) y `undefined` (nunca se asignó). El error típico: `Cannot read properties of null`. Se evita con encadenamiento opcional `?.` y con un valor por defecto `??`. Swift lo resuelve en el tipo: un `String?` obliga a manejar el caso vacío para compilar.",
+   "example": "const usuario = null;\nconsole.log(usuario?.nombre ?? \"anónimo\"); // \"anónimo\", sin error",
+   "why": "Es la causa más frecuente de 'Cannot read properties of null' en cualquier app JS.",
+   "source": "https://developer.mozilla.org/en-US/docs/Glossary/Null",
+   "related": [
+    "fundamentos-booleano",
+    "fundamentos-excepcion"
+   ],
+   "updated": "2026-09-29"
+  },
+  {
+   "id": "fundamentos-operador-aritmetico",
+   "term": "Operador aritmético",
+   "category": "fundamentos",
+   "level": "basico",
+   "summary": "Los símbolos + - * / % para calcular; % da el resto de una división, no un porcentaje.",
+   "body": "`%` (módulo) sirve para ciclos: `i % 2` dice si un número es par, `n % 12` da la posición en una rueda de 12. La trampa: los decimales en binario no son exactos. `0.1 + 0.2` no da `0.3`. Para dinero se usan enteros (centavos), nunca decimales.",
+   "example": "console.log(7 % 3);          // 1\nconsole.log(0.1 + 0.2);      // 0.30000000000000004\nconsole.log((10 + 20) / 100); // 0.3: calcular en centavos",
+   "why": "Este proyecto usa % para elegir la tarjeta: fnv1a32(clave) % count da un índice válido.",
+   "source": "https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Operators#arithmetic_operators",
+   "related": [
+    "fundamentos-operador-asignacion",
+    "fundamentos-binario-bit"
+   ],
+   "updated": "2026-09-29"
+  },
+  {
+   "id": "fundamentos-operador-asignacion",
+   "term": "Operador de asignación",
+   "category": "fundamentos",
+   "level": "basico",
+   "summary": "= guarda un valor en una variable; no compara. Para comparar en JavaScript se usa ===.",
+   "body": "`=` asigna, `==` compara convirtiendo tipos, `===` compara sin convertir. Hay atajos: `+=`, `-=`, `??=` (asigna solo si está vacío). La trampa: `==` hace `0 == \"\"` verdadero. En JavaScript usa siempre `===` salvo que sepas exactamente por qué no.",
+   "example": "let n = 5;\nn += 2;                  // 7\nconsole.log(0 == \"\");    // true  (convierte tipos)\nconsole.log(0 === \"\");   // false",
+   "why": "Confundir = con === dentro de un if es un bug que no da error: simplemente hace otra cosa.",
+   "source": "https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Operators#assignment_operators",
+   "related": [
+    "fundamentos-operador-aritmetico",
+    "fundamentos-variable"
+   ],
+   "updated": "2026-09-29"
+  },
+  {
+   "id": "fundamentos-parametro-argumento",
+   "term": "Parámetro vs argumento",
+   "category": "fundamentos",
+   "level": "basico",
+   "summary": "El parámetro es el nombre en la definición de la función; el argumento es el valor que pasas al llamarla.",
+   "body": "En `function area(ancho, alto)`, `ancho` y `alto` son parámetros. En `area(3, 4)`, `3` y `4` son argumentos. La trampa en JavaScript: si pasas menos argumentos, el parámetro que falta vale `undefined` sin error. Un valor por defecto lo evita.",
+   "example": "function area(ancho, alto = 1) { return ancho * alto; }\nconsole.log(area(3, 4)); // 12\nconsole.log(area(3));    // 3, alto usa el valor por defecto",
+   "why": "Entender el vocabulario ayuda a leer mensajes de error como 'expected 2 arguments'.",
+   "source": "https://developer.mozilla.org/en-US/docs/Glossary/Parameter",
+   "related": [
+    "fundamentos-funcion",
+    "fundamentos-return"
+   ],
+   "updated": "2026-09-29"
+  },
+  {
+   "id": "fundamentos-parsing",
+   "term": "Parsing (análisis sintáctico)",
+   "category": "fundamentos",
+   "level": "intermedio",
+   "summary": "Convertir texto en una estructura que el programa entiende: JSON en objetos, YAML en campos, código en un árbol.",
+   "body": "Todo lenguaje y formato tiene un parser. Si el texto no respeta la gramática, el parser falla con un error de sintaxis y una posición. La trampa: parsear a mano con `split` y regex funciona hasta el primer caso raro. Este proyecto lo hace a propósito con un subconjunto de YAML acotado y documentado.",
+   "example": "const datos = JSON.parse('{\"id\": \"git-commit\", \"level\": \"basico\"}');\nconsole.log(datos.level); // \"basico\"",
+   "why": "Cuando un error dice 'Unexpected token at position 42', ya sabes que es un fallo de parsing.",
+   "source": "https://developer.mozilla.org/en-US/docs/Glossary/Parse",
+   "related": [
+    "datos-json",
+    "datos-yaml",
+    "datos-serializacion"
+   ],
+   "updated": "2026-09-29"
+  },
+  {
+   "id": "fundamentos-promesa",
+   "term": "Promesa (Promise) y async/await",
+   "category": "fundamentos",
+   "level": "intermedio",
+   "summary": "Un objeto que representa un resultado futuro: se cumple con un valor o se rechaza con un error.",
+   "body": "`async/await` es la forma legible de usarlas: `await` pausa la función hasta que la promesa se resuelve, sin bloquear el resto del programa. La trampa: una promesa rechazada sin `catch` (o sin try/catch alrededor del `await`) produce un \"unhandled rejection\" que en Node puede terminar el proceso.",
+   "example": "async function main() {\n  const r = await fetch(\"https://code.claude.com/docs/en/hooks.md\");\n  console.log(r.status);\n}\nmain().catch(console.error);",
+   "why": "fetch, lectura de archivos y casi toda la I/O moderna en JS devuelven promesas.",
+   "source": "https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Promise",
+   "related": [
+    "fundamentos-sincrono-asincrono",
+    "fundamentos-callback",
+    "fundamentos-excepcion"
+   ],
+   "updated": "2026-09-29"
+  },
+  {
+   "id": "fundamentos-pseudocodigo",
+   "term": "Pseudocódigo",
+   "category": "fundamentos",
+   "level": "basico",
+   "summary": "Describir un algoritmo con palabras y estructura de código, sin atarse a la sintaxis de un lenguaje.",
+   "body": "Sirve para pensar antes de escribir: `si`, `mientras`, `para cada` y pasos numerados. Nadie lo ejecuta, así que no hay errores de sintaxis que distraigan de la lógica. La trampa es saltárselo en problemas con varios casos: los errores de lógica que encuentras en pseudocódigo cuestan minutos; en código ya escrito, horas.",
+   "example": "para cada tarjeta en el corpus:\n    si su summary pasa de 120 caracteres:\n        marcar error\nsi hay errores: detener el build",
+   "why": "Es un buen formato para explicarle a Claude qué quieres antes de que escriba código.",
+   "source": "https://es.wikipedia.org/wiki/Pseudoc%C3%B3digo",
+   "related": [
+    "fundamentos-algoritmo",
+    "fundamentos-diagrama-flujo"
+   ],
+   "updated": "2026-09-29"
+  },
+  {
+   "id": "fundamentos-python",
+   "term": "Python",
+   "category": "fundamentos",
+   "level": "basico",
+   "summary": "Lenguaje de alto nivel muy legible, dominante en datos, IA y scripts de automatización.",
+   "body": "Usa la sangría como sintaxis: los bloques se definen por indentación, no por llaves. La trampa del entorno: instalar paquetes con `pip` en el Python del sistema mezcla versiones entre proyectos. Un entorno virtual (`python3 -m venv .venv`) los aísla.",
+   "example": "python3 -m venv .venv && source .venv/bin/activate\npython3 -c 'print(sorted([3, 1, 2]))'",
+   "why": "Es el lenguaje por defecto para análisis de datos y para muchos SDKs de IA.",
+   "source": "https://docs.python.org/3/tutorial/",
+   "related": [
+    "fundamentos-alto-bajo-nivel",
+    "ia-data-science",
+    "herramientas-dependencia"
+   ],
+   "updated": "2026-09-29"
+  },
+  {
+   "id": "fundamentos-recursion",
+   "term": "Recursión",
+   "category": "fundamentos",
+   "level": "intermedio",
+   "summary": "Una función que se llama a sí misma con un problema más pequeño, hasta llegar a un caso base.",
+   "body": "Encaja con estructuras que se contienen a sí mismas: carpetas con subcarpetas, árboles, JSON anidado. La trampa: sin caso base, o si el problema no se achica, se llama infinitamente hasta agotar la pila y el programa cae con un stack overflow.",
+   "example": "function factorial(n) {\n  if (n <= 1) return 1;          // caso base\n  return n * factorial(n - 1);   // problema más pequeño\n}\nconsole.log(factorial(5)); // 120",
+   "why": "Para recorrer carpetas o JSON anidado sin saber cuántos niveles tienen.",
+   "source": "https://developer.mozilla.org/en-US/docs/Glossary/Recursion",
+   "related": [
+    "algoritmos-stack-overflow",
+    "fundamentos-bucle",
+    "algoritmos-pila"
+   ],
+   "updated": "2026-09-29"
+  },
+  {
+   "id": "fundamentos-regex",
+   "term": "Expresión regular (regex)",
+   "category": "fundamentos",
+   "level": "intermedio",
+   "summary": "Un patrón de texto para buscar, validar o reemplazar: ^\\\\d{4}-\\\\d{2}-\\\\d{2}$ reconoce una fecha AAAA-MM-DD.",
+   "body": "`^` y `$` anclan inicio y fin; `\\d` es un dígito; `+` es uno o más; `[a-z]` es un rango. La trampa: olvidar las anclas. Sin `^...$`, el patrón acepta cualquier texto que *contenga* una coincidencia, no que *sea* una. Y las regex complejas son ilegibles: coméntalas o pártelas.",
+   "example": "const esFecha = /^\\d{4}-\\d{2}-\\d{2}$/;\nconsole.log(esFecha.test(\"2026-09-29\"));  // true\nconsole.log(esFecha.test(\"x2026-09-29\")); // false",
+   "why": "validate.mjs usa regex para revisar ids y fechas; sin anclas dejaría pasar basura.",
+   "source": "https://developer.mozilla.org/en-US/docs/Web/JavaScript/Guide/Regular_expressions",
+   "related": [
+    "fundamentos-parsing"
+   ],
+   "updated": "2026-09-29"
+  },
+  {
+   "id": "fundamentos-return",
+   "term": "Return (retorno)",
+   "category": "fundamentos",
+   "level": "basico",
+   "summary": "Termina la función y entrega un valor a quien la llamó; lo que va después ya no se ejecuta.",
+   "body": "Una función sin `return` devuelve `undefined` en JavaScript y `None` en Python. La trampa: confundir imprimir con devolver. `console.log` muestra un valor en pantalla, pero quien llamó a la función no recibe nada.",
+   "example": "function doble(n) { console.log(n * 2); }   // imprime, no devuelve\nconst r = doble(4);\nconsole.log(r); // undefined",
+   "why": "Explica por qué una función 'muestra el resultado' pero la variable queda vacía.",
+   "source": "https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Statements/return",
+   "related": [
+    "fundamentos-funcion",
+    "fundamentos-condicional"
+   ],
+   "updated": "2026-09-29"
+  },
+  {
+   "id": "fundamentos-scope",
+   "term": "Contexto de ejecución (scope)",
+   "category": "fundamentos",
+   "level": "intermedio",
+   "summary": "Las reglas que definen qué variables son visibles en cada parte del código.",
+   "body": "Una variable declarada dentro de una función o un bloque `{}` no existe fuera de él. Desde dentro sí se ven las variables de afuera. La trampa: declarar dentro de un bloque una variable con el mismo nombre que una de afuera la \"oculta\" (shadowing), y cambias una creyendo que cambias la otra.",
+   "example": "const x = \"afuera\";\n{ const x = \"adentro\"; console.log(x); } // \"adentro\"\nconsole.log(x);                          // \"afuera\"",
+   "why": "Explica errores de 'is not defined' y valores que no cambian donde esperabas.",
+   "source": "https://developer.mozilla.org/en-US/docs/Glossary/Scope",
+   "related": [
+    "fundamentos-closure",
+    "fundamentos-variable-global",
+    "fundamentos-namespace"
+   ],
+   "updated": "2026-09-29"
+  },
+  {
+   "id": "fundamentos-script",
+   "term": "Script",
+   "category": "fundamentos",
+   "level": "basico",
+   "summary": "Un programa corto que automatiza una tarea concreta y se ejecuta directo, sin compilar.",
+   "body": "Bash, Python y Node son los lenguajes típicos. `build.sh` e `install.sh` en este proyecto son scripts. La trampa en scripts de shell: sin `set -e`, un comando que falla no detiene el script y los pasos siguientes corren sobre un estado roto.",
+   "example": "#!/bin/bash\nset -euo pipefail   # detenerse ante el primer error\nnode pipeline/build.mjs",
+   "why": "Un set -euo pipefail al inicio evita que un script siga como si nada tras un error.",
+   "source": "https://www.gnu.org/software/bash/manual/html_node/The-Set-Builtin.html",
+   "related": [
+    "herramientas-shell",
+    "herramientas-cli"
+   ],
+   "updated": "2026-09-29"
+  },
+  {
+   "id": "fundamentos-sincrono-asincrono",
+   "term": "Síncrono vs asíncrono",
+   "category": "fundamentos",
+   "level": "intermedio",
+   "summary": "Síncrono espera a que cada paso termine; asíncrono lanza una tarea lenta y sigue mientras llega el resultado.",
+   "body": "Leer un archivo o llamar a una API es lento. En modo asíncrono el programa no se congela mientras espera. La trampa: olvidar `await`. La función sigue sin esperar y la variable queda con una `Promise` pendiente en vez del dato.",
+   "example": "const esperar = (ms) => new Promise((r) => setTimeout(r, ms));\nconsole.log(\"1\");\nesperar(100).then(() => console.log(\"3\"));\nconsole.log(\"2\");   // imprime 1, 2, 3",
+   "why": "Explica por qué un console.log muestra 'Promise { <pending> }' en vez del dato.",
+   "source": "https://developer.mozilla.org/en-US/docs/Glossary/Asynchronous",
+   "related": [
+    "fundamentos-promesa",
+    "fundamentos-callback",
+    "arquitectura-concurrencia"
+   ],
+   "updated": "2026-09-29"
+  },
+  {
+   "id": "fundamentos-stack-trace",
+   "term": "Stack trace",
+   "category": "fundamentos",
+   "level": "intermedio",
+   "summary": "La lista de llamadas activas cuando ocurrió un error: dice en qué archivo y línea falló y cómo se llegó ahí.",
+   "body": "Se lee de arriba hacia abajo: la primera línea es donde explotó; las siguientes, quién la llamó. La trampa: la primera línea suele estar dentro de una librería. Busca la primera que apunte a un archivo tuyo; casi siempre ahí está el problema.",
+   "example": "function a() { b(); }\nfunction b() { throw new Error(\"falló en b\"); }\ntry { a(); } catch (e) { console.log(e.stack); }",
+   "why": "Pegarle a Claude el stack trace completo, no solo el mensaje, le ahorra adivinar dónde falló.",
+   "source": "https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Error/stack",
+   "related": [
+    "fundamentos-excepcion",
+    "proceso-debugging",
+    "algoritmos-pila"
+   ],
+   "updated": "2026-09-29"
+  },
+  {
+   "id": "fundamentos-switch",
+   "term": "Switch",
+   "category": "fundamentos",
+   "level": "basico",
+   "summary": "Elige un bloque según el valor exacto de una expresión; alternativa a muchos if sobre la misma variable.",
+   "body": "Compara con `===` contra cada `case`. La trampa en JavaScript y C: sin `break`, la ejecución \"cae\" al siguiente `case` (fall-through). Swift no tiene ese problema y además exige cubrir todos los casos. Para mapear valor a resultado, un objeto de consulta suele ser más corto que un switch.",
+   "example": "const color = { basico: \"verde\", intermedio: \"ámbar\", avanzado: \"rojo\" };\nconsole.log(color[\"intermedio\"]); // \"ámbar\", sin switch",
+   "why": "Olvidar un break produce un bug silencioso: se ejecutan dos ramas en vez de una.",
+   "source": "https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Statements/switch",
+   "related": [
+    "fundamentos-condicional"
+   ],
+   "updated": "2026-09-29"
+  },
+  {
+   "id": "fundamentos-tipado-dinamico",
+   "term": "Tipado dinámico",
+   "category": "fundamentos",
+   "level": "intermedio",
+   "summary": "El tipo lo tiene el valor, no la variable, y se comprueba al ejecutar: la misma variable puede cambiar de tipo.",
+   "body": "Python y JavaScript son dinámicos: escribes menos, pero los errores de tipo aparecen en ejecución, a veces en producción. La trampa en JavaScript es la coerción implícita: `\"5\" + 1` da `\"51\"` y `\"5\" - 1` da `4`. TypeScript existe precisamente para añadir tipado estático encima de JavaScript.",
+   "example": "let x = 5;\nx = \"cinco\";          // válido: ahora es string\nconsole.log(\"5\" + 1); // \"51\"\nconsole.log(\"5\" - 1); // 4",
+   "why": "Explica por qué un bug de tipos en JS o Python no aparece hasta que el código corre.",
+   "source": "https://developer.mozilla.org/en-US/docs/Glossary/Dynamic_typing",
+   "related": [
+    "fundamentos-tipado-estatico",
+    "fundamentos-variable"
+   ],
+   "updated": "2026-09-29"
+  },
+  {
+   "id": "fundamentos-tipado-estatico",
+   "term": "Tipado estático",
+   "category": "fundamentos",
+   "level": "intermedio",
+   "summary": "Cada variable tiene un tipo fijo que el compilador revisa antes de ejecutar: los errores de tipo no llegan a correr.",
+   "body": "Swift, Java, Go y TypeScript lo usan. Si pasas un texto donde se espera un número, el programa ni siquiera compila. Muchos lenguajes infieren el tipo, así que no siempre lo escribes. El costo es algo más de ceremonia; la ganancia es que el editor sabe qué métodos existen y avisa antes.",
+   "example": "// Swift: el compilador rechaza esto antes de ejecutar\nlet edad: Int = 30\n// edad = \"treinta\"  // error: cannot assign value of type 'String' to type 'Int'",
+   "why": "Por eso el Swift de la app de Mac falla al compilar donde el JS del pipeline fallaría al correr.",
+   "source": "https://developer.mozilla.org/en-US/docs/Glossary/Static_typing",
+   "related": [
+    "fundamentos-tipado-dinamico",
+    "herramientas-compilador"
+   ],
+   "updated": "2026-09-29"
+  },
+  {
+   "id": "fundamentos-utf-8",
+   "term": "UTF-8",
+   "category": "fundamentos",
+   "level": "intermedio",
+   "summary": "La codificación estándar de texto: representa cualquier carácter Unicode usando de 1 a 4 bytes.",
+   "body": "Las letras ASCII ocupan 1 byte; la `ñ` o la `é`, 2; un emoji, 4. Por eso la longitud en bytes y en caracteres no coinciden. La trampa: si un archivo se lee con otra codificación, aparece \"EspaÃ±ol\" en vez de \"Español\". Este proyecto hashea la clave en UTF-8 en Swift y JS para que coincidan.",
+   "example": "console.log(\"ñ\".length);                     // 1 carácter\nconsole.log(Buffer.byteLength(\"ñ\", \"utf8\")); // 2 bytes",
+   "why": "Si ves caracteres raros como Ã±, el problema es de codificación, no de tu texto.",
+   "source": "https://developer.mozilla.org/en-US/docs/Glossary/UTF-8",
+   "related": [
+    "fundamentos-binario-bit",
+    "algoritmos-hash"
+   ],
+   "updated": "2026-09-29"
+  },
+  {
+   "id": "fundamentos-variable",
+   "term": "Variable",
+   "category": "fundamentos",
+   "level": "basico",
+   "summary": "Un nombre que apunta a un valor guardado en memoria, para poder leerlo o cambiarlo después.",
+   "body": "En JavaScript: `const` para lo que no se reasigna, `let` para lo que sí. Evita `var`, que tiene reglas de alcance confusas. La trampa: `const` impide reasignar el nombre, no modificar el contenido. Un array declarado con `const` todavía acepta `push`.",
+   "example": "const lista = [1, 2];\nlista.push(3);        // permitido: cambia el contenido\n// lista = [9];       // TypeError: no se puede reasignar\nconsole.log(lista);   // [ 1, 2, 3 ]",
+   "why": "Entender const vs let evita el error clásico de creer que un objeto const es inmutable.",
+   "source": "https://developer.mozilla.org/en-US/docs/Glossary/Variable",
+   "related": [
+    "fundamentos-variable-global",
+    "fundamentos-inmutable",
+    "fundamentos-scope"
+   ],
+   "updated": "2026-09-29"
+  },
+  {
+   "id": "fundamentos-variable-global",
+   "term": "Variable global",
+   "category": "fundamentos",
+   "level": "basico",
+   "summary": "Una variable visible desde todo el programa; cómoda al inicio y fuente de errores difíciles después.",
+   "body": "Cualquier función puede leerla y cambiarla, así que cuando tiene un valor inesperado no sabes quién lo puso. La alternativa es pasar los datos como parámetros o agruparlos en un módulo. Lo que sí suele ser global con razón es la configuración que no cambia, como constantes.",
+   "example": "let total = 0;                  // global: cualquiera la toca\nfunction sumar(n) { total += n; }\nsumar(5); sumar(3);\nconsole.log(total);             // 8, pero ¿quién más la cambió?",
+   "why": "Si un valor 'cambia solo', lo primero es buscar un estado global compartido.",
+   "source": "https://developer.mozilla.org/en-US/docs/Glossary/Global_variable",
+   "related": [
+    "fundamentos-variable",
+    "fundamentos-scope",
+    "paradigmas-singleton"
+   ],
+   "updated": "2026-09-29"
+  },
+  {
+   "id": "git-clone",
+   "term": "git clone",
+   "category": "git",
+   "level": "basico",
+   "summary": "Descarga una copia completa de un repo remoto, con todo su historial, a tu computadora.",
+   "body": "El clon queda conectado al original con el nombre `origin`, listo para hacer pull y push. La diferencia con descargar el ZIP de GitHub: el ZIP trae solo los archivos, sin historial y sin conexión. No podrás hacer pull ni push desde ahí.",
+   "example": "git clone https://github.com/git/git.git --depth 1",
+   "why": "Clonar, y no bajar el ZIP, es lo que te permite recibir cambios y enviar los tuyos.",
+   "source": "https://git-scm.com/docs/git-clone",
+   "related": [
+    "git-remote",
+    "git-repositorio",
+    "git-pull"
+   ],
+   "updated": "2026-09-29"
+  },
+  {
+   "id": "git-commit",
+   "term": "Commit",
+   "category": "git",
+   "level": "basico",
+   "summary": "Una foto guardada de tus cambios con un mensaje que explica qué hiciste; queda solo en tu computadora.",
+   "body": "Primero eliges qué entra con `git add` (staging) y luego `git commit` guarda la foto. Un buen mensaje dice por qué, no solo qué. La trampa: commitear no es subir. Hasta que haces push, el commit existe solo en tu máquina y nadie más lo ve.",
+   "example": "git add content/tags/git-commit.yaml\ngit commit -m \"Agrega tarjeta de commit\"",
+   "why": "Commits pequeños con buenos mensajes hacen fácil encontrar y revertir un cambio que rompió algo.",
+   "source": "https://git-scm.com/docs/git-commit",
+   "related": [
+    "git-push",
+    "git-status",
+    "git-control-versiones"
+   ],
+   "updated": "2026-09-29"
+  },
+  {
+   "id": "git-conflicto",
+   "term": "Conflicto de merge",
+   "category": "git",
+   "level": "intermedio",
+   "summary": "Ocurre cuando dos ramas cambiaron las mismas líneas y Git no sabe cuál conservar; se resuelve a mano.",
+   "body": "Git marca el archivo con `<<<<<<<`, `=======` y `>>>>>>>`: arriba tu versión, abajo la otra. Editas, dejas lo correcto, borras las marcas y haces commit. La trampa: aceptar \"la mía\" o \"la de ellos\" en bloque sin leer. Muchas veces la respuesta correcta combina ambas.",
+   "example": "git diff --name-only --diff-filter=U\ngit merge --abort   # si prefieres volver atrás",
+   "why": "Saber que git merge --abort existe quita el miedo: un conflicto siempre tiene salida.",
+   "source": "https://git-scm.com/docs/git-merge#_how_conflicts_are_presented",
+   "related": [
+    "git-merge",
+    "git-pull"
+   ],
+   "updated": "2026-09-29"
+  },
+  {
+   "id": "git-control-versiones",
+   "term": "Control de versiones (Git)",
+   "category": "git",
+   "level": "basico",
+   "summary": "Un sistema que guarda el historial de cada cambio de un proyecto; Git es el más usado.",
+   "body": "Es como el \"control de cambios\" de Word, pero para carpetas enteras: puedes ver quién cambió qué, cuándo y por qué, y volver atrás. Git es distribuido: cada copia tiene el historial completo, así que funciona sin internet. Lo que no está commiteado, Git no lo protege.",
+   "example": "git log --oneline -5",
+   "why": "Con historial puedes experimentar sin miedo: cualquier cambio commiteado se puede recuperar.",
+   "source": "https://git-scm.com/book/es/v2/Inicio---Sobre-el-Control-de-Versiones-Acerca-del-Control-de-Versiones",
+   "related": [
+    "git-repositorio",
+    "git-commit",
+    "git-github"
+   ],
+   "updated": "2026-09-29"
+  },
+  {
+   "id": "git-fast-forward",
+   "term": "Fast-forward",
+   "category": "git",
+   "level": "intermedio",
+   "summary": "Un merge trivial: tu rama no tenía nada propio y solo avanza hasta el commit más nuevo. No hay conflictos.",
+   "body": "Git mueve el puntero de la rama hacia adelante; no crea un commit de merge. `git pull --ff-only` exige este caso y falla si hay divergencia, en vez de crear un merge sin que lo pidas. Es una buena opción por defecto para mantenerte al día.",
+   "example": "git pull --ff-only",
+   "why": "--ff-only garantiza que un pull nunca mezcle nada inesperado en tu rama.",
+   "source": "https://git-scm.com/docs/git-merge#_fast_forward_merge",
+   "related": [
+    "git-merge",
+    "git-pull"
+   ],
+   "updated": "2026-09-29"
+  },
+  {
+   "id": "git-fetch",
+   "term": "git fetch",
+   "category": "git",
+   "level": "intermedio",
+   "summary": "Descarga los cambios nuevos del remoto sin aplicarlos a tus archivos: solo mira qué hay.",
+   "body": "Actualiza `origin/main` pero deja tu rama y tus archivos intactos. Es seguro de correr siempre. Después puedes comparar antes de decidir: `git log main..origin/main` muestra lo que llegó y todavía no tienes.",
+   "example": "git fetch\ngit log --oneline main..origin/main",
+   "why": "Te deja ver qué cambió tu compañero antes de mezclarlo con tu trabajo.",
+   "source": "https://git-scm.com/docs/git-fetch",
+   "related": [
+    "git-pull",
+    "git-remote",
+    "git-merge"
+   ],
+   "updated": "2026-09-29"
+  },
+  {
+   "id": "git-github",
+   "term": "GitHub",
+   "category": "git",
+   "level": "basico",
+   "summary": "El sitio web donde se aloja una copia de un repo Git para compartirlo y colaborar; Git y GitHub no son lo mismo.",
+   "body": "Git es el programa que corre en tu computadora; GitHub es un servicio que guarda repos y añade pull requests, issues y Actions. La trampa: un repo público es público de verdad, incluido todo su historial. Un secreto que se subió y luego se borró sigue visible en commits anteriores.",
+   "example": "gh repo view --web",
+   "why": "Este proyecto usa GitHub como backend: el iPhone lee dist/tags.json desde GitHub raw.",
+   "source": "https://docs.github.com/es/get-started/start-your-journey/about-github-and-git",
+   "related": [
+    "git-control-versiones",
+    "git-remote",
+    "git-pull-request",
+    "plataforma-github-actions"
+   ],
+   "updated": "2026-09-29"
+  },
+  {
+   "id": "git-gitignore",
+   "term": ".gitignore",
+   "category": "git",
+   "level": "basico",
+   "summary": "Archivo con la lista de rutas que Git debe ignorar y nunca subir: .env, node_modules, builds.",
+   "body": "Cada línea es un patrón: `.env*`, `node_modules/`, `*.log`. La trampa: `.gitignore` no afecta a archivos que ya están en el repo. Si un `.env` ya se commiteó, agregarlo después no lo saca; hay que quitarlo con `git rm --cached` y rotar el secreto.",
+   "example": "echo \".env*\" >> .gitignore\ngit check-ignore -v .env.local",
+   "why": "Es la primera barrera para no publicar claves; git check-ignore confirma que funciona.",
+   "source": "https://git-scm.com/docs/gitignore",
+   "related": [
+    "seguridad-env-file",
+    "seguridad-secreto",
+    "git-status"
+   ],
+   "updated": "2026-09-29"
+  },
+  {
+   "id": "git-merge",
+   "term": "Merge (fusionar)",
+   "category": "git",
+   "level": "intermedio",
+   "summary": "Combina los cambios de una rama en otra; Git junta automáticamente lo que no se pisa.",
+   "body": "Si ambas ramas avanzaron, se crea un \"merge commit\" con dos padres. Si solo una avanzó, es un fast-forward. La trampa: hacer merge sin probar el resultado. Dos cambios que funcionan por separado pueden romperse juntos aunque Git no reporte conflicto.",
+   "example": "git switch main\ngit merge mejora-tarjetas",
+   "why": "Probar después de un merge detecta roturas que Git no ve porque no hubo conflicto de texto.",
+   "source": "https://git-scm.com/docs/git-merge",
+   "related": [
+    "git-fast-forward",
+    "git-conflicto",
+    "git-rama"
+   ],
+   "updated": "2026-09-29"
+  },
+  {
+   "id": "git-pull",
+   "term": "git pull",
+   "category": "git",
+   "level": "basico",
+   "summary": "Fetch + merge en un paso: descarga los cambios del remoto y los aplica a tu rama.",
+   "body": "Si no tenías cambios propios, es un fast-forward limpio. Si ambos cambiaron lo mismo, aparece un conflicto. La trampa: hacer pull con cambios sin commitear. Git puede negarse o mezclarlos de forma confusa. Haz commit (o `git stash`) antes.",
+   "example": "git status --short && git pull",
+   "why": "Revisar git status antes de hacer pull evita mezclar trabajo a medias con cambios ajenos.",
+   "source": "https://git-scm.com/docs/git-pull",
+   "related": [
+    "git-fetch",
+    "git-merge",
+    "git-conflicto"
+   ],
+   "updated": "2026-09-29"
+  },
+  {
+   "id": "git-pull-request",
+   "term": "Pull request (PR)",
+   "category": "git",
+   "level": "basico",
+   "summary": "Una solicitud en GitHub para que alguien revise los cambios de tu rama antes de mezclarlos a main.",
+   "body": "Muestra el diff, permite comentar línea por línea y corre los checks automáticos. Se mezcla con un botón cuando está aprobado. La trampa: PRs gigantes. Nadie revisa bien 2 000 líneas; un PR pequeño y enfocado se revisa en minutos y con más atención.",
+   "example": "gh pr create --fill",
+   "why": "Un PR pequeño recibe una revisión real; uno enorme recibe un 'LGTM' sin leer.",
+   "source": "https://docs.github.com/es/pull-requests/collaborating-with-pull-requests/proposing-changes-to-your-work-with-pull-requests/about-pull-requests",
+   "related": [
+    "git-rama",
+    "proceso-code-review",
+    "workflow-code-review"
+   ],
+   "updated": "2026-09-29"
+  },
+  {
+   "id": "git-push",
+   "term": "git push",
+   "category": "git",
+   "level": "basico",
+   "summary": "Sube tus commits locales al remoto; es el paso que hace visibles tus cambios a los demás.",
+   "body": "Si el remoto tiene commits que tú no, Git rechaza el push: primero haz pull. La trampa: `git push --force` sobrescribe el historial remoto y puede borrar trabajo ajeno. Si de verdad hace falta, `--force-with-lease` al menos falla si alguien subió algo que no has visto.",
+   "example": "git push origin mejora-tarjetas",
+   "why": "En este proyecto el push a main es lo que actualiza el widget del iPhone.",
+   "source": "https://git-scm.com/docs/git-push",
+   "related": [
+    "git-commit",
+    "git-pull",
+    "git-remote"
+   ],
+   "updated": "2026-09-29"
+  },
+  {
+   "id": "git-rama",
+   "term": "Rama (branch) y main",
+   "category": "git",
+   "level": "basico",
+   "summary": "Una línea de trabajo paralela: cambias en tu rama sin afectar a main hasta que decidas mezclarla.",
+   "body": "`main` es la rama principal, la que el equipo da por buena y, a menudo, la que se publica sola en producción. La trampa: trabajar directo sobre `main`. Una rama por tarea mantiene main siempre funcional y permite descartar un experimento sin rastro.",
+   "example": "git switch -c mejora-tarjetas\ngit branch --show-current",
+   "why": "Una rama por cambio te deja probar sin arriesgar lo que ya está publicado.",
+   "source": "https://git-scm.com/book/es/v2/Ramificaciones-en-Git-%C2%BFQu%C3%A9-es-una-rama%3F",
+   "related": [
+    "git-merge",
+    "git-pull-request",
+    "workflow-worktrees"
+   ],
+   "updated": "2026-09-29"
+  },
+  {
+   "id": "git-remote",
+   "term": "Remoto y origin",
+   "category": "git",
+   "level": "intermedio",
+   "summary": "Un remoto es una copia del repo en otro lugar, normalmente GitHub; origin es el nombre por defecto.",
+   "body": "`origin/main` es tu última foto conocida de la rama main en GitHub, no la rama en vivo: solo se actualiza cuando haces fetch o pull. Un repo puede tener varios remotos, por ejemplo `origin` (tu fork) y `upstream` (el original).",
+   "example": "git remote -v",
+   "why": "Explica por qué git status dice 'al día' aunque tu compañero ya haya subido cambios.",
+   "source": "https://git-scm.com/book/es/v2/Fundamentos-de-Git-Trabajar-con-Remotos",
+   "related": [
+    "git-fetch",
+    "git-push",
+    "git-clone",
+    "infra-local-remoto"
+   ],
+   "updated": "2026-09-29"
+  },
+  {
+   "id": "git-repositorio",
+   "term": "Repositorio (repo)",
+   "category": "git",
+   "level": "basico",
+   "summary": "Una carpeta de proyecto cuyo historial lleva Git; la información vive en la carpeta oculta .git.",
+   "body": "`git init` convierte una carpeta en repo. Un repo puede tener copia local y copia en GitHub (remota), y se sincronizan con push y pull. La trampa: borrar la carpeta `.git` borra todo el historial local. Y un monorepo es un solo repo con varios proyectos dentro.",
+   "example": "git rev-parse --show-toplevel",
+   "why": "Saber dónde está la raíz del repo explica qué archivos controla Git y cuáles no.",
+   "source": "https://git-scm.com/book/es/v2/Fundamentos-de-Git-Obteniendo-un-repositorio-Git",
+   "related": [
+    "git-control-versiones",
+    "git-clone",
+    "arquitectura-monorepo"
+   ],
+   "updated": "2026-09-29"
+  },
+  {
+   "id": "git-status",
+   "term": "git status",
+   "category": "git",
+   "level": "basico",
+   "summary": "Muestra qué archivos cambiaron, cuáles están listos para commit y si vas adelante o atrás del remoto.",
+   "body": "\"Working tree clean\" significa que no hay cambios sin guardar. La trampa: \"Your branch is up to date\" compara con tu última copia de `origin`, no con GitHub en vivo. Sin un `git fetch` antes, puede estar desactualizado.",
+   "example": "git fetch && git status -sb",
+   "why": "Es el comando para correr antes de cualquier otro: te dice en qué estado está todo.",
+   "source": "https://git-scm.com/docs/git-status",
+   "related": [
+    "git-commit",
+    "git-fetch",
+    "git-gitignore"
+   ],
+   "updated": "2026-09-29"
+  },
+  {
+   "id": "herramientas-archivo-oculto",
+   "term": "Archivo oculto",
+   "category": "herramientas",
+   "level": "basico",
+   "summary": "Archivo cuyo nombre empieza con punto, como .env o .gitignore; el sistema no lo muestra por defecto.",
+   "body": "Se ocultan para no borrarlos por accidente, no por seguridad: cualquiera puede verlos. En Finder se muestran con `Cmd + Shift + .`. En la terminal, `ls -a`. VS Code sí los muestra en el explorador.",
+   "example": "ls -a",
+   "why": "Si 'no encuentras' el .env o la carpeta .claude, probablemente solo está oculta.",
+   "source": "https://en.wikipedia.org/wiki/Hidden_file_and_hidden_directory",
+   "related": [
+    "seguridad-env-file",
+    "git-gitignore",
+    "cli-claude-directory"
+   ],
+   "updated": "2026-09-29"
+  },
+  {
+   "id": "herramientas-biblioteca",
+   "term": "Biblioteca (library)",
+   "category": "herramientas",
+   "level": "basico",
+   "summary": "Código reutilizable escrito por otros que tu programa llama cuando lo necesita.",
+   "body": "La diferencia con un framework: a una biblioteca la llamas tú; un framework te llama a ti y decide la estructura (inversión de control). La trampa: cada biblioteca es código que no escribiste ni revisaste. Este proyecto prohíbe dependencias externas a propósito (invariante 3) para no heredar ese riesgo.",
+   "example": "node -e 'const { join } = require(\"node:path\"); console.log(join(\"a\", \"b\"))'",
+   "why": "Antes de agregar una librería, pregunta si la biblioteca estándar ya lo resuelve.",
+   "source": "https://en.wikipedia.org/wiki/Library_(computing)",
+   "related": [
+    "herramientas-framework",
+    "herramientas-dependencia",
+    "fundamentos-modulo"
+   ],
+   "updated": "2026-09-29"
+  },
+  {
+   "id": "herramientas-cli",
+   "term": "CLI (interfaz de línea de comandos)",
+   "category": "herramientas",
+   "level": "basico",
+   "summary": "Un programa que se usa escribiendo comandos en la terminal, como git, node o claude.",
+   "body": "Casi todos siguen la misma forma: `programa subcomando --opcion valor`. Y casi todos aceptan `--help`. La ventaja sobre una interfaz gráfica: los comandos se pueden guardar en scripts, repetir y automatizar. Por eso Claude Code trabaja sobre todo a través de CLIs.",
+   "example": "git --help | head -5",
+   "why": "--help es la documentación más rápida y siempre coincide con la versión que tienes.",
+   "source": "https://es.wikipedia.org/wiki/Interfaz_de_l%C3%ADnea_de_comandos",
+   "related": [
+    "herramientas-shell",
+    "proceso-ui",
+    "fundamentos-script"
+   ],
+   "updated": "2026-09-29"
+  },
+  {
+   "id": "herramientas-compilacion",
+   "term": "Build (compilación)",
+   "category": "herramientas",
+   "level": "basico",
+   "summary": "El proceso que convierte el código fuente en algo ejecutable o publicable: compila, empaqueta y optimiza.",
+   "body": "En este proyecto hay dos: `node pipeline/build.mjs` convierte los YAML en `dist/tags.json`, y `./macos/build.sh` compila la app. La trampa: editar el resultado del build a mano. Se sobrescribe en el siguiente build. Siempre se edita la fuente y se vuelve a construir.",
+   "example": "node pipeline/build.mjs",
+   "why": "Si un cambio 'desaparece', probablemente editaste un archivo generado en vez de su fuente.",
+   "source": "https://en.wikipedia.org/wiki/Software_build",
+   "related": [
+    "herramientas-compilador",
+    "fundamentos-codigo-fuente",
+    "infra-pipeline"
+   ],
+   "updated": "2026-09-29"
+  },
+  {
+   "id": "herramientas-compilador",
+   "term": "Compilador",
+   "category": "herramientas",
+   "level": "intermedio",
+   "summary": "Programa que traduce código fuente a código máquina (o a otro lenguaje) antes de ejecutarlo.",
+   "body": "`swiftc` compila el Swift de la app de Mac; `tsc` compila TypeScript a JavaScript. Un intérprete, en cambio, ejecuta el código directamente, línea a línea. La ventaja del compilador: detecta errores de tipos y sintaxis antes de que el programa corra. Sus mensajes de error suelen señalar la línea exacta.",
+   "example": "echo 'print(\"hola\")' > hola.swift && swiftc hola.swift -o hola && ./hola",
+   "why": "Leer el primer error del compilador, no el último, suele resolver los demás en cadena.",
+   "source": "https://es.wikipedia.org/wiki/Compilador",
+   "related": [
+    "herramientas-compilacion",
+    "herramientas-jit",
+    "fundamentos-tipado-estatico"
+   ],
+   "updated": "2026-09-29"
+  },
+  {
+   "id": "herramientas-dependencia",
+   "term": "Dependencia",
+   "category": "herramientas",
+   "level": "basico",
+   "summary": "Una librería externa que tu proyecto necesita para funcionar, declarada en un archivo como package.json.",
+   "body": "Cada dependencia trae a su vez las suyas (dependencias transitivas): instalar una puede bajar cientos. La trampa: versiones sueltas. El lockfile (`package-lock.json`) fija las versiones exactas para que todos instalen lo mismo; se commitea siempre.",
+   "example": "npm ls --depth=0",
+   "why": "Commitear el lockfile evita que el proyecto se rompa solo por una actualización ajena.",
+   "source": "https://docs.npmjs.com/cli/configuring-npm/package-lock-json",
+   "related": [
+    "herramientas-npm",
+    "herramientas-package-json",
+    "herramientas-biblioteca"
+   ],
+   "updated": "2026-09-29"
+  },
+  {
+   "id": "herramientas-driver",
+   "term": "Driver (controlador)",
+   "category": "herramientas",
+   "level": "intermedio",
+   "summary": "Software que permite al sistema operativo hablar con un hardware concreto, como una impresora o una GPU.",
+   "body": "Traduce las órdenes genéricas del sistema a lo que ese dispositivo entiende. La palabra también se usa para software: un \"driver de base de datos\" es la librería que conecta tu programa con Postgres o MySQL.",
+   "why": "Cuando algo conecta pero no funciona bien, el driver suele ser la pieza desactualizada.",
+   "source": "https://es.wikipedia.org/wiki/Controlador_de_dispositivo",
+   "related": [
+    "herramientas-kernel",
+    "datos-base-datos"
+   ],
+   "updated": "2026-09-29"
+  },
+  {
+   "id": "herramientas-framework",
+   "term": "Framework",
+   "category": "herramientas",
+   "level": "basico",
+   "summary": "Un esqueleto de aplicación con estructura y reglas ya definidas; tú rellenas las partes y él las llama.",
+   "body": "Next.js, Django o SwiftUI deciden dónde va cada archivo y cómo fluye el programa. Aceleran mucho si sigues sus convenciones. La trampa: pelear contra el framework. Si te encuentras forzándolo a trabajar de otra forma, o eliges otro o aceptas sus reglas.",
+   "why": "Seguir las convenciones del framework hace que Claude y otros entiendan el proyecto al instante.",
+   "source": "https://en.wikipedia.org/wiki/Software_framework",
+   "related": [
+    "herramientas-biblioteca",
+    "web-nextjs"
+   ],
+   "updated": "2026-09-29"
+  },
+  {
+   "id": "herramientas-garbage-collection",
+   "term": "Garbage collection",
+   "category": "herramientas",
+   "level": "avanzado",
+   "summary": "El runtime libera automáticamente la memoria de objetos que ya nadie usa, sin que lo hagas a mano.",
+   "body": "JavaScript, Python y Java lo tienen; C no. Swift usa otro sistema, el conteo de referencias (ARC). La trampa: la memoria solo se libera si ya nada apunta al objeto. Un listener olvidado o una caché que nunca se vacía mantiene objetos vivos: una fuga de memoria aun con GC.",
+   "why": "Explica fugas de memoria en lenguajes 'que gestionan la memoria solos'.",
+   "source": "https://developer.mozilla.org/en-US/docs/Web/JavaScript/Guide/Memory_management",
+   "related": [
+    "herramientas-runtime",
+    "fundamentos-alto-bajo-nivel",
+    "algoritmos-heap"
+   ],
+   "updated": "2026-09-29"
+  },
+  {
+   "id": "herramientas-ide",
+   "term": "IDE",
+   "category": "herramientas",
+   "level": "basico",
+   "summary": "Un editor de código con herramientas integradas: autocompletado, depurador, terminal, Git. VS Code, Xcode.",
+   "body": "La diferencia con un editor de texto es que entiende el código: sabe dónde se define una función y quién la llama. Atajos que más rinden: ir a la definición (F12 en VS Code), renombrar un símbolo en todo el proyecto (F2) y buscar en todos los archivos (Cmd+Shift+F).",
+   "example": "code .",
+   "why": "Renombrar con F2 cambia todas las referencias sin romper nada, a diferencia de buscar y reemplazar.",
+   "source": "https://code.visualstudio.com/docs/editing/editingevolved",
+   "related": [
+    "plataforma-vs-code",
+    "proceso-debugging",
+    "herramientas-cli"
+   ],
+   "updated": "2026-09-29"
+  },
+  {
+   "id": "herramientas-jit",
+   "term": "Compilador JIT",
+   "category": "herramientas",
+   "level": "avanzado",
+   "summary": "Compila el código mientras el programa corre, optimizando las partes que más se usan.",
+   "body": "Los motores de JavaScript como V8 (Node, Chrome) empiezan interpretando y compilan a código máquina las funciones que se ejecutan muchas veces. Por eso un benchmark de JS da tiempos distintos en las primeras vueltas: el código todavía se está \"calentando\".",
+   "why": "Explica por qué JavaScript, siendo interpretado, puede ser tan rápido.",
+   "source": "https://en.wikipedia.org/wiki/Just-in-time_compilation",
+   "related": [
+    "herramientas-compilador",
+    "herramientas-runtime",
+    "fundamentos-javascript"
+   ],
+   "updated": "2026-09-29"
+  },
+  {
+   "id": "herramientas-jvm",
+   "term": "JVM (Java Virtual Machine)",
+   "category": "herramientas",
+   "level": "avanzado",
+   "summary": "El runtime que ejecuta bytecode de Java o Kotlin; permite que el mismo programa corra en cualquier sistema.",
+   "body": "El compilador de Java no genera código para un procesador concreto, sino bytecode, y la JVM de cada sistema lo ejecuta (con JIT). \"Escribe una vez, corre en cualquier lado\" era la promesa. El costo es un arranque más lento y más memoria que un binario nativo.",
+   "why": "Completa el mapa de runtimes: Node para JS, JVM para Java y Kotlin, nativo para Swift.",
+   "source": "https://es.wikipedia.org/wiki/M%C3%A1quina_virtual_Java",
+   "related": [
+    "herramientas-runtime",
+    "herramientas-jit"
+   ],
+   "updated": "2026-09-29"
+  },
+  {
+   "id": "herramientas-kernel",
+   "term": "Kernel",
+   "category": "herramientas",
+   "level": "avanzado",
+   "summary": "El núcleo del sistema operativo: reparte CPU y memoria entre programas y habla con el hardware.",
+   "body": "Los programas no tocan el hardware directamente; se lo piden al kernel. macOS usa el kernel XNU; Linux es, en sentido estricto, solo un kernel. Los contenedores comparten el kernel del sistema anfitrión. Por eso un contenedor de Linux necesita una máquina virtual con Linux para correr en una Mac.",
+   "example": "uname -sr",
+   "why": "Explica por qué Docker en Mac corre dentro de una máquina virtual escondida.",
+   "source": "https://es.wikipedia.org/wiki/N%C3%BAcleo_(inform%C3%A1tica)",
+   "related": [
+    "infra-contenedor",
+    "herramientas-driver"
+   ],
+   "updated": "2026-09-29"
+  },
+  {
+   "id": "herramientas-markdown",
+   "term": "Markdown",
+   "category": "herramientas",
+   "level": "basico",
+   "summary": "Formato de texto plano con símbolos simples (# títulos, ** negrita, - listas) que se muestra con formato.",
+   "body": "Se lee bien incluso sin renderizar, por eso lo usan los README, CLAUDE.md y la documentación de este proyecto. La trampa: un salto de línea simple no crea un párrafo nuevo; hace falta una línea en blanco. El build de este proyecto aplica la misma regla al `body` de las tarjetas.",
+   "example": "# Título\nTexto con **negrita** y `código`.\n\n- un punto\n- otro punto",
+   "why": "Es el formato de CLAUDE.md y de casi toda la documentación que lee Claude.",
+   "source": "https://commonmark.org/help/",
+   "related": [
+    "contexto-claude-md",
+    "datos-yaml"
+   ],
+   "updated": "2026-09-29"
+  },
+  {
+   "id": "herramientas-nodejs",
+   "term": "Node.js",
+   "category": "herramientas",
+   "level": "basico",
+   "summary": "El runtime que ejecuta JavaScript fuera del navegador: en tu terminal o en un servidor.",
+   "body": "Trae módulos para archivos, red y procesos (`node:fs`, `node:http`). El pipeline de este proyecto corre en Node 22 sin paquetes externos. La trampa: la versión. Un proyecto puede exigir una versión concreta; si tienes otra, falla con errores confusos. Revisa `node -v` primero.",
+   "example": "node -v\nnode pipeline/validate.mjs",
+   "why": "Muchos errores raros de un proyecto JS se deben a una versión de Node distinta.",
+   "source": "https://nodejs.org/en/learn/getting-started/introduction-to-nodejs",
+   "related": [
+    "herramientas-npm",
+    "herramientas-runtime",
+    "fundamentos-javascript"
+   ],
+   "updated": "2026-09-29"
+  },
+  {
+   "id": "herramientas-npm",
+   "term": "npm y node_modules",
+   "category": "herramientas",
+   "level": "basico",
+   "summary": "npm descarga las librerías de un proyecto de Node en la carpeta node_modules, que nunca se sube a Git.",
+   "body": "`npm install` lee `package.json` y llena `node_modules/`; `npm run dev` ejecuta un script definido ahí. `node_modules` pesa cientos de MB y se regenera en cualquier momento, por eso va en `.gitignore`. Si algo se comporta raro, borrarla y reinstalar es un arreglo legítimo.",
+   "example": "rm -rf node_modules && npm install",
+   "why": "Borrar node_modules y reinstalar resuelve una sorprendente cantidad de errores extraños.",
+   "source": "https://docs.npmjs.com/cli/commands/npm-install",
+   "related": [
+    "herramientas-package-json",
+    "herramientas-dependencia",
+    "git-gitignore"
+   ],
+   "updated": "2026-09-29"
+  },
+  {
+   "id": "herramientas-package-json",
+   "term": "package.json",
+   "category": "herramientas",
+   "level": "basico",
+   "summary": "La ficha técnica de un proyecto de Node: nombre, dependencias y los comandos disponibles en scripts.",
+   "body": "La sección `scripts` es el menú del proyecto: `npm run dev`, `npm test`, `npm run build`. Mirarla es lo primero al abrir un repo ajeno. `dependencies` son las que necesita en producción; `devDependencies`, solo para desarrollar y probar.",
+   "example": "node -e 'console.log(require(\"./package.json\").scripts)'",
+   "why": "Leer scripts en package.json te dice cómo arrancar, probar y compilar cualquier proyecto JS.",
+   "source": "https://docs.npmjs.com/cli/configuring-npm/package-json",
+   "related": [
+    "herramientas-npm",
+    "herramientas-dependencia"
+   ],
+   "updated": "2026-09-29"
+  },
+  {
+   "id": "herramientas-runtime",
+   "term": "Runtime (tiempo de ejecución)",
+   "category": "herramientas",
+   "level": "intermedio",
+   "summary": "Dos cosas: el momento en que el programa corre, y el entorno que lo hace correr, como Node o la JVM.",
+   "body": "\"Error en runtime\" es el que aparece al ejecutar, no al compilar. Como entorno, el runtime define qué hay disponible: Node tiene acceso a archivos, el navegador tiene `window` y `document`. El mismo JavaScript funciona en uno y falla en el otro.",
+   "example": "node -e 'console.log(typeof window, typeof process)'   # undefined object",
+   "why": "Explica errores como 'window is not defined' al correr código de navegador en Node.",
+   "source": "https://en.wikipedia.org/wiki/Runtime_system",
+   "related": [
+    "herramientas-nodejs",
+    "herramientas-jvm",
+    "herramientas-compilador"
+   ],
+   "updated": "2026-09-29"
+  },
+  {
+   "id": "herramientas-sdk",
+   "term": "SDK",
+   "category": "herramientas",
+   "level": "intermedio",
+   "summary": "Un kit de herramientas y librerías para desarrollar sobre una plataforma o servicio concreto.",
+   "body": "El SDK de Anthropic simplifica llamar a la API de Claude; el SDK de macOS trae los frameworks del sistema. Este proyecto compila la app de Mac solo con el SDK que viene en Command Line Tools, sin Xcode. Un SDK suele incluir librerías, documentación y herramientas de línea de comandos.",
+   "example": "xcrun --show-sdk-path",
+   "why": "Usar el SDK oficial ahorra reimplementar autenticación, reintentos y formatos a mano.",
+   "source": "https://en.wikipedia.org/wiki/Software_development_kit",
+   "related": [
+    "herramientas-biblioteca",
+    "web-api"
+   ],
+   "updated": "2026-09-29"
+  },
+  {
+   "id": "herramientas-servidor-desarrollo",
+   "term": "Servidor de desarrollo",
+   "category": "herramientas",
+   "level": "basico",
+   "summary": "Un servidor local que muestra tu app mientras la editas y la recarga sola al guardar cambios.",
+   "body": "Se enciende con algo como `npm run dev` y se abre en `http://localhost:3000`. La trampa: el servidor de desarrollo no es producción. Es más lento, muestra errores detallados y omite optimizaciones. Algo que funciona ahí puede fallar en el build real.",
+   "example": "npm run dev",
+   "why": "Correr el build de producción localmente antes de publicar detecta lo que el modo dev oculta.",
+   "source": "https://nextjs.org/docs/app/api-reference/cli/next#next-dev-options",
+   "related": [
+    "web-localhost",
+    "herramientas-compilacion",
+    "infra-deployment"
+   ],
+   "updated": "2026-09-29"
+  },
+  {
+   "id": "herramientas-shell",
+   "term": "Shell",
+   "category": "herramientas",
+   "level": "basico",
+   "summary": "El programa que interpreta lo que escribes en la terminal y ejecuta los comandos; en tu Mac es zsh.",
+   "body": "Terminal es la ventana; shell es el intérprete que corre dentro. zsh y bash son shells distintos con sintaxis casi igual. Conceptos clave: `|` pasa la salida de un comando a otro, `>` la guarda en un archivo y `&&` ejecuta el siguiente solo si el anterior tuvo éxito.",
+   "example": "ls content/tags | grep '^git-' | wc -l",
+   "why": "Combinar comandos con | resuelve en una línea tareas que parecen necesitar un script.",
+   "source": "https://es.wikipedia.org/wiki/Shell_(inform%C3%A1tica)",
+   "related": [
+    "herramientas-cli",
+    "fundamentos-script",
+    "fundamentos-entrada-salida"
+   ],
+   "updated": "2026-09-29"
+  },
+  {
+   "id": "herramientas-variable-entorno",
+   "term": "Variable de entorno",
+   "category": "herramientas",
+   "level": "basico",
+   "summary": "Un dato de configuración que el programa lee del sistema en vez de tenerlo escrito en el código.",
+   "body": "Así el mismo código usa una base de pruebas en tu máquina y la real en producción. Se leen con `process.env.NOMBRE` en Node o `os.environ` en Python. La trampa: una variable exportada en una terminal solo existe en esa terminal. Abrir otra ventana o reiniciar la pierde.",
+   "example": "export MODO=pruebas\nnode -e 'console.log(process.env.MODO)'",
+   "why": "Separa configuración y secretos del código, para no tener que editarlo en cada entorno.",
+   "source": "https://12factor.net/es/config",
+   "related": [
+    "seguridad-env-file",
+    "configuracion-env-vars",
+    "seguridad-secreto"
+   ],
+   "updated": "2026-09-29"
+  },
+  {
    "id": "hooks-eventos",
    "term": "Hook event",
    "category": "hooks",
@@ -457,6 +2450,324 @@
    "updated": "2026-09-28"
   },
   {
+   "id": "ia-big-data",
+   "term": "Big data",
+   "category": "ia",
+   "level": "intermedio",
+   "summary": "Datos tan grandes, rápidos o variados que no caben en una sola máquina ni en herramientas normales.",
+   "body": "Se describe con las \"V\": volumen, velocidad y variedad. La trampa: la mayoría de los problemas que parecen big data caben en una laptop. Unos millones de filas se manejan bien con SQLite o pandas; montar infraestructura distribuida sin necesitarla es complejidad gratuita.",
+   "why": "Evita sobredimensionar: probar con herramientas simples antes de montar infraestructura grande.",
+   "source": "https://es.wikipedia.org/wiki/Macrodatos",
+   "related": [
+    "ia-data-science",
+    "arquitectura-batch-processing",
+    "arquitectura-escalabilidad"
+   ],
+   "updated": "2026-09-29"
+  },
+  {
+   "id": "ia-data-mining",
+   "term": "Data mining (minería de datos)",
+   "category": "ia",
+   "level": "avanzado",
+   "summary": "Buscar patrones ocultos en grandes volúmenes de datos: grupos, asociaciones, anomalías.",
+   "body": "El ejemplo clásico: descubrir qué productos se compran juntos para ubicarlos cerca. La trampa: con suficientes datos y suficientes pruebas, siempre aparece algún patrón por pura casualidad. Un patrón descubierto es una hipótesis, no una conclusión.",
+   "why": "Recordar que un patrón en los datos necesita confirmarse antes de actuar sobre él.",
+   "source": "https://es.wikipedia.org/wiki/Miner%C3%ADa_de_datos",
+   "related": [
+    "ia-data-science",
+    "ia-big-data"
+   ],
+   "updated": "2026-09-29"
+  },
+  {
+   "id": "ia-data-science",
+   "term": "Data science (ciencia de datos)",
+   "category": "ia",
+   "level": "intermedio",
+   "summary": "Usar estadística y programación para sacar conclusiones útiles de los datos.",
+   "body": "El trabajo real es sobre todo limpiar datos: nulos, duplicados, formatos distintos. Python con pandas es la herramienta habitual. La trampa: correlación no es causalidad. Que dos cosas suban juntas no prueba que una cause la otra.",
+   "example": "python3 -c 'import statistics as s; print(s.mean([3, 5, 7]), s.median([1, 9, 2]))'",
+   "why": "Te protege de sacar conclusiones falsas de un dashboard que muestra dos curvas juntas.",
+   "source": "https://en.wikipedia.org/wiki/Data_science",
+   "related": [
+    "ia-data-mining",
+    "ia-big-data",
+    "fundamentos-python"
+   ],
+   "updated": "2026-09-29"
+  },
+  {
+   "id": "ia-llm",
+   "term": "LLM (modelo de lenguaje grande)",
+   "category": "ia",
+   "level": "basico",
+   "summary": "Un modelo entrenado con enormes cantidades de texto que predice el siguiente token; Claude es un LLM.",
+   "body": "Procesa texto en tokens, fragmentos de palabras, y tiene una ventana de contexto limitada: lo que no está en ella, no lo sabe. La trampa: suena igual de seguro cuando acierta que cuando inventa. Por eso las respuestas que importan se verifican contra una fuente o con una ejecución real.",
+   "why": "Entender tokens y contexto explica por qué Claude olvida cosas en sesiones largas.",
+   "source": "https://en.wikipedia.org/wiki/Large_language_model",
+   "related": [
+    "contexto-context-window",
+    "ia-machine-learning",
+    "seguridad-token"
+   ],
+   "updated": "2026-09-29"
+  },
+  {
+   "id": "ia-machine-learning",
+   "term": "Machine learning",
+   "category": "ia",
+   "level": "intermedio",
+   "summary": "Programas que aprenden patrones a partir de datos de ejemplo en vez de seguir reglas escritas a mano.",
+   "body": "En lugar de programar \"si el correo tiene X es spam\", se le muestran miles de correos etiquetados y el modelo deduce las reglas. La trampa: el modelo aprende lo que hay en los datos, incluidos sus sesgos y errores. Si los datos de entrenamiento no se parecen a los reales, falla sin avisar.",
+   "why": "Para saber cuándo un problema necesita un modelo y cuándo bastan unas pocas reglas claras.",
+   "source": "https://en.wikipedia.org/wiki/Machine_learning",
+   "related": [
+    "ia-llm",
+    "ia-data-science"
+   ],
+   "updated": "2026-09-29"
+  },
+  {
+   "id": "infra-baas",
+   "term": "BaaS (Backend as a Service)",
+   "category": "infra",
+   "level": "intermedio",
+   "summary": "Un backend ya armado (base de datos, autenticación, archivos) que usas por API, como Supabase o Firebase.",
+   "body": "Supabase ofrece una base Postgres, almacenamiento de archivos y autenticación sin escribir un servidor propio. La trampa: la seguridad pasa a la configuración. Si no defines reglas de acceso (RLS en Supabase), la clave pública puede leer toda la base.",
+   "example": "supabase init && supabase start",
+   "why": "Acelera mucho, pero las reglas de acceso son ahora tu responsabilidad directa.",
+   "source": "https://supabase.com/docs/guides/getting-started/features",
+   "related": [
+    "datos-base-datos",
+    "seguridad-service-role-key",
+    "datos-migracion"
+   ],
+   "updated": "2026-09-29"
+  },
+  {
+   "id": "infra-balanceador-carga",
+   "term": "Balanceador de carga",
+   "category": "infra",
+   "level": "avanzado",
+   "summary": "Reparte las peticiones entre varios servidores iguales para que ninguno se sature y la app siga si uno cae.",
+   "body": "Es lo que permite escalar horizontalmente: agregas servidores detrás y el balanceador les distribuye el tráfico. La trampa: guardar la sesión en la memoria de un servidor. La siguiente petición puede ir a otro servidor que no la conoce. El estado compartido va en una base o caché común.",
+   "why": "Explica por qué las apps escalables no guardan estado de usuario en la memoria del servidor.",
+   "source": "https://en.wikipedia.org/wiki/Load_balancing_(computing)",
+   "related": [
+    "arquitectura-escalabilidad",
+    "web-servidor-web"
+   ],
+   "updated": "2026-09-29"
+  },
+  {
+   "id": "infra-cloud",
+   "term": "Computación en la nube",
+   "category": "infra",
+   "level": "basico",
+   "summary": "Usar servidores, almacenamiento y bases de datos de otro por internet, pagando por uso, en vez de tenerlos tú.",
+   "body": "Va de más control a menos: IaaS (máquinas virtuales), PaaS (plataforma donde subes tu código), SaaS (la app lista para usar). La trampa: los costos. Un recurso olvidado encendido o un bucle que llama a una API de pago genera facturas sin que nadie lo note. Configura alertas de gasto.",
+   "why": "Entender los niveles de nube ayuda a elegir cuánto quieres administrar tú.",
+   "source": "https://es.wikipedia.org/wiki/Computaci%C3%B3n_en_la_nube",
+   "related": [
+    "infra-saas",
+    "infra-paas",
+    "infra-baas"
+   ],
+   "updated": "2026-09-29"
+  },
+  {
+   "id": "infra-contenedor",
+   "term": "Contenedor (container)",
+   "category": "infra",
+   "level": "intermedio",
+   "summary": "Un paquete con tu app y todas sus dependencias que corre igual en cualquier máquina; Docker es el más conocido.",
+   "body": "Resuelve el \"en mi máquina funciona\": el contenedor lleva consigo las versiones exactas de todo lo que necesita. A diferencia de una máquina virtual, comparte el kernel del sistema anfitrión, así que arranca en segundos y ocupa menos. La trampa: sin un volumen, lo que escribes dentro se pierde al borrarlo.",
+   "example": "docker run --rm node:22 node -e 'console.log(process.version)'",
+   "why": "Garantiza que el entorno de producción sea idéntico al de desarrollo.",
+   "source": "https://docs.docker.com/get-started/docker-concepts/the-basics/what-is-a-container/",
+   "related": [
+    "infra-virtualizacion",
+    "herramientas-kernel",
+    "infra-deployment"
+   ],
+   "updated": "2026-09-29"
+  },
+  {
+   "id": "infra-deploy-automatico",
+   "term": "Deploy automático",
+   "category": "infra",
+   "level": "intermedio",
+   "summary": "La plataforma vigila el repo y vuelve a publicar la app sola cada vez que llega un cambio a la rama principal.",
+   "body": "Con Vercel conectado a GitHub, cada push a `main` despliega producción y cada rama o PR recibe su propia URL de vista previa. La consecuencia: mezclar a `main` es publicar. Lo que no quieras en producción no debe llegar a main sin revisión.",
+   "why": "Mezclar a main en un proyecto con deploy automático equivale a publicar en producción.",
+   "source": "https://vercel.com/docs/git",
+   "related": [
+    "infra-deployment",
+    "git-rama",
+    "git-pull-request"
+   ],
+   "updated": "2026-09-29"
+  },
+  {
+   "id": "infra-deployment",
+   "term": "Deployment (despliegue)",
+   "category": "infra",
+   "level": "basico",
+   "summary": "Publicar una versión de la app en un servidor para que otros la usen desde una URL.",
+   "body": "En plataformas como Vercel, cada deploy genera una URL propia, y uno se marca como producción. Un redeploy vuelve a publicar la misma versión, por ejemplo tras cambiar una variable de entorno. La trampa: cambiar una variable de entorno no afecta al deploy en curso. Hace falta un redeploy para que la tome.",
+   "example": "vercel --prod",
+   "why": "Explica por qué cambiar una variable en el panel 'no hace nada' hasta redesplegar.",
+   "source": "https://vercel.com/docs/deployments",
+   "related": [
+    "infra-deploy-automatico",
+    "infra-root-directory",
+    "infra-paas"
+   ],
+   "updated": "2026-09-29"
+  },
+  {
+   "id": "infra-devops",
+   "term": "DevOps",
+   "category": "infra",
+   "level": "intermedio",
+   "summary": "Unir desarrollo y operaciones: quien escribe el código también automatiza cómo se prueba, despliega y monitorea.",
+   "body": "Sus herramientas típicas son pipelines de CI/CD, infraestructura como código y monitoreo. La idea central es acortar el ciclo: cambios pequeños, desplegados seguido y de forma automática, en vez de grandes lanzamientos manuales que asustan.",
+   "why": "Desplegar seguido en cambios pequeños hace que cada fallo sea fácil de encontrar y revertir.",
+   "source": "https://es.wikipedia.org/wiki/DevOps",
+   "related": [
+    "infra-pipeline",
+    "infra-deploy-automatico"
+   ],
+   "updated": "2026-09-29"
+  },
+  {
+   "id": "infra-hypervisor",
+   "term": "Hypervisor",
+   "category": "infra",
+   "level": "avanzado",
+   "summary": "El software que crea y reparte el hardware entre máquinas virtuales.",
+   "body": "Tipo 1 corre directo sobre el hardware (servidores de la nube); tipo 2 corre como una app dentro de tu sistema operativo (UTM o Parallels en una Mac). Es lo que impide que una máquina virtual vea la memoria de otra.",
+   "why": "Completa el mapa de cómo la nube comparte una máquina física entre muchos clientes.",
+   "source": "https://es.wikipedia.org/wiki/Hipervisor",
+   "related": [
+    "infra-virtualizacion"
+   ],
+   "updated": "2026-09-29"
+  },
+  {
+   "id": "infra-iot",
+   "term": "IoT (Internet de las cosas)",
+   "category": "infra",
+   "level": "intermedio",
+   "summary": "Dispositivos físicos conectados a internet que envían datos o reciben órdenes: sensores, relojes, electrodomésticos.",
+   "body": "Suelen tener poca memoria y batería, así que usan protocolos livianos como MQTT. La trampa es la seguridad: muchos se venden con contraseñas por defecto y nunca se actualizan, y terminan formando redes de bots.",
+   "why": "Para reconocer por qué un dispositivo conectado es también una puerta de entrada a tu red.",
+   "source": "https://es.wikipedia.org/wiki/Internet_de_las_cosas",
+   "related": [
+    "seguridad-firewall",
+    "arquitectura-escalabilidad"
+   ],
+   "updated": "2026-09-29"
+  },
+  {
+   "id": "infra-local-remoto",
+   "term": "Local vs remoto",
+   "category": "infra",
+   "level": "basico",
+   "summary": "Local es lo que está en tu máquina; remoto, lo que está en otra accesible por red, como GitHub o un servidor.",
+   "body": "Tu clon del repo es local; la copia en GitHub, remota. Tu servidor de desarrollo es local; el deploy de producción, remoto. La trampa: suponer que están sincronizados. Un cambio local no existe en el remoto hasta que lo subes, y un cambio remoto no llega a tu máquina hasta que lo bajas.",
+   "example": "git status -sb   # muestra si tu rama local va adelante o atrás del remoto",
+   "why": "Casi todo 'yo lo veo y tú no' se explica porque uno mira lo local y el otro lo remoto.",
+   "source": "https://en.wikipedia.org/wiki/Remote_computer",
+   "related": [
+    "git-remote",
+    "web-localhost",
+    "infra-deployment"
+   ],
+   "updated": "2026-09-29"
+  },
+  {
+   "id": "infra-paas",
+   "term": "PaaS (Platform as a Service)",
+   "category": "infra",
+   "level": "intermedio",
+   "summary": "Una plataforma donde subes tu código y ella se encarga de servidores y escalado: Vercel, Heroku, Railway.",
+   "body": "No administras máquinas ni sistema operativo; configuras variables de entorno y comandos de build. La trampa: los límites de la plataforma, como el tiempo máximo por función o el tamaño del build. Aparecen tarde y a veces obligan a rediseñar.",
+   "why": "Te deja publicar una app sin saber administrar servidores.",
+   "source": "https://es.wikipedia.org/wiki/Plataforma_como_servicio",
+   "related": [
+    "infra-cloud",
+    "infra-deployment",
+    "infra-baas"
+   ],
+   "updated": "2026-09-29"
+  },
+  {
+   "id": "infra-pipeline",
+   "term": "Pipeline de CI/CD",
+   "category": "infra",
+   "level": "intermedio",
+   "summary": "Una serie de pasos automáticos que corren con cada cambio: instalar, probar, compilar y desplegar.",
+   "body": "CI (integración continua) prueba cada cambio; CD (despliegue continuo) lo publica si todo pasó. En GitHub se escriben como workflows en `.github/workflows/`. La trampa: un pipeline lento o que falla por azar (tests flaky) hace que la gente lo ignore o lo salte, y entonces ya no protege nada.",
+   "example": "gh run list --limit 5",
+   "why": "Con CI, un error que rompe el build se detecta en el PR, no cuando ya está publicado.",
+   "source": "https://docs.github.com/es/actions/about-github-actions/about-continuous-integration-with-github-actions",
+   "related": [
+    "plataforma-github-actions",
+    "infra-devops",
+    "proceso-testing"
+   ],
+   "updated": "2026-09-29"
+  },
+  {
+   "id": "infra-root-directory",
+   "term": "Root Directory",
+   "category": "infra",
+   "level": "intermedio",
+   "summary": "La carpeta del repo que la plataforma de despliegue toma como 'el proyecto'; lo de fuera se ignora.",
+   "body": "En un monorepo, cada app desplegada apunta a su subcarpeta (por ejemplo, `web/app`). Solo los cambios dentro de ella afectan a la app publicada. La trampa: si el Root Directory está mal, el build no encuentra `package.json` y falla con errores que parecen del código, no de la configuración.",
+   "why": "Si un build falla con 'no package.json found', revisa primero la carpeta raíz configurada.",
+   "source": "https://vercel.com/docs/builds/configure-a-build#root-directory",
+   "related": [
+    "arquitectura-monorepo",
+    "infra-deployment",
+    "herramientas-package-json"
+   ],
+   "updated": "2026-09-29"
+  },
+  {
+   "id": "infra-saas",
+   "term": "SaaS (Software as a Service)",
+   "category": "infra",
+   "level": "basico",
+   "summary": "Software que usas por internet con una suscripción, sin instalar ni mantener nada: Notion, Gmail, Slack.",
+   "body": "El proveedor se encarga de servidores, actualizaciones y copias de seguridad. La trampa: tus datos viven en su plataforma. Antes de depender de un SaaS, revisa si puedes exportar tus datos en un formato útil y qué pasa si cierra o sube el precio.",
+   "why": "Para evaluar el costo de salida antes de construir un flujo encima de un servicio.",
+   "source": "https://es.wikipedia.org/wiki/Software_como_servicio",
+   "related": [
+    "infra-cloud",
+    "infra-paas"
+   ],
+   "updated": "2026-09-29"
+  },
+  {
+   "id": "infra-virtualizacion",
+   "term": "Virtualización",
+   "category": "infra",
+   "level": "intermedio",
+   "summary": "Crear máquinas virtuales por software: varios sistemas operativos completos sobre un mismo hardware.",
+   "body": "Cada máquina virtual tiene su propio sistema operativo, así que aísla mejor que un contenedor pero pesa más y arranca más lento. Es la base de la nube: cuando alquilas un servidor, casi siempre es una máquina virtual sobre hardware compartido.",
+   "why": "Explica la diferencia de peso y aislamiento entre una VM y un contenedor.",
+   "source": "https://es.wikipedia.org/wiki/Virtualizaci%C3%B3n",
+   "related": [
+    "infra-hypervisor",
+    "infra-contenedor",
+    "infra-cloud"
+   ],
+   "updated": "2026-09-29"
+  },
+  {
    "id": "mcp-connector",
    "term": "Connector",
    "category": "mcp",
@@ -518,6 +2829,270 @@
     "contexto-context-window"
    ],
    "updated": "2026-09-28"
+  },
+  {
+   "id": "paradigmas-atributo",
+   "term": "Atributo (propiedad)",
+   "category": "paradigmas",
+   "level": "basico",
+   "summary": "Un dato que pertenece a un objeto, como el term o el level de una tarjeta; representa su estado.",
+   "body": "Se lee y escribe con punto: `tarjeta.level`. Los métodos describen lo que el objeto hace; los atributos, lo que el objeto tiene. La trampa: exponer todos los atributos para escritura permite que cualquier parte del código deje el objeto inconsistente. Por eso existen los atributos privados.",
+   "example": "class Tag { #vistas = 0; ver() { return ++this.#vistas; } }\nconst t = new Tag();\nt.ver();\nconsole.log(t.ver()); // 2; #vistas no se puede tocar desde fuera",
+   "why": "Distinguir atributos de métodos ayuda a leer cualquier modelo de datos, en código o en JSON.",
+   "source": "https://developer.mozilla.org/en-US/docs/Glossary/Property/JavaScript",
+   "related": [
+    "paradigmas-metodo",
+    "paradigmas-encapsulacion"
+   ],
+   "updated": "2026-09-29"
+  },
+  {
+   "id": "paradigmas-clase",
+   "term": "Clase",
+   "category": "paradigmas",
+   "level": "intermedio",
+   "summary": "El molde que define qué atributos y métodos tendrán los objetos creados a partir de ella.",
+   "body": "La clase no es el objeto: `Tarjeta` es el molde, cada tarjeta concreta es una instancia. En Swift conviene distinguir `class` (se comparte por referencia) de `struct` (se copia al asignarse). Elegir mal produce cambios que aparecen donde no los esperabas.",
+   "example": "class Contador {\n  n = 0;\n  sumar() { this.n++; return this.n; }\n}\nconst c = new Contador();\nc.sumar();\nconsole.log(c.sumar()); // 2",
+   "why": "Leer una clase te dice qué puede hacer cada objeto de ese tipo sin buscarlos uno por uno.",
+   "source": "https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Classes",
+   "related": [
+    "paradigmas-objeto-instancia",
+    "paradigmas-constructor",
+    "paradigmas-herencia"
+   ],
+   "updated": "2026-09-29"
+  },
+  {
+   "id": "paradigmas-constructor",
+   "term": "Constructor",
+   "category": "paradigmas",
+   "level": "intermedio",
+   "summary": "El método que se ejecuta automáticamente al crear una instancia, para dejarla en un estado válido.",
+   "body": "En JavaScript es `constructor()`; en Swift, `init()`; en Python, `__init__()`. Buena práctica: que el constructor valide y falle rápido. Un objeto que se puede crear en un estado inválido obliga a revisar ese estado en todas partes después.",
+   "example": "class Tarjeta {\n  constructor(summary) {\n    if (summary.length > 120) throw new Error(\"summary demasiado largo\");\n    this.summary = summary;\n  }\n}\nnew Tarjeta(\"ok\");",
+   "why": "Validar en el constructor garantiza que ningún objeto roto circule por el programa.",
+   "source": "https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Classes/constructor",
+   "related": [
+    "paradigmas-clase",
+    "paradigmas-objeto-instancia"
+   ],
+   "updated": "2026-09-29"
+  },
+  {
+   "id": "paradigmas-encapsulacion",
+   "term": "Encapsulación",
+   "category": "paradigmas",
+   "level": "intermedio",
+   "summary": "Ocultar los detalles internos y exponer solo una interfaz pública, para que nadie dependa de las tripas.",
+   "body": "Si el resto del código solo usa la interfaz, puedes cambiar la implementación sin romper nada. Aplica igual a módulos y servicios: este proyecto encapsula todo el contenido detrás de `dist/tags.json`. Mientras ese contrato no cambie, el pipeline puede reescribirse entero sin tocar la Mac ni el iPhone.",
+   "why": "Te permite cambiar cómo funciona algo por dentro sin romper a quien lo usa.",
+   "source": "https://developer.mozilla.org/en-US/docs/Glossary/Encapsulation",
+   "related": [
+    "paradigmas-poo",
+    "paradigmas-atributo",
+    "fundamentos-modulo"
+   ],
+   "updated": "2026-09-29"
+  },
+  {
+   "id": "paradigmas-funcional",
+   "term": "Programación funcional",
+   "category": "paradigmas",
+   "level": "avanzado",
+   "summary": "Construir programas con funciones puras que no modifican estado: misma entrada, misma salida, sin efectos.",
+   "body": "`map`, `filter` y `reduce` transforman datos creando valores nuevos en lugar de modificar los existentes. La ventaja: una función pura se prueba y se razona sola. El límite: todo programa útil tiene efectos (escribir archivos, red); la idea es aislarlos en los bordes.",
+   "example": "const niveles = [\"basico\", \"avanzado\", \"basico\"];\nconst conteo = niveles.reduce((acc, n) => ({ ...acc, [n]: (acc[n] ?? 0) + 1 }), {});\nconsole.log(conteo); // { basico: 2, avanzado: 1 }",
+   "why": "El selector de este proyecto es una función pura: por eso Mac e iPhone coinciden sin hablarse.",
+   "source": "https://en.wikipedia.org/wiki/Functional_programming",
+   "related": [
+    "paradigmas-imperativa",
+    "fundamentos-inmutable",
+    "fundamentos-lambda"
+   ],
+   "updated": "2026-09-29"
+  },
+  {
+   "id": "paradigmas-herencia",
+   "term": "Herencia",
+   "category": "paradigmas",
+   "level": "intermedio",
+   "summary": "Una clase hija recibe los atributos y métodos de una clase padre y puede añadir o cambiar los suyos.",
+   "body": "Se declara con `extends` en JavaScript y con `:` en Swift. La trampa: la herencia acopla mucho. Un cambio en la clase padre afecta a todas las hijas. La regla habitual es \"composición sobre herencia\": tener un objeto dentro en lugar de heredar de él.",
+   "example": "class Animal { hablar() { return \"...\"; } }\nclass Perro extends Animal { hablar() { return \"guau\"; } }\nconsole.log(new Perro().hablar()); // \"guau\"",
+   "why": "Ayuda a decidir cuándo heredar y cuándo es mejor componer objetos más pequeños.",
+   "source": "https://developer.mozilla.org/en-US/docs/Glossary/Inheritance",
+   "related": [
+    "paradigmas-clase",
+    "paradigmas-override",
+    "paradigmas-polimorfismo"
+   ],
+   "updated": "2026-09-29"
+  },
+  {
+   "id": "paradigmas-imperativa",
+   "term": "Programación imperativa",
+   "category": "paradigmas",
+   "level": "intermedio",
+   "summary": "Describir paso a paso cómo llegar al resultado, cambiando variables en el camino.",
+   "body": "Un `for` que acumula en una variable es imperativo; un `filter` que describe qué quieres es declarativo. SQL y CSS son declarativos: dices qué, no cómo. Ninguno es mejor siempre. Lo imperativo es más fácil de seguir paso a paso; lo declarativo, más corto y con menos lugares para equivocarse.",
+   "example": "const nums = [1, 2, 3, 4];\nconst paresA = [];\nfor (const n of nums) if (n % 2 === 0) paresA.push(n); // imperativo\nconst paresB = nums.filter((n) => n % 2 === 0);         // declarativo\nconsole.log(paresA, paresB);",
+   "why": "Reconocer ambos estilos te deja elegir el más legible para cada caso.",
+   "source": "https://en.wikipedia.org/wiki/Imperative_programming",
+   "related": [
+    "paradigmas-funcional",
+    "fundamentos-bucle"
+   ],
+   "updated": "2026-09-29"
+  },
+  {
+   "id": "paradigmas-inyeccion-dependencias",
+   "term": "Inyección de dependencias",
+   "category": "paradigmas",
+   "level": "avanzado",
+   "summary": "Pasarle a un objeto lo que necesita desde fuera, en vez de que lo cree por dentro.",
+   "body": "Una función que recibe el reloj como parámetro se puede probar con una fecha fija; una que llama a `new Date()` por dentro, no. No hace falta un framework: casi siempre basta con recibir la dependencia como parámetro del constructor o de la función.",
+   "example": "function saludo(ahora = new Date()) {\n  return ahora.getHours() < 12 ? \"buenos días\" : \"buenas tardes\";\n}\nconsole.log(saludo(new Date(2026, 8, 29, 9))); // test con hora fija",
+   "why": "Es lo que permite probar código que depende del tiempo, la red o una base de datos.",
+   "source": "https://en.wikipedia.org/wiki/Dependency_injection",
+   "related": [
+    "paradigmas-singleton",
+    "proceso-mock",
+    "proceso-test-unitario"
+   ],
+   "updated": "2026-09-29"
+  },
+  {
+   "id": "paradigmas-metodo",
+   "term": "Método",
+   "category": "paradigmas",
+   "level": "basico",
+   "summary": "Una función que pertenece a un objeto o clase y opera sobre sus datos.",
+   "body": "`\"hola\".toUpperCase()` llama al método `toUpperCase` del string. Dentro del método, `this` (o `self` en Swift y Python) es el objeto sobre el que se llamó. La trampa en JavaScript: si sacas un método del objeto y lo pasas como callback, pierde su `this`. Una función flecha o `.bind()` lo conserva.",
+   "example": "const tag = { term: \"git\", titulo() { return this.term.toUpperCase(); } };\nconsole.log(tag.titulo()); // \"GIT\"\nconst suelto = tag.titulo;\n// suelto(); // TypeError: this es undefined",
+   "why": "El error 'Cannot read properties of undefined' en un callback suele ser un this perdido.",
+   "source": "https://developer.mozilla.org/en-US/docs/Glossary/Method",
+   "related": [
+    "fundamentos-funcion",
+    "paradigmas-atributo",
+    "paradigmas-clase"
+   ],
+   "updated": "2026-09-29"
+  },
+  {
+   "id": "paradigmas-objeto-instancia",
+   "term": "Objeto e instancia",
+   "category": "paradigmas",
+   "level": "intermedio",
+   "summary": "Una instancia es un objeto concreto creado desde una clase, con sus propios valores; instanciar es crearlo.",
+   "body": "`new Tarjeta(\"git\")` instancia la clase y devuelve un objeto independiente de cualquier otro `new Tarjeta(...)`. En JavaScript también hay objetos sin clase: `{ term: \"git\" }` es un objeto literal. La trampa: asignar un objeto a otra variable no lo copia; ambas apuntan al mismo.",
+   "example": "const a = { term: \"git\" };\nconst b = a;           // misma referencia, no copia\nb.term = \"sql\";\nconsole.log(a.term);   // \"sql\"",
+   "why": "Explica por qué modificar 'una copia' de un objeto cambia también el original.",
+   "source": "https://developer.mozilla.org/en-US/docs/Glossary/Instance",
+   "related": [
+    "paradigmas-clase",
+    "paradigmas-constructor",
+    "paradigmas-atributo"
+   ],
+   "updated": "2026-09-29"
+  },
+  {
+   "id": "paradigmas-overloading",
+   "term": "Overloading (sobrecarga)",
+   "category": "paradigmas",
+   "level": "avanzado",
+   "summary": "Definir varias versiones de una función con el mismo nombre y distintos parámetros.",
+   "body": "Swift y Java eligen la versión según los tipos de los argumentos, al compilar. JavaScript y Python no la tienen: una segunda definición reemplaza a la primera. Allí se simula revisando los argumentos dentro de una sola función. No confundir con override, que redefine un método heredado.",
+   "example": "// Swift\nfunc area(_ lado: Double) -> Double { lado * lado }\nfunc area(_ ancho: Double, _ alto: Double) -> Double { ancho * alto }",
+   "why": "Explica por qué en JS definir dos funciones con el mismo nombre no da error: gana la última.",
+   "source": "https://en.wikipedia.org/wiki/Function_overloading",
+   "related": [
+    "paradigmas-override",
+    "paradigmas-polimorfismo"
+   ],
+   "updated": "2026-09-29"
+  },
+  {
+   "id": "paradigmas-override",
+   "term": "Override (sobrescritura)",
+   "category": "paradigmas",
+   "level": "intermedio",
+   "summary": "Una subclase redefine un método que heredó, para cambiar su comportamiento.",
+   "body": "Swift exige escribir `override`, así un error de tipeo no crea un método nuevo por accidente. JavaScript no lo exige. La trampa: al sobrescribir, olvidar llamar a `super.metodo()` cuando la versión del padre hacía algo necesario, como inicializar estado.",
+   "example": "class Base { saludo() { return \"hola\"; } }\nclass Formal extends Base {\n  saludo() { return super.saludo() + \", buenos días\"; }\n}\nconsole.log(new Formal().saludo());",
+   "why": "Olvidar super() al sobrescribir es una causa típica de objetos a medio inicializar.",
+   "source": "https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Operators/super",
+   "related": [
+    "paradigmas-herencia",
+    "paradigmas-overloading"
+   ],
+   "updated": "2026-09-29"
+  },
+  {
+   "id": "paradigmas-polimorfismo",
+   "term": "Polimorfismo",
+   "category": "paradigmas",
+   "level": "avanzado",
+   "summary": "Llamar al mismo método en objetos distintos y que cada uno responda a su manera.",
+   "body": "Una lista de formas puede pedir `area()` a cada una sin preguntar si es círculo o cuadrado. Agregar un tipo nuevo no obliga a tocar el código que las recorre. La señal de que falta polimorfismo: un `switch` sobre el tipo de objeto repetido en muchos lugares del código.",
+   "example": "const formas = [\n  { area: () => 3.14 * 2 ** 2 },\n  { area: () => 3 * 3 },\n];\nformas.forEach((f) => console.log(f.area()));",
+   "why": "Evita switch repetidos por tipo y hace que agregar un caso nuevo toque un solo lugar.",
+   "source": "https://developer.mozilla.org/en-US/docs/Glossary/Polymorphism",
+   "related": [
+    "paradigmas-herencia",
+    "paradigmas-override",
+    "paradigmas-overloading"
+   ],
+   "updated": "2026-09-29"
+  },
+  {
+   "id": "paradigmas-poo",
+   "term": "Programación orientada a objetos (POO)",
+   "category": "paradigmas",
+   "level": "intermedio",
+   "summary": "Organiza el código en objetos que juntan datos (atributos) y comportamiento (métodos).",
+   "body": "Sus cuatro pilares: encapsulación, herencia, polimorfismo y abstracción. Swift, Java y Python la usan mucho. La trampa es sobreusarla: jerarquías de clases profundas para algo que una función resolvía. La POO ordena bien entidades con estado; no todo necesita ser una clase.",
+   "example": "class Tarjeta {\n  constructor(term) { this.term = term; }\n  titulo() { return this.term.toUpperCase(); }\n}\nconsole.log(new Tarjeta(\"git\").titulo()); // \"GIT\"",
+   "why": "Es el modelo de la app de Mac en Swift: tipos con propiedades y métodos.",
+   "source": "https://developer.mozilla.org/en-US/docs/Glossary/OOP",
+   "related": [
+    "paradigmas-clase",
+    "paradigmas-encapsulacion",
+    "paradigmas-funcional"
+   ],
+   "updated": "2026-09-29"
+  },
+  {
+   "id": "paradigmas-singleton",
+   "term": "Singleton",
+   "category": "paradigmas",
+   "level": "avanzado",
+   "summary": "Un patrón que garantiza una sola instancia de una clase en todo el programa, accesible desde cualquier lugar.",
+   "body": "Se usa para recursos compartidos: una conexión a base de datos, la configuración. La trampa: es una variable global con otro nombre. Dificulta los tests, porque todos comparten el mismo estado. Muchas veces es mejor crear una instancia y pasarla (inyección de dependencias).",
+   "example": "// En Node un módulo ya es un singleton: se evalúa una sola vez\n// config.mjs\nexport const config = { intervalHours: 4 };",
+   "why": "Para reconocer cuándo un 'singleton' en realidad es estado global que complicará los tests.",
+   "source": "https://en.wikipedia.org/wiki/Singleton_pattern",
+   "related": [
+    "fundamentos-variable-global",
+    "paradigmas-inyeccion-dependencias"
+   ],
+   "updated": "2026-09-29"
+  },
+  {
+   "id": "paradigmas-wrapper",
+   "term": "Wrapper (envoltorio)",
+   "category": "paradigmas",
+   "level": "intermedio",
+   "summary": "Código que envuelve otra función o librería para simplificarla, adaptarla o agregarle algo.",
+   "body": "Un wrapper sobre `fetch` puede añadir reintentos y timeout en un solo lugar, y el resto del código llama al wrapper. La ventaja extra: si cambias de librería, solo reescribes el wrapper. La trampa: un wrapper que solo reenvía argumentos sin agregar nada es código de más.",
+   "example": "async function getJSON(url) {\n  const r = await fetch(url);\n  if (!r.ok) throw new Error(`HTTP ${r.status}`);\n  return r.json();\n}",
+   "why": "Centraliza manejo de errores y reintentos en un lugar en vez de repetirlo en cada llamada.",
+   "source": "https://en.wikipedia.org/wiki/Wrapper_function",
+   "related": [
+    "herramientas-biblioteca",
+    "arquitectura-middleware"
+   ],
+   "updated": "2026-09-29"
   },
   {
    "id": "permisos-auto-mode",
@@ -783,6 +3358,480 @@
    "updated": "2026-09-28"
   },
   {
+   "id": "proceso-agile",
+   "term": "Desarrollo ágil (agile)",
+   "category": "proceso",
+   "level": "basico",
+   "summary": "Entregar software en incrementos pequeños y frecuentes, ajustando el plan con lo que se aprende en cada uno.",
+   "body": "Nace del Manifiesto Ágil de 2001: software funcionando y respuesta al cambio por encima de planes detallados y documentación exhaustiva. La trampa: adoptar las ceremonias (reuniones diarias, tableros) sin entregar incrementos reales. Ágil es acortar el ciclo de aprendizaje, no hacer reuniones.",
+   "why": "Pensar en entregas pequeñas y verificables funciona igual para proyectos personales.",
+   "source": "https://agilemanifesto.org/iso/es/manifesto.html",
+   "related": [
+    "proceso-scrum",
+    "infra-devops"
+   ],
+   "updated": "2026-09-29"
+  },
+  {
+   "id": "proceso-bug",
+   "term": "Bug",
+   "category": "proceso",
+   "level": "basico",
+   "summary": "Un error en el código que hace que el programa se comporte distinto de lo esperado.",
+   "body": "Un buen reporte de bug tiene tres partes: qué hiciste, qué esperabas y qué pasó. La trampa: arreglar el síntoma en vez de la causa. Si un valor llega vacío, añadir un `if` que lo esquive oculta el problema; hay que encontrar por qué llega vacío.",
+   "why": "Describirle un bug a Claude con esperado vs obtenido ahorra varias vueltas de preguntas.",
+   "source": "https://es.wikipedia.org/wiki/Error_de_software",
+   "related": [
+    "proceso-debugging",
+    "fundamentos-stack-trace",
+    "proceso-testing"
+   ],
+   "updated": "2026-09-29"
+  },
+  {
+   "id": "proceso-clean-code",
+   "term": "Código limpio (clean code)",
+   "category": "proceso",
+   "level": "intermedio",
+   "summary": "Código fácil de leer y cambiar: nombres claros, funciones cortas, sin duplicación ni complejidad innecesaria.",
+   "body": "El código se lee muchas más veces de las que se escribe; optimizar para el lector es optimizar el costo real. La trampa: convertirlo en dogma. Partir todo en funciones de tres líneas o abstraer algo usado una sola vez también empeora la lectura.",
+   "why": "Un código claro es también más fácil de revisar cuando lo escribe Claude.",
+   "source": "https://en.wikipedia.org/wiki/Robert_C._Martin",
+   "related": [
+    "proceso-refactorizacion",
+    "proceso-estilo-codigo",
+    "fundamentos-funcion"
+   ],
+   "updated": "2026-09-29"
+  },
+  {
+   "id": "proceso-code-review",
+   "term": "Revisión de código",
+   "category": "proceso",
+   "level": "basico",
+   "summary": "Que otra persona lea tus cambios antes de mezclarlos, para encontrar errores y compartir conocimiento.",
+   "body": "Ocurre normalmente en un pull request. Revisa primero lo que una máquina no ve: si el cambio resuelve el problema correcto, si hay casos no contemplados, si hay una forma más simple. El formato y los espacios déjalos al linter.",
+   "example": "gh pr diff 1",
+   "why": "Revisar lo que Claude escribe con la misma atención que un PR ajeno evita sorpresas.",
+   "source": "https://en.wikipedia.org/wiki/Code_review",
+   "related": [
+    "git-pull-request",
+    "workflow-code-review",
+    "proceso-linter"
+   ],
+   "updated": "2026-09-29"
+  },
+  {
+   "id": "proceso-debugging",
+   "term": "Depuración (debugging)",
+   "category": "proceso",
+   "level": "intermedio",
+   "summary": "Encontrar la causa de un bug: reproducirlo, aislar dónde falla y confirmar el arreglo.",
+   "body": "El paso más importante es reproducirlo de forma confiable; un bug que no puedes provocar no puedes confirmar que lo arreglaste. Luego se divide el problema a la mitad hasta acorralarlo: con logs, un depurador o `git bisect`, que busca el commit exacto que lo introdujo.",
+   "example": "git bisect start && git bisect bad && git bisect good HEAD~10",
+   "why": "git bisect encuentra el commit culpable entre cientos en unos pocos pasos.",
+   "source": "https://git-scm.com/docs/git-bisect",
+   "related": [
+    "proceso-bug",
+    "fundamentos-stack-trace",
+    "workflow-verification-loop"
+   ],
+   "updated": "2026-09-29"
+  },
+  {
+   "id": "proceso-estilo-codigo",
+   "term": "Estilo de código",
+   "category": "proceso",
+   "level": "basico",
+   "summary": "Las convenciones de un proyecto sobre nombres, formato y estructura, para que todo parezca escrito por una persona.",
+   "body": "Lo que importa no es qué estilo, sino que sea consistente. Un formateador automático (Prettier, `swift-format`) termina las discusiones. Al pedir cambios a Claude, \"sigue el estilo del archivo\" suele dar mejor resultado que describir las reglas una por una.",
+   "example": "npx prettier --check .",
+   "why": "Un estilo automático hace que los diffs muestren solo cambios reales, no espacios.",
+   "source": "https://en.wikipedia.org/wiki/Programming_style",
+   "related": [
+    "proceso-linter",
+    "proceso-clean-code"
+   ],
+   "updated": "2026-09-29"
+  },
+  {
+   "id": "proceso-linter",
+   "term": "Linter",
+   "category": "proceso",
+   "level": "intermedio",
+   "summary": "Una herramienta que revisa el código sin ejecutarlo y avisa de errores probables y malas prácticas.",
+   "body": "ESLint para JavaScript, Ruff para Python, SwiftLint para Swift. Detecta variables sin usar, comparaciones sospechosas, imports rotos. La diferencia con un formateador (Prettier): el linter encuentra problemas; el formateador solo acomoda espacios y saltos de línea.",
+   "example": "npx eslint .",
+   "why": "Detecta en segundos errores que en una revisión humana pasarían desapercibidos.",
+   "source": "https://es.wikipedia.org/wiki/Lint",
+   "related": [
+    "proceso-estilo-codigo",
+    "proceso-clean-code",
+    "hooks-posttooluse"
+   ],
+   "updated": "2026-09-29"
+  },
+  {
+   "id": "proceso-mock",
+   "term": "Mock (objeto simulado)",
+   "category": "proceso",
+   "level": "avanzado",
+   "summary": "Un reemplazo falso de una pieza real (API, base de datos, reloj) para probar código sin depender de ella.",
+   "body": "Permite probar qué hace tu código cuando la API responde error, sin esperar a que la API real falle. La trampa: mockear demasiado. Si todo es falso, el test pasa aunque la integración real esté rota. Mockea los bordes lentos o impredecibles, no tu propia lógica.",
+   "example": "const apiFalsa = { get: async () => ({ status: 500 }) };\nasync function estado(api) { return (await api.get()).status >= 500 ? \"caído\" : \"ok\"; }\nestado(apiFalsa).then(console.log); // \"caído\"",
+   "why": "Deja probar casos difíciles de provocar, como errores de red, en milisegundos.",
+   "source": "https://en.wikipedia.org/wiki/Mock_object",
+   "related": [
+    "proceso-test-unitario",
+    "paradigmas-inyeccion-dependencias"
+   ],
+   "updated": "2026-09-29"
+  },
+  {
+   "id": "proceso-open-source",
+   "term": "Open source (código abierto)",
+   "category": "proceso",
+   "level": "basico",
+   "summary": "Software cuyo código es público y se puede usar, modificar y redistribuir según su licencia.",
+   "body": "Git, Linux, Python y Node son open source. La trampa: público no significa \"sin reglas\". La licencia manda: MIT permite casi todo; GPL obliga a publicar tus cambios si distribuyes el software. Un repo sin licencia, legalmente, no te da permiso de reutilizarlo.",
+   "example": "gh repo view facebook/react --json licenseInfo",
+   "why": "Antes de copiar código de un repo, revisa la licencia: sin ella no tienes permiso.",
+   "source": "https://opensource.org/osd",
+   "related": [
+    "git-github",
+    "herramientas-biblioteca"
+   ],
+   "updated": "2026-09-29"
+  },
+  {
+   "id": "proceso-portar",
+   "term": "Portar (port)",
+   "category": "proceso",
+   "level": "intermedio",
+   "summary": "Reescribir algo que funciona en una tecnología para que funcione igual en otra, sin cambiar lo que hace.",
+   "body": "Por ejemplo, llevar un prototipo hecho con Vite y Express a Next.js. La trampa: aprovechar el port para cambiar comportamiento. Si al terminar algo funciona distinto, no sabes si es un bug del port o un cambio deseado. Primero se porta igual y después se mejora.",
+   "why": "Portar primero y mejorar después permite comparar el resultado con el original.",
+   "source": "https://en.wikipedia.org/wiki/Porting",
+   "related": [
+    "proceso-refactorizacion",
+    "proceso-wireframe"
+   ],
+   "updated": "2026-09-29"
+  },
+  {
+   "id": "proceso-qa",
+   "term": "QA (aseguramiento de calidad)",
+   "category": "proceso",
+   "level": "intermedio",
+   "summary": "El proceso de asegurar que el software cumple lo esperado antes de llegar al usuario, no solo testear al final.",
+   "body": "Incluye criterios de aceptación claros, pruebas automáticas y manuales, y revisión. La lección de este proyecto: dos defectos de la tarjeta de Mac aparecieron al mirar la pantalla, no el código. Algunas cosas solo se verifican usando el producto de verdad.",
+   "why": "Recuerda que 'los tests pasan' no es lo mismo que 'funciona para el usuario'.",
+   "source": "https://en.wikipedia.org/wiki/Software_quality_assurance",
+   "related": [
+    "proceso-testing",
+    "proceso-code-review",
+    "workflow-verification-loop"
+   ],
+   "updated": "2026-09-29"
+  },
+  {
+   "id": "proceso-refactorizacion",
+   "term": "Refactorización",
+   "category": "proceso",
+   "level": "intermedio",
+   "summary": "Mejorar la estructura interna del código sin cambiar lo que hace desde afuera.",
+   "body": "Renombrar, extraer funciones, eliminar duplicación. Si el comportamiento cambia, ya no es refactor: es un cambio de funcionalidad. La trampa: refactorizar sin tests. Sin algo que confirme que el comportamiento sigue igual, no puedes saber si lo rompiste. Y nunca mezcles refactor con cambio de funcionalidad en el mismo commit.",
+   "why": "Separar refactor de cambios de lógica hace que cada commit sea fácil de revisar y revertir.",
+   "source": "https://refactoring.com/",
+   "related": [
+    "proceso-clean-code",
+    "proceso-testing",
+    "proceso-code-review"
+   ],
+   "updated": "2026-09-29"
+  },
+  {
+   "id": "proceso-scrum",
+   "term": "Scrum",
+   "category": "proceso",
+   "level": "intermedio",
+   "summary": "Un marco ágil que organiza el trabajo en sprints de 1 a 4 semanas, cada uno con un incremento usable.",
+   "body": "Tiene tres roles (Product Owner, Scrum Master, equipo de desarrollo) y eventos fijos: planificación, reunión diaria, revisión y retrospectiva. La trampa: tratar el sprint como un plazo de entrega fijo e intocable. Su propósito es inspeccionar y adaptar, no comprometerse con todo por adelantado.",
+   "why": "Es el marco de trabajo más común en equipos de software; conocer su vocabulario ayuda a integrarse.",
+   "source": "https://scrumguides.org/scrum-guide.html",
+   "related": [
+    "proceso-agile"
+   ],
+   "updated": "2026-09-29"
+  },
+  {
+   "id": "proceso-test-unitario",
+   "term": "Test unitario",
+   "category": "proceso",
+   "level": "intermedio",
+   "summary": "Un test que verifica una sola función aislada: dado esta entrada, espero esta salida.",
+   "body": "Son rápidos y precisos: cuando fallan, dicen exactamente qué se rompió. Node trae su propio runner (`node --test`) sin instalar nada. La trampa: probar la implementación en vez del comportamiento. Si cada refactor rompe los tests aunque el resultado sea el mismo, están probando lo que no importa.",
+   "example": "// suma.test.mjs  →  node --test\nimport { test } from \"node:test\";\nimport assert from \"node:assert\";\ntest(\"suma\", () => assert.strictEqual(1 + 1, 2));",
+   "why": "validate.mjs usa vectores de prueba para garantizar que Mac e iPhone elijan la misma tarjeta.",
+   "source": "https://nodejs.org/api/test.html",
+   "related": [
+    "proceso-testing",
+    "proceso-mock",
+    "paradigmas-inyeccion-dependencias"
+   ],
+   "updated": "2026-09-29"
+  },
+  {
+   "id": "proceso-testing",
+   "term": "Testing (pruebas)",
+   "category": "proceso",
+   "level": "basico",
+   "summary": "Verificar con programas que el código hace lo que debe: unitarias, de integración y de extremo a extremo.",
+   "body": "Las unitarias prueban una función aislada; las de integración, varias piezas juntas; las end-to-end, la app completa como la usaría una persona. La trampa: un test que nunca falla no prueba nada. Antes de confiar en uno, rompe el código a propósito y verifica que el test lo detecte.",
+   "example": "npm test",
+   "why": "Los tests te dejan cambiar código con confianza: si algo se rompe, avisan solos.",
+   "source": "https://en.wikipedia.org/wiki/Software_testing",
+   "related": [
+    "proceso-test-unitario",
+    "proceso-qa",
+    "infra-pipeline"
+   ],
+   "updated": "2026-09-29"
+  },
+  {
+   "id": "proceso-ui",
+   "term": "UI y GUI (interfaz de usuario)",
+   "category": "proceso",
+   "level": "basico",
+   "summary": "Lo que el usuario ve y usa para interactuar: botones, menús, pantallas. Una GUI es una UI gráfica.",
+   "body": "Una CLI también es una interfaz, pero de texto. La GUI usa ventanas, iconos y el ratón o el dedo. UI es cómo se ve y se opera; UX es cómo se siente usarla. Una interfaz bonita puede ser confusa.",
+   "why": "Distinguir UI de UX ayuda a dar feedback preciso: 'se ve mal' no es lo mismo que 'no se entiende'.",
+   "source": "https://developer.mozilla.org/en-US/docs/Glossary/UI",
+   "related": [
+    "proceso-ux",
+    "proceso-wireframe",
+    "herramientas-cli"
+   ],
+   "updated": "2026-09-29"
+  },
+  {
+   "id": "proceso-ux",
+   "term": "UX (experiencia de usuario)",
+   "category": "proceso",
+   "level": "basico",
+   "summary": "Cómo se siente usar un producto: si es fácil, claro y resuelve lo que la persona necesita.",
+   "body": "Se mide observando a personas reales usarlo, no preguntándoles si les gusta. Este proyecto tiene una decisión de UX central: la espera de 90 minutos entre tarjetas. Sin ella, el desbloqueo mostraría decenas de ventanas al día y el sistema terminaría desinstalado.",
+   "why": "Muchas decisiones técnicas son en realidad decisiones de experiencia de usuario.",
+   "source": "https://developer.mozilla.org/en-US/docs/Glossary/UX",
+   "related": [
+    "proceso-ui",
+    "proceso-wireframe"
+   ],
+   "updated": "2026-09-29"
+  },
+  {
+   "id": "proceso-wireframe",
+   "term": "Wireframe, mockup y prototipo",
+   "category": "proceso",
+   "level": "basico",
+   "summary": "Wireframe: el esqueleto sin estilo. Mockup: cómo se verá. Prototipo: una versión que se puede usar para probar.",
+   "body": "Van de menos a más fidelidad y costo. Se empieza con wireframes para discutir la estructura sin distraerse con colores. La trampa: un prototipo que funciona tienta a tratarlo como producto. Suele estar hecho con atajos que no aguantan uso real.",
+   "why": "Elegir la fidelidad correcta evita pulir detalles de algo cuya estructura aún cambiará.",
+   "source": "https://en.wikipedia.org/wiki/Website_wireframe",
+   "related": [
+    "proceso-ui",
+    "proceso-ux",
+    "proceso-portar"
+   ],
+   "updated": "2026-09-29"
+  },
+  {
+   "id": "seguridad-api-key",
+   "term": "API key (clave de API)",
+   "category": "seguridad",
+   "level": "basico",
+   "summary": "Una contraseña larga que identifica tu cuenta ante un servicio; quien la tenga puede usarlo y cobrarte a ti.",
+   "body": "Se envía en una cabecera HTTP, como `x-api-key` o `Authorization: Bearer ...`. La trampa: ponerla en código que corre en el navegador o en una app. Cualquiera puede extraerla. Las llamadas con clave secreta se hacen desde el servidor.",
+   "example": "curl -s https://api.anthropic.com/v1/models \\\n  -H \"x-api-key: $ANTHROPIC_API_KEY\" -H \"anthropic-version: 2023-06-01\" | head -c 200",
+   "why": "Una clave expuesta en el frontend puede generar cargos en tu cuenta en cuestión de horas.",
+   "source": "https://en.wikipedia.org/wiki/API_key",
+   "related": [
+    "seguridad-secreto",
+    "seguridad-env-file",
+    "web-api"
+   ],
+   "updated": "2026-09-29"
+  },
+  {
+   "id": "seguridad-encriptacion",
+   "term": "Cifrado (encriptación)",
+   "category": "seguridad",
+   "level": "intermedio",
+   "summary": "Transformar datos para que solo quien tenga la clave pueda leerlos; a diferencia de un hash, se puede revertir.",
+   "body": "Simétrico: la misma clave cifra y descifra. Asimétrico: una clave pública cifra y solo la privada descifra; así funcionan HTTPS y SSH. La trampa: inventar tu propio cifrado. Usa las librerías estándar del lenguaje y, para contraseñas, no cifres: aplica un hash lento como bcrypt o argon2.",
+   "example": "echo \"hola\" | openssl enc -aes-256-cbc -pbkdf2 -pass pass:demo -base64",
+   "why": "Distinguir cifrar de hashear evita guardar contraseñas de forma recuperable.",
+   "source": "https://developer.mozilla.org/en-US/docs/Glossary/Encryption",
+   "related": [
+    "algoritmos-hash",
+    "web-https",
+    "seguridad-ssh"
+   ],
+   "updated": "2026-09-29"
+  },
+  {
+   "id": "seguridad-env-file",
+   "term": "Archivo .env",
+   "category": "seguridad",
+   "level": "basico",
+   "summary": "Archivo local con las variables de entorno de un proyecto, incluidas claves; nunca se sube a Git.",
+   "body": "Frameworks como Next.js cargan `.env.local` al arrancar. Un `.env.example` (o `.env.local.ejemplo`) con los nombres pero sin valores sí se sube, como plantilla para que cada quien llene los suyos. La trampa: en producción no hay `.env`: las variables se configuran en el panel del servicio de despliegue.",
+   "example": "cp .env.example .env.local\ngit check-ignore .env.local && echo \"ignorado, bien\"",
+   "why": "La plantilla .env.example dice qué configurar sin exponer ningún valor real.",
+   "source": "https://nextjs.org/docs/app/guides/environment-variables",
+   "related": [
+    "herramientas-variable-entorno",
+    "seguridad-secreto",
+    "git-gitignore",
+    "herramientas-archivo-oculto"
+   ],
+   "updated": "2026-09-29"
+  },
+  {
+   "id": "seguridad-firewall",
+   "term": "Firewall",
+   "category": "seguridad",
+   "level": "intermedio",
+   "summary": "Un filtro que permite o bloquea tráfico de red según reglas: qué puertos, desde dónde, hacia dónde.",
+   "body": "Protege una máquina o una red de conexiones no deseadas. macOS trae uno en Ajustes > Red. La trampa: un firewall no protege de lo que ya dejaste entrar. Si un servicio expuesto tiene una vulnerabilidad, el firewall lo dejará pasar porque el puerto está permitido.",
+   "example": "/usr/libexec/ApplicationFirewall/socketfilterfw --getglobalstate",
+   "why": "Explica por qué un servidor no responde aunque el programa esté corriendo: un puerto bloqueado.",
+   "source": "https://es.wikipedia.org/wiki/Cortafuegos_(inform%C3%A1tica)",
+   "related": [
+    "permisos-sandboxing",
+    "seguridad-zero-day"
+   ],
+   "updated": "2026-09-29"
+  },
+  {
+   "id": "seguridad-jwt",
+   "term": "JWT (JSON Web Token)",
+   "category": "seguridad",
+   "level": "avanzado",
+   "summary": "Un token firmado que lleva datos dentro (quién eres, cuándo expira); el servidor lo verifica sin consultar una base.",
+   "body": "Tiene tres partes separadas por puntos: cabecera, datos y firma. La trampa: los datos van codificados en base64, no cifrados. Cualquiera puede leerlos; la firma solo impide que los modifiquen. Nunca pongas secretos dentro de un JWT.",
+   "example": "echo 'eyJzdWIiOiIxMjMifQ==' | base64 -d",
+   "why": "Saber que un JWT se puede leer evita meter datos sensibles en él.",
+   "source": "https://datatracker.ietf.org/doc/html/rfc7519",
+   "related": [
+    "seguridad-token",
+    "seguridad-oauth"
+   ],
+   "updated": "2026-09-29"
+  },
+  {
+   "id": "seguridad-oauth",
+   "term": "OAuth",
+   "category": "seguridad",
+   "level": "avanzado",
+   "summary": "El protocolo detrás de 'Iniciar sesión con Google': das acceso limitado a una app sin darle tu contraseña.",
+   "body": "La app te redirige al proveedor, apruebas los permisos (scopes) y el proveedor le entrega a la app un token con solo esos permisos. La trampa: aceptar scopes sin leerlos. Un permiso de \"leer y escribir todo tu correo\" es muy distinto de \"ver tu email\".",
+   "why": "Es cómo se conectan los conectores de Claude a Gmail o Notion sin compartir tu contraseña.",
+   "source": "https://oauth.net/2/",
+   "related": [
+    "seguridad-token",
+    "seguridad-jwt",
+    "mcp-connector"
+   ],
+   "updated": "2026-09-29"
+  },
+  {
+   "id": "seguridad-secreto",
+   "term": "Secreto",
+   "category": "seguridad",
+   "level": "basico",
+   "summary": "Cualquier dato que no debe ser público: claves, contraseñas, tokens. Si se filtra, se cambia; no basta con borrarlo.",
+   "body": "Los secretos viven en variables de entorno o en un gestor de secretos, nunca escritos en el código. La trampa: borrar el secreto en un commit nuevo no lo saca del historial de Git. Si llegó a un repo, se considera comprometido: se revoca y se genera uno nuevo.",
+   "example": "git log -p -S \"sk-ant-\" --all | head",
+   "why": "Ante una filtración, rotar la clave es lo único que la invalida de verdad.",
+   "source": "https://cheatsheetseries.owasp.org/cheatsheets/Secrets_Management_Cheat_Sheet.html",
+   "related": [
+    "seguridad-env-file",
+    "seguridad-api-key",
+    "git-gitignore",
+    "permisos-deny-rule"
+   ],
+   "updated": "2026-09-29"
+  },
+  {
+   "id": "seguridad-service-role-key",
+   "term": "Service role key",
+   "category": "seguridad",
+   "level": "avanzado",
+   "summary": "Una clave de Supabase con acceso total que se salta las reglas de seguridad; solo debe usarse en el servidor.",
+   "body": "Supabase tiene dos tipos de clave: la pública (anon/publishable), limitada por las reglas de seguridad por fila (RLS), y la de servicio, que ignora esas reglas. La trampa: usar la de servicio en el navegador \"porque así funciona\". Funciona porque le da a cualquiera acceso a toda la base.",
+   "why": "Si algo solo funciona con la service role key, falta una política RLS, no una clave más potente.",
+   "source": "https://supabase.com/docs/guides/api/api-keys",
+   "related": [
+    "seguridad-secreto",
+    "seguridad-api-key",
+    "infra-baas"
+   ],
+   "updated": "2026-09-29"
+  },
+  {
+   "id": "seguridad-ssh",
+   "term": "SSH",
+   "category": "seguridad",
+   "level": "intermedio",
+   "summary": "Protocolo para conectarte de forma cifrada a otra máquina y ejecutar comandos; también autentica Git con GitHub.",
+   "body": "Usa un par de claves: la privada se queda en tu máquina (`~/.ssh/id_ed25519`), la pública la subes al servidor o a GitHub. La trampa: compartir o subir la clave privada. Quien la tenga entra como tú. Solo la que termina en `.pub` se comparte.",
+   "example": "ssh-keygen -t ed25519\nssh -T git@github.com",
+   "why": "Con SSH configurado, Git deja de pedirte usuario y contraseña en cada push.",
+   "source": "https://docs.github.com/es/authentication/connecting-to-github-with-ssh",
+   "related": [
+    "seguridad-encriptacion",
+    "git-push",
+    "herramientas-shell"
+   ],
+   "updated": "2026-09-29"
+  },
+  {
+   "id": "seguridad-token",
+   "term": "Token de acceso",
+   "category": "seguridad",
+   "level": "intermedio",
+   "summary": "Un valor que prueba que ya te autenticaste; se envía en cada petición en lugar de la contraseña.",
+   "body": "Suele ir en la cabecera `Authorization: Bearer <token>` y expirar tras un tiempo. \"Token\" también nombra otras cosas: la unidad mínima de un lenguaje para su parser, y el fragmento de texto que procesa un LLM. Por el contexto se sabe cuál. La trampa: un token robado sirve igual que la contraseña hasta que expire.",
+   "example": "gh auth token | cut -c1-4",
+   "why": "Tokens de vida corta limitan el daño si alguno se filtra.",
+   "source": "https://developer.mozilla.org/en-US/docs/Web/HTTP/Headers/Authorization",
+   "related": [
+    "seguridad-jwt",
+    "seguridad-oauth",
+    "web-cookie-sesion",
+    "ia-llm"
+   ],
+   "updated": "2026-09-29"
+  },
+  {
+   "id": "seguridad-zero-day",
+   "term": "Vulnerabilidad zero-day",
+   "category": "seguridad",
+   "level": "intermedio",
+   "summary": "Un fallo de seguridad que se explota antes de que exista un parche: los defensores tienen 'cero días'.",
+   "body": "No hay actualización que lo arregle todavía, así que la defensa es limitar el daño: mínimos permisos, sandbox, copias de seguridad. La lección práctica: la mayoría de los ataques reales no son zero-days, sino fallos conocidos sin parchear. Mantener dependencias y sistema al día cubre la mayor parte.",
+   "example": "npm audit",
+   "why": "Actualizar a tiempo te protege de casi todo; los zero-days son la excepción, no la regla.",
+   "source": "https://en.wikipedia.org/wiki/Zero-day_vulnerability",
+   "related": [
+    "herramientas-dependencia",
+    "permisos-sandboxing",
+    "seguridad-firewall"
+   ],
+   "updated": "2026-09-29"
+  },
+  {
    "id": "skills-bundled",
    "term": "Bundled skill",
    "category": "skills",
@@ -859,6 +3908,357 @@
     "contexto-context-window"
    ],
    "updated": "2026-09-28"
+  },
+  {
+   "id": "web-api",
+   "term": "API",
+   "category": "web",
+   "level": "basico",
+   "summary": "Una ventanilla con reglas fijas para que un programa le pida datos o acciones a otro sin ver su interior.",
+   "body": "Define qué puedes pedir, en qué formato y qué te devuelve. Puede ser una API web (por HTTP) o la de una librería (sus funciones públicas). Lo valioso es el contrato: mientras la API no cambie, el sistema de detrás puede reescribirse entero. Un cambio que la rompe se llama \"breaking change\".",
+   "example": "curl -s https://api.github.com/repos/anthropics/claude-code | head -5",
+   "why": "MCP es una API estándar: por eso Claude puede hablar con herramientas que no conoce de antemano.",
+   "source": "https://developer.mozilla.org/en-US/docs/Glossary/API",
+   "related": [
+    "web-endpoint",
+    "web-rest",
+    "mcp-protocolo",
+    "seguridad-api-key"
+   ],
+   "updated": "2026-09-29"
+  },
+  {
+   "id": "web-cookie-sesion",
+   "term": "Cookie de sesión",
+   "category": "web",
+   "level": "intermedio",
+   "summary": "Un dato que el navegador guarda al iniciar sesión y reenvía en cada petición para que el servidor te reconozca.",
+   "body": "Como HTTP no recuerda nada entre peticiones, la cookie es la memoria de \"ya entraste\". Flags clave: `HttpOnly` (JavaScript no puede leerla), `Secure` (solo por HTTPS) y `SameSite` (no se envía desde otros sitios). La trampa: una cookie de sesión robada equivale a la contraseña mientras siga vigente.",
+   "example": "Set-Cookie: sesion=abc123; HttpOnly; Secure; SameSite=Lax; Max-Age=86400",
+   "why": "Las flags HttpOnly y Secure son la diferencia entre una sesión robable y una protegida.",
+   "source": "https://developer.mozilla.org/en-US/docs/Web/HTTP/Cookies",
+   "related": [
+    "web-http",
+    "seguridad-token",
+    "seguridad-jwt"
+   ],
+   "updated": "2026-09-29"
+  },
+  {
+   "id": "web-cors",
+   "term": "CORS",
+   "category": "web",
+   "level": "avanzado",
+   "summary": "Regla del navegador que bloquea peticiones a otro dominio salvo que ese servidor lo permita con cabeceras.",
+   "body": "Si tu página en `localhost:3000` llama a `api.otro.com`, el navegador pregunta y solo entrega la respuesta si el servidor responde con `Access-Control-Allow-Origin`. La trampa: CORS lo aplica el navegador, no el servidor. curl o un backend no tienen CORS. Por eso \"en Postman funciona pero en el navegador no\".",
+   "example": "curl -sI -H \"Origin: https://ejemplo.com\" https://api.github.com | grep -i access-control-allow-origin",
+   "why": "Cuando una petición funciona en curl y falla en el navegador, casi siempre es CORS.",
+   "source": "https://developer.mozilla.org/en-US/docs/Web/HTTP/CORS",
+   "related": [
+    "web-http",
+    "arquitectura-backend",
+    "web-localhost"
+   ],
+   "updated": "2026-09-29"
+  },
+  {
+   "id": "web-css",
+   "term": "CSS",
+   "category": "web",
+   "level": "basico",
+   "summary": "El lenguaje que define cómo se ve el HTML: colores, tipografía, espaciado y distribución.",
+   "body": "\"Cascading\" significa que varias reglas pueden aplicar al mismo elemento y gana la más específica o la última. La trampa: cuando un estilo \"no se aplica\", casi siempre otra regla más específica lo está pisando. El inspector del navegador muestra cuál gana y cuáles quedaron tachadas.",
+   "example": ".card { padding: 16px; border-radius: 12px; }\n.card.destacada { border: 2px solid orange; }",
+   "why": "Entender la cascada evita llenar el CSS de !important para forzar estilos.",
+   "source": "https://developer.mozilla.org/en-US/docs/Web/CSS",
+   "related": [
+    "web-html",
+    "web-z-index"
+   ],
+   "updated": "2026-09-29"
+  },
+  {
+   "id": "web-dom",
+   "term": "DOM",
+   "category": "web",
+   "level": "intermedio",
+   "summary": "El árbol de objetos que el navegador construye a partir del HTML; JavaScript lo modifica para cambiar la página.",
+   "body": "Cada etiqueta es un nodo. `document.querySelector` encuentra nodos y cambiarlos actualiza lo que ves. La trampa: el HTML que ves con \"ver código fuente\" no es el DOM actual. En apps hechas con JavaScript, el DOM real solo se ve en el inspector del navegador.",
+   "example": "document.querySelector(\"h1\").textContent = \"Tags CC\";",
+   "why": "Explica por qué el HTML descargado y lo que ves en pantalla pueden ser distintos.",
+   "source": "https://developer.mozilla.org/en-US/docs/Web/API/Document_Object_Model",
+   "related": [
+    "web-html",
+    "web-renderizado",
+    "web-scraping"
+   ],
+   "updated": "2026-09-29"
+  },
+  {
+   "id": "web-endpoint",
+   "term": "Endpoint (ruta)",
+   "category": "web",
+   "level": "basico",
+   "summary": "Una dirección concreta de una API para una tarea concreta, como GET /api/candidatos.",
+   "body": "Un endpoint es método + ruta: `GET /tags` y `POST /tags` son dos endpoints distintos aunque compartan ruta. En frameworks como Next.js, la estructura de carpetas define las rutas. La trampa es tratar a un endpoint como privado solo porque nadie conoce su URL: si no valida quién llama, es público.",
+   "example": "curl -s -o /dev/null -w \"%{http_code}\\n\" https://api.github.com/users/octocat",
+   "why": "Un endpoint sin autenticación es accesible para cualquiera, aunque no lo publiques.",
+   "source": "https://en.wikipedia.org/wiki/Web_API#Endpoints",
+   "related": [
+    "web-api",
+    "web-rest",
+    "web-nextjs"
+   ],
+   "updated": "2026-09-29"
+  },
+  {
+   "id": "web-graphql",
+   "term": "GraphQL",
+   "category": "web",
+   "level": "avanzado",
+   "summary": "Un lenguaje de consulta para APIs donde el cliente pide exactamente los campos que necesita, en un solo endpoint.",
+   "body": "Resuelve el problema de REST de traer datos de más o tener que hacer varias peticiones. El costo: más complejidad en el servidor, y la caché HTTP normal deja de servir porque todo va por POST al mismo endpoint. Para APIs simples, REST suele bastar.",
+   "example": "query {\n  repository(owner: \"git\", name: \"git\") { stargazerCount }\n}",
+   "why": "Para reconocer cuándo una API te obliga a GraphQL (como la v4 de GitHub) y cómo se consulta.",
+   "source": "https://graphql.org/learn/",
+   "related": [
+    "web-rest",
+    "web-api",
+    "datos-query"
+   ],
+   "updated": "2026-09-29"
+  },
+  {
+   "id": "web-html",
+   "term": "HTML",
+   "category": "web",
+   "level": "basico",
+   "summary": "El lenguaje que define la estructura y el contenido de una página: títulos, párrafos, enlaces, formularios.",
+   "body": "Describe qué es cada cosa, no cómo se ve (eso es CSS) ni cómo se comporta (eso es JS). La trampa es usar `div` para todo: las etiquetas semánticas (`button`, `nav`, `header`) dan accesibilidad y funcionamiento con teclado gratis.",
+   "example": "<button type=\"button\">Ya lo sé</button>\n<a href=\"https://code.claude.com/docs\">Docs</a>",
+   "why": "Usar la etiqueta correcta hace que lectores de pantalla y teclado funcionen sin código extra.",
+   "source": "https://developer.mozilla.org/en-US/docs/Web/HTML",
+   "related": [
+    "web-css",
+    "web-dom"
+   ],
+   "updated": "2026-09-29"
+  },
+  {
+   "id": "web-http",
+   "term": "HTTP",
+   "category": "web",
+   "level": "basico",
+   "summary": "El protocolo de la web: el cliente envía una petición (método + URL) y el servidor responde con un código y datos.",
+   "body": "Los métodos dicen la intención: GET lee, POST crea, PUT/PATCH actualizan, DELETE borra. Los códigos dicen el resultado: 2xx bien, 3xx redirección, 4xx error tuyo (400, 401, 404), 5xx error del servidor. La trampa: HTTP no tiene memoria entre peticiones; las sesiones se simulan con cookies o tokens.",
+   "example": "curl -sI https://code.claude.com/docs/en/hooks.md | head -1",
+   "why": "Leer el código de estado te dice si el error es tuyo (4xx) o del servidor (5xx).",
+   "source": "https://developer.mozilla.org/en-US/docs/Web/HTTP/Overview",
+   "related": [
+    "web-https",
+    "web-url",
+    "web-rest",
+    "web-cookie-sesion"
+   ],
+   "updated": "2026-09-29"
+  },
+  {
+   "id": "web-https",
+   "term": "HTTPS",
+   "category": "web",
+   "level": "basico",
+   "summary": "HTTP cifrado con TLS: nadie en el camino puede leer ni alterar lo que viaja entre cliente y servidor.",
+   "body": "El candado del navegador indica que el certificado es válido para ese dominio. La trampa: HTTPS protege el transporte, no el contenido. Un sitio malicioso también puede tener HTTPS. Y cualquier clave enviada por HTTP plano debe darse por expuesta.",
+   "example": "curl -svo /dev/null https://github.com 2>&1 | grep -i \"SSL connection\"",
+   "why": "Por eso el widget del iPhone lee el corpus por HTTPS: GitHub raw no acepta otra cosa.",
+   "source": "https://developer.mozilla.org/en-US/docs/Glossary/HTTPS",
+   "related": [
+    "web-http",
+    "seguridad-encriptacion"
+   ],
+   "updated": "2026-09-29"
+  },
+  {
+   "id": "web-lazy-loading",
+   "term": "Lazy loading",
+   "category": "web",
+   "level": "intermedio",
+   "summary": "Cargar un recurso solo cuando se necesita, no al inicio, para que lo primero aparezca antes.",
+   "body": "Las imágenes fuera de pantalla se cargan al acercarse con el scroll; el código de una sección, al entrar en ella. La trampa: aplicarlo a lo que se ve de entrada lo hace más lento, porque el navegador espera para descubrir que sí lo necesitaba.",
+   "example": "<img src=\"diagrama.png\" loading=\"lazy\" alt=\"Arquitectura\">",
+   "why": "Mejora el tiempo de carga sin quitar contenido, solo reordenando cuándo llega.",
+   "source": "https://developer.mozilla.org/en-US/docs/Web/Performance/Guides/Lazy_loading",
+   "related": [
+    "web-renderizado",
+    "arquitectura-latencia"
+   ],
+   "updated": "2026-09-29"
+  },
+  {
+   "id": "web-localhost",
+   "term": "localhost",
+   "category": "web",
+   "level": "basico",
+   "summary": "La dirección que significa 'esta misma computadora'; lo que corre en localhost solo lo ves tú.",
+   "body": "Equivale a la IP `127.0.0.1`. El número después de los dos puntos es el puerto: `localhost:3000` es un programa, `localhost:5432` puede ser otro. La trampa: \"en mi localhost funciona\" no dice nada de producción. Variables de entorno, datos y red son distintos allá.",
+   "example": "python3 -m http.server 8000   # luego abre http://localhost:8000",
+   "why": "Es donde pruebas antes de publicar; lo que ahí ves no lo ve nadie más.",
+   "source": "https://en.wikipedia.org/wiki/Localhost",
+   "related": [
+    "herramientas-servidor-desarrollo",
+    "infra-local-remoto",
+    "web-url"
+   ],
+   "updated": "2026-09-29"
+  },
+  {
+   "id": "web-nextjs",
+   "term": "Next.js",
+   "category": "web",
+   "level": "intermedio",
+   "summary": "Framework de React que junta frontend y backend en un solo proyecto, con rutas definidas por carpetas.",
+   "body": "Cada carpeta dentro de `app/` es una ruta; un archivo `route.ts` crea un endpoint de API. Decide por página si se renderiza en el servidor o en el navegador. La trampa: saber de qué lado corre cada archivo. Los secretos solo pueden usarse en código de servidor; una variable con prefijo `NEXT_PUBLIC_` termina en el navegador.",
+   "example": "npx create-next-app@latest mi-app && cd mi-app && npm run dev",
+   "why": "Un NEXT_PUBLIC_ en una clave secreta la publica a cualquiera que abra la página.",
+   "source": "https://nextjs.org/docs",
+   "related": [
+    "herramientas-framework",
+    "web-renderizado",
+    "seguridad-secreto"
+   ],
+   "updated": "2026-09-29"
+  },
+  {
+   "id": "web-query-string",
+   "term": "Query string",
+   "category": "web",
+   "level": "basico",
+   "summary": "La parte de la URL después de ?, con pares clave=valor separados por &: ?id=1&nivel=basico.",
+   "body": "Se usa para filtros, búsquedas y paginación en peticiones GET. La trampa: va visible en la URL, en el historial y en los logs del servidor. Nunca pongas contraseñas ni API keys en la query string.",
+   "example": "const p = new URLSearchParams({ q: \"hooks y skills\", page: \"2\" });\nconsole.log(p.toString()); // q=hooks+y+skills&page=2",
+   "why": "Para construir URLs con parámetros sin romperlas por espacios o caracteres especiales.",
+   "source": "https://developer.mozilla.org/en-US/docs/Web/API/URLSearchParams",
+   "related": [
+    "web-url",
+    "seguridad-api-key"
+   ],
+   "updated": "2026-09-29"
+  },
+  {
+   "id": "web-renderizado",
+   "term": "Renderizado (CSR y SSR)",
+   "category": "web",
+   "level": "avanzado",
+   "summary": "Generar el HTML que ves: en el navegador con JavaScript (CSR) o en el servidor antes de enviarlo (SSR).",
+   "body": "Con CSR la página llega casi vacía y JavaScript la arma; con SSR llega completa y aparece antes. Next.js mezcla ambos por página o por componente. La trampa del SSR: el código corre en dos sitios. Usar `window` o `localStorage` en un componente de servidor falla, porque en el servidor no existen.",
+   "why": "Explica errores como 'window is not defined' en frameworks como Next.js.",
+   "source": "https://developer.mozilla.org/en-US/docs/Glossary/SSR",
+   "related": [
+    "web-nextjs",
+    "web-dom",
+    "arquitectura-frontend"
+   ],
+   "updated": "2026-09-29"
+  },
+  {
+   "id": "web-rest",
+   "term": "REST / API RESTful",
+   "category": "web",
+   "level": "intermedio",
+   "summary": "Un estilo de API donde cada URL es un recurso y los métodos HTTP dicen qué hacer con él.",
+   "body": "`GET /tags/42` lee, `DELETE /tags/42` borra. Sin estado: cada petición lleva todo lo necesario, incluida la autenticación. La trampa: usar GET para acciones que modifican datos. Los navegadores, cachés y bots asumen que GET es seguro de repetir y pueden dispararlo solos.",
+   "example": "curl -s \"https://api.github.com/repos/git/git/pulls?per_page=1\" | head -3",
+   "why": "Casi toda API pública es REST; entender el patrón permite adivinar sus endpoints.",
+   "source": "https://developer.mozilla.org/en-US/docs/Glossary/REST",
+   "related": [
+    "web-http",
+    "web-api",
+    "web-graphql",
+    "datos-crud"
+   ],
+   "updated": "2026-09-29"
+  },
+  {
+   "id": "web-scraping",
+   "term": "Web scraping",
+   "category": "web",
+   "level": "intermedio",
+   "summary": "Extraer datos de páginas web con un programa que descarga el HTML y busca lo que necesita.",
+   "body": "Es frágil: un cambio de diseño en la página rompe el scraper sin aviso. Antes de scrapear, busca una API o un formato limpio. Este proyecto no parsea el HTML de los docs: pide la versión `.md`, que el sitio ofrece para eso. Respeta también `robots.txt` y los términos del sitio.",
+   "example": "curl -s https://code.claude.com/docs/en/hooks.md | head -20",
+   "why": "Pedir markdown o usar una API evita un scraper que se rompe con cada rediseño.",
+   "source": "https://en.wikipedia.org/wiki/Web_scraping",
+   "related": [
+    "web-dom",
+    "web-api",
+    "fundamentos-parsing"
+   ],
+   "updated": "2026-09-29"
+  },
+  {
+   "id": "web-servidor-web",
+   "term": "Servidor web",
+   "category": "web",
+   "level": "basico",
+   "summary": "El programa que recibe peticiones HTTP y responde con páginas, archivos o datos.",
+   "body": "Puede servir archivos estáticos (GitHub raw, que entrega el tags.json de este proyecto) o ejecutar código por cada petición (Node, Next.js). \"Servidor\" nombra tanto al programa como a la máquina que lo corre, lo que confunde.",
+   "example": "npx serve dist",
+   "why": "Distinguir estático de dinámico explica por qué este proyecto no necesita backend.",
+   "source": "https://developer.mozilla.org/en-US/docs/Learn_web_development/Howto/Web_mechanics/What_is_a_web_server",
+   "related": [
+    "web-http",
+    "arquitectura-backend",
+    "web-localhost"
+   ],
+   "updated": "2026-09-29"
+  },
+  {
+   "id": "web-url",
+   "term": "URL",
+   "category": "web",
+   "level": "basico",
+   "summary": "La dirección de un recurso: protocolo, dominio, ruta y, opcionalmente, parámetros y fragmento.",
+   "body": "En `https://code.claude.com/docs/en/hooks?x=1#matchers`: `https` es el protocolo, `code.claude.com` el dominio, `/docs/en/hooks` la ruta, `?x=1` la query string y `#matchers` el fragmento, que nunca se envía al servidor. La trampa: los espacios y acentos deben codificarse (`%20`, `%C3%B1`).",
+   "example": "const u = new URL(\"https://code.claude.com/docs/en/hooks?x=1#matchers\");\nconsole.log(u.hostname, u.pathname, u.searchParams.get(\"x\"), u.hash);",
+   "why": "Este proyecto tuvo un bug real por una ruta con espacio que quedó como 'Tags%20CC'.",
+   "source": "https://developer.mozilla.org/en-US/docs/Learn_web_development/Howto/Web_mechanics/What_is_a_URL",
+   "related": [
+    "web-query-string",
+    "web-http",
+    "web-endpoint"
+   ],
+   "updated": "2026-09-29"
+  },
+  {
+   "id": "web-websocket",
+   "term": "WebSocket",
+   "category": "web",
+   "level": "avanzado",
+   "summary": "Una conexión que queda abierta para que cliente y servidor se envíen mensajes en ambos sentidos al instante.",
+   "body": "HTTP es pedir-responder; con WebSocket el servidor puede enviar datos sin que se los pidan. Es la base de chats, notificaciones en vivo y colaboración en tiempo real. La trampa: las conexiones se caen (red móvil, suspensión). Hay que reconectar y recuperar lo que se perdió mientras tanto.",
+   "example": "const ws = new WebSocket(\"wss://echo.websocket.org\");\nws.onmessage = (e) => { console.log(e.data); if (e.data === \"hola\") ws.close(); };\nws.onopen = () => ws.send(\"hola\");",
+   "why": "Para saber cuándo necesitas tiempo real de verdad y cuándo basta con consultar cada tanto.",
+   "source": "https://developer.mozilla.org/en-US/docs/Web/API/WebSockets_API",
+   "related": [
+    "web-http",
+    "arquitectura-latencia"
+   ],
+   "updated": "2026-09-29"
+  },
+  {
+   "id": "web-z-index",
+   "term": "z-index",
+   "category": "web",
+   "level": "intermedio",
+   "summary": "Propiedad CSS que decide qué elemento queda encima cuando se superponen; mayor valor, más arriba.",
+   "body": "Solo funciona en elementos posicionados (`position` distinto de `static`) o dentro de flex y grid. La trampa: el contexto de apilamiento. Un hijo con `z-index: 9999` no puede salir por encima de algo que tapa a su padre. Subir el número no lo arregla; hay que revisar el padre.",
+   "example": ".modal { position: fixed; z-index: 10; }\n.overlay { position: fixed; z-index: 9; }",
+   "why": "Explica por qué un modal queda detrás de otro elemento aunque tenga z-index enorme.",
+   "source": "https://developer.mozilla.org/en-US/docs/Web/CSS/z-index",
+   "related": [
+    "web-css"
+   ],
+   "updated": "2026-09-29"
   },
   {
    "id": "workflow-best-practices",

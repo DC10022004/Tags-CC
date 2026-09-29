@@ -1,0 +1,16 @@
+id: datos-sql
+term: SQL
+category: datos
+level: intermedio
+summary: "El lenguaje para consultar y modificar bases de datos relacionales: SELECT, INSERT, UPDATE, DELETE."
+body: |
+  Es declarativo: describes qué datos quieres y el motor decide cómo buscarlos.
+  La trampa más cara: un `UPDATE` o `DELETE` sin `WHERE` afecta a todas las filas.
+  Escribe primero el `SELECT` con el mismo `WHERE`, revisa lo que devuelve, y recién
+  después cámbialo por `UPDATE`.
+example: |
+  SELECT id, term FROM tags WHERE level = 'basico' ORDER BY id LIMIT 5;
+why: "Probar el WHERE con un SELECT antes de un UPDATE evita borrar o cambiar la tabla entera."
+source: https://developer.mozilla.org/en-US/docs/Glossary/SQL
+related: [datos-query, datos-crud, datos-base-datos, datos-orm]
+updated: 2026-09-29

@@ -1,0 +1,16 @@
+id: git-remote
+term: Remoto y origin
+category: git
+level: intermedio
+summary: "Un remoto es una copia del repo en otro lugar, normalmente GitHub; origin es el nombre por defecto."
+body: |
+  `origin/main` es tu última foto conocida de la rama main en GitHub, no la rama en
+  vivo: solo se actualiza cuando haces fetch o pull.
+  Un repo puede tener varios remotos, por ejemplo `origin` (tu fork) y `upstream` (el
+  original).
+example: |
+  git remote -v
+why: "Explica por qué git status dice 'al día' aunque tu compañero ya haya subido cambios."
+source: https://git-scm.com/book/es/v2/Fundamentos-de-Git-Trabajar-con-Remotos
+related: [git-fetch, git-push, git-clone, infra-local-remoto]
+updated: 2026-09-29

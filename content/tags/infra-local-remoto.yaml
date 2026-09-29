@@ -1,0 +1,16 @@
+id: infra-local-remoto
+term: Local vs remoto
+category: infra
+level: basico
+summary: "Local es lo que está en tu máquina; remoto, lo que está en otra accesible por red, como GitHub o un servidor."
+body: |
+  Tu clon del repo es local; la copia en GitHub, remota. Tu servidor de desarrollo es
+  local; el deploy de producción, remoto.
+  La trampa: suponer que están sincronizados. Un cambio local no existe en el remoto
+  hasta que lo subes, y un cambio remoto no llega a tu máquina hasta que lo bajas.
+example: |
+  git status -sb   # muestra si tu rama local va adelante o atrás del remoto
+why: "Casi todo 'yo lo veo y tú no' se explica porque uno mira lo local y el otro lo remoto."
+source: https://en.wikipedia.org/wiki/Remote_computer
+related: [git-remote, web-localhost, infra-deployment]
+updated: 2026-09-29

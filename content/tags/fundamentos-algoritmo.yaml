@@ -1,0 +1,18 @@
+id: fundamentos-algoritmo
+term: Algoritmo
+category: fundamentos
+level: basico
+summary: "Una secuencia finita de pasos precisos que resuelve un problema, independiente del lenguaje."
+body: |
+  El algoritmo es la idea; el código es una forma de escribirla. El mismo algoritmo de
+  ordenamiento se puede implementar en Python, Swift o a mano con cartas.
+  La trampa: "funciona" no es lo mismo que "es un buen algoritmo". Dos algoritmos correctos
+  pueden tardar uno un milisegundo y el otro una hora con los mismos datos.
+example: |
+  // Búsqueda lineal: revisar uno por uno hasta encontrarlo
+  const buscar = (lista, x) => lista.findIndex((v) => v === x);
+  console.log(buscar([4, 8, 15, 16], 15)); // 2
+why: "Para pedirle a Claude la solución describiendo los pasos, no solo el resultado que esperas."
+source: https://developer.mozilla.org/en-US/docs/Glossary/Algorithm
+related: [algoritmos-big-o, fundamentos-pseudocodigo, fundamentos-diagrama-flujo]
+updated: 2026-09-29

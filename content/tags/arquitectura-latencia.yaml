@@ -1,0 +1,16 @@
+id: arquitectura-latencia
+term: Latencia
+category: arquitectura
+level: intermedio
+summary: "El tiempo que tarda una petición en recibir respuesta; distinto del ancho de banda, que es cuánto cabe por segundo."
+body: |
+  Una conexión puede tener mucho ancho de banda y alta latencia, como un camión grande
+  que tarda en llegar.
+  La trampa: muchas peticiones pequeñas en serie suman latencia en cada una. Diez
+  llamadas de 100 ms una tras otra tardan un segundo; en paralelo, cerca de 100 ms.
+example: |
+  curl -o /dev/null -s -w "%{time_total}s\n" https://github.com
+why: "Agrupar o paralelizar llamadas suele acelerar más que optimizar el código de cada una."
+source: https://developer.mozilla.org/en-US/docs/Web/Performance/Guides/Understanding_latency
+related: [arquitectura-cache, arquitectura-timeout, arquitectura-concurrencia]
+updated: 2026-09-29

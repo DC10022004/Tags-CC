@@ -1,0 +1,14 @@
+id: arquitectura-backend
+term: Backend
+category: arquitectura
+level: basico
+summary: "La parte que trabaja detrás: guarda datos, aplica reglas de negocio y habla con otros servicios. El usuario no la ve."
+body: |
+  Expone su funcionalidad al frontend mediante una API.
+  Es donde viven los secretos y las validaciones que importan, porque el usuario no
+  puede alterarlo. Este proyecto decidió no tener backend (ADR 0002): Git y GitHub raw
+  cumplen ese papel.
+why: "Saber qué necesita backend y qué no evita montar servidores que nadie necesita."
+source: https://en.wikipedia.org/wiki/Front_end_and_back_end
+related: [arquitectura-frontend, web-api, infra-baas]
+updated: 2026-09-29

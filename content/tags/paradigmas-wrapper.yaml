@@ -1,0 +1,20 @@
+id: paradigmas-wrapper
+term: Wrapper (envoltorio)
+category: paradigmas
+level: intermedio
+summary: "Código que envuelve otra función o librería para simplificarla, adaptarla o agregarle algo."
+body: |
+  Un wrapper sobre `fetch` puede añadir reintentos y timeout en un solo lugar, y el resto
+  del código llama al wrapper.
+  La ventaja extra: si cambias de librería, solo reescribes el wrapper. La trampa: un
+  wrapper que solo reenvía argumentos sin agregar nada es código de más.
+example: |
+  async function getJSON(url) {
+    const r = await fetch(url);
+    if (!r.ok) throw new Error(`HTTP ${r.status}`);
+    return r.json();
+  }
+why: "Centraliza manejo de errores y reintentos en un lugar en vez de repetirlo en cada llamada."
+source: https://en.wikipedia.org/wiki/Wrapper_function
+related: [herramientas-biblioteca, arquitectura-middleware]
+updated: 2026-09-29

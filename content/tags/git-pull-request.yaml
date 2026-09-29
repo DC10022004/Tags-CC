@@ -1,0 +1,16 @@
+id: git-pull-request
+term: Pull request (PR)
+category: git
+level: basico
+summary: "Una solicitud en GitHub para que alguien revise los cambios de tu rama antes de mezclarlos a main."
+body: |
+  Muestra el diff, permite comentar línea por línea y corre los checks automáticos.
+  Se mezcla con un botón cuando está aprobado.
+  La trampa: PRs gigantes. Nadie revisa bien 2 000 líneas; un PR pequeño y enfocado se
+  revisa en minutos y con más atención.
+example: |
+  gh pr create --fill
+why: "Un PR pequeño recibe una revisión real; uno enorme recibe un 'LGTM' sin leer."
+source: https://docs.github.com/es/pull-requests/collaborating-with-pull-requests/proposing-changes-to-your-work-with-pull-requests/about-pull-requests
+related: [git-rama, proceso-code-review, workflow-code-review]
+updated: 2026-09-29

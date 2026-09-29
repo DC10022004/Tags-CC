@@ -1,0 +1,15 @@
+id: arquitectura-microservicios
+term: Microservicios
+category: arquitectura
+level: avanzado
+summary: "Dividir una app en servicios pequeños e independientes que se despliegan por separado y se hablan por red."
+body: |
+  Permite que equipos distintos avancen sin coordinarse en cada deploy y escalar solo la
+  parte que lo necesita.
+  El costo: cada llamada entre servicios puede fallar o tardar, y depurar un error que
+  cruza cinco servicios es mucho más difícil. Tiene sentido con equipos grandes, no con
+  una o dos personas.
+why: "Para reconocer que su complejidad solo se justifica cuando hay varios equipos."
+source: https://en.wikipedia.org/wiki/Microservices
+related: [arquitectura-monolito, arquitectura-latencia, infra-contenedor]
+updated: 2026-09-29

@@ -1,0 +1,17 @@
+id: web-endpoint
+term: Endpoint (ruta)
+category: web
+level: basico
+summary: "Una dirección concreta de una API para una tarea concreta, como GET /api/candidatos."
+body: |
+  Un endpoint es método + ruta: `GET /tags` y `POST /tags` son dos endpoints distintos
+  aunque compartan ruta.
+  En frameworks como Next.js, la estructura de carpetas define las rutas. La trampa es
+  tratar a un endpoint como privado solo porque nadie conoce su URL: si no valida quién
+  llama, es público.
+example: |
+  curl -s -o /dev/null -w "%{http_code}\n" https://api.github.com/users/octocat
+why: "Un endpoint sin autenticación es accesible para cualquiera, aunque no lo publiques."
+source: https://en.wikipedia.org/wiki/Web_API#Endpoints
+related: [web-api, web-rest, web-nextjs]
+updated: 2026-09-29

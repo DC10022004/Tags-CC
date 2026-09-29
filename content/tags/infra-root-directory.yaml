@@ -1,0 +1,14 @@
+id: infra-root-directory
+term: Root Directory
+category: infra
+level: intermedio
+summary: "La carpeta del repo que la plataforma de despliegue toma como 'el proyecto'; lo de fuera se ignora."
+body: |
+  En un monorepo, cada app desplegada apunta a su subcarpeta (por ejemplo, `web/app`).
+  Solo los cambios dentro de ella afectan a la app publicada.
+  La trampa: si el Root Directory está mal, el build no encuentra `package.json` y falla
+  con errores que parecen del código, no de la configuración.
+why: "Si un build falla con 'no package.json found', revisa primero la carpeta raíz configurada."
+source: https://vercel.com/docs/builds/configure-a-build#root-directory
+related: [arquitectura-monorepo, infra-deployment, herramientas-package-json]
+updated: 2026-09-29

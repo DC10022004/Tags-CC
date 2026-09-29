@@ -1,0 +1,16 @@
+id: herramientas-cli
+term: CLI (interfaz de línea de comandos)
+category: herramientas
+level: basico
+summary: "Un programa que se usa escribiendo comandos en la terminal, como git, node o claude."
+body: |
+  Casi todos siguen la misma forma: `programa subcomando --opcion valor`. Y casi todos
+  aceptan `--help`.
+  La ventaja sobre una interfaz gráfica: los comandos se pueden guardar en scripts,
+  repetir y automatizar. Por eso Claude Code trabaja sobre todo a través de CLIs.
+example: |
+  git --help | head -5
+why: "--help es la documentación más rápida y siempre coincide con la versión que tienes."
+source: https://es.wikipedia.org/wiki/Interfaz_de_l%C3%ADnea_de_comandos
+related: [herramientas-shell, proceso-ui, fundamentos-script]
+updated: 2026-09-29

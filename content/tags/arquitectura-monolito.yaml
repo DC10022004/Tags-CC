@@ -1,0 +1,14 @@
+id: arquitectura-monolito
+term: Monolito
+category: arquitectura
+level: intermedio
+summary: "Una aplicación donde todo vive en un solo código y se despliega como una sola unidad."
+body: |
+  Es la forma más simple de empezar: un repo, un deploy, una base de datos.
+  "Monolito" suele decirse con desprecio, pero es la opción correcta para la mayoría de
+  proyectos pequeños. El problema real es un monolito sin módulos internos claros, no
+  el monolito en sí.
+why: "Evita dividir en microservicios antes de tiempo, que multiplica la complejidad sin beneficio."
+source: https://en.wikipedia.org/wiki/Monolithic_application
+related: [arquitectura-microservicios, arquitectura-monorepo]
+updated: 2026-09-29

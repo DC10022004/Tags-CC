@@ -1,0 +1,16 @@
+id: algoritmos-heap
+term: Heap (montículo)
+category: algoritmos
+level: avanzado
+summary: "Un árbol que mantiene siempre el elemento de mayor prioridad en la raíz; base de las colas de prioridad."
+body: |
+  Insertar y sacar el máximo cuesta O(log n), mucho mejor que ordenar la lista entera
+  cada vez.
+  La trampa del nombre: "heap" también es la zona de memoria donde viven los objetos
+  (heap memory). Son conceptos distintos que comparten palabra.
+example: |
+  python3 -c 'import heapq; h=[5,1,3]; heapq.heapify(h); print(heapq.heappop(h))'
+why: "Cuando necesitas 'el siguiente más urgente' repetidamente, un heap evita reordenar todo."
+source: https://docs.python.org/3/library/heapq.html
+related: [algoritmos-cola, algoritmos-big-o, herramientas-garbage-collection]
+updated: 2026-09-29

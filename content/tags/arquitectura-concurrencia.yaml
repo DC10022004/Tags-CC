@@ -1,0 +1,17 @@
+id: arquitectura-concurrencia
+term: Concurrencia
+category: arquitectura
+level: avanzado
+summary: "Manejar varias tareas que avanzan en el mismo periodo, intercalándose; no implica que corran al mismo tiempo."
+body: |
+  Node es concurrente con un solo hilo: mientras espera una respuesta de red, atiende
+  otra cosa.
+  La trampa son las condiciones de carrera (race conditions): dos tareas leen un valor,
+  ambas lo modifican y una pisa a la otra. El resultado depende de quién llegó primero.
+example: |
+  const esperar = (ms, v) => new Promise((r) => setTimeout(() => r(v), ms));
+  Promise.all([esperar(200, "a"), esperar(100, "b")]).then(console.log); // ~200 ms, no 300
+why: "Promise.all ejecuta esperas a la vez: es la forma más simple de acelerar llamadas de red."
+source: https://en.wikipedia.org/wiki/Concurrency_(computer_science)
+related: [arquitectura-paralelismo, arquitectura-thread, fundamentos-sincrono-asincrono]
+updated: 2026-09-29

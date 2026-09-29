@@ -1,0 +1,18 @@
+id: datos-serializacion
+term: Serialización y deserialización
+category: datos
+level: intermedio
+summary: "Convertir un objeto en texto o bytes para guardarlo o enviarlo (serializar), y reconstruirlo al recibirlo."
+body: |
+  `JSON.stringify` serializa; `JSON.parse` deserializa. Swift usa `Codable` para lo mismo.
+  La trampa: no todo sobrevive el viaje. Las fechas vuelven como texto, las funciones se
+  pierden y los `undefined` desaparecen. Y deserializar datos no confiables sin validarlos
+  es un riesgo de seguridad.
+example: |
+  const s = JSON.stringify({ fecha: new Date(0), f: () => 1 });
+  console.log(s);                       // {"fecha":"1970-01-01T00:00:00.000Z"}
+  console.log(typeof JSON.parse(s).fecha); // "string", ya no es Date
+why: "Explica por qué una fecha que guardaste llega como texto y hay que convertirla de nuevo."
+source: https://developer.mozilla.org/en-US/docs/Glossary/Serialization
+related: [datos-json, fundamentos-parsing]
+updated: 2026-09-29

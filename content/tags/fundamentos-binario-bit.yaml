@@ -1,0 +1,17 @@
+id: fundamentos-binario-bit
+term: Bit y sistema binario
+category: fundamentos
+level: basico
+summary: "Un bit es un 0 o un 1; el binario representa cualquier número solo con esos dos dígitos."
+body: |
+  8 bits forman un byte, que puede tomar 256 valores. Todo lo que maneja una computadora
+  (texto, imágenes, código) termina siendo bits.
+  La consecuencia práctica: muchos decimales no tienen representación exacta en binario,
+  y por eso `0.1 + 0.2` no da exactamente `0.3`.
+example: |
+  console.log((10).toString(2));     // "1010"
+  console.log(parseInt("1010", 2));  // 10
+why: "Entender bits explica límites como 2^32 en hashes o el error de redondeo en decimales."
+source: https://es.wikipedia.org/wiki/Bit
+related: [fundamentos-operador-aritmetico, fundamentos-utf-8]
+updated: 2026-09-29

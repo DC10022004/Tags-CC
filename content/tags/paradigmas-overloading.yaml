@@ -1,0 +1,18 @@
+id: paradigmas-overloading
+term: Overloading (sobrecarga)
+category: paradigmas
+level: avanzado
+summary: "Definir varias versiones de una función con el mismo nombre y distintos parámetros."
+body: |
+  Swift y Java eligen la versión según los tipos de los argumentos, al compilar.
+  JavaScript y Python no la tienen: una segunda definición reemplaza a la primera. Allí se
+  simula revisando los argumentos dentro de una sola función.
+  No confundir con override, que redefine un método heredado.
+example: |
+  // Swift
+  func area(_ lado: Double) -> Double { lado * lado }
+  func area(_ ancho: Double, _ alto: Double) -> Double { ancho * alto }
+why: "Explica por qué en JS definir dos funciones con el mismo nombre no da error: gana la última."
+source: https://en.wikipedia.org/wiki/Function_overloading
+related: [paradigmas-override, paradigmas-polimorfismo]
+updated: 2026-09-29

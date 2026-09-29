@@ -1,0 +1,16 @@
+id: web-api
+term: API
+category: web
+level: basico
+summary: "Una ventanilla con reglas fijas para que un programa le pida datos o acciones a otro sin ver su interior."
+body: |
+  Define qué puedes pedir, en qué formato y qué te devuelve. Puede ser una API web (por
+  HTTP) o la de una librería (sus funciones públicas).
+  Lo valioso es el contrato: mientras la API no cambie, el sistema de detrás puede
+  reescribirse entero. Un cambio que la rompe se llama "breaking change".
+example: |
+  curl -s https://api.github.com/repos/anthropics/claude-code | head -5
+why: "MCP es una API estándar: por eso Claude puede hablar con herramientas que no conoce de antemano."
+source: https://developer.mozilla.org/en-US/docs/Glossary/API
+related: [web-endpoint, web-rest, mcp-protocolo, seguridad-api-key]
+updated: 2026-09-29

@@ -1,0 +1,14 @@
+id: proceso-ux
+term: UX (experiencia de usuario)
+category: proceso
+level: basico
+summary: "Cómo se siente usar un producto: si es fácil, claro y resuelve lo que la persona necesita."
+body: |
+  Se mide observando a personas reales usarlo, no preguntándoles si les gusta.
+  Este proyecto tiene una decisión de UX central: la espera de 90 minutos entre tarjetas.
+  Sin ella, el desbloqueo mostraría decenas de ventanas al día y el sistema terminaría
+  desinstalado.
+why: "Muchas decisiones técnicas son en realidad decisiones de experiencia de usuario."
+source: https://developer.mozilla.org/en-US/docs/Glossary/UX
+related: [proceso-ui, proceso-wireframe]
+updated: 2026-09-29

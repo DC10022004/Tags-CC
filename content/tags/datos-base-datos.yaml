@@ -1,0 +1,16 @@
+id: datos-base-datos
+term: Base de datos
+category: datos
+level: basico
+summary: "Un sistema para guardar datos de forma ordenada y consultarlos rápido; relacional (SQL) o no relacional (NoSQL)."
+body: |
+  Una relacional organiza en tablas con filas y columnas, parecidas a hojas de Excel pero
+  con reglas: tipos, relaciones y restricciones.
+  La trampa: guardar datos en archivos sueltos "por ahora". En cuanto dos procesos
+  escriben a la vez o necesitas buscar, reinventas mal una base de datos.
+example: |
+  sqlite3 prueba.db "create table tags(id text primary key); insert into tags values('git-commit'); select * from tags;"
+why: "Saber cuándo un archivo JSON basta y cuándo hace falta una base de datos de verdad."
+source: https://es.wikipedia.org/wiki/Base_de_datos
+related: [datos-sql, datos-nosql, datos-esquema, infra-baas]
+updated: 2026-09-29

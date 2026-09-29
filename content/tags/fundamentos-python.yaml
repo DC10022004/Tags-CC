@@ -1,0 +1,16 @@
+id: fundamentos-python
+term: Python
+category: fundamentos
+level: basico
+summary: "Lenguaje de alto nivel muy legible, dominante en datos, IA y scripts de automatización."
+body: |
+  Usa la sangría como sintaxis: los bloques se definen por indentación, no por llaves.
+  La trampa del entorno: instalar paquetes con `pip` en el Python del sistema mezcla
+  versiones entre proyectos. Un entorno virtual (`python3 -m venv .venv`) los aísla.
+example: |
+  python3 -m venv .venv && source .venv/bin/activate
+  python3 -c 'print(sorted([3, 1, 2]))'
+why: "Es el lenguaje por defecto para análisis de datos y para muchos SDKs de IA."
+source: https://docs.python.org/3/tutorial/
+related: [fundamentos-alto-bajo-nivel, ia-data-science, herramientas-dependencia]
+updated: 2026-09-29

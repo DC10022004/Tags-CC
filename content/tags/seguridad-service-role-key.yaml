@@ -1,0 +1,14 @@
+id: seguridad-service-role-key
+term: Service role key
+category: seguridad
+level: avanzado
+summary: "Una clave de Supabase con acceso total que se salta las reglas de seguridad; solo debe usarse en el servidor."
+body: |
+  Supabase tiene dos tipos de clave: la pública (anon/publishable), limitada por las
+  reglas de seguridad por fila (RLS), y la de servicio, que ignora esas reglas.
+  La trampa: usar la de servicio en el navegador "porque así funciona". Funciona porque
+  le da a cualquiera acceso a toda la base.
+why: "Si algo solo funciona con la service role key, falta una política RLS, no una clave más potente."
+source: https://supabase.com/docs/guides/api/api-keys
+related: [seguridad-secreto, seguridad-api-key, infra-baas]
+updated: 2026-09-29

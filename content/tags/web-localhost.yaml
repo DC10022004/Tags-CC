@@ -1,0 +1,16 @@
+id: web-localhost
+term: localhost
+category: web
+level: basico
+summary: "La dirección que significa 'esta misma computadora'; lo que corre en localhost solo lo ves tú."
+body: |
+  Equivale a la IP `127.0.0.1`. El número después de los dos puntos es el puerto:
+  `localhost:3000` es un programa, `localhost:5432` puede ser otro.
+  La trampa: "en mi localhost funciona" no dice nada de producción. Variables de entorno,
+  datos y red son distintos allá.
+example: |
+  python3 -m http.server 8000   # luego abre http://localhost:8000
+why: "Es donde pruebas antes de publicar; lo que ahí ves no lo ve nadie más."
+source: https://en.wikipedia.org/wiki/Localhost
+related: [herramientas-servidor-desarrollo, infra-local-remoto, web-url]
+updated: 2026-09-29

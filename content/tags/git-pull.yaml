@@ -1,0 +1,16 @@
+id: git-pull
+term: git pull
+category: git
+level: basico
+summary: "Fetch + merge en un paso: descarga los cambios del remoto y los aplica a tu rama."
+body: |
+  Si no tenías cambios propios, es un fast-forward limpio. Si ambos cambiaron lo mismo,
+  aparece un conflicto.
+  La trampa: hacer pull con cambios sin commitear. Git puede negarse o mezclarlos de
+  forma confusa. Haz commit (o `git stash`) antes.
+example: |
+  git status --short && git pull
+why: "Revisar git status antes de hacer pull evita mezclar trabajo a medias con cambios ajenos."
+source: https://git-scm.com/docs/git-pull
+related: [git-fetch, git-merge, git-conflicto]
+updated: 2026-09-29

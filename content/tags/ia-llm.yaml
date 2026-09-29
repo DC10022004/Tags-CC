@@ -1,0 +1,14 @@
+id: ia-llm
+term: LLM (modelo de lenguaje grande)
+category: ia
+level: basico
+summary: "Un modelo entrenado con enormes cantidades de texto que predice el siguiente token; Claude es un LLM."
+body: |
+  Procesa texto en tokens, fragmentos de palabras, y tiene una ventana de contexto
+  limitada: lo que no está en ella, no lo sabe.
+  La trampa: suena igual de seguro cuando acierta que cuando inventa. Por eso las
+  respuestas que importan se verifican contra una fuente o con una ejecución real.
+why: "Entender tokens y contexto explica por qué Claude olvida cosas en sesiones largas."
+source: https://en.wikipedia.org/wiki/Large_language_model
+related: [contexto-context-window, ia-machine-learning, seguridad-token]
+updated: 2026-09-29

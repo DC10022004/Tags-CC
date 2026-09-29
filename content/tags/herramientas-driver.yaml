@@ -1,0 +1,13 @@
+id: herramientas-driver
+term: Driver (controlador)
+category: herramientas
+level: intermedio
+summary: "Software que permite al sistema operativo hablar con un hardware concreto, como una impresora o una GPU."
+body: |
+  Traduce las órdenes genéricas del sistema a lo que ese dispositivo entiende.
+  La palabra también se usa para software: un "driver de base de datos" es la librería
+  que conecta tu programa con Postgres o MySQL.
+why: "Cuando algo conecta pero no funciona bien, el driver suele ser la pieza desactualizada."
+source: https://es.wikipedia.org/wiki/Controlador_de_dispositivo
+related: [herramientas-kernel, datos-base-datos]
+updated: 2026-09-29

@@ -1,0 +1,19 @@
+id: paradigmas-atributo
+term: Atributo (propiedad)
+category: paradigmas
+level: basico
+summary: "Un dato que pertenece a un objeto, como el term o el level de una tarjeta; representa su estado."
+body: |
+  Se lee y escribe con punto: `tarjeta.level`. Los métodos describen lo que el objeto
+  hace; los atributos, lo que el objeto tiene.
+  La trampa: exponer todos los atributos para escritura permite que cualquier parte del
+  código deje el objeto inconsistente. Por eso existen los atributos privados.
+example: |
+  class Tag { #vistas = 0; ver() { return ++this.#vistas; } }
+  const t = new Tag();
+  t.ver();
+  console.log(t.ver()); // 2; #vistas no se puede tocar desde fuera
+why: "Distinguir atributos de métodos ayuda a leer cualquier modelo de datos, en código o en JSON."
+source: https://developer.mozilla.org/en-US/docs/Glossary/Property/JavaScript
+related: [paradigmas-metodo, paradigmas-encapsulacion]
+updated: 2026-09-29

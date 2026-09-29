@@ -1,0 +1,16 @@
+id: datos-migracion
+term: Migración de base de datos
+category: datos
+level: intermedio
+summary: "Un archivo fechado con los cambios de estructura de la base, para aplicarlos en orden en cualquier entorno."
+body: |
+  Crear una tabla o agregar una columna va en una migración versionada con Git, no se
+  hace a mano en el panel. Así la base de pruebas y la de producción quedan iguales.
+  La trampa: editar una migración que ya se aplicó. No se vuelve a correr; se escribe una
+  migración nueva que corrija.
+example: |
+  supabase migration new agregar_columna_nivel
+why: "Cambios hechos a mano en el panel no quedan registrados y la otra base nunca los recibe."
+source: https://supabase.com/docs/guides/deployment/database-migrations
+related: [datos-esquema, git-commit, infra-baas]
+updated: 2026-09-29

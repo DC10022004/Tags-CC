@@ -1,0 +1,18 @@
+id: fundamentos-script
+term: Script
+category: fundamentos
+level: basico
+summary: "Un programa corto que automatiza una tarea concreta y se ejecuta directo, sin compilar."
+body: |
+  Bash, Python y Node son los lenguajes típicos. `build.sh` e `install.sh` en este
+  proyecto son scripts.
+  La trampa en scripts de shell: sin `set -e`, un comando que falla no detiene el script
+  y los pasos siguientes corren sobre un estado roto.
+example: |
+  #!/bin/bash
+  set -euo pipefail   # detenerse ante el primer error
+  node pipeline/build.mjs
+why: "Un set -euo pipefail al inicio evita que un script siga como si nada tras un error."
+source: https://www.gnu.org/software/bash/manual/html_node/The-Set-Builtin.html
+related: [herramientas-shell, herramientas-cli]
+updated: 2026-09-29

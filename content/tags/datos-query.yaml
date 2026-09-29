@@ -1,0 +1,17 @@
+id: datos-query
+term: Query (consulta)
+category: datos
+level: basico
+summary: "Una petición a una base de datos para leer o modificar datos, normalmente escrita en SQL."
+body: |
+  Una query lenta casi siempre es una query que recorre toda la tabla porque le falta un
+  índice sobre la columna del `WHERE`.
+  La trampa de seguridad: armar la query concatenando texto del usuario abre la puerta a
+  inyección SQL. Siempre parámetros: `where id = $1`.
+example: |
+  sqlite3 :memory: "create table t(id text); insert into t values('a');" \
+    ".param set :id 'a'" "select count(*) from t where id = :id;"
+why: "Las consultas parametrizadas son la defensa contra inyección SQL, uno de los ataques más comunes."
+source: https://owasp.org/www-community/attacks/SQL_Injection
+related: [datos-sql, datos-orm, datos-clave]
+updated: 2026-09-29

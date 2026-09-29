@@ -1,0 +1,16 @@
+id: infra-baas
+term: BaaS (Backend as a Service)
+category: infra
+level: intermedio
+summary: "Un backend ya armado (base de datos, autenticación, archivos) que usas por API, como Supabase o Firebase."
+body: |
+  Supabase ofrece una base Postgres, almacenamiento de archivos y autenticación sin
+  escribir un servidor propio.
+  La trampa: la seguridad pasa a la configuración. Si no defines reglas de acceso (RLS en
+  Supabase), la clave pública puede leer toda la base.
+example: |
+  supabase init && supabase start
+why: "Acelera mucho, pero las reglas de acceso son ahora tu responsabilidad directa."
+source: https://supabase.com/docs/guides/getting-started/features
+related: [datos-base-datos, seguridad-service-role-key, datos-migracion]
+updated: 2026-09-29

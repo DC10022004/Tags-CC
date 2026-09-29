@@ -1,0 +1,17 @@
+id: git-merge
+term: Merge (fusionar)
+category: git
+level: intermedio
+summary: "Combina los cambios de una rama en otra; Git junta automáticamente lo que no se pisa."
+body: |
+  Si ambas ramas avanzaron, se crea un "merge commit" con dos padres. Si solo una
+  avanzó, es un fast-forward.
+  La trampa: hacer merge sin probar el resultado. Dos cambios que funcionan por
+  separado pueden romperse juntos aunque Git no reporte conflicto.
+example: |
+  git switch main
+  git merge mejora-tarjetas
+why: "Probar después de un merge detecta roturas que Git no ve porque no hubo conflicto de texto."
+source: https://git-scm.com/docs/git-merge
+related: [git-fast-forward, git-conflicto, git-rama]
+updated: 2026-09-29

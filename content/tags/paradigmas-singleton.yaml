@@ -1,0 +1,18 @@
+id: paradigmas-singleton
+term: Singleton
+category: paradigmas
+level: avanzado
+summary: "Un patrón que garantiza una sola instancia de una clase en todo el programa, accesible desde cualquier lugar."
+body: |
+  Se usa para recursos compartidos: una conexión a base de datos, la configuración.
+  La trampa: es una variable global con otro nombre. Dificulta los tests, porque todos
+  comparten el mismo estado. Muchas veces es mejor crear una instancia y pasarla
+  (inyección de dependencias).
+example: |
+  // En Node un módulo ya es un singleton: se evalúa una sola vez
+  // config.mjs
+  export const config = { intervalHours: 4 };
+why: "Para reconocer cuándo un 'singleton' en realidad es estado global que complicará los tests."
+source: https://en.wikipedia.org/wiki/Singleton_pattern
+related: [fundamentos-variable-global, paradigmas-inyeccion-dependencias]
+updated: 2026-09-29

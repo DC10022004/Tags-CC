@@ -1,0 +1,16 @@
+id: herramientas-ide
+term: IDE
+category: herramientas
+level: basico
+summary: "Un editor de código con herramientas integradas: autocompletado, depurador, terminal, Git. VS Code, Xcode."
+body: |
+  La diferencia con un editor de texto es que entiende el código: sabe dónde se define una
+  función y quién la llama.
+  Atajos que más rinden: ir a la definición (F12 en VS Code), renombrar un símbolo en todo
+  el proyecto (F2) y buscar en todos los archivos (Cmd+Shift+F).
+example: |
+  code .
+why: "Renombrar con F2 cambia todas las referencias sin romper nada, a diferencia de buscar y reemplazar."
+source: https://code.visualstudio.com/docs/editing/editingevolved
+related: [plataforma-vs-code, proceso-debugging, herramientas-cli]
+updated: 2026-09-29

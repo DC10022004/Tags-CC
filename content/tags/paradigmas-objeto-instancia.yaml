@@ -1,0 +1,19 @@
+id: paradigmas-objeto-instancia
+term: Objeto e instancia
+category: paradigmas
+level: intermedio
+summary: "Una instancia es un objeto concreto creado desde una clase, con sus propios valores; instanciar es crearlo."
+body: |
+  `new Tarjeta("git")` instancia la clase y devuelve un objeto independiente de cualquier
+  otro `new Tarjeta(...)`.
+  En JavaScript también hay objetos sin clase: `{ term: "git" }` es un objeto literal.
+  La trampa: asignar un objeto a otra variable no lo copia; ambas apuntan al mismo.
+example: |
+  const a = { term: "git" };
+  const b = a;           // misma referencia, no copia
+  b.term = "sql";
+  console.log(a.term);   // "sql"
+why: "Explica por qué modificar 'una copia' de un objeto cambia también el original."
+source: https://developer.mozilla.org/en-US/docs/Glossary/Instance
+related: [paradigmas-clase, paradigmas-constructor, paradigmas-atributo]
+updated: 2026-09-29

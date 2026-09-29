@@ -1,0 +1,16 @@
+id: herramientas-kernel
+term: Kernel
+category: herramientas
+level: avanzado
+summary: "El núcleo del sistema operativo: reparte CPU y memoria entre programas y habla con el hardware."
+body: |
+  Los programas no tocan el hardware directamente; se lo piden al kernel. macOS usa el
+  kernel XNU; Linux es, en sentido estricto, solo un kernel.
+  Los contenedores comparten el kernel del sistema anfitrión. Por eso un contenedor de
+  Linux necesita una máquina virtual con Linux para correr en una Mac.
+example: |
+  uname -sr
+why: "Explica por qué Docker en Mac corre dentro de una máquina virtual escondida."
+source: https://es.wikipedia.org/wiki/N%C3%BAcleo_(inform%C3%A1tica)
+related: [infra-contenedor, herramientas-driver]
+updated: 2026-09-29

@@ -1,0 +1,17 @@
+id: algoritmos-pila
+term: Pila (stack) y LIFO
+category: algoritmos
+level: intermedio
+summary: "Estructura LIFO: el último en entrar es el primero en salir, como una pila de platos."
+body: |
+  El botón "deshacer" es una pila: se revierte primero lo último que hiciste.
+  El caso más importante es la pila de llamadas (call stack): cada función que llamas se
+  apila y se desapila al terminar. De ahí vienen el stack trace y el stack overflow.
+example: |
+  const pila = [];
+  pila.push("a"); pila.push("b");
+  console.log(pila.pop()); // "b": sale el último que entró
+why: "Entender la pila de llamadas es lo que permite leer un stack trace."
+source: https://es.wikipedia.org/wiki/Pila_(inform%C3%A1tica)
+related: [algoritmos-cola, algoritmos-stack-overflow, fundamentos-stack-trace]
+updated: 2026-09-29

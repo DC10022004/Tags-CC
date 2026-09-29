@@ -1,0 +1,16 @@
+id: web-html
+term: HTML
+category: web
+level: basico
+summary: "El lenguaje que define la estructura y el contenido de una página: títulos, párrafos, enlaces, formularios."
+body: |
+  Describe qué es cada cosa, no cómo se ve (eso es CSS) ni cómo se comporta (eso es JS).
+  La trampa es usar `div` para todo: las etiquetas semánticas (`button`, `nav`,
+  `header`) dan accesibilidad y funcionamiento con teclado gratis.
+example: |
+  <button type="button">Ya lo sé</button>
+  <a href="https://code.claude.com/docs">Docs</a>
+why: "Usar la etiqueta correcta hace que lectores de pantalla y teclado funcionen sin código extra."
+source: https://developer.mozilla.org/en-US/docs/Web/HTML
+related: [web-css, web-dom]
+updated: 2026-09-29

@@ -1,0 +1,13 @@
+id: datos-orm
+term: ORM
+category: datos
+level: avanzado
+summary: "Una librería que te deja leer y escribir en la base de datos con objetos de tu lenguaje en vez de SQL."
+body: |
+  Prisma, Drizzle o SQLAlchemy traducen `usuario.save()` a un INSERT.
+  La trampa clásica es el problema N+1: recorrer 100 objetos y acceder a una relación
+  dispara 101 queries sin que se vea en el código. Revisa las queries que genera.
+why: "Cuando una página con ORM está lenta, lo primero es contar cuántas queries dispara."
+source: https://en.wikipedia.org/wiki/Object%E2%80%93relational_mapping
+related: [datos-sql, datos-query, paradigmas-poo]
+updated: 2026-09-29

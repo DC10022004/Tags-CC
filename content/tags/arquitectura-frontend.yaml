@@ -1,0 +1,13 @@
+id: arquitectura-frontend
+term: Frontend
+category: arquitectura
+level: basico
+summary: "La parte de una app que el usuario ve y toca: pantallas, botones, formularios. Corre en su navegador o dispositivo."
+body: |
+  Se construye con HTML, CSS y JavaScript, o con frameworks como React.
+  La regla de oro: todo lo que está en el frontend es visible y modificable por el
+  usuario. Validar solo en el frontend no protege nada; el backend debe volver a validar.
+why: "Explica por qué las validaciones y claves secretas nunca pueden vivir solo en el frontend."
+source: https://developer.mozilla.org/en-US/docs/Learn_web_development/Getting_started/Web_standards/How_the_web_works
+related: [arquitectura-backend, arquitectura-fullstack, web-renderizado]
+updated: 2026-09-29

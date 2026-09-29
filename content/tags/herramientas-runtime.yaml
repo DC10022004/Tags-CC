@@ -1,0 +1,16 @@
+id: herramientas-runtime
+term: Runtime (tiempo de ejecución)
+category: herramientas
+level: intermedio
+summary: "Dos cosas: el momento en que el programa corre, y el entorno que lo hace correr, como Node o la JVM."
+body: |
+  "Error en runtime" es el que aparece al ejecutar, no al compilar.
+  Como entorno, el runtime define qué hay disponible: Node tiene acceso a archivos, el
+  navegador tiene `window` y `document`. El mismo JavaScript funciona en uno y falla en
+  el otro.
+example: |
+  node -e 'console.log(typeof window, typeof process)'   # undefined object
+why: "Explica errores como 'window is not defined' al correr código de navegador en Node."
+source: https://en.wikipedia.org/wiki/Runtime_system
+related: [herramientas-nodejs, herramientas-jvm, herramientas-compilador]
+updated: 2026-09-29

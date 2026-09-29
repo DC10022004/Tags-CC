@@ -1,0 +1,18 @@
+id: fundamentos-booleano
+term: Booleano
+category: fundamentos
+level: basico
+summary: "Un tipo con solo dos valores, true y false; es lo que evalúa cada if."
+body: |
+  Los operadores `&&` (y), `||` (o) y `!` (no) combinan booleanos.
+  La trampa en JavaScript: `if` acepta cualquier valor y lo convierte. `0`, `""`, `null`,
+  `undefined` y `NaN` cuentan como falsos ("falsy"). Un contador en 0 hace fallar un
+  `if (contador)` aunque el contador exista.
+example: |
+  const contador = 0;
+  if (contador) console.log("hay");        // no imprime: 0 es falsy
+  if (contador !== undefined) console.log("existe"); // imprime
+why: "Evita el bug de tratar un 0 o un texto vacío como si el dato no existiera."
+source: https://developer.mozilla.org/en-US/docs/Glossary/Boolean
+related: [fundamentos-condicional, fundamentos-null]
+updated: 2026-09-29

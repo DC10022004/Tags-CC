@@ -1,0 +1,17 @@
+id: fundamentos-return
+term: Return (retorno)
+category: fundamentos
+level: basico
+summary: "Termina la función y entrega un valor a quien la llamó; lo que va después ya no se ejecuta."
+body: |
+  Una función sin `return` devuelve `undefined` en JavaScript y `None` en Python.
+  La trampa: confundir imprimir con devolver. `console.log` muestra un valor en pantalla,
+  pero quien llamó a la función no recibe nada.
+example: |
+  function doble(n) { console.log(n * 2); }   // imprime, no devuelve
+  const r = doble(4);
+  console.log(r); // undefined
+why: "Explica por qué una función 'muestra el resultado' pero la variable queda vacía."
+source: https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Statements/return
+related: [fundamentos-funcion, fundamentos-condicional]
+updated: 2026-09-29

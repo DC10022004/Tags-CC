@@ -1,0 +1,18 @@
+id: seguridad-env-file
+term: Archivo .env
+category: seguridad
+level: basico
+summary: "Archivo local con las variables de entorno de un proyecto, incluidas claves; nunca se sube a Git."
+body: |
+  Frameworks como Next.js cargan `.env.local` al arrancar. Un `.env.example` (o
+  `.env.local.ejemplo`) con los nombres pero sin valores sí se sube, como plantilla para
+  que cada quien llene los suyos.
+  La trampa: en producción no hay `.env`: las variables se configuran en el panel del
+  servicio de despliegue.
+example: |
+  cp .env.example .env.local
+  git check-ignore .env.local && echo "ignorado, bien"
+why: "La plantilla .env.example dice qué configurar sin exponer ningún valor real."
+source: https://nextjs.org/docs/app/guides/environment-variables
+related: [herramientas-variable-entorno, seguridad-secreto, git-gitignore, herramientas-archivo-oculto]
+updated: 2026-09-29

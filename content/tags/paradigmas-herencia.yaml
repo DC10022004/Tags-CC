@@ -1,0 +1,18 @@
+id: paradigmas-herencia
+term: Herencia
+category: paradigmas
+level: intermedio
+summary: "Una clase hija recibe los atributos y métodos de una clase padre y puede añadir o cambiar los suyos."
+body: |
+  Se declara con `extends` en JavaScript y con `:` en Swift.
+  La trampa: la herencia acopla mucho. Un cambio en la clase padre afecta a todas las
+  hijas. La regla habitual es "composición sobre herencia": tener un objeto dentro en
+  lugar de heredar de él.
+example: |
+  class Animal { hablar() { return "..."; } }
+  class Perro extends Animal { hablar() { return "guau"; } }
+  console.log(new Perro().hablar()); // "guau"
+why: "Ayuda a decidir cuándo heredar y cuándo es mejor componer objetos más pequeños."
+source: https://developer.mozilla.org/en-US/docs/Glossary/Inheritance
+related: [paradigmas-clase, paradigmas-override, paradigmas-polimorfismo]
+updated: 2026-09-29

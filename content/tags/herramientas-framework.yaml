@@ -1,0 +1,14 @@
+id: herramientas-framework
+term: Framework
+category: herramientas
+level: basico
+summary: "Un esqueleto de aplicación con estructura y reglas ya definidas; tú rellenas las partes y él las llama."
+body: |
+  Next.js, Django o SwiftUI deciden dónde va cada archivo y cómo fluye el programa.
+  Aceleran mucho si sigues sus convenciones.
+  La trampa: pelear contra el framework. Si te encuentras forzándolo a trabajar de otra
+  forma, o eliges otro o aceptas sus reglas.
+why: "Seguir las convenciones del framework hace que Claude y otros entiendan el proyecto al instante."
+source: https://en.wikipedia.org/wiki/Software_framework
+related: [herramientas-biblioteca, web-nextjs]
+updated: 2026-09-29

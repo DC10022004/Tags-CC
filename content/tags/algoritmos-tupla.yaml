@@ -1,0 +1,16 @@
+id: algoritmos-tupla
+term: Tupla
+category: algoritmos
+level: intermedio
+summary: "Una colección ordenada, de tamaño fijo e inmutable; en Python se escribe con paréntesis."
+body: |
+  Sirve para agrupar valores que van juntos, como una coordenada `(x, y)` o un par
+  `(clave, valor)`. Una lista puede crecer y cambiar; una tupla no.
+  La trampa en Python: una tupla de un elemento necesita coma. `(5)` es un número;
+  `(5,)` es una tupla.
+example: |
+  python3 -c 'p = (3, 4); x, y = p; print(x, y, type((5)), type((5,)))'
+why: "Aparecen en Python al devolver varios valores de una función y al desempaquetarlos."
+source: https://docs.python.org/3/tutorial/datastructures.html#tuples-and-sequences
+related: [algoritmos-array, fundamentos-inmutable]
+updated: 2026-09-29

@@ -1,0 +1,16 @@
+id: proceso-testing
+term: Testing (pruebas)
+category: proceso
+level: basico
+summary: "Verificar con programas que el código hace lo que debe: unitarias, de integración y de extremo a extremo."
+body: |
+  Las unitarias prueban una función aislada; las de integración, varias piezas juntas;
+  las end-to-end, la app completa como la usaría una persona.
+  La trampa: un test que nunca falla no prueba nada. Antes de confiar en uno, rompe el
+  código a propósito y verifica que el test lo detecte.
+example: |
+  npm test
+why: "Los tests te dejan cambiar código con confianza: si algo se rompe, avisan solos."
+source: https://en.wikipedia.org/wiki/Software_testing
+related: [proceso-test-unitario, proceso-qa, infra-pipeline]
+updated: 2026-09-29

@@ -1,0 +1,16 @@
+id: git-repositorio
+term: Repositorio (repo)
+category: git
+level: basico
+summary: "Una carpeta de proyecto cuyo historial lleva Git; la información vive en la carpeta oculta .git."
+body: |
+  `git init` convierte una carpeta en repo. Un repo puede tener copia local y copia en
+  GitHub (remota), y se sincronizan con push y pull.
+  La trampa: borrar la carpeta `.git` borra todo el historial local. Y un monorepo es
+  un solo repo con varios proyectos dentro.
+example: |
+  git rev-parse --show-toplevel
+why: "Saber dónde está la raíz del repo explica qué archivos controla Git y cuáles no."
+source: https://git-scm.com/book/es/v2/Fundamentos-de-Git-Obteniendo-un-repositorio-Git
+related: [git-control-versiones, git-clone, arquitectura-monorepo]
+updated: 2026-09-29

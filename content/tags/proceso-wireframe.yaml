@@ -1,0 +1,14 @@
+id: proceso-wireframe
+term: Wireframe, mockup y prototipo
+category: proceso
+level: basico
+summary: "Wireframe: el esqueleto sin estilo. Mockup: cómo se verá. Prototipo: una versión que se puede usar para probar."
+body: |
+  Van de menos a más fidelidad y costo. Se empieza con wireframes para discutir la
+  estructura sin distraerse con colores.
+  La trampa: un prototipo que funciona tienta a tratarlo como producto. Suele estar
+  hecho con atajos que no aguantan uso real.
+why: "Elegir la fidelidad correcta evita pulir detalles de algo cuya estructura aún cambiará."
+source: https://en.wikipedia.org/wiki/Website_wireframe
+related: [proceso-ui, proceso-ux, proceso-portar]
+updated: 2026-09-29

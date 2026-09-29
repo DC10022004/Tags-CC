@@ -1,0 +1,16 @@
+id: git-github
+term: GitHub
+category: git
+level: basico
+summary: "El sitio web donde se aloja una copia de un repo Git para compartirlo y colaborar; Git y GitHub no son lo mismo."
+body: |
+  Git es el programa que corre en tu computadora; GitHub es un servicio que guarda
+  repos y añade pull requests, issues y Actions.
+  La trampa: un repo público es público de verdad, incluido todo su historial. Un
+  secreto que se subió y luego se borró sigue visible en commits anteriores.
+example: |
+  gh repo view --web
+why: "Este proyecto usa GitHub como backend: el iPhone lee dist/tags.json desde GitHub raw."
+source: https://docs.github.com/es/get-started/start-your-journey/about-github-and-git
+related: [git-control-versiones, git-remote, git-pull-request, plataforma-github-actions]
+updated: 2026-09-29

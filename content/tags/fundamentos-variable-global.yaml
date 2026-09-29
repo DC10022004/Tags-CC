@@ -1,0 +1,19 @@
+id: fundamentos-variable-global
+term: Variable global
+category: fundamentos
+level: basico
+summary: "Una variable visible desde todo el programa; cómoda al inicio y fuente de errores difíciles después."
+body: |
+  Cualquier función puede leerla y cambiarla, así que cuando tiene un valor inesperado
+  no sabes quién lo puso.
+  La alternativa es pasar los datos como parámetros o agruparlos en un módulo. Lo que sí
+  suele ser global con razón es la configuración que no cambia, como constantes.
+example: |
+  let total = 0;                  // global: cualquiera la toca
+  function sumar(n) { total += n; }
+  sumar(5); sumar(3);
+  console.log(total);             // 8, pero ¿quién más la cambió?
+why: "Si un valor 'cambia solo', lo primero es buscar un estado global compartido."
+source: https://developer.mozilla.org/en-US/docs/Glossary/Global_variable
+related: [fundamentos-variable, fundamentos-scope, paradigmas-singleton]
+updated: 2026-09-29

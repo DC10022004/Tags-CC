@@ -1,0 +1,16 @@
+id: web-scraping
+term: Web scraping
+category: web
+level: intermedio
+summary: "Extraer datos de páginas web con un programa que descarga el HTML y busca lo que necesita."
+body: |
+  Es frágil: un cambio de diseño en la página rompe el scraper sin aviso.
+  Antes de scrapear, busca una API o un formato limpio. Este proyecto no parsea el HTML
+  de los docs: pide la versión `.md`, que el sitio ofrece para eso. Respeta también
+  `robots.txt` y los términos del sitio.
+example: |
+  curl -s https://code.claude.com/docs/en/hooks.md | head -20
+why: "Pedir markdown o usar una API evita un scraper que se rompe con cada rediseño."
+source: https://en.wikipedia.org/wiki/Web_scraping
+related: [web-dom, web-api, fundamentos-parsing]
+updated: 2026-09-29

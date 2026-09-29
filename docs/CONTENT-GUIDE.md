@@ -47,9 +47,17 @@ enseña algo falso.
 lo apruebes" es útil; "para mejorar la seguridad" no.
 
 **`level`**
-- `basico` — lo usas en tu primera semana (`/clear`, `CLAUDE.md`, plan mode).
-- `intermedio` — lo configuras cuando quieres más control (hooks, permisos, subagentes).
-- `avanzado` — SDK, plugins, MCP propio, `settings.json` a fondo.
+- `basico` — lo usas en tu primera semana (`/clear`, `CLAUDE.md`, plan mode; `commit`,
+  variable, `.env`).
+- `intermedio` — lo configuras cuando quieres más control (hooks, permisos, subagentes;
+  `fetch` vs `pull`, async, SQL).
+- `avanzado` — SDK, plugins, MCP propio, `settings.json` a fondo; closures, JWT, CORS.
+
+**Tarjetas de programación general** (ADR 0005): mismas reglas. El `source` es
+documentación pública (MDN, git-scm, docs oficiales, Wikipedia), nunca una página privada.
+Nada específico de otros proyectos —nombres de repos, usuarios, bases de datos—, porque
+el repo es público. Cuando se pueda, conecta la tarjeta con este proyecto o con Claude
+Code en `why` o en `related`: es lo que la vuelve memorable.
 
 **`source`** — Obligatorio. Es lo que permite re-auditar la tarjeta cuando los docs
 cambien, y ya cambiaron una vez (`docs.anthropic.com` → `code.claude.com`).

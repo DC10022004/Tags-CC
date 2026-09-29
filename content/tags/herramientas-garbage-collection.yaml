@@ -1,0 +1,14 @@
+id: herramientas-garbage-collection
+term: Garbage collection
+category: herramientas
+level: avanzado
+summary: "El runtime libera automáticamente la memoria de objetos que ya nadie usa, sin que lo hagas a mano."
+body: |
+  JavaScript, Python y Java lo tienen; C no. Swift usa otro sistema, el conteo de
+  referencias (ARC).
+  La trampa: la memoria solo se libera si ya nada apunta al objeto. Un listener olvidado
+  o una caché que nunca se vacía mantiene objetos vivos: una fuga de memoria aun con GC.
+why: "Explica fugas de memoria en lenguajes 'que gestionan la memoria solos'."
+source: https://developer.mozilla.org/en-US/docs/Web/JavaScript/Guide/Memory_management
+related: [herramientas-runtime, fundamentos-alto-bajo-nivel, algoritmos-heap]
+updated: 2026-09-29

@@ -1,0 +1,16 @@
+id: herramientas-npm
+term: npm y node_modules
+category: herramientas
+level: basico
+summary: "npm descarga las librerías de un proyecto de Node en la carpeta node_modules, que nunca se sube a Git."
+body: |
+  `npm install` lee `package.json` y llena `node_modules/`; `npm run dev` ejecuta un
+  script definido ahí.
+  `node_modules` pesa cientos de MB y se regenera en cualquier momento, por eso va en
+  `.gitignore`. Si algo se comporta raro, borrarla y reinstalar es un arreglo legítimo.
+example: |
+  rm -rf node_modules && npm install
+why: "Borrar node_modules y reinstalar resuelve una sorprendente cantidad de errores extraños."
+source: https://docs.npmjs.com/cli/commands/npm-install
+related: [herramientas-package-json, herramientas-dependencia, git-gitignore]
+updated: 2026-09-29

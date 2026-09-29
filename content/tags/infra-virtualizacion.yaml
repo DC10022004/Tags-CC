@@ -1,0 +1,14 @@
+id: infra-virtualizacion
+term: Virtualización
+category: infra
+level: intermedio
+summary: "Crear máquinas virtuales por software: varios sistemas operativos completos sobre un mismo hardware."
+body: |
+  Cada máquina virtual tiene su propio sistema operativo, así que aísla mejor que un
+  contenedor pero pesa más y arranca más lento.
+  Es la base de la nube: cuando alquilas un servidor, casi siempre es una máquina
+  virtual sobre hardware compartido.
+why: "Explica la diferencia de peso y aislamiento entre una VM y un contenedor."
+source: https://es.wikipedia.org/wiki/Virtualizaci%C3%B3n
+related: [infra-hypervisor, infra-contenedor, infra-cloud]
+updated: 2026-09-29

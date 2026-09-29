@@ -1,0 +1,20 @@
+id: paradigmas-imperativa
+term: Programación imperativa
+category: paradigmas
+level: intermedio
+summary: "Describir paso a paso cómo llegar al resultado, cambiando variables en el camino."
+body: |
+  Un `for` que acumula en una variable es imperativo; un `filter` que describe qué
+  quieres es declarativo. SQL y CSS son declarativos: dices qué, no cómo.
+  Ninguno es mejor siempre. Lo imperativo es más fácil de seguir paso a paso; lo
+  declarativo, más corto y con menos lugares para equivocarse.
+example: |
+  const nums = [1, 2, 3, 4];
+  const paresA = [];
+  for (const n of nums) if (n % 2 === 0) paresA.push(n); // imperativo
+  const paresB = nums.filter((n) => n % 2 === 0);         // declarativo
+  console.log(paresA, paresB);
+why: "Reconocer ambos estilos te deja elegir el más legible para cada caso."
+source: https://en.wikipedia.org/wiki/Imperative_programming
+related: [paradigmas-funcional, fundamentos-bucle]
+updated: 2026-09-29

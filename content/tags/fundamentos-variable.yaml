@@ -1,0 +1,19 @@
+id: fundamentos-variable
+term: Variable
+category: fundamentos
+level: basico
+summary: "Un nombre que apunta a un valor guardado en memoria, para poder leerlo o cambiarlo después."
+body: |
+  En JavaScript: `const` para lo que no se reasigna, `let` para lo que sí. Evita `var`,
+  que tiene reglas de alcance confusas.
+  La trampa: `const` impide reasignar el nombre, no modificar el contenido. Un array
+  declarado con `const` todavía acepta `push`.
+example: |
+  const lista = [1, 2];
+  lista.push(3);        // permitido: cambia el contenido
+  // lista = [9];       // TypeError: no se puede reasignar
+  console.log(lista);   // [ 1, 2, 3 ]
+why: "Entender const vs let evita el error clásico de creer que un objeto const es inmutable."
+source: https://developer.mozilla.org/en-US/docs/Glossary/Variable
+related: [fundamentos-variable-global, fundamentos-inmutable, fundamentos-scope]
+updated: 2026-09-29

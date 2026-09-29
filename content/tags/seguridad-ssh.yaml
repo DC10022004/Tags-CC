@@ -1,0 +1,17 @@
+id: seguridad-ssh
+term: SSH
+category: seguridad
+level: intermedio
+summary: "Protocolo para conectarte de forma cifrada a otra máquina y ejecutar comandos; también autentica Git con GitHub."
+body: |
+  Usa un par de claves: la privada se queda en tu máquina (`~/.ssh/id_ed25519`), la
+  pública la subes al servidor o a GitHub.
+  La trampa: compartir o subir la clave privada. Quien la tenga entra como tú. Solo la
+  que termina en `.pub` se comparte.
+example: |
+  ssh-keygen -t ed25519
+  ssh -T git@github.com
+why: "Con SSH configurado, Git deja de pedirte usuario y contraseña en cada push."
+source: https://docs.github.com/es/authentication/connecting-to-github-with-ssh
+related: [seguridad-encriptacion, git-push, herramientas-shell]
+updated: 2026-09-29

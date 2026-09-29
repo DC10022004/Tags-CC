@@ -1,0 +1,15 @@
+id: git-fast-forward
+term: Fast-forward
+category: git
+level: intermedio
+summary: "Un merge trivial: tu rama no tenía nada propio y solo avanza hasta el commit más nuevo. No hay conflictos."
+body: |
+  Git mueve el puntero de la rama hacia adelante; no crea un commit de merge.
+  `git pull --ff-only` exige este caso y falla si hay divergencia, en vez de crear un
+  merge sin que lo pidas. Es una buena opción por defecto para mantenerte al día.
+example: |
+  git pull --ff-only
+why: "--ff-only garantiza que un pull nunca mezcle nada inesperado en tu rama."
+source: https://git-scm.com/docs/git-merge#_fast_forward_merge
+related: [git-merge, git-pull]
+updated: 2026-09-29

@@ -1,0 +1,14 @@
+id: datos-rpc
+term: RPC (llamada a procedimiento remoto)
+category: datos
+level: avanzado
+summary: "Llamar a una función que vive en otro sistema como si fuera local; en Postgres, una función guardada en la base."
+body: |
+  En Supabase, una función SQL guardada en la base se llama por nombre desde la app con
+  `supabase.rpc("nombre")` y devuelve un resultado ya armado en una sola ida.
+  Ventaja: junta varias consultas en una. La trampa: la lógica queda en la base, fuera del
+  código de la app, y hay que versionarla con migraciones para no perderla de vista.
+why: "Explica por qué parte de la lógica de una app con Supabase puede no estar en el repo de código."
+source: https://supabase.com/docs/reference/javascript/rpc
+related: [datos-migracion, web-api, infra-baas]
+updated: 2026-09-29

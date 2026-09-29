@@ -1,0 +1,17 @@
+id: fundamentos-namespace
+term: Namespace (espacio de nombres)
+category: fundamentos
+level: intermedio
+summary: "Un prefijo que agrupa nombres para que dos cosas llamadas igual no choquen."
+body: |
+  `Math.max` y un `max` tuyo conviven porque uno vive en el namespace `Math`. En Python
+  cada módulo es su propio namespace; en Swift, cada módulo y cada tipo.
+  El `id` de las tarjetas usa la misma idea: `hooks-eventos` y `git-...` no chocan
+  porque el prefijo de categoría actúa como namespace.
+example: |
+  import { join } from "node:path";
+  console.log(join("content", "tags"));  // join de path, no de Array
+why: "Explica por qué importar dos cosas con el mismo nombre rompe, y cómo renombrar al importar."
+source: https://developer.mozilla.org/en-US/docs/Glossary/Namespace
+related: [fundamentos-modulo, fundamentos-scope]
+updated: 2026-09-29

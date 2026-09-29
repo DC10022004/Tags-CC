@@ -1,0 +1,16 @@
+id: git-push
+term: git push
+category: git
+level: basico
+summary: "Sube tus commits locales al remoto; es el paso que hace visibles tus cambios a los demás."
+body: |
+  Si el remoto tiene commits que tú no, Git rechaza el push: primero haz pull.
+  La trampa: `git push --force` sobrescribe el historial remoto y puede borrar trabajo
+  ajeno. Si de verdad hace falta, `--force-with-lease` al menos falla si alguien subió
+  algo que no has visto.
+example: |
+  git push origin mejora-tarjetas
+why: "En este proyecto el push a main es lo que actualiza el widget del iPhone."
+source: https://git-scm.com/docs/git-push
+related: [git-commit, git-pull, git-remote]
+updated: 2026-09-29

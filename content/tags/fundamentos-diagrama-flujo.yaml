@@ -1,0 +1,14 @@
+id: fundamentos-diagrama-flujo
+term: Diagrama de flujo
+category: fundamentos
+level: basico
+summary: "Dibujo de un proceso con cajas y flechas: rombos para decisiones, rectángulos para acciones."
+body: |
+  Muestra por dónde puede ir la ejecución y en qué punto se bifurca. Es útil cuando un
+  proceso tiene muchas decisiones encadenadas y el texto ya no se entiende.
+  Su límite: no escala. Un diagrama con más de una página suele indicar que el proceso
+  debería partirse en funciones más pequeñas, no que falta un diagrama más grande.
+why: "Para ver de un vistazo en qué decisión se rompe un proceso antes de tocar código."
+source: https://es.wikipedia.org/wiki/Diagrama_de_flujo
+related: [fundamentos-pseudocodigo, fundamentos-condicional]
+updated: 2026-09-29

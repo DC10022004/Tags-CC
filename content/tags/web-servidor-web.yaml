@@ -1,0 +1,15 @@
+id: web-servidor-web
+term: Servidor web
+category: web
+level: basico
+summary: "El programa que recibe peticiones HTTP y responde con páginas, archivos o datos."
+body: |
+  Puede servir archivos estáticos (GitHub raw, que entrega el tags.json de este
+  proyecto) o ejecutar código por cada petición (Node, Next.js).
+  "Servidor" nombra tanto al programa como a la máquina que lo corre, lo que confunde.
+example: |
+  npx serve dist
+why: "Distinguir estático de dinámico explica por qué este proyecto no necesita backend."
+source: https://developer.mozilla.org/en-US/docs/Learn_web_development/Howto/Web_mechanics/What_is_a_web_server
+related: [web-http, arquitectura-backend, web-localhost]
+updated: 2026-09-29

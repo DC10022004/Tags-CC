@@ -1,0 +1,16 @@
+id: seguridad-zero-day
+term: Vulnerabilidad zero-day
+category: seguridad
+level: intermedio
+summary: "Un fallo de seguridad que se explota antes de que exista un parche: los defensores tienen 'cero días'."
+body: |
+  No hay actualización que lo arregle todavía, así que la defensa es limitar el daño:
+  mínimos permisos, sandbox, copias de seguridad.
+  La lección práctica: la mayoría de los ataques reales no son zero-days, sino fallos
+  conocidos sin parchear. Mantener dependencias y sistema al día cubre la mayor parte.
+example: |
+  npm audit
+why: "Actualizar a tiempo te protege de casi todo; los zero-days son la excepción, no la regla."
+source: https://en.wikipedia.org/wiki/Zero-day_vulnerability
+related: [herramientas-dependencia, permisos-sandboxing, seguridad-firewall]
+updated: 2026-09-29

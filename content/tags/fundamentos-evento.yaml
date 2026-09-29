@@ -1,0 +1,18 @@
+id: fundamentos-evento
+term: Evento
+category: fundamentos
+level: basico
+summary: "Algo que ocurre (un clic, un desbloqueo, un archivo nuevo) y dispara el código que está escuchando."
+body: |
+  El código registra un "listener" y el sistema lo llama cuando el evento sucede. Es
+  programación dirigida por eventos: el programa espera en vez de preguntar en bucle.
+  La trampa: registrar el mismo listener dos veces hace que todo ocurra dos veces.
+example: |
+  const { EventEmitter } = require("node:events");
+  const bus = new EventEmitter();
+  bus.on("unlock", () => console.log("mostrar tarjeta"));
+  bus.emit("unlock");
+why: "La app de Mac funciona así: escucha el evento de desbloqueo de pantalla para mostrar la tarjeta."
+source: https://developer.mozilla.org/en-US/docs/Web/API/Event
+related: [fundamentos-callback, hooks-eventos]
+updated: 2026-09-29

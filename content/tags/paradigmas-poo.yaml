@@ -1,0 +1,20 @@
+id: paradigmas-poo
+term: Programación orientada a objetos (POO)
+category: paradigmas
+level: intermedio
+summary: "Organiza el código en objetos que juntan datos (atributos) y comportamiento (métodos)."
+body: |
+  Sus cuatro pilares: encapsulación, herencia, polimorfismo y abstracción. Swift, Java y
+  Python la usan mucho.
+  La trampa es sobreusarla: jerarquías de clases profundas para algo que una función
+  resolvía. La POO ordena bien entidades con estado; no todo necesita ser una clase.
+example: |
+  class Tarjeta {
+    constructor(term) { this.term = term; }
+    titulo() { return this.term.toUpperCase(); }
+  }
+  console.log(new Tarjeta("git").titulo()); // "GIT"
+why: "Es el modelo de la app de Mac en Swift: tipos con propiedades y métodos."
+source: https://developer.mozilla.org/en-US/docs/Glossary/OOP
+related: [paradigmas-clase, paradigmas-encapsulacion, paradigmas-funcional]
+updated: 2026-09-29

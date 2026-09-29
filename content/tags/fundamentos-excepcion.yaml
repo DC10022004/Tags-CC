@@ -1,0 +1,19 @@
+id: fundamentos-excepcion
+term: Excepción (exception)
+category: fundamentos
+level: intermedio
+summary: "Un error en tiempo de ejecución que corta el flujo normal hasta que un try/catch lo atrapa."
+body: |
+  Si nadie la atrapa, el programa termina y muestra un stack trace.
+  La trampa es el `catch` vacío: atrapar un error y no hacer nada lo vuelve invisible. Solo
+  atrapa lo que sabes manejar; lo demás, déjalo subir.
+example: |
+  try {
+    JSON.parse("{ roto");
+  } catch (e) {
+    console.error("JSON inválido:", e.message);
+  }
+why: "Un catch que se traga errores es la razón típica de un fallo 'silencioso' imposible de rastrear."
+source: https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Statements/try...catch
+related: [fundamentos-stack-trace, proceso-debugging, fundamentos-null]
+updated: 2026-09-29

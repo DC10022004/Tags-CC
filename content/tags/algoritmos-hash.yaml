@@ -1,0 +1,17 @@
+id: algoritmos-hash
+term: Hash (función hash)
+category: algoritmos
+level: intermedio
+summary: "Convierte datos de cualquier tamaño en un valor de tamaño fijo; la misma entrada da siempre el mismo hash."
+body: |
+  Sirve para buscar rápido (tablas hash), detectar cambios (comparar hashes) y guardar
+  contraseñas.
+  La trampa: un hash no es cifrado. No se "desencripta"; es de una vía. Y no todos sirven
+  para seguridad: FNV-1a, el de este proyecto, se eligió por portabilidad, no por ser
+  criptográfico.
+example: |
+  node -e 'const c=require("node:crypto");console.log(c.createHash("sha256").update("tags-cc").digest("hex"))'
+why: "El manifest usa un hash del contenido para saber si el corpus cambió sin comparar archivo por archivo."
+source: https://developer.mozilla.org/en-US/docs/Glossary/Hash_function
+related: [seguridad-encriptacion, algoritmos-big-o, datos-clave]
+updated: 2026-09-29

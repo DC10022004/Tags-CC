@@ -1,0 +1,14 @@
+id: datos-crud
+term: CRUD
+category: datos
+level: basico
+summary: "Las cuatro operaciones básicas sobre datos: Create, Read, Update, Delete."
+body: |
+  Se mapean directo a SQL (INSERT, SELECT, UPDATE, DELETE) y a HTTP (POST, GET,
+  PUT/PATCH, DELETE).
+  Muchas apps son "solo un CRUD" con pantallas encima. La trampa es el Delete: borrar de
+  verdad es irreversible; muchas apps marcan un campo `borrado_en` (soft delete).
+why: "Pensar en CRUD es la forma más rápida de listar qué pantallas y endpoints necesita una app."
+source: https://developer.mozilla.org/en-US/docs/Glossary/CRUD
+related: [datos-sql, web-rest]
+updated: 2026-09-29

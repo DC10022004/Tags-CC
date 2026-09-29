@@ -1,0 +1,19 @@
+id: fundamentos-tipado-dinamico
+term: Tipado dinámico
+category: fundamentos
+level: intermedio
+summary: "El tipo lo tiene el valor, no la variable, y se comprueba al ejecutar: la misma variable puede cambiar de tipo."
+body: |
+  Python y JavaScript son dinámicos: escribes menos, pero los errores de tipo aparecen
+  en ejecución, a veces en producción.
+  La trampa en JavaScript es la coerción implícita: `"5" + 1` da `"51"` y `"5" - 1` da `4`.
+  TypeScript existe precisamente para añadir tipado estático encima de JavaScript.
+example: |
+  let x = 5;
+  x = "cinco";          // válido: ahora es string
+  console.log("5" + 1); // "51"
+  console.log("5" - 1); // 4
+why: "Explica por qué un bug de tipos en JS o Python no aparece hasta que el código corre."
+source: https://developer.mozilla.org/en-US/docs/Glossary/Dynamic_typing
+related: [fundamentos-tipado-estatico, fundamentos-variable]
+updated: 2026-09-29

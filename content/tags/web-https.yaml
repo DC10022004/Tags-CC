@@ -1,0 +1,15 @@
+id: web-https
+term: HTTPS
+category: web
+level: basico
+summary: "HTTP cifrado con TLS: nadie en el camino puede leer ni alterar lo que viaja entre cliente y servidor."
+body: |
+  El candado del navegador indica que el certificado es válido para ese dominio.
+  La trampa: HTTPS protege el transporte, no el contenido. Un sitio malicioso también
+  puede tener HTTPS. Y cualquier clave enviada por HTTP plano debe darse por expuesta.
+example: |
+  curl -svo /dev/null https://github.com 2>&1 | grep -i "SSL connection"
+why: "Por eso el widget del iPhone lee el corpus por HTTPS: GitHub raw no acepta otra cosa."
+source: https://developer.mozilla.org/en-US/docs/Glossary/HTTPS
+related: [web-http, seguridad-encriptacion]
+updated: 2026-09-29

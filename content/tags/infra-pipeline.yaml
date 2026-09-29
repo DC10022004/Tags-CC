@@ -1,0 +1,16 @@
+id: infra-pipeline
+term: Pipeline de CI/CD
+category: infra
+level: intermedio
+summary: "Una serie de pasos automáticos que corren con cada cambio: instalar, probar, compilar y desplegar."
+body: |
+  CI (integración continua) prueba cada cambio; CD (despliegue continuo) lo publica si
+  todo pasó. En GitHub se escriben como workflows en `.github/workflows/`.
+  La trampa: un pipeline lento o que falla por azar (tests flaky) hace que la gente lo
+  ignore o lo salte, y entonces ya no protege nada.
+example: |
+  gh run list --limit 5
+why: "Con CI, un error que rompe el build se detecta en el PR, no cuando ya está publicado."
+source: https://docs.github.com/es/actions/about-github-actions/about-continuous-integration-with-github-actions
+related: [plataforma-github-actions, infra-devops, proceso-testing]
+updated: 2026-09-29

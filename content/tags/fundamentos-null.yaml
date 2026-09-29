@@ -1,0 +1,17 @@
+id: fundamentos-null
+term: Null
+category: fundamentos
+level: basico
+summary: "Un valor que significa 'aquí no hay nada'; leer una propiedad de null es de los errores más comunes."
+body: |
+  En JavaScript conviven `null` (vacío a propósito) y `undefined` (nunca se asignó).
+  El error típico: `Cannot read properties of null`. Se evita con encadenamiento
+  opcional `?.` y con un valor por defecto `??`.
+  Swift lo resuelve en el tipo: un `String?` obliga a manejar el caso vacío para compilar.
+example: |
+  const usuario = null;
+  console.log(usuario?.nombre ?? "anónimo"); // "anónimo", sin error
+why: "Es la causa más frecuente de 'Cannot read properties of null' en cualquier app JS."
+source: https://developer.mozilla.org/en-US/docs/Glossary/Null
+related: [fundamentos-booleano, fundamentos-excepcion]
+updated: 2026-09-29

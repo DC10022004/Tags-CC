@@ -1,0 +1,13 @@
+id: infra-saas
+term: SaaS (Software as a Service)
+category: infra
+level: basico
+summary: "Software que usas por internet con una suscripción, sin instalar ni mantener nada: Notion, Gmail, Slack."
+body: |
+  El proveedor se encarga de servidores, actualizaciones y copias de seguridad.
+  La trampa: tus datos viven en su plataforma. Antes de depender de un SaaS, revisa si
+  puedes exportar tus datos en un formato útil y qué pasa si cierra o sube el precio.
+why: "Para evaluar el costo de salida antes de construir un flujo encima de un servicio."
+source: https://es.wikipedia.org/wiki/Software_como_servicio
+related: [infra-cloud, infra-paas]
+updated: 2026-09-29

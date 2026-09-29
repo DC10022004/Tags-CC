@@ -1,0 +1,16 @@
+id: herramientas-dependencia
+term: Dependencia
+category: herramientas
+level: basico
+summary: "Una librería externa que tu proyecto necesita para funcionar, declarada en un archivo como package.json."
+body: |
+  Cada dependencia trae a su vez las suyas (dependencias transitivas): instalar una puede
+  bajar cientos.
+  La trampa: versiones sueltas. El lockfile (`package-lock.json`) fija las versiones
+  exactas para que todos instalen lo mismo; se commitea siempre.
+example: |
+  npm ls --depth=0
+why: "Commitear el lockfile evita que el proyecto se rompa solo por una actualización ajena."
+source: https://docs.npmjs.com/cli/configuring-npm/package-lock-json
+related: [herramientas-npm, herramientas-package-json, herramientas-biblioteca]
+updated: 2026-09-29

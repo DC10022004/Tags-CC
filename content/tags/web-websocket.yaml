@@ -1,0 +1,18 @@
+id: web-websocket
+term: WebSocket
+category: web
+level: avanzado
+summary: "Una conexión que queda abierta para que cliente y servidor se envíen mensajes en ambos sentidos al instante."
+body: |
+  HTTP es pedir-responder; con WebSocket el servidor puede enviar datos sin que se los
+  pidan. Es la base de chats, notificaciones en vivo y colaboración en tiempo real.
+  La trampa: las conexiones se caen (red móvil, suspensión). Hay que reconectar y
+  recuperar lo que se perdió mientras tanto.
+example: |
+  const ws = new WebSocket("wss://echo.websocket.org");
+  ws.onmessage = (e) => { console.log(e.data); if (e.data === "hola") ws.close(); };
+  ws.onopen = () => ws.send("hola");
+why: "Para saber cuándo necesitas tiempo real de verdad y cuándo basta con consultar cada tanto."
+source: https://developer.mozilla.org/en-US/docs/Web/API/WebSockets_API
+related: [web-http, arquitectura-latencia]
+updated: 2026-09-29

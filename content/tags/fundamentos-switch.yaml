@@ -1,0 +1,17 @@
+id: fundamentos-switch
+term: Switch
+category: fundamentos
+level: basico
+summary: "Elige un bloque según el valor exacto de una expresión; alternativa a muchos if sobre la misma variable."
+body: |
+  Compara con `===` contra cada `case`.
+  La trampa en JavaScript y C: sin `break`, la ejecución "cae" al siguiente `case`
+  (fall-through). Swift no tiene ese problema y además exige cubrir todos los casos.
+  Para mapear valor a resultado, un objeto de consulta suele ser más corto que un switch.
+example: |
+  const color = { basico: "verde", intermedio: "ámbar", avanzado: "rojo" };
+  console.log(color["intermedio"]); // "ámbar", sin switch
+why: "Olvidar un break produce un bug silencioso: se ejecutan dos ramas en vez de una."
+source: https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Statements/switch
+related: [fundamentos-condicional]
+updated: 2026-09-29

@@ -1,0 +1,14 @@
+id: ia-machine-learning
+term: Machine learning
+category: ia
+level: intermedio
+summary: "Programas que aprenden patrones a partir de datos de ejemplo en vez de seguir reglas escritas a mano."
+body: |
+  En lugar de programar "si el correo tiene X es spam", se le muestran miles de correos
+  etiquetados y el modelo deduce las reglas.
+  La trampa: el modelo aprende lo que hay en los datos, incluidos sus sesgos y errores. Si
+  los datos de entrenamiento no se parecen a los reales, falla sin avisar.
+why: "Para saber cuándo un problema necesita un modelo y cuándo bastan unas pocas reglas claras."
+source: https://en.wikipedia.org/wiki/Machine_learning
+related: [ia-llm, ia-data-science]
+updated: 2026-09-29

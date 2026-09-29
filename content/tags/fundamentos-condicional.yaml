@@ -1,0 +1,21 @@
+id: fundamentos-condicional
+term: Condicional (if / else)
+category: fundamentos
+level: basico
+summary: "Ejecuta un bloque u otro según si una condición es verdadera; es cómo un programa toma decisiones."
+body: |
+  `if`, `else if` y `else` evalúan en orden y se quedan con la primera rama verdadera.
+  La trampa es el orden: si pones primero la condición más general, las específicas
+  nunca se alcanzan.
+  Las "guard clauses" (salir temprano con `return`) evitan pirámides de `if` anidados.
+example: |
+  function nivel(n) {
+    if (n >= 90) return "avanzado";
+    if (n >= 50) return "intermedio";
+    return "basico";
+  }
+  console.log(nivel(70)); // "intermedio"
+why: "Salir temprano con return hace que el código que lees tenga una sola ruta principal."
+source: https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Statements/if...else
+related: [fundamentos-switch, fundamentos-booleano, fundamentos-nested]
+updated: 2026-09-29

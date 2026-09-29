@@ -1,0 +1,16 @@
+id: web-nextjs
+term: Next.js
+category: web
+level: intermedio
+summary: "Framework de React que junta frontend y backend en un solo proyecto, con rutas definidas por carpetas."
+body: |
+  Cada carpeta dentro de `app/` es una ruta; un archivo `route.ts` crea un endpoint de
+  API. Decide por página si se renderiza en el servidor o en el navegador.
+  La trampa: saber de qué lado corre cada archivo. Los secretos solo pueden usarse en
+  código de servidor; una variable con prefijo `NEXT_PUBLIC_` termina en el navegador.
+example: |
+  npx create-next-app@latest mi-app && cd mi-app && npm run dev
+why: "Un NEXT_PUBLIC_ en una clave secreta la publica a cualquiera que abra la página."
+source: https://nextjs.org/docs
+related: [herramientas-framework, web-renderizado, seguridad-secreto]
+updated: 2026-09-29

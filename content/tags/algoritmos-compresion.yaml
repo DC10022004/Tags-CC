@@ -1,0 +1,16 @@
+id: algoritmos-compresion
+term: Compresión de datos (zip)
+category: algoritmos
+level: basico
+summary: "Reduce el tamaño de un archivo; sin pérdida (zip, gzip) se recupera exacto, con pérdida (JPEG, MP3) no."
+body: |
+  La compresión sin pérdida busca patrones repetidos; por eso el texto comprime muy bien
+  y un archivo ya comprimido casi no se achica.
+  `zip` agrupa y comprime varios archivos en uno. Los servidores web comprimen con gzip o
+  brotli al vuelo para enviar menos datos.
+example: |
+  zip -r respaldo.zip content/ && unzip -l respaldo.zip | tail -1
+why: "Para saber cuándo comprimir sirve (texto, JSON) y cuándo es inútil (fotos, videos)."
+source: https://es.wikipedia.org/wiki/Compresi%C3%B3n_de_datos
+related: [fundamentos-binario-bit]
+updated: 2026-09-29

@@ -1,0 +1,14 @@
+id: proceso-portar
+term: Portar (port)
+category: proceso
+level: intermedio
+summary: "Reescribir algo que funciona en una tecnología para que funcione igual en otra, sin cambiar lo que hace."
+body: |
+  Por ejemplo, llevar un prototipo hecho con Vite y Express a Next.js.
+  La trampa: aprovechar el port para cambiar comportamiento. Si al terminar algo funciona
+  distinto, no sabes si es un bug del port o un cambio deseado. Primero se porta igual y
+  después se mejora.
+why: "Portar primero y mejorar después permite comparar el resultado con el original."
+source: https://en.wikipedia.org/wiki/Porting
+related: [proceso-refactorizacion, proceso-wireframe]
+updated: 2026-09-29

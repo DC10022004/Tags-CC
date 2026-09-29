@@ -1,0 +1,16 @@
+id: proceso-debugging
+term: Depuración (debugging)
+category: proceso
+level: intermedio
+summary: "Encontrar la causa de un bug: reproducirlo, aislar dónde falla y confirmar el arreglo."
+body: |
+  El paso más importante es reproducirlo de forma confiable; un bug que no puedes
+  provocar no puedes confirmar que lo arreglaste.
+  Luego se divide el problema a la mitad hasta acorralarlo: con logs, un depurador o
+  `git bisect`, que busca el commit exacto que lo introdujo.
+example: |
+  git bisect start && git bisect bad && git bisect good HEAD~10
+why: "git bisect encuentra el commit culpable entre cientos en unos pocos pasos."
+source: https://git-scm.com/docs/git-bisect
+related: [proceso-bug, fundamentos-stack-trace, workflow-verification-loop]
+updated: 2026-09-29

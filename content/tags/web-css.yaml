@@ -1,0 +1,17 @@
+id: web-css
+term: CSS
+category: web
+level: basico
+summary: "El lenguaje que define cómo se ve el HTML: colores, tipografía, espaciado y distribución."
+body: |
+  "Cascading" significa que varias reglas pueden aplicar al mismo elemento y gana la más
+  específica o la última.
+  La trampa: cuando un estilo "no se aplica", casi siempre otra regla más específica lo
+  está pisando. El inspector del navegador muestra cuál gana y cuáles quedaron tachadas.
+example: |
+  .card { padding: 16px; border-radius: 12px; }
+  .card.destacada { border: 2px solid orange; }
+why: "Entender la cascada evita llenar el CSS de !important para forzar estilos."
+source: https://developer.mozilla.org/en-US/docs/Web/CSS
+related: [web-html, web-z-index]
+updated: 2026-09-29

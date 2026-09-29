@@ -1,0 +1,17 @@
+id: herramientas-variable-entorno
+term: Variable de entorno
+category: herramientas
+level: basico
+summary: "Un dato de configuración que el programa lee del sistema en vez de tenerlo escrito en el código."
+body: |
+  Así el mismo código usa una base de pruebas en tu máquina y la real en producción.
+  Se leen con `process.env.NOMBRE` en Node o `os.environ` en Python.
+  La trampa: una variable exportada en una terminal solo existe en esa terminal. Abrir
+  otra ventana o reiniciar la pierde.
+example: |
+  export MODO=pruebas
+  node -e 'console.log(process.env.MODO)'
+why: "Separa configuración y secretos del código, para no tener que editarlo en cada entorno."
+source: https://12factor.net/es/config
+related: [seguridad-env-file, configuracion-env-vars, seguridad-secreto]
+updated: 2026-09-29

@@ -1,0 +1,17 @@
+id: git-conflicto
+term: Conflicto de merge
+category: git
+level: intermedio
+summary: "Ocurre cuando dos ramas cambiaron las mismas líneas y Git no sabe cuál conservar; se resuelve a mano."
+body: |
+  Git marca el archivo con `<<<<<<<`, `=======` y `>>>>>>>`: arriba tu versión, abajo
+  la otra. Editas, dejas lo correcto, borras las marcas y haces commit.
+  La trampa: aceptar "la mía" o "la de ellos" en bloque sin leer. Muchas veces la
+  respuesta correcta combina ambas.
+example: |
+  git diff --name-only --diff-filter=U
+  git merge --abort   # si prefieres volver atrás
+why: "Saber que git merge --abort existe quita el miedo: un conflicto siempre tiene salida."
+source: https://git-scm.com/docs/git-merge#_how_conflicts_are_presented
+related: [git-merge, git-pull]
+updated: 2026-09-29

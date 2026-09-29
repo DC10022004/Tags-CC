@@ -1,0 +1,17 @@
+id: web-graphql
+term: GraphQL
+category: web
+level: avanzado
+summary: "Un lenguaje de consulta para APIs donde el cliente pide exactamente los campos que necesita, en un solo endpoint."
+body: |
+  Resuelve el problema de REST de traer datos de más o tener que hacer varias peticiones.
+  El costo: más complejidad en el servidor, y la caché HTTP normal deja de servir porque
+  todo va por POST al mismo endpoint. Para APIs simples, REST suele bastar.
+example: |
+  query {
+    repository(owner: "git", name: "git") { stargazerCount }
+  }
+why: "Para reconocer cuándo una API te obliga a GraphQL (como la v4 de GitHub) y cómo se consulta."
+source: https://graphql.org/learn/
+related: [web-rest, web-api, datos-query]
+updated: 2026-09-29

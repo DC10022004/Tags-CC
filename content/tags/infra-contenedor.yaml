@@ -1,0 +1,17 @@
+id: infra-contenedor
+term: Contenedor (container)
+category: infra
+level: intermedio
+summary: "Un paquete con tu app y todas sus dependencias que corre igual en cualquier máquina; Docker es el más conocido."
+body: |
+  Resuelve el "en mi máquina funciona": el contenedor lleva consigo las versiones exactas
+  de todo lo que necesita.
+  A diferencia de una máquina virtual, comparte el kernel del sistema anfitrión, así que
+  arranca en segundos y ocupa menos. La trampa: sin un volumen, lo que escribes dentro se
+  pierde al borrarlo.
+example: |
+  docker run --rm node:22 node -e 'console.log(process.version)'
+why: "Garantiza que el entorno de producción sea idéntico al de desarrollo."
+source: https://docs.docker.com/get-started/docker-concepts/the-basics/what-is-a-container/
+related: [infra-virtualizacion, herramientas-kernel, infra-deployment]
+updated: 2026-09-29

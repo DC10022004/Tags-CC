@@ -1,0 +1,13 @@
+id: arquitectura-fullstack
+term: Fullstack
+category: arquitectura
+level: basico
+summary: "Quien trabaja (o el framework que cubre) frontend y backend a la vez."
+body: |
+  Frameworks como Next.js son fullstack: un solo proyecto tiene pantallas y endpoints.
+  La ventaja es moverse rápido. La trampa es perder de vista en qué lado corre cada
+  pieza, y terminar con un secreto en código que llega al navegador.
+why: "En un proyecto fullstack, preguntarse '¿esto corre en servidor o en navegador?' evita fugas."
+source: https://en.wikipedia.org/wiki/Solution_stack
+related: [arquitectura-frontend, arquitectura-backend, web-nextjs]
+updated: 2026-09-29

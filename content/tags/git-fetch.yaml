@@ -1,0 +1,17 @@
+id: git-fetch
+term: git fetch
+category: git
+level: intermedio
+summary: "Descarga los cambios nuevos del remoto sin aplicarlos a tus archivos: solo mira qué hay."
+body: |
+  Actualiza `origin/main` pero deja tu rama y tus archivos intactos. Es seguro de correr
+  siempre.
+  Después puedes comparar antes de decidir: `git log main..origin/main` muestra lo que
+  llegó y todavía no tienes.
+example: |
+  git fetch
+  git log --oneline main..origin/main
+why: "Te deja ver qué cambió tu compañero antes de mezclarlo con tu trabajo."
+source: https://git-scm.com/docs/git-fetch
+related: [git-pull, git-remote, git-merge]
+updated: 2026-09-29

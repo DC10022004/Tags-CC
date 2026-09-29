@@ -1,0 +1,14 @@
+id: herramientas-jvm
+term: JVM (Java Virtual Machine)
+category: herramientas
+level: avanzado
+summary: "El runtime que ejecuta bytecode de Java o Kotlin; permite que el mismo programa corra en cualquier sistema."
+body: |
+  El compilador de Java no genera código para un procesador concreto, sino bytecode, y
+  la JVM de cada sistema lo ejecuta (con JIT).
+  "Escribe una vez, corre en cualquier lado" era la promesa. El costo es un arranque más
+  lento y más memoria que un binario nativo.
+why: "Completa el mapa de runtimes: Node para JS, JVM para Java y Kotlin, nativo para Swift."
+source: https://es.wikipedia.org/wiki/M%C3%A1quina_virtual_Java
+related: [herramientas-runtime, herramientas-jit]
+updated: 2026-09-29

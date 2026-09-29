@@ -1,0 +1,17 @@
+id: algoritmos-stack-overflow
+term: Stack overflow (desbordamiento)
+category: algoritmos
+level: intermedio
+summary: "Error que ocurre cuando la pila de llamadas se llena, casi siempre por una recursión sin fin."
+body: |
+  Cada llamada ocupa espacio en la pila; si una función se llama a sí misma sin llegar
+  nunca al caso base, el espacio se agota y el programa cae.
+  En JavaScript aparece como `RangeError: Maximum call stack size exceeded`. La solución
+  es arreglar el caso base, no agrandar la pila.
+example: |
+  function infinita() { return infinita(); }
+  try { infinita(); } catch (e) { console.log(e.message); }
+why: "Si ves 'Maximum call stack size exceeded', busca una función que se llama a sí misma."
+source: https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Errors/Too_much_recursion
+related: [fundamentos-recursion, algoritmos-pila]
+updated: 2026-09-29

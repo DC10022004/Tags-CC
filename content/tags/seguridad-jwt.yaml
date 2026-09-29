@@ -1,0 +1,15 @@
+id: seguridad-jwt
+term: JWT (JSON Web Token)
+category: seguridad
+level: avanzado
+summary: "Un token firmado que lleva datos dentro (quién eres, cuándo expira); el servidor lo verifica sin consultar una base."
+body: |
+  Tiene tres partes separadas por puntos: cabecera, datos y firma.
+  La trampa: los datos van codificados en base64, no cifrados. Cualquiera puede leerlos;
+  la firma solo impide que los modifiquen. Nunca pongas secretos dentro de un JWT.
+example: |
+  echo 'eyJzdWIiOiIxMjMifQ==' | base64 -d
+why: "Saber que un JWT se puede leer evita meter datos sensibles en él."
+source: https://datatracker.ietf.org/doc/html/rfc7519
+related: [seguridad-token, seguridad-oauth]
+updated: 2026-09-29

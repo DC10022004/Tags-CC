@@ -1,0 +1,18 @@
+id: algoritmos-buffer
+term: Buffer
+category: algoritmos
+level: intermedio
+summary: "Un espacio temporal de memoria donde se acumulan datos mientras pasan de un lado a otro."
+body: |
+  Escribir de a un byte es lento; juntar datos en un buffer y enviarlos en bloque es
+  mucho más eficiente.
+  La trampa: la salida puede quedarse en el buffer sin mostrarse. Por eso un script que
+  termina abruptamente a veces no imprime sus últimos mensajes.
+example: |
+  const b = Buffer.from("hola", "utf8");
+  console.log(b);            // <Buffer 68 6f 6c 61>
+  console.log(b.toString()); // "hola"
+why: "Explica por qué los logs aparecen tarde o incompletos cuando un proceso se cae."
+source: https://es.wikipedia.org/wiki/B%C3%BAfer_de_datos
+related: [fundamentos-entrada-salida, arquitectura-cache]
+updated: 2026-09-29

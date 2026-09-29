@@ -1,0 +1,16 @@
+id: web-cookie-sesion
+term: Cookie de sesión
+category: web
+level: intermedio
+summary: "Un dato que el navegador guarda al iniciar sesión y reenvía en cada petición para que el servidor te reconozca."
+body: |
+  Como HTTP no recuerda nada entre peticiones, la cookie es la memoria de "ya entraste".
+  Flags clave: `HttpOnly` (JavaScript no puede leerla), `Secure` (solo por HTTPS) y
+  `SameSite` (no se envía desde otros sitios).
+  La trampa: una cookie de sesión robada equivale a la contraseña mientras siga vigente.
+example: |
+  Set-Cookie: sesion=abc123; HttpOnly; Secure; SameSite=Lax; Max-Age=86400
+why: "Las flags HttpOnly y Secure son la diferencia entre una sesión robable y una protegida."
+source: https://developer.mozilla.org/en-US/docs/Web/HTTP/Cookies
+related: [web-http, seguridad-token, seguridad-jwt]
+updated: 2026-09-29

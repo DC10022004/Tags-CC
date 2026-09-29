@@ -1,0 +1,17 @@
+id: web-url
+term: URL
+category: web
+level: basico
+summary: "La dirección de un recurso: protocolo, dominio, ruta y, opcionalmente, parámetros y fragmento."
+body: |
+  En `https://code.claude.com/docs/en/hooks?x=1#matchers`: `https` es el protocolo,
+  `code.claude.com` el dominio, `/docs/en/hooks` la ruta, `?x=1` la query string y
+  `#matchers` el fragmento, que nunca se envía al servidor.
+  La trampa: los espacios y acentos deben codificarse (`%20`, `%C3%B1`).
+example: |
+  const u = new URL("https://code.claude.com/docs/en/hooks?x=1#matchers");
+  console.log(u.hostname, u.pathname, u.searchParams.get("x"), u.hash);
+why: "Este proyecto tuvo un bug real por una ruta con espacio que quedó como 'Tags%20CC'."
+source: https://developer.mozilla.org/en-US/docs/Learn_web_development/Howto/Web_mechanics/What_is_a_URL
+related: [web-query-string, web-http, web-endpoint]
+updated: 2026-09-29

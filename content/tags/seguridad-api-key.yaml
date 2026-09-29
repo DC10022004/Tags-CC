@@ -1,0 +1,16 @@
+id: seguridad-api-key
+term: API key (clave de API)
+category: seguridad
+level: basico
+summary: "Una contraseña larga que identifica tu cuenta ante un servicio; quien la tenga puede usarlo y cobrarte a ti."
+body: |
+  Se envía en una cabecera HTTP, como `x-api-key` o `Authorization: Bearer ...`.
+  La trampa: ponerla en código que corre en el navegador o en una app. Cualquiera puede
+  extraerla. Las llamadas con clave secreta se hacen desde el servidor.
+example: |
+  curl -s https://api.anthropic.com/v1/models \
+    -H "x-api-key: $ANTHROPIC_API_KEY" -H "anthropic-version: 2023-06-01" | head -c 200
+why: "Una clave expuesta en el frontend puede generar cargos en tu cuenta en cuestión de horas."
+source: https://en.wikipedia.org/wiki/API_key
+related: [seguridad-secreto, seguridad-env-file, web-api]
+updated: 2026-09-29

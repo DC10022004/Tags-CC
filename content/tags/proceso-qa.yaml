@@ -1,0 +1,13 @@
+id: proceso-qa
+term: QA (aseguramiento de calidad)
+category: proceso
+level: intermedio
+summary: "El proceso de asegurar que el software cumple lo esperado antes de llegar al usuario, no solo testear al final."
+body: |
+  Incluye criterios de aceptación claros, pruebas automáticas y manuales, y revisión.
+  La lección de este proyecto: dos defectos de la tarjeta de Mac aparecieron al mirar la
+  pantalla, no el código. Algunas cosas solo se verifican usando el producto de verdad.
+why: "Recuerda que 'los tests pasan' no es lo mismo que 'funciona para el usuario'."
+source: https://en.wikipedia.org/wiki/Software_quality_assurance
+related: [proceso-testing, proceso-code-review, workflow-verification-loop]
+updated: 2026-09-29

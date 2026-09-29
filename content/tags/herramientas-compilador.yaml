@@ -1,0 +1,16 @@
+id: herramientas-compilador
+term: Compilador
+category: herramientas
+level: intermedio
+summary: "Programa que traduce código fuente a código máquina (o a otro lenguaje) antes de ejecutarlo."
+body: |
+  `swiftc` compila el Swift de la app de Mac; `tsc` compila TypeScript a JavaScript.
+  Un intérprete, en cambio, ejecuta el código directamente, línea a línea.
+  La ventaja del compilador: detecta errores de tipos y sintaxis antes de que el programa
+  corra. Sus mensajes de error suelen señalar la línea exacta.
+example: |
+  echo 'print("hola")' > hola.swift && swiftc hola.swift -o hola && ./hola
+why: "Leer el primer error del compilador, no el último, suele resolver los demás en cadena."
+source: https://es.wikipedia.org/wiki/Compilador
+related: [herramientas-compilacion, herramientas-jit, fundamentos-tipado-estatico]
+updated: 2026-09-29

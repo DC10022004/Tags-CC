@@ -1,0 +1,13 @@
+id: ia-data-mining
+term: Data mining (minería de datos)
+category: ia
+level: avanzado
+summary: "Buscar patrones ocultos en grandes volúmenes de datos: grupos, asociaciones, anomalías."
+body: |
+  El ejemplo clásico: descubrir qué productos se compran juntos para ubicarlos cerca.
+  La trampa: con suficientes datos y suficientes pruebas, siempre aparece algún patrón
+  por pura casualidad. Un patrón descubierto es una hipótesis, no una conclusión.
+why: "Recordar que un patrón en los datos necesita confirmarse antes de actuar sobre él."
+source: https://es.wikipedia.org/wiki/Miner%C3%ADa_de_datos
+related: [ia-data-science, ia-big-data]
+updated: 2026-09-29

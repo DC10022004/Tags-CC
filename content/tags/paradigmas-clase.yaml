@@ -1,0 +1,21 @@
+id: paradigmas-clase
+term: Clase
+category: paradigmas
+level: intermedio
+summary: "El molde que define qué atributos y métodos tendrán los objetos creados a partir de ella."
+body: |
+  La clase no es el objeto: `Tarjeta` es el molde, cada tarjeta concreta es una instancia.
+  En Swift conviene distinguir `class` (se comparte por referencia) de `struct` (se copia
+  al asignarse). Elegir mal produce cambios que aparecen donde no los esperabas.
+example: |
+  class Contador {
+    n = 0;
+    sumar() { this.n++; return this.n; }
+  }
+  const c = new Contador();
+  c.sumar();
+  console.log(c.sumar()); // 2
+why: "Leer una clase te dice qué puede hacer cada objeto de ese tipo sin buscarlos uno por uno."
+source: https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Classes
+related: [paradigmas-objeto-instancia, paradigmas-constructor, paradigmas-herencia]
+updated: 2026-09-29

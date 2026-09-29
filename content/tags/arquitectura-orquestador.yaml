@@ -1,0 +1,14 @@
+id: arquitectura-orquestador
+term: Orquestador
+category: arquitectura
+level: avanzado
+summary: "La pieza que recibe una petición y decide qué herramienta o agente la resuelve; no hace el trabajo, lo reparte."
+body: |
+  En sistemas con IA, el orquestador interpreta lo que pide el usuario y activa la
+  herramienta o subagente correcto.
+  La trampa: meter lógica de negocio en el orquestador. Si empieza a hacer el trabajo en
+  vez de delegarlo, se vuelve el lugar donde todo se enreda.
+why: "Es el rol del agente principal de Claude Code cuando delega en subagentes."
+source: https://en.wikipedia.org/wiki/Orchestration_(computing)
+related: [subagentes-subagent, arquitectura-microservicios]
+updated: 2026-09-29

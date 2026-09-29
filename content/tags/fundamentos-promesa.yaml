@@ -1,0 +1,20 @@
+id: fundamentos-promesa
+term: Promesa (Promise) y async/await
+category: fundamentos
+level: intermedio
+summary: "Un objeto que representa un resultado futuro: se cumple con un valor o se rechaza con un error."
+body: |
+  `async/await` es la forma legible de usarlas: `await` pausa la función hasta que la
+  promesa se resuelve, sin bloquear el resto del programa.
+  La trampa: una promesa rechazada sin `catch` (o sin try/catch alrededor del `await`)
+  produce un "unhandled rejection" que en Node puede terminar el proceso.
+example: |
+  async function main() {
+    const r = await fetch("https://code.claude.com/docs/en/hooks.md");
+    console.log(r.status);
+  }
+  main().catch(console.error);
+why: "fetch, lectura de archivos y casi toda la I/O moderna en JS devuelven promesas."
+source: https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Promise
+related: [fundamentos-sincrono-asincrono, fundamentos-callback, fundamentos-excepcion]
+updated: 2026-09-29

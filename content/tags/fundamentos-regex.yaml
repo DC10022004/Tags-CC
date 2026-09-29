@@ -1,0 +1,18 @@
+id: fundamentos-regex
+term: Expresión regular (regex)
+category: fundamentos
+level: intermedio
+summary: "Un patrón de texto para buscar, validar o reemplazar: ^\\d{4}-\\d{2}-\\d{2}$ reconoce una fecha AAAA-MM-DD."
+body: |
+  `^` y `$` anclan inicio y fin; `\d` es un dígito; `+` es uno o más; `[a-z]` es un rango.
+  La trampa: olvidar las anclas. Sin `^...$`, el patrón acepta cualquier texto que
+  *contenga* una coincidencia, no que *sea* una. Y las regex complejas son ilegibles:
+  coméntalas o pártelas.
+example: |
+  const esFecha = /^\d{4}-\d{2}-\d{2}$/;
+  console.log(esFecha.test("2026-09-29"));  // true
+  console.log(esFecha.test("x2026-09-29")); // false
+why: "validate.mjs usa regex para revisar ids y fechas; sin anclas dejaría pasar basura."
+source: https://developer.mozilla.org/en-US/docs/Web/JavaScript/Guide/Regular_expressions
+related: [fundamentos-parsing]
+updated: 2026-09-29

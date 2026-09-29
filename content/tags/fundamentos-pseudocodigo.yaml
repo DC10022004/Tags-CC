@@ -1,0 +1,19 @@
+id: fundamentos-pseudocodigo
+term: Pseudocódigo
+category: fundamentos
+level: basico
+summary: "Describir un algoritmo con palabras y estructura de código, sin atarse a la sintaxis de un lenguaje."
+body: |
+  Sirve para pensar antes de escribir: `si`, `mientras`, `para cada` y pasos numerados.
+  Nadie lo ejecuta, así que no hay errores de sintaxis que distraigan de la lógica.
+  La trampa es saltárselo en problemas con varios casos: los errores de lógica que
+  encuentras en pseudocódigo cuestan minutos; en código ya escrito, horas.
+example: |
+  para cada tarjeta en el corpus:
+      si su summary pasa de 120 caracteres:
+          marcar error
+  si hay errores: detener el build
+why: "Es un buen formato para explicarle a Claude qué quieres antes de que escriba código."
+source: https://es.wikipedia.org/wiki/Pseudoc%C3%B3digo
+related: [fundamentos-algoritmo, fundamentos-diagrama-flujo]
+updated: 2026-09-29

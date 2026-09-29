@@ -1,0 +1,17 @@
+id: git-gitignore
+term: .gitignore
+category: git
+level: basico
+summary: "Archivo con la lista de rutas que Git debe ignorar y nunca subir: .env, node_modules, builds."
+body: |
+  Cada línea es un patrón: `.env*`, `node_modules/`, `*.log`.
+  La trampa: `.gitignore` no afecta a archivos que ya están en el repo. Si un `.env` ya
+  se commiteó, agregarlo después no lo saca; hay que quitarlo con `git rm --cached` y
+  rotar el secreto.
+example: |
+  echo ".env*" >> .gitignore
+  git check-ignore -v .env.local
+why: "Es la primera barrera para no publicar claves; git check-ignore confirma que funciona."
+source: https://git-scm.com/docs/gitignore
+related: [seguridad-env-file, seguridad-secreto, git-status]
+updated: 2026-09-29

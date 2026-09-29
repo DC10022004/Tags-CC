@@ -1,0 +1,17 @@
+id: algoritmos-cola
+term: Cola (queue) y FIFO
+category: algoritmos
+level: intermedio
+summary: "Estructura FIFO: el primero en entrar es el primero en salir, como la fila de un banco."
+body: |
+  Se usa para procesar trabajo en orden de llegada: tareas pendientes, mensajes, eventos.
+  La trampa en JavaScript: `shift()` en un array grande es O(n) porque reacomoda todos los
+  elementos. Para colas grandes conviene un índice de lectura o una estructura dedicada.
+example: |
+  const cola = [];
+  cola.push("tarea1"); cola.push("tarea2");
+  console.log(cola.shift()); // "tarea1": sale la primera en entrar
+why: "Los sistemas de procesamiento en segundo plano son colas; FIFO garantiza el orden de llegada."
+source: https://es.wikipedia.org/wiki/Cola_(inform%C3%A1tica)
+related: [algoritmos-pila, arquitectura-batch-processing]
+updated: 2026-09-29

@@ -1,0 +1,19 @@
+id: fundamentos-modulo
+term: Módulo
+category: fundamentos
+level: basico
+summary: "Un archivo de código que expone solo lo que exporta; el resto queda privado."
+body: |
+  En JavaScript moderno se usa `export` e `import` (ES modules, archivos `.mjs` en este
+  proyecto). En Python, cada archivo `.py` es un módulo.
+  La trampa: dos módulos que se importan entre sí (dependencia circular) pueden recibir
+  valores `undefined` porque uno todavía no terminó de cargarse.
+example: |
+  // lib.mjs
+  export const SUMMARY_MAX = 120;
+  // validate.mjs
+  import { SUMMARY_MAX } from "./lib.mjs";
+why: "pipeline/lib.mjs es un módulo compartido: así build y validate usan las mismas reglas."
+source: https://developer.mozilla.org/en-US/docs/Web/JavaScript/Guide/Modules
+related: [fundamentos-namespace, herramientas-biblioteca, paradigmas-encapsulacion]
+updated: 2026-09-29

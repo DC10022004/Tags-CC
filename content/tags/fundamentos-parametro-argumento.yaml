@@ -1,0 +1,18 @@
+id: fundamentos-parametro-argumento
+term: Parámetro vs argumento
+category: fundamentos
+level: basico
+summary: "El parámetro es el nombre en la definición de la función; el argumento es el valor que pasas al llamarla."
+body: |
+  En `function area(ancho, alto)`, `ancho` y `alto` son parámetros. En `area(3, 4)`,
+  `3` y `4` son argumentos.
+  La trampa en JavaScript: si pasas menos argumentos, el parámetro que falta vale
+  `undefined` sin error. Un valor por defecto lo evita.
+example: |
+  function area(ancho, alto = 1) { return ancho * alto; }
+  console.log(area(3, 4)); // 12
+  console.log(area(3));    // 3, alto usa el valor por defecto
+why: "Entender el vocabulario ayuda a leer mensajes de error como 'expected 2 arguments'."
+source: https://developer.mozilla.org/en-US/docs/Glossary/Parameter
+related: [fundamentos-funcion, fundamentos-return]
+updated: 2026-09-29

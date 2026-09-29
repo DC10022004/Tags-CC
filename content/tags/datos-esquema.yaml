@@ -1,0 +1,14 @@
+id: datos-esquema
+term: Esquema (schema)
+category: datos
+level: intermedio
+summary: "La definición de cómo se organizan los datos: qué tablas o campos hay, de qué tipo y con qué reglas."
+body: |
+  En una base de datos son las tablas, columnas, tipos y relaciones. En este proyecto,
+  el SDD define el schema de cada tarjeta y `validate.mjs` lo hace cumplir.
+  La trampa: cambiar un esquema con datos existentes. Renombrar un campo rompe a todo lo
+  que lo lee; por eso los cambios de esquema van en migraciones.
+why: "Un esquema validado convierte errores de datos en errores de build, antes de llegar al usuario."
+source: https://en.wikipedia.org/wiki/Database_schema
+related: [datos-migracion, datos-base-datos, datos-normalizacion]
+updated: 2026-09-29

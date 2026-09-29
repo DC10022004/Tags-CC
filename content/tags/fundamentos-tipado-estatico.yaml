@@ -1,0 +1,18 @@
+id: fundamentos-tipado-estatico
+term: Tipado estático
+category: fundamentos
+level: intermedio
+summary: "Cada variable tiene un tipo fijo que el compilador revisa antes de ejecutar: los errores de tipo no llegan a correr."
+body: |
+  Swift, Java, Go y TypeScript lo usan. Si pasas un texto donde se espera un número,
+  el programa ni siquiera compila.
+  Muchos lenguajes infieren el tipo, así que no siempre lo escribes. El costo es algo más
+  de ceremonia; la ganancia es que el editor sabe qué métodos existen y avisa antes.
+example: |
+  // Swift: el compilador rechaza esto antes de ejecutar
+  let edad: Int = 30
+  // edad = "treinta"  // error: cannot assign value of type 'String' to type 'Int'
+why: "Por eso el Swift de la app de Mac falla al compilar donde el JS del pipeline fallaría al correr."
+source: https://developer.mozilla.org/en-US/docs/Glossary/Static_typing
+related: [fundamentos-tipado-dinamico, herramientas-compilador]
+updated: 2026-09-29

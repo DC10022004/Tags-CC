@@ -1,0 +1,15 @@
+id: paradigmas-encapsulacion
+term: Encapsulación
+category: paradigmas
+level: intermedio
+summary: "Ocultar los detalles internos y exponer solo una interfaz pública, para que nadie dependa de las tripas."
+body: |
+  Si el resto del código solo usa la interfaz, puedes cambiar la implementación sin
+  romper nada.
+  Aplica igual a módulos y servicios: este proyecto encapsula todo el contenido detrás de
+  `dist/tags.json`. Mientras ese contrato no cambie, el pipeline puede reescribirse
+  entero sin tocar la Mac ni el iPhone.
+why: "Te permite cambiar cómo funciona algo por dentro sin romper a quien lo usa."
+source: https://developer.mozilla.org/en-US/docs/Glossary/Encapsulation
+related: [paradigmas-poo, paradigmas-atributo, fundamentos-modulo]
+updated: 2026-09-29

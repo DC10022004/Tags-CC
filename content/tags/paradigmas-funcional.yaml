@@ -1,0 +1,18 @@
+id: paradigmas-funcional
+term: Programación funcional
+category: paradigmas
+level: avanzado
+summary: "Construir programas con funciones puras que no modifican estado: misma entrada, misma salida, sin efectos."
+body: |
+  `map`, `filter` y `reduce` transforman datos creando valores nuevos en lugar de
+  modificar los existentes.
+  La ventaja: una función pura se prueba y se razona sola. El límite: todo programa útil
+  tiene efectos (escribir archivos, red); la idea es aislarlos en los bordes.
+example: |
+  const niveles = ["basico", "avanzado", "basico"];
+  const conteo = niveles.reduce((acc, n) => ({ ...acc, [n]: (acc[n] ?? 0) + 1 }), {});
+  console.log(conteo); // { basico: 2, avanzado: 1 }
+why: "El selector de este proyecto es una función pura: por eso Mac e iPhone coinciden sin hablarse."
+source: https://en.wikipedia.org/wiki/Functional_programming
+related: [paradigmas-imperativa, fundamentos-inmutable, fundamentos-lambda]
+updated: 2026-09-29

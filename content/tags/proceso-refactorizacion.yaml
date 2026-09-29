@@ -1,0 +1,15 @@
+id: proceso-refactorizacion
+term: Refactorización
+category: proceso
+level: intermedio
+summary: "Mejorar la estructura interna del código sin cambiar lo que hace desde afuera."
+body: |
+  Renombrar, extraer funciones, eliminar duplicación. Si el comportamiento cambia, ya no
+  es refactor: es un cambio de funcionalidad.
+  La trampa: refactorizar sin tests. Sin algo que confirme que el comportamiento sigue
+  igual, no puedes saber si lo rompiste. Y nunca mezcles refactor con cambio de
+  funcionalidad en el mismo commit.
+why: "Separar refactor de cambios de lógica hace que cada commit sea fácil de revisar y revertir."
+source: https://refactoring.com/
+related: [proceso-clean-code, proceso-testing, proceso-code-review]
+updated: 2026-09-29

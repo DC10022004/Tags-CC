@@ -1,0 +1,13 @@
+id: infra-iot
+term: IoT (Internet de las cosas)
+category: infra
+level: intermedio
+summary: "Dispositivos físicos conectados a internet que envían datos o reciben órdenes: sensores, relojes, electrodomésticos."
+body: |
+  Suelen tener poca memoria y batería, así que usan protocolos livianos como MQTT.
+  La trampa es la seguridad: muchos se venden con contraseñas por defecto y nunca se
+  actualizan, y terminan formando redes de bots.
+why: "Para reconocer por qué un dispositivo conectado es también una puerta de entrada a tu red."
+source: https://es.wikipedia.org/wiki/Internet_de_las_cosas
+related: [seguridad-firewall, arquitectura-escalabilidad]
+updated: 2026-09-29

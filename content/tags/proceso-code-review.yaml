@@ -1,0 +1,16 @@
+id: proceso-code-review
+term: Revisión de código
+category: proceso
+level: basico
+summary: "Que otra persona lea tus cambios antes de mezclarlos, para encontrar errores y compartir conocimiento."
+body: |
+  Ocurre normalmente en un pull request.
+  Revisa primero lo que una máquina no ve: si el cambio resuelve el problema correcto, si
+  hay casos no contemplados, si hay una forma más simple. El formato y los espacios
+  déjalos al linter.
+example: |
+  gh pr diff 1
+why: "Revisar lo que Claude escribe con la misma atención que un PR ajeno evita sorpresas."
+source: https://en.wikipedia.org/wiki/Code_review
+related: [git-pull-request, workflow-code-review, proceso-linter]
+updated: 2026-09-29

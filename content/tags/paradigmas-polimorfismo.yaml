@@ -1,0 +1,20 @@
+id: paradigmas-polimorfismo
+term: Polimorfismo
+category: paradigmas
+level: avanzado
+summary: "Llamar al mismo método en objetos distintos y que cada uno responda a su manera."
+body: |
+  Una lista de formas puede pedir `area()` a cada una sin preguntar si es círculo o
+  cuadrado. Agregar un tipo nuevo no obliga a tocar el código que las recorre.
+  La señal de que falta polimorfismo: un `switch` sobre el tipo de objeto repetido en
+  muchos lugares del código.
+example: |
+  const formas = [
+    { area: () => 3.14 * 2 ** 2 },
+    { area: () => 3 * 3 },
+  ];
+  formas.forEach((f) => console.log(f.area()));
+why: "Evita switch repetidos por tipo y hace que agregar un caso nuevo toque un solo lugar."
+source: https://developer.mozilla.org/en-US/docs/Glossary/Polymorphism
+related: [paradigmas-herencia, paradigmas-override, paradigmas-overloading]
+updated: 2026-09-29

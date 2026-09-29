@@ -1,0 +1,19 @@
+id: proceso-test-unitario
+term: Test unitario
+category: proceso
+level: intermedio
+summary: "Un test que verifica una sola función aislada: dado esta entrada, espero esta salida."
+body: |
+  Son rápidos y precisos: cuando fallan, dicen exactamente qué se rompió.
+  Node trae su propio runner (`node --test`) sin instalar nada.
+  La trampa: probar la implementación en vez del comportamiento. Si cada refactor rompe
+  los tests aunque el resultado sea el mismo, están probando lo que no importa.
+example: |
+  // suma.test.mjs  →  node --test
+  import { test } from "node:test";
+  import assert from "node:assert";
+  test("suma", () => assert.strictEqual(1 + 1, 2));
+why: "validate.mjs usa vectores de prueba para garantizar que Mac e iPhone elijan la misma tarjeta."
+source: https://nodejs.org/api/test.html
+related: [proceso-testing, proceso-mock, paradigmas-inyeccion-dependencias]
+updated: 2026-09-29

@@ -1,0 +1,19 @@
+id: fundamentos-funcion
+term: Función
+category: fundamentos
+level: basico
+summary: "Un bloque de código con nombre que recibe datos, hace una tarea y puede devolver un resultado."
+body: |
+  Evita repetir código y le pone nombre a una intención: `validarTarjeta()` se entiende
+  sin leer su interior.
+  La regla práctica: una función, una tarea. Si su nombre necesita "y" (`leerYValidar`),
+  probablemente son dos funciones.
+example: |
+  function saludar(nombre) {
+    return `Hola, ${nombre}`;
+  }
+  console.log(saludar("Diego"));
+why: "Pedirle a Claude funciones pequeñas con nombres claros hace el código más fácil de revisar."
+source: https://developer.mozilla.org/en-US/docs/Glossary/Function
+related: [fundamentos-parametro-argumento, fundamentos-return, paradigmas-metodo]
+updated: 2026-09-29

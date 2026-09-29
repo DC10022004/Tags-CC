@@ -1,0 +1,18 @@
+id: fundamentos-stack-trace
+term: Stack trace
+category: fundamentos
+level: intermedio
+summary: "La lista de llamadas activas cuando ocurrió un error: dice en qué archivo y línea falló y cómo se llegó ahí."
+body: |
+  Se lee de arriba hacia abajo: la primera línea es donde explotó; las siguientes, quién
+  la llamó.
+  La trampa: la primera línea suele estar dentro de una librería. Busca la primera que
+  apunte a un archivo tuyo; casi siempre ahí está el problema.
+example: |
+  function a() { b(); }
+  function b() { throw new Error("falló en b"); }
+  try { a(); } catch (e) { console.log(e.stack); }
+why: "Pegarle a Claude el stack trace completo, no solo el mensaje, le ahorra adivinar dónde falló."
+source: https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Error/stack
+related: [fundamentos-excepcion, proceso-debugging, algoritmos-pila]
+updated: 2026-09-29

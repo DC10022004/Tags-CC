@@ -1,0 +1,17 @@
+id: fundamentos-parsing
+term: Parsing (análisis sintáctico)
+category: fundamentos
+level: intermedio
+summary: "Convertir texto en una estructura que el programa entiende: JSON en objetos, YAML en campos, código en un árbol."
+body: |
+  Todo lenguaje y formato tiene un parser. Si el texto no respeta la gramática, el parser
+  falla con un error de sintaxis y una posición.
+  La trampa: parsear a mano con `split` y regex funciona hasta el primer caso raro. Este
+  proyecto lo hace a propósito con un subconjunto de YAML acotado y documentado.
+example: |
+  const datos = JSON.parse('{"id": "git-commit", "level": "basico"}');
+  console.log(datos.level); // "basico"
+why: "Cuando un error dice 'Unexpected token at position 42', ya sabes que es un fallo de parsing."
+source: https://developer.mozilla.org/en-US/docs/Glossary/Parse
+related: [datos-json, datos-yaml, datos-serializacion]
+updated: 2026-09-29

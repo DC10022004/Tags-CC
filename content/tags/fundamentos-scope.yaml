@@ -1,0 +1,18 @@
+id: fundamentos-scope
+term: Contexto de ejecución (scope)
+category: fundamentos
+level: intermedio
+summary: "Las reglas que definen qué variables son visibles en cada parte del código."
+body: |
+  Una variable declarada dentro de una función o un bloque `{}` no existe fuera de él.
+  Desde dentro sí se ven las variables de afuera.
+  La trampa: declarar dentro de un bloque una variable con el mismo nombre que una de
+  afuera la "oculta" (shadowing), y cambias una creyendo que cambias la otra.
+example: |
+  const x = "afuera";
+  { const x = "adentro"; console.log(x); } // "adentro"
+  console.log(x);                          // "afuera"
+why: "Explica errores de 'is not defined' y valores que no cambian donde esperabas."
+source: https://developer.mozilla.org/en-US/docs/Glossary/Scope
+related: [fundamentos-closure, fundamentos-variable-global, fundamentos-namespace]
+updated: 2026-09-29

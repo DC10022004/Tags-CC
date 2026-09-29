@@ -31,4 +31,43 @@ categories:
     nombre: Plataforma
     descripcion: SDK, plugins, IDE, web, escritorio, CI.
 
+  # Programación general (ADR 0005). Fuentes: glosario de MoureDev y el diccionario
+  # técnico personal de Diego; el texto de cada tarjeta es propio.
+  - id: fundamentos
+    nombre: Fundamentos de programación
+    descripcion: Variables, tipos, funciones, control de flujo, errores.
+  - id: algoritmos
+    nombre: Algoritmos y estructuras de datos
+    descripcion: Complejidad, arrays, pilas, colas, hashing.
+  - id: paradigmas
+    nombre: Paradigmas y patrones
+    descripcion: POO, programación funcional e imperativa, patrones de diseño.
+  - id: web
+    nombre: Web y APIs
+    descripcion: HTTP, URLs, REST, navegador, renderizado.
+  - id: datos
+    nombre: Bases de datos y formatos
+    descripcion: SQL, NoSQL, esquemas, migraciones, JSON, YAML.
+  - id: ia
+    nombre: IA y ciencia de datos
+    descripcion: LLMs, machine learning, análisis de datos.
+  - id: git
+    nombre: Git y GitHub
+    descripcion: Commits, ramas, remotos, merge, pull requests.
+  - id: arquitectura
+    nombre: Arquitectura de software
+    descripcion: Frontend y backend, monolitos, concurrencia, caché, latencia.
+  - id: infra
+    nombre: Infraestructura y despliegue
+    descripcion: Nube, contenedores, CI/CD, deployment, sistema operativo.
+  - id: seguridad
+    nombre: Seguridad y secretos
+    descripcion: Claves de API, .env, cifrado, autenticación.
+  - id: herramientas
+    nombre: Herramientas de desarrollo
+    descripcion: Compiladores, runtimes, terminal, npm, dependencias.
+  - id: proceso
+    nombre: Calidad y proceso
+    descripcion: Testing, depuración, revisión de código, ágil, diseño de producto.
+
 levels: [basico, intermedio, avanzado]

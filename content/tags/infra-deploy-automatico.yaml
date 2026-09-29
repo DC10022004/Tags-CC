@@ -1,0 +1,14 @@
+id: infra-deploy-automatico
+term: Deploy automático
+category: infra
+level: intermedio
+summary: "La plataforma vigila el repo y vuelve a publicar la app sola cada vez que llega un cambio a la rama principal."
+body: |
+  Con Vercel conectado a GitHub, cada push a `main` despliega producción y cada rama o
+  PR recibe su propia URL de vista previa.
+  La consecuencia: mezclar a `main` es publicar. Lo que no quieras en producción no debe
+  llegar a main sin revisión.
+why: "Mezclar a main en un proyecto con deploy automático equivale a publicar en producción."
+source: https://vercel.com/docs/git
+related: [infra-deployment, git-rama, git-pull-request]
+updated: 2026-09-29

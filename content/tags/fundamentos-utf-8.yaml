@@ -1,0 +1,17 @@
+id: fundamentos-utf-8
+term: UTF-8
+category: fundamentos
+level: intermedio
+summary: "La codificación estándar de texto: representa cualquier carácter Unicode usando de 1 a 4 bytes."
+body: |
+  Las letras ASCII ocupan 1 byte; la `ñ` o la `é`, 2; un emoji, 4. Por eso la longitud en
+  bytes y en caracteres no coinciden.
+  La trampa: si un archivo se lee con otra codificación, aparece "EspaÃ±ol" en vez de
+  "Español". Este proyecto hashea la clave en UTF-8 en Swift y JS para que coincidan.
+example: |
+  console.log("ñ".length);                     // 1 carácter
+  console.log(Buffer.byteLength("ñ", "utf8")); // 2 bytes
+why: "Si ves caracteres raros como Ã±, el problema es de codificación, no de tu texto."
+source: https://developer.mozilla.org/en-US/docs/Glossary/UTF-8
+related: [fundamentos-binario-bit, algoritmos-hash]
+updated: 2026-09-29

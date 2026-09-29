@@ -1,0 +1,18 @@
+id: proceso-mock
+term: Mock (objeto simulado)
+category: proceso
+level: avanzado
+summary: "Un reemplazo falso de una pieza real (API, base de datos, reloj) para probar código sin depender de ella."
+body: |
+  Permite probar qué hace tu código cuando la API responde error, sin esperar a que la
+  API real falle.
+  La trampa: mockear demasiado. Si todo es falso, el test pasa aunque la integración real
+  esté rota. Mockea los bordes lentos o impredecibles, no tu propia lógica.
+example: |
+  const apiFalsa = { get: async () => ({ status: 500 }) };
+  async function estado(api) { return (await api.get()).status >= 500 ? "caído" : "ok"; }
+  estado(apiFalsa).then(console.log); // "caído"
+why: "Deja probar casos difíciles de provocar, como errores de red, en milisegundos."
+source: https://en.wikipedia.org/wiki/Mock_object
+related: [proceso-test-unitario, paradigmas-inyeccion-dependencias]
+updated: 2026-09-29

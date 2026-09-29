@@ -1,0 +1,14 @@
+id: fundamentos-alto-bajo-nivel
+term: Lenguaje de alto y bajo nivel
+category: fundamentos
+level: basico
+summary: "Alto nivel se parece al lenguaje humano (Python, JS); bajo nivel se acerca al procesador (C, ensamblador)."
+body: |
+  El ensamblador traduce instrucciones casi uno a uno a código máquina. C da control de la
+  memoria. Python o JavaScript la gestionan por ti.
+  El intercambio: más alto nivel es más rápido de escribir y más seguro, a cambio de
+  menos control y, a veces, menos rendimiento.
+why: "Ayuda a elegir herramienta: Python para un script, Swift o C cuando el rendimiento importa."
+source: https://es.wikipedia.org/wiki/Lenguaje_de_alto_nivel
+related: [herramientas-compilador, fundamentos-binario-bit, herramientas-garbage-collection]
+updated: 2026-09-29

@@ -1,0 +1,14 @@
+id: infra-cloud
+term: Computación en la nube
+category: infra
+level: basico
+summary: "Usar servidores, almacenamiento y bases de datos de otro por internet, pagando por uso, en vez de tenerlos tú."
+body: |
+  Va de más control a menos: IaaS (máquinas virtuales), PaaS (plataforma donde subes tu
+  código), SaaS (la app lista para usar).
+  La trampa: los costos. Un recurso olvidado encendido o un bucle que llama a una API de
+  pago genera facturas sin que nadie lo note. Configura alertas de gasto.
+why: "Entender los niveles de nube ayuda a elegir cuánto quieres administrar tú."
+source: https://es.wikipedia.org/wiki/Computaci%C3%B3n_en_la_nube
+related: [infra-saas, infra-paas, infra-baas]
+updated: 2026-09-29

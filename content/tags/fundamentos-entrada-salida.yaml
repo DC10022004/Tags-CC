@@ -1,0 +1,16 @@
+id: fundamentos-entrada-salida
+term: Entrada y salida (I/O)
+category: fundamentos
+level: basico
+summary: "Los datos que un programa recibe (teclado, archivo, red) y los que produce (pantalla, archivo, respuesta)."
+body: |
+  En la terminal hay tres canales: stdin (entrada), stdout (salida normal) y stderr
+  (errores). Separarlos permite redirigir solo los errores a un archivo.
+  La I/O es la parte lenta de casi todo programa: leer disco o red tarda miles de veces
+  más que calcular en memoria.
+example: |
+  echo '{"tool":"Bash"}' | node -e 'process.stdin.on("data", d => console.log(JSON.parse(d).tool))'
+why: "Los hooks de Claude Code reciben el evento por stdin y responden por stdout: es I/O pura."
+source: https://es.wikipedia.org/wiki/Entrada/salida
+related: [herramientas-shell, fundamentos-sincrono-asincrono, algoritmos-buffer]
+updated: 2026-09-29

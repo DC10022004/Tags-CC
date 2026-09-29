@@ -1,0 +1,21 @@
+id: paradigmas-constructor
+term: Constructor
+category: paradigmas
+level: intermedio
+summary: "El método que se ejecuta automáticamente al crear una instancia, para dejarla en un estado válido."
+body: |
+  En JavaScript es `constructor()`; en Swift, `init()`; en Python, `__init__()`.
+  Buena práctica: que el constructor valide y falle rápido. Un objeto que se puede crear
+  en un estado inválido obliga a revisar ese estado en todas partes después.
+example: |
+  class Tarjeta {
+    constructor(summary) {
+      if (summary.length > 120) throw new Error("summary demasiado largo");
+      this.summary = summary;
+    }
+  }
+  new Tarjeta("ok");
+why: "Validar en el constructor garantiza que ningún objeto roto circule por el programa."
+source: https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Classes/constructor
+related: [paradigmas-clase, paradigmas-objeto-instancia]
+updated: 2026-09-29

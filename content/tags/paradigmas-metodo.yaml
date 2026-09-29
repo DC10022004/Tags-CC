@@ -1,0 +1,19 @@
+id: paradigmas-metodo
+term: Método
+category: paradigmas
+level: basico
+summary: "Una función que pertenece a un objeto o clase y opera sobre sus datos."
+body: |
+  `"hola".toUpperCase()` llama al método `toUpperCase` del string. Dentro del método,
+  `this` (o `self` en Swift y Python) es el objeto sobre el que se llamó.
+  La trampa en JavaScript: si sacas un método del objeto y lo pasas como callback, pierde
+  su `this`. Una función flecha o `.bind()` lo conserva.
+example: |
+  const tag = { term: "git", titulo() { return this.term.toUpperCase(); } };
+  console.log(tag.titulo()); // "GIT"
+  const suelto = tag.titulo;
+  // suelto(); // TypeError: this es undefined
+why: "El error 'Cannot read properties of undefined' en un callback suele ser un this perdido."
+source: https://developer.mozilla.org/en-US/docs/Glossary/Method
+related: [fundamentos-funcion, paradigmas-atributo, paradigmas-clase]
+updated: 2026-09-29

@@ -1,0 +1,22 @@
+id: fundamentos-closure
+term: Closure (clausura)
+category: fundamentos
+level: avanzado
+summary: "Una función que recuerda las variables del lugar donde se creó, aunque se ejecute en otro sitio."
+body: |
+  Permite estado privado sin clases: la variable vive mientras la función que la usa
+  siga existiendo.
+  La trampa: la función captura la variable, no su valor en ese momento. Con `var` en un
+  bucle, todas las funciones ven el último valor; con `let` cada vuelta tiene la suya.
+example: |
+  function contador() {
+    let n = 0;
+    return () => ++n;
+  }
+  const c = contador();
+  c(); c();
+  console.log(c()); // 3
+why: "Explica por qué un callback 've' variables que parecían fuera de su alcance."
+source: https://developer.mozilla.org/en-US/docs/Web/JavaScript/Guide/Closures
+related: [fundamentos-scope, fundamentos-callback, fundamentos-lambda]
+updated: 2026-09-29

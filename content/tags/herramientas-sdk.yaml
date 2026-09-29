@@ -1,0 +1,17 @@
+id: herramientas-sdk
+term: SDK
+category: herramientas
+level: intermedio
+summary: "Un kit de herramientas y librerías para desarrollar sobre una plataforma o servicio concreto."
+body: |
+  El SDK de Anthropic simplifica llamar a la API de Claude; el SDK de macOS trae los
+  frameworks del sistema.
+  Este proyecto compila la app de Mac solo con el SDK que viene en Command Line Tools,
+  sin Xcode. Un SDK suele incluir librerías, documentación y herramientas de línea de
+  comandos.
+example: |
+  xcrun --show-sdk-path
+why: "Usar el SDK oficial ahorra reimplementar autenticación, reintentos y formatos a mano."
+source: https://en.wikipedia.org/wiki/Software_development_kit
+related: [herramientas-biblioteca, web-api]
+updated: 2026-09-29

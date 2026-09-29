@@ -1,0 +1,18 @@
+id: algoritmos-big-o
+term: Big O y complejidad
+category: algoritmos
+level: intermedio
+summary: "Describe cómo crece el tiempo o la memoria de un algoritmo cuando crece la entrada: O(1), O(n), O(n²)."
+body: |
+  No mide segundos, mide la forma de la curva. O(n) con el doble de datos tarda el
+  doble; O(n²) tarda cuatro veces más.
+  La trampa: con pocos datos todo es rápido, así que el problema aparece recién en
+  producción. `includes` dentro de un bucle es O(n²) disfrazado; un `Set` lo baja a O(n).
+example: |
+  const ids = ["a", "b", "c"];
+  const vistos = new Set(ids);        // búsqueda O(1)
+  console.log(vistos.has("b"));        // true, sin recorrer la lista
+why: "Para detectar por qué algo que iba bien con 100 datos se arrastra con 100 000."
+source: https://es.wikipedia.org/wiki/Cota_superior_asint%C3%B3tica
+related: [fundamentos-algoritmo, fundamentos-nested, algoritmos-hash]
+updated: 2026-09-29

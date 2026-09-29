@@ -1,0 +1,14 @@
+id: arquitectura-escalabilidad
+term: Escalabilidad y carga
+category: arquitectura
+level: intermedio
+summary: "La capacidad de atender más carga (usuarios, peticiones, datos) agregando recursos sin rediseñar."
+body: |
+  Vertical: una máquina más grande. Horizontal: más máquinas iguales detrás de un
+  balanceador. La carga es cuánto trabajo recibe el sistema en un momento dado.
+  La trampa: optimizar para una escala que no tienes. Mide primero dónde se satura; casi
+  siempre el cuello de botella es la base de datos, no el servidor.
+why: "Evita diseñar para millones de usuarios cuando el problema real es una query lenta."
+source: https://en.wikipedia.org/wiki/Scalability
+related: [infra-balanceador-carga, arquitectura-cache, ia-big-data]
+updated: 2026-09-29

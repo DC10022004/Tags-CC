@@ -1,0 +1,16 @@
+id: git-clone
+term: git clone
+category: git
+level: basico
+summary: "Descarga una copia completa de un repo remoto, con todo su historial, a tu computadora."
+body: |
+  El clon queda conectado al original con el nombre `origin`, listo para hacer pull y
+  push.
+  La diferencia con descargar el ZIP de GitHub: el ZIP trae solo los archivos, sin
+  historial y sin conexión. No podrás hacer pull ni push desde ahí.
+example: |
+  git clone https://github.com/git/git.git --depth 1
+why: "Clonar, y no bajar el ZIP, es lo que te permite recibir cambios y enviar los tuyos."
+source: https://git-scm.com/docs/git-clone
+related: [git-remote, git-repositorio, git-pull]
+updated: 2026-09-29

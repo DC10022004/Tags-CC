@@ -1,0 +1,18 @@
+id: fundamentos-callback
+term: Callback
+category: fundamentos
+level: intermedio
+summary: "Una función que le pasas a otra para que la llame después, cuando termine algo o ocurra un evento."
+body: |
+  `map`, `filter` y los manejadores de eventos reciben callbacks. También era la forma
+  clásica de manejar código asíncrono.
+  La trampa: callbacks dentro de callbacks forman el "callback hell", difícil de leer y
+  de manejar errores. Las promesas y `async/await` nacieron para eso.
+example: |
+  const nums = [1, 2, 3];
+  console.log(nums.map((n) => n * 10)); // [10, 20, 30]
+  setTimeout(() => console.log("después"), 100);
+why: "Es la base para entender promesas, eventos y casi cualquier API de JavaScript."
+source: https://developer.mozilla.org/en-US/docs/Glossary/Callback_function
+related: [fundamentos-promesa, fundamentos-lambda, fundamentos-evento]
+updated: 2026-09-29

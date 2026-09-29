@@ -1,0 +1,20 @@
+id: fundamentos-recursion
+term: Recursión
+category: fundamentos
+level: intermedio
+summary: "Una función que se llama a sí misma con un problema más pequeño, hasta llegar a un caso base."
+body: |
+  Encaja con estructuras que se contienen a sí mismas: carpetas con subcarpetas, árboles,
+  JSON anidado.
+  La trampa: sin caso base, o si el problema no se achica, se llama infinitamente hasta
+  agotar la pila y el programa cae con un stack overflow.
+example: |
+  function factorial(n) {
+    if (n <= 1) return 1;          // caso base
+    return n * factorial(n - 1);   // problema más pequeño
+  }
+  console.log(factorial(5)); // 120
+why: "Para recorrer carpetas o JSON anidado sin saber cuántos niveles tienen."
+source: https://developer.mozilla.org/en-US/docs/Glossary/Recursion
+related: [algoritmos-stack-overflow, fundamentos-bucle, algoritmos-pila]
+updated: 2026-09-29

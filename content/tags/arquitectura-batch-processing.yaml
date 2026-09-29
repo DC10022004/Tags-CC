@@ -1,0 +1,16 @@
+id: arquitectura-batch-processing
+term: Batch processing (por lotes)
+category: arquitectura
+level: intermedio
+summary: "Agrupar muchas tareas y procesarlas juntas más tarde, en vez de una a una en tiempo real."
+body: |
+  Facturación nocturna, reportes, reindexar datos: todo lo que no necesita respuesta
+  inmediata.
+  La trampa: si un elemento falla a mitad del lote, hay que saber cuáles ya se
+  procesaron. Diseña los lotes para que puedan reintentarse sin duplicar trabajo.
+example: |
+  for f in content/tags/*.yaml; do grep -q "^source:" "$f" || echo "falta source: $f"; done
+why: "Procesar en lote es más barato y simple cuando nadie espera la respuesta en el momento."
+source: https://en.wikipedia.org/wiki/Batch_processing
+related: [algoritmos-cola, infra-pipeline]
+updated: 2026-09-29

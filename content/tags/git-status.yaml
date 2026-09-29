@@ -1,0 +1,15 @@
+id: git-status
+term: git status
+category: git
+level: basico
+summary: "Muestra qué archivos cambiaron, cuáles están listos para commit y si vas adelante o atrás del remoto."
+body: |
+  "Working tree clean" significa que no hay cambios sin guardar.
+  La trampa: "Your branch is up to date" compara con tu última copia de `origin`, no con
+  GitHub en vivo. Sin un `git fetch` antes, puede estar desactualizado.
+example: |
+  git fetch && git status -sb
+why: "Es el comando para correr antes de cualquier otro: te dice en qué estado está todo."
+source: https://git-scm.com/docs/git-status
+related: [git-commit, git-fetch, git-gitignore]
+updated: 2026-09-29

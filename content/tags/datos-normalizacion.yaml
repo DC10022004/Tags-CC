@@ -1,0 +1,15 @@
+id: datos-normalizacion
+term: Normalización
+category: datos
+level: avanzado
+summary: "Organizar tablas para que cada dato se guarde en un solo lugar y se referencie en vez de copiarse."
+body: |
+  Si el nombre de la universidad está copiado en cada candidato, cambiarlo exige tocar
+  cien filas y alguna quedará distinta. Normalizado, vive en una tabla y los candidatos
+  apuntan a ella.
+  El límite: normalizar de más obliga a unir muchas tablas para leer algo simple. A veces
+  se desnormaliza a propósito por rendimiento.
+why: "Datos duplicados terminan desincronizados; normalizar evita que la misma cosa tenga dos valores."
+source: https://es.wikipedia.org/wiki/Normalizaci%C3%B3n_de_bases_de_datos
+related: [datos-clave, datos-esquema]
+updated: 2026-09-29

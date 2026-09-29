@@ -1,0 +1,14 @@
+id: infra-devops
+term: DevOps
+category: infra
+level: intermedio
+summary: "Unir desarrollo y operaciones: quien escribe el código también automatiza cómo se prueba, despliega y monitorea."
+body: |
+  Sus herramientas típicas son pipelines de CI/CD, infraestructura como código y
+  monitoreo.
+  La idea central es acortar el ciclo: cambios pequeños, desplegados seguido y de forma
+  automática, en vez de grandes lanzamientos manuales que asustan.
+why: "Desplegar seguido en cambios pequeños hace que cada fallo sea fácil de encontrar y revertir."
+source: https://es.wikipedia.org/wiki/DevOps
+related: [infra-pipeline, infra-deploy-automatico]
+updated: 2026-09-29
