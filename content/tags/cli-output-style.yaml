@@ -1,0 +1,17 @@
+id: cli-output-style
+term: "Output style"
+category: cli
+level: intermedio
+summary: "Configuración que cambia las instrucciones que Claude Code le da a Claude."
+body: |
+  Cambia comportamiento, tono o formato de las respuestas.
+  La diferencia con CLAUDE.md es de fondo, no de grado: CLAUDE.md **agrega** contexto del
+  proyecto junto a las instrucciones por defecto, mientras que un output style propio puede
+  **reemplazar** las instrucciones de ingeniería de software.
+  Es potente y por eso es fácil romper cosas con él: lo que quites, deja de existir.
+example: |
+  /output-style
+why: "Sirve para usar Claude Code en algo que no es programar, sin pelear con sus defaults."
+source: https://code.claude.com/docs/en/output-styles
+related: [contexto-claude-md]
+updated: 2026-09-28

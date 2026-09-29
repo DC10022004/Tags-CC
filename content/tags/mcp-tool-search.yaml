@@ -1,0 +1,18 @@
+id: mcp-tool-search
+term: "MCP Tool Search"
+category: mcp
+level: avanzado
+summary: "Difiere los esquemas de las herramientas MCP hasta que se necesitan, para ahorrar contexto."
+body: |
+  Al arrancar solo se cargan los nombres de las herramientas y las instrucciones del
+  servidor; el esquema completo se pide cuando Claude decide usar una.
+  Es lo que evita que diez servidores MCP conectados te coman la ventana de contexto antes
+  de escribir el primer prompt.
+  Si tienes muchos servidores y notas el contexto lleno desde el inicio, esto es lo que hay
+  que revisar.
+example: |
+  /context   # ver cuánto contexto ocupan los servidores MCP
+why: "Permite tener muchos servidores conectados sin pagar el contexto de todos a la vez."
+source: https://code.claude.com/docs/en/mcp
+related: [mcp-servidor, contexto-context-window]
+updated: 2026-09-28

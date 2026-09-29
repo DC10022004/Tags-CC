@@ -16,6 +16,30 @@ Formato de cada entrada:
 
 ---
 
+## 2026-09-28 — Corpus v1: 60 tarjetas
+
+**Hecho:** el corpus llegó a las 60 tarjetas del objetivo, en 10 categorías
+(19 básicas, 31 intermedias, 10 avanzadas; 45 con ejemplo ejecutable).
+
+**Decidido:** la página `glossary` de los docs resultó ser la mejor fuente para curar en
+volumen: 51 términos con definiciones concisas y exactas, cada una enlazando a la página
+que lo desarrolla. Las tarjetas se escribieron contra esas definiciones y contra las
+páginas citadas, no de memoria.
+
+**Un ejemplo inventado, detectado y corregido:** la tarjeta de `PostToolUse` usaba
+`npx prettier --write $FILE`. Esa variable **no existe**: los hooks reciben JSON por
+stdin, y la forma real es `jq -r '.tool_input.file_path' | xargs npx prettier --write`.
+Es justo lo que `CONTENT-GUIDE.md` prohíbe —un ejemplo inventado enseña algo falso— y se
+coló igual. Conviene revisar los ejemplos contra la documentación, no contra el recuerdo.
+
+**Verificado:** las 60 fuentes citadas existen en el sitemap; el `summary` más largo usa
+94 de los 120 caracteres permitidos.
+
+**Abierto:** quedan ~150 páginas de docs sin cubrir, la mayoría de nicho (despliegues
+empresariales, gateways, SDK). El siguiente lote natural es el Agent SDK.
+
+---
+
 ## 2026-09-28 — Fases 2 y 3: pipeline de contenido y cliente de iPhone
 
 **Hecho:** `fetch-docs.mjs`, `extract-local.mjs` y `draft-cards.mjs`; el script de

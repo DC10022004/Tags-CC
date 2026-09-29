@@ -1,0 +1,14 @@
+id: workflow-best-practices
+term: "Best practices"
+category: workflow
+level: basico
+summary: "La página de docs con los patrones que más rinden al trabajar con Claude Code."
+body: |
+  Cubre cómo estructurar CLAUDE.md, cuándo usar plan mode, cómo dar contexto suficiente
+  sin saturar, y cómo pedir verificación.
+  Vale releerla cada cierto tiempo: los patrones útiles cambian conforme la herramienta
+  gana funciones, y lo que era necesario hace seis meses hoy puede ser innecesario.
+why: "Es el atajo para no descubrir por prueba y error cosas que ya están documentadas."
+source: https://code.claude.com/docs/en/best-practices
+related: [workflow-verification-loop, contexto-claude-md]
+updated: 2026-09-28

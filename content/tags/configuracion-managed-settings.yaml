@@ -1,0 +1,17 @@
+id: configuracion-managed-settings
+term: "Managed settings"
+category: configuracion
+level: avanzado
+summary: "Configuración que fija la organización y que ningún ajuste local puede pisar."
+body: |
+  Es el nivel más alto de la precedencia: por encima de la línea de comandos, del
+  proyecto y del usuario.
+  Se entrega por MDM, por `managed-settings.json` o desde la consola de administración.
+  Si trabajas en una empresa y un ajuste tuyo 'no hace nada', este es el primer sospechoso:
+  no está roto, está pisado a propósito.
+example: |
+  /doctor   # muestra la configuración efectiva y su origen
+why: "Explica por qué en un equipo tu configuración a veces simplemente no se aplica."
+source: https://code.claude.com/docs/en/managed-settings
+related: [configuracion-settings-json, cli-doctor]
+updated: 2026-09-28

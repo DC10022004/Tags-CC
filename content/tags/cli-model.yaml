@@ -1,0 +1,17 @@
+id: cli-model
+term: "/model"
+category: cli
+level: basico
+summary: "Cambia el modelo de la sesión en vivo, sin reiniciar ni perder la conversación."
+body: |
+  Modelos distintos tienen costos y capacidades distintas: conviene uno rápido para
+  tareas mecánicas y uno más capaz para diseño o diagnóstico difícil.
+  Se puede fijar por defecto en `settings.json` con la clave `model`, y cambiarlo puntual
+  con el comando.
+  Cambiarlo a mitad de sesión conserva la conversación.
+example: |
+  /model
+why: "Ajustar el modelo a la tarea es la forma más directa de controlar costo y calidad."
+source: https://code.claude.com/docs/en/model-config
+related: [cli-effort-level, configuracion-settings-json]
+updated: 2026-09-28

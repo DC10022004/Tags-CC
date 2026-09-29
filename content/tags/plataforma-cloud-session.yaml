@@ -1,0 +1,16 @@
+id: plataforma-cloud-session
+term: "Cloud session"
+category: plataforma
+level: intermedio
+summary: "Sesión que corre en infraestructura remota y sigue trabajando aunque cierres la laptop."
+body: |
+  Se arranca desde claude.ai/code, la app móvil, la app de escritorio o `claude --cloud`.
+  Diferencia que importa: una sesión en la nube parte de un clon fresco de tu repositorio y
+  **no** lee el `~/.claude/` de tu máquina, así que tus skills y ajustes personales no
+  están ahí. Lo que viaja es lo que está commiteado en el repo.
+example: |
+  claude --cloud
+why: "Para tareas largas que no quieres tener atadas a que tu laptop esté abierta."
+source: https://code.claude.com/docs/en/cloud-environments
+related: [plataforma-remote-control, cli-session]
+updated: 2026-09-28

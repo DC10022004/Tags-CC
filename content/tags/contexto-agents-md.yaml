@@ -1,0 +1,17 @@
+id: contexto-agents-md
+term: "AGENTS.md"
+category: contexto
+level: intermedio
+summary: "Archivo de instrucciones estándar entre herramientas de IA. Claude lo lee si no hay CLAUDE.md."
+body: |
+  Si tu repo ya tiene un `AGENTS.md` y no tiene CLAUDE.md, Claude lo usa como
+  instrucciones del proyecto sin que agregues un segundo archivo.
+  En `/config`, el ajuste **Project instructions** decide si lee ambos o solo CLAUDE.md.
+  Sirve cuando el equipo usa varias herramientas de IA y no quieres mantener el mismo
+  contenido duplicado en dos archivos.
+example: |
+  /config    # ajuste: Project instructions
+why: "Evita duplicar las mismas reglas en dos archivos si tu equipo usa más de una herramienta."
+source: https://code.claude.com/docs/en/memory
+related: [contexto-claude-md, contexto-rules]
+updated: 2026-09-28

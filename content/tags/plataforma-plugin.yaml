@@ -1,0 +1,17 @@
+id: plataforma-plugin
+term: "Plugin"
+category: plataforma
+level: intermedio
+summary: "Paquete instalable con skills, hooks, subagentes y servidores MCP juntos."
+body: |
+  Sirve para distribuir una configuración completa en lugar de pedirle a cada persona
+  que copie archivos.
+  Las skills de un plugin quedan con espacio de nombres, `nombre-plugin:nombre-skill`, así
+  que dos plugins pueden traer una skill con el mismo nombre sin chocar.
+  Se reparten por marketplaces, que es como un equipo estandariza su configuración.
+example: |
+  /plugin
+why: "Es cómo un equipo comparte su forma de trabajar sin un instructivo de diez pasos."
+source: https://code.claude.com/docs/en/plugin-evals
+related: [skills-skill-md, mcp-servidor]
+updated: 2026-09-28

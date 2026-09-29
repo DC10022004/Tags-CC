@@ -1,0 +1,22 @@
+id: skills-control-invocacion
+term: "disable-model-invocation"
+category: skills
+level: intermedio
+summary: "Campo del frontmatter que hace que una skill solo la puedas invocar tú, no Claude."
+body: |
+  Por defecto, tú y Claude pueden invocar cualquier skill.
+  `disable-model-invocation: true` la reserva para ti: es lo correcto para todo lo que
+  tiene efectos secundarios o donde el momento importa, como `/deploy` o `/commit`. No
+  quieres que Claude decida desplegar porque el código *parece* listo.
+  El opuesto es `user-invocable: false`, para conocimiento de fondo que Claude debe tener
+  pero que no es una acción que tú ejecutarías.
+example: |
+  ---
+  name: deploy
+  description: Despliega a producción.
+  disable-model-invocation: true
+  ---
+why: "Evita que Claude ejecute por su cuenta algo cuyo momento debes decidir tú."
+source: https://code.claude.com/docs/en/skills
+related: [skills-skill-md, configuracion-frontmatter]
+updated: 2026-09-28

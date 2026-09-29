@@ -1,0 +1,18 @@
+id: workflow-code-review
+term: "/code-review"
+category: workflow
+level: basico
+summary: "Skill incluida que revisa el diff actual, una rama o un PR buscando errores."
+body: |
+  Acepta un nivel de esfuerzo: los bajos dan pocos hallazgos de alta confianza, los altos
+  amplían la cobertura a costa de incluir cosas inciertas.
+  Con `--fix` aplica los hallazgos al árbol de trabajo; con `--comment` los publica como
+  comentarios en el PR.
+  No es lo mismo que `/simplify`, que solo busca limpieza y no caza errores.
+example: |
+  /code-review
+  /code-review high --fix
+why: "Una segunda lectura de tu diff antes de que la haga otra persona, o la producción."
+source: https://code.claude.com/docs/en/code-review
+related: [skills-bundled, workflow-verification-loop]
+updated: 2026-09-28

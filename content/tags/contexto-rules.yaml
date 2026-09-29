@@ -1,0 +1,20 @@
+id: contexto-rules
+term: "Rules"
+category: contexto
+level: intermedio
+summary: "Archivos de instrucciones en .claude/rules/ que pueden cargarse solo para ciertas rutas."
+body: |
+  Se cargan junto a CLAUDE.md, pero con una ventaja: con `paths:` en el frontmatter, una
+  regla se carga **solo** cuando Claude lee un archivo que coincide.
+  Así las convenciones de tus tests no ocupan contexto mientras trabajas en el frontend.
+  Es la forma de partir un CLAUDE.md que creció demasiado sin perder las reglas.
+example: |
+  # .claude/rules/tests.md
+  ---
+  paths: ["**/*.test.ts"]
+  ---
+  Usa Vitest, nunca Jest.
+why: "Mantiene el contexto liviano: cada regla aparece solo cuando es relevante."
+source: https://code.claude.com/docs/en/memory
+related: [contexto-claude-md, configuracion-frontmatter]
+updated: 2026-09-28

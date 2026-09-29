@@ -1,0 +1,18 @@
+id: mcp-protocolo
+term: "MCP"
+category: mcp
+level: intermedio
+summary: "Protocolo abierto para conectar Claude con herramientas y datos externos."
+body: |
+  Model Context Protocol. En lugar de que cada integración se programe a mano, un
+  servidor MCP expone sus herramientas de forma estándar y Claude las usa como usa las
+  propias.
+  Es la diferencia entre 'Claude puede leer tu código' y 'Claude puede leer tu Notion, tu
+  base de datos y tus tickets'.
+  `/mcp` te muestra los servidores conectados y sus herramientas.
+example: |
+  /mcp
+why: "Es cómo Claude deja de estar limitado a tu sistema de archivos."
+source: https://code.claude.com/docs/en/mcp
+related: [mcp-servidor, mcp-connector]
+updated: 2026-09-28

@@ -1,0 +1,14 @@
+id: plataforma-remote-control
+term: "Remote Control"
+category: plataforma
+level: intermedio
+summary: "Continuar desde el teléfono o el navegador una sesión que corre en tu máquina."
+body: |
+  Tu código y tus archivos se quedan donde están; lo único remoto es la interfaz.
+  Es lo contrario de una sesión en la nube, donde lo que se mueve es la ejecución. Aquí la
+  ejecución sigue en tu laptop y tú te mueves.
+  Útil para revisar cómo va algo largo sin volver al escritorio.
+why: "Te deja mirar y redirigir una tarea larga desde el celular sin mover el trabajo de sitio."
+source: https://code.claude.com/docs/en/remote-control
+related: [plataforma-cloud-session]
+updated: 2026-09-28

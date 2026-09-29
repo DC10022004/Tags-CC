@@ -1,0 +1,18 @@
+id: subagentes-subagent
+term: "Subagent"
+category: subagentes
+level: intermedio
+summary: "Asistente especializado que corre en su propio contexto y devuelve un resumen."
+body: |
+  Tiene system prompt propio, acceso a herramientas específico y permisos independientes.
+  Trabaja en una tarea delegada y al terminar devuelve un resumen a la conversación
+  principal.
+  Su valor real es el contexto: una exploración grande que llenaría tu ventana ocurre en la
+  del subagente, y a ti solo te llega la conclusión.
+  Límite: un subagente no sale de la sesión que lo creó.
+example: |
+  ls .claude/agents/
+why: "Mantiene las búsquedas largas fuera de tu contexto, que es el recurso que siempre escasea."
+source: https://code.claude.com/docs/en/sub-agents
+related: [subagentes-agent-teams, contexto-context-window]
+updated: 2026-09-28

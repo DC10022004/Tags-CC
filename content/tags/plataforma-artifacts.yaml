@@ -1,0 +1,15 @@
+id: plataforma-artifacts
+term: "Artifact"
+category: plataforma
+level: basico
+summary: "Página web interactiva que Claude Code publica desde tu sesión a una URL privada."
+body: |
+  Sirve cuando el resultado se entiende mejor viéndolo que leyéndolo en la terminal: un
+  gráfico, un tablero, una demo.
+  La página se actualiza en su sitio cuando la sesión vuelve a publicar, así que el enlace
+  no cambia.
+  Empiezan privados; compartirlos depende de tu plan.
+why: "Convierte una salida de terminal en algo que de verdad puedes mandarle a alguien."
+source: https://code.claude.com/docs/en/artifacts
+related: [plataforma-cloud-session]
+updated: 2026-09-28

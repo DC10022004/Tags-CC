@@ -1,0 +1,16 @@
+id: permisos-prompt-injection
+term: "Prompt injection"
+category: permisos
+level: intermedio
+summary: "Instrucciones hostiles escondidas en un archivo o web que intentan redirigir a Claude."
+body: |
+  El vector es simple: Claude lee un archivo, una página o el resultado de una
+  herramienta, y ese contenido trae instrucciones que tú nunca diste.
+  Las defensas son el sistema de permisos, la detección de inyección en comandos y la
+  verificación de confianza. El auto mode añade un sondeo que escanea resultados y un
+  clasificador al que se le ocultan esos resultados.
+  Ninguna defensa sustituye leer lo que apruebas.
+why: "Es el riesgo real de darle acceso a contenido externo, y explica por qué existen los permisos."
+source: https://code.claude.com/docs/en/security
+related: [permisos-auto-mode, permisos-project-trust]
+updated: 2026-09-28

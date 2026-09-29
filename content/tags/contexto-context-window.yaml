@@ -1,0 +1,18 @@
+id: contexto-context-window
+term: "Context window"
+category: contexto
+level: basico
+summary: "La memoria de trabajo de la sesión. Cuando se llena, la conversación se comprime."
+body: |
+  Contiene todo lo que Claude tiene presente: la conversación, los archivos que leyó,
+  las salidas de comandos, CLAUDE.md, la auto memory, las skills cargadas y las
+  instrucciones del sistema.
+  No es infinita: a medida que trabajas se va llenando hasta que la compactación la
+  resume. Por eso una sesión larga sobre un tema terminado empeora el siguiente.
+  `/context` te muestra qué la está ocupando, que casi siempre sorprende.
+example: |
+  /context
+why: "Saber qué la llena explica por qué a veces Claude 'olvida' algo que dijiste hace rato."
+source: https://code.claude.com/docs/en/context-window
+related: [contexto-compaction, cli-clear]
+updated: 2026-09-28

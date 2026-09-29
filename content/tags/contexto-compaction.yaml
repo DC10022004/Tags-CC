@@ -1,0 +1,18 @@
+id: contexto-compaction
+term: "Compaction"
+category: contexto
+level: intermedio
+summary: "Resumen automático de la conversación cuando el contexto se acerca a su límite."
+body: |
+  Primero se descartan las salidas de herramientas más viejas y después se resume la
+  conversación.
+  Lo importante es qué sobrevive: el CLAUDE.md de la raíz del proyecto y la auto memory se
+  recargan desde disco, pero **las instrucciones que diste solo hablando pueden perderse**.
+  Si algo tiene que sobrevivir, escríbelo en CLAUDE.md en lugar de decirlo.
+  Puedes dispararla tú con `/compact`, y enfocarla.
+example: |
+  /compact enfócate en los cambios de la API
+why: "Explica por qué a veces se pierde una instrucción que diste al inicio de una sesión larga."
+source: https://code.claude.com/docs/en/costs
+related: [contexto-context-window, contexto-claude-md]
+updated: 2026-09-28

@@ -1,0 +1,15 @@
+id: plataforma-routines
+term: "Routine"
+category: plataforma
+level: avanzado
+summary: "Configuración guardada de Claude Code que corre sola: por horario, por API o por GitHub."
+body: |
+  Empaqueta un prompt, uno o más repositorios y un conjunto de conectores, y se ejecuta
+  en infraestructura en la nube, así que sigue funcionando con la laptop cerrada.
+  La diferencia con una sesión en la nube es que una routine se **repite**: se dispara por
+  calendario, por llamada a la API o por un evento de GitHub.
+  Está en vista previa de investigación; puede cambiar.
+why: "Para tareas que deberían ocurrir sin que tú te acuerdes: revisiones, reportes, mantenimiento."
+source: https://code.claude.com/docs/en/routines
+related: [plataforma-cloud-session]
+updated: 2026-09-28

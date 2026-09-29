@@ -1,0 +1,18 @@
+id: cli-goal
+term: "/goal"
+category: cli
+level: intermedio
+summary: "Fija una condición de término y Claude sigue trabajando solo hasta cumplirla."
+body: |
+  Después de cada turno, un modelo pequeño y rápido comprueba si la condición se cumple.
+  Si aún no, Claude arranca otro turno en vez de devolverte el control.
+  La meta se limpia sola cuando se cumple, cuando el modelo la juzga imposible, o cuando un
+  turno falla con un error que tienes que arreglar tú.
+  Solo sirve con un final **verificable**: 'migrar hasta que compile y pasen los tests',
+  no 'mejorar el código'.
+example: |
+  /goal todos los tests de auth pasan y no queda ningún uso de la API vieja
+why: "Para trabajo largo con final comprobable, sin tener que empujar turno por turno."
+source: https://code.claude.com/docs/en/goal
+related: [workflow-verification-loop]
+updated: 2026-09-28

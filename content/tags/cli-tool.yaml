@@ -1,0 +1,15 @@
+id: cli-tool
+term: "Tool"
+category: cli
+level: basico
+summary: "Una acción que Claude puede ejecutar: leer, editar, correr un comando, buscar en la web."
+body: |
+  Las herramientas son lo que hace a Claude Code *agéntico*. Sin ellas solo podría
+  responder con texto que tú aplicas a mano.
+  Cada uso devuelve un resultado que informa la decisión siguiente dentro del bucle.
+  También son la unidad sobre la que trabajan los permisos y los hooks: cuando escribes
+  `Bash(git push *)` en una regla, estás nombrando una herramienta y su argumento.
+why: "Es la unidad de todo lo demás: permisos, hooks y reglas se escriben sobre herramientas."
+source: https://code.claude.com/docs/en/tools-reference
+related: [cli-agentic-loop, permisos-deny-rule]
+updated: 2026-09-28

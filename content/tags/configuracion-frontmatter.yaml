@@ -1,0 +1,21 @@
+id: configuracion-frontmatter
+term: "Frontmatter"
+category: configuracion
+level: intermedio
+summary: "Bloque YAML entre --- al inicio de un archivo Markdown, con su configuración."
+body: |
+  Las skills, los subagentes, los output styles y las rules leen su configuración de ahí:
+  el `description` de una skill, las `tools` de un subagente, los `paths` de una regla.
+  Todo lo que va después del `---` de cierre son las instrucciones.
+  Una trampa que cuesta tiempo: el `---` de apertura tiene que ser **la primera línea del
+  archivo**. Un salto de línea antes y el frontmatter deja de existir.
+example: |
+  ---
+  name: deploy
+  description: Pasos de despliegue del proyecto.
+  ---
+  Las instrucciones van acá.
+why: "Es la sintaxis compartida por skills, subagentes y reglas; equivocarla los vuelve invisibles."
+source: https://code.claude.com/docs/en/skills
+related: [skills-skill-md, contexto-rules]
+updated: 2026-09-28

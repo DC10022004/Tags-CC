@@ -1,0 +1,15 @@
+id: subagentes-agent-teams
+term: "Agent teams"
+category: subagentes
+level: avanzado
+summary: "Varias sesiones de Claude Code coordinadas por un líder, con lista de tareas compartida."
+body: |
+  A diferencia de los subagentes, que viven dentro de una sesión y solo le reportan al
+  padre, cada compañero de equipo tiene su propia ventana de contexto y puedes hablarle
+  directamente a cualquiera.
+  Se comunican entre pares y comparten una lista de tareas.
+  Es experimental y viene desactivado: hay que habilitarlo a propósito.
+why: "Para trabajo paralelo de verdad, donde quieres intervenir en cada rama sin perder el hilo."
+source: https://code.claude.com/docs/en/agent-teams
+related: [subagentes-subagent]
+updated: 2026-09-28

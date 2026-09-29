@@ -1,0 +1,15 @@
+id: plataforma-vs-code
+term: "Extensión de VS Code"
+category: plataforma
+level: basico
+summary: "Claude Code dentro del editor, con el mismo motor que la CLI y diffs integrados."
+body: |
+  Comparte el mismo motor y la misma configuración que la terminal: tus CLAUDE.md,
+  skills y ajustes valen igual.
+  Lo que aporta es la integración visual: ver los cambios como diffs del editor, el
+  indicador de modo de permiso, y la selección de código como contexto.
+  Hay extensión equivalente para JetBrains.
+why: "Si vives en el editor, evita saltar a la terminal para cada cambio."
+source: https://code.claude.com/docs/en/vs-code
+related: [cli-session, permisos-modos]
+updated: 2026-09-28

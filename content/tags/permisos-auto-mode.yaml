@@ -1,0 +1,18 @@
+id: permisos-auto-mode
+term: "Auto mode"
+category: permisos
+level: basico
+summary: "Modo donde un modelo clasificador revisa las acciones en tu lugar, en vez de preguntarte."
+body: |
+  Claude Code ejecuta la mayoría de acciones sin preguntar, pero no a ciegas: un
+  clasificador aparte las revisa y bloquea escalamiento de alcance, infraestructura no
+  confiable e inyección de prompts.
+  Detalle de diseño que vale conocer: al clasificador se le quitan los resultados de las
+  herramientas, así que el contenido hostil de un archivo o una web no puede manipularlo.
+  Tus reglas `ask` explícitas siguen preguntando.
+example: |
+  claude --permission-mode auto
+why: "Es cómo bajar la fatiga de aprobar todo sin quedarte sin ninguna revisión."
+source: https://code.claude.com/docs/en/permission-modes
+related: [permisos-modos, permisos-prompt-injection]
+updated: 2026-09-28

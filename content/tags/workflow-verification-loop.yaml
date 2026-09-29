@@ -1,0 +1,17 @@
+id: workflow-verification-loop
+term: "Verification loop"
+category: workflow
+level: intermedio
+summary: "Darle a Claude una prueba que pueda correr, para que itere hasta que pase."
+body: |
+  Es cómo una sesión sabe que el trabajo está *hecho* y no solo que *parece* hecho: le
+  das un chequeo ejecutable —una suite de tests, un build, una comparación de capturas— y
+  Claude itera hasta que pase, en vez de parar al primer intento.
+  Es el prerrequisito de las corridas desatendidas: sin un bucle de verificación, lo único
+  que decide que el agente terminó es el propio agente.
+example: |
+  claude "arregla el bug y corre npm test hasta que pase"
+why: "Es la diferencia entre código que compila en tu cabeza y código que de verdad pasa las pruebas."
+source: https://code.claude.com/docs/en/goal
+related: [workflow-best-practices]
+updated: 2026-09-28

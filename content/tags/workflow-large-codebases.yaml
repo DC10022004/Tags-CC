@@ -1,0 +1,16 @@
+id: workflow-large-codebases
+term: "Trabajar en un repo grande"
+category: workflow
+level: intermedio
+summary: "En un repo grande el cuello de botella es el contexto, no el modelo."
+body: |
+  La estrategia es la misma en todos los casos: no metas el repo entero en la ventana.
+  Delega la exploración a subagentes, apóyate en CLAUDE.md para las convenciones, usa
+  rules con `paths:` para lo específico de cada zona, y deja que Claude busque en lugar de
+  darle archivos.
+  El error típico es pegar demasiado código 'por si acaso': llena el contexto y empeora
+  las respuestas.
+why: "Es la diferencia entre que Claude te sirva o no en el repo donde de verdad trabajas."
+source: https://code.claude.com/docs/en/large-codebases
+related: [subagentes-subagent, contexto-context-window, contexto-rules]
+updated: 2026-09-28

@@ -1,8 +1,39 @@
 {
  "schema": 1,
- "version": "2026-09-28.2",
- "count": 12,
+ "version": "2026-09-28.4",
+ "count": 60,
  "tags": [
+  {
+   "id": "cli-agentic-loop",
+   "term": "Agentic loop",
+   "category": "cli",
+   "level": "basico",
+   "summary": "El ciclo que Claude repite: reunir contexto, actuar, verificar, y otra vez hasta terminar.",
+   "body": "Cada uso de una herramienta devuelve información que decide el paso siguiente. Puedes interrumpirlo en cualquier momento para redirigir. Entenderlo sirve para algo concreto: casi todos los puntos de extensión —hooks, skills, MCP— se enganchan a una fase específica de este ciclo. Si sabes en qué fase quieres intervenir, sabes qué mecanismo usar.",
+   "why": "Es el modelo mental que hace que hooks, skills y MCP dejen de parecer cosas sueltas.",
+   "source": "https://code.claude.com/docs/en/how-claude-code-works",
+   "related": [
+    "hooks-eventos",
+    "cli-tool"
+   ],
+   "updated": "2026-09-28"
+  },
+  {
+   "id": "cli-claude-directory",
+   "term": ".claude",
+   "category": "cli",
+   "level": "intermedio",
+   "summary": "La carpeta donde vive todo: skills, comandos, ajustes, sesiones y auto memory.",
+   "body": "Existe en dos lugares y la distinción importa: `~/.claude/` es tuya y aplica a todo, y `.claude/` dentro de un repo aplica solo a ese proyecto y normalmente se commitea. Ahí viven `settings.json`, `skills/`, `commands/`, `rules/`, `agents/` y las transcripciones en `projects/`. Si algo se comporta distinto entre dos proyectos, la respuesta casi siempre está en comparar estas dos carpetas.",
+   "example": "ls ~/.claude/          # tu configuración global\nls .claude/            # la del proyecto",
+   "why": "Es el primer lugar donde mirar cuando algo funciona en un proyecto y en otro no.",
+   "source": "https://code.claude.com/docs/en/claude-directory",
+   "related": [
+    "configuracion-settings-json",
+    "cli-session"
+   ],
+   "updated": "2026-09-28"
+  },
   {
    "id": "cli-clear",
    "term": "/clear",
@@ -16,6 +47,112 @@
    "related": [
     "cli-rewind",
     "contexto-auto-memory"
+   ],
+   "updated": "2026-09-28"
+  },
+  {
+   "id": "cli-doctor",
+   "term": "/doctor",
+   "category": "cli",
+   "level": "basico",
+   "summary": "Diagnostica tu instalación y configuración, y dice de dónde sale cada valor.",
+   "body": "Es lo primero que conviene correr cuando algo no funciona y no sabes por qué: revisa la instalación, la configuración efectiva y los puntos de extensión cargados. Sirve especialmente con la precedencia de `settings.json`, donde un ajuste puede estar pisado por otro nivel y no es evidente cuál. Sigue disponible aunque apagues las skills incluidas.",
+   "example": "/doctor",
+   "why": "Es el primer paso de cualquier diagnóstico, y evita adivinar dónde está el problema.",
+   "source": "https://code.claude.com/docs/en/commands",
+   "related": [
+    "configuracion-settings-json",
+    "skills-bundled"
+   ],
+   "updated": "2026-09-28"
+  },
+  {
+   "id": "cli-effort-level",
+   "term": "Effort level",
+   "category": "cli",
+   "level": "intermedio",
+   "summary": "Ajuste que controla cuánto razona el modelo antes de responder. Más esfuerzo, más lento.",
+   "body": "Activa razonamiento adaptativo: el modelo decide si piensa y cuánto en cada paso. Más esfuerzo significa más tokens de pensamiento y razonamiento más profundo; menos es más rápido y más barato. No siempre conviene subirlo: para tareas mecánicas es gasto sin beneficio. Súbelo cuando el problema es de diseño o de diagnóstico, no de tecleo.",
+   "example": "/config",
+   "why": "Es la perilla entre rapidez y profundidad; la mayoría nunca la toca y debería.",
+   "source": "https://code.claude.com/docs/en/model-config",
+   "related": [
+    "cli-extended-thinking"
+   ],
+   "updated": "2026-09-28"
+  },
+  {
+   "id": "cli-extended-thinking",
+   "term": "Extended thinking",
+   "category": "cli",
+   "level": "basico",
+   "summary": "El razonamiento paso a paso que el modelo hace antes de responder, visible en gris.",
+   "body": "Aparece en cursiva gris en la terminal, antes de la respuesta. Se ajusta con el effort level, o se acota con `MAX_THINKING_TOKENS` en los modelos con presupuesto fijo de pensamiento. Leerlo es la forma más barata de detectar que Claude entendió mal algo: si el razonamiento parte de una premisa falsa, la respuesta también va a estar mal.",
+   "why": "Leer el razonamiento te deja corregir el rumbo antes de que escriba código equivocado.",
+   "source": "https://code.claude.com/docs/en/model-config",
+   "related": [
+    "cli-effort-level"
+   ],
+   "updated": "2026-09-28"
+  },
+  {
+   "id": "cli-goal",
+   "term": "/goal",
+   "category": "cli",
+   "level": "intermedio",
+   "summary": "Fija una condición de término y Claude sigue trabajando solo hasta cumplirla.",
+   "body": "Después de cada turno, un modelo pequeño y rápido comprueba si la condición se cumple. Si aún no, Claude arranca otro turno en vez de devolverte el control. La meta se limpia sola cuando se cumple, cuando el modelo la juzga imposible, o cuando un turno falla con un error que tienes que arreglar tú. Solo sirve con un final **verificable**: 'migrar hasta que compile y pasen los tests', no 'mejorar el código'.",
+   "example": "/goal todos los tests de auth pasan y no queda ningún uso de la API vieja",
+   "why": "Para trabajo largo con final comprobable, sin tener que empujar turno por turno.",
+   "source": "https://code.claude.com/docs/en/goal",
+   "related": [
+    "workflow-verification-loop"
+   ],
+   "updated": "2026-09-28"
+  },
+  {
+   "id": "cli-keybindings",
+   "term": "Atajos de teclado",
+   "category": "cli",
+   "level": "basico",
+   "summary": "Shift+Tab cambia el modo de permiso; Esc interrumpe; Esc dos veces abre /rewind.",
+   "body": "Los tres que más rinden: **Shift+Tab** rota el modo de permiso sin salir de la sesión, **Esc** interrumpe a Claude a mitad de una acción, y **Esc Esc** con el input vacío abre el menú de rewind. Interrumpir es una habilidad subestimada: es más barato redirigir a los diez segundos que dejar que termine algo que iba mal. Se pueden personalizar en `~/.claude/keybindings.json`.",
+   "why": "Redirigir a tiempo cuesta menos que deshacer, y son tres teclas que ya tienes.",
+   "source": "https://code.claude.com/docs/en/keybindings",
+   "related": [
+    "permisos-modos",
+    "cli-rewind"
+   ],
+   "updated": "2026-09-28"
+  },
+  {
+   "id": "cli-model",
+   "term": "/model",
+   "category": "cli",
+   "level": "basico",
+   "summary": "Cambia el modelo de la sesión en vivo, sin reiniciar ni perder la conversación.",
+   "body": "Modelos distintos tienen costos y capacidades distintas: conviene uno rápido para tareas mecánicas y uno más capaz para diseño o diagnóstico difícil. Se puede fijar por defecto en `settings.json` con la clave `model`, y cambiarlo puntual con el comando. Cambiarlo a mitad de sesión conserva la conversación.",
+   "example": "/model",
+   "why": "Ajustar el modelo a la tarea es la forma más directa de controlar costo y calidad.",
+   "source": "https://code.claude.com/docs/en/model-config",
+   "related": [
+    "cli-effort-level",
+    "configuracion-settings-json"
+   ],
+   "updated": "2026-09-28"
+  },
+  {
+   "id": "cli-output-style",
+   "term": "Output style",
+   "category": "cli",
+   "level": "intermedio",
+   "summary": "Configuración que cambia las instrucciones que Claude Code le da a Claude.",
+   "body": "Cambia comportamiento, tono o formato de las respuestas. La diferencia con CLAUDE.md es de fondo, no de grado: CLAUDE.md **agrega** contexto del proyecto junto a las instrucciones por defecto, mientras que un output style propio puede **reemplazar** las instrucciones de ingeniería de software. Es potente y por eso es fácil romper cosas con él: lo que quites, deja de existir.",
+   "example": "/output-style",
+   "why": "Sirve para usar Claude Code en algo que no es programar, sin pelear con sus defaults.",
+   "source": "https://code.claude.com/docs/en/output-styles",
+   "related": [
+    "contexto-claude-md"
    ],
    "updated": "2026-09-28"
   },
@@ -36,6 +173,114 @@
    "updated": "2026-09-28"
   },
   {
+   "id": "cli-session",
+   "term": "Session",
+   "category": "cli",
+   "level": "basico",
+   "summary": "Una conversación atada a tu directorio actual, con su propio contexto. Se puede retomar.",
+   "body": "Se retoma con `claude -c`, se bifurca con `--fork-session` para conservar el historial bajo un id nuevo, y puedes correr varias en paralelo en distintas terminales. `/clear` empieza una sesión nueva; la anterior no se pierde y sigue disponible en `/resume`. Cada transcripción se guarda en `~/.claude/projects/`.",
+   "example": "claude -c              # retomar la última\nclaude --resume        # elegir cuál retomar",
+   "why": "Cerrar la terminal no pierde el trabajo: casi siempre puedes volver a donde estabas.",
+   "source": "https://code.claude.com/docs/en/sessions",
+   "related": [
+    "cli-clear",
+    "cli-claude-directory"
+   ],
+   "updated": "2026-09-28"
+  },
+  {
+   "id": "cli-statusline",
+   "term": "Status line",
+   "category": "cli",
+   "level": "intermedio",
+   "summary": "Barra inferior configurable que corre un script tuyo y muestra lo que imprima.",
+   "body": "Recibe los datos de la sesión como JSON por stdin y muestra la salida de tu script. Lo más útil que se puede poner ahí es el uso de la ventana de contexto y el costo acumulado: son las dos cosas que te afectan y que de otro modo no ves hasta que duelen. También suele llevarse la rama de git.",
+   "example": "/statusline",
+   "why": "Te deja ver el contexto y el gasto mientras trabajas, en vez de descubrirlos tarde.",
+   "source": "https://code.claude.com/docs/en/statusline",
+   "related": [
+    "contexto-context-window"
+   ],
+   "updated": "2026-09-28"
+  },
+  {
+   "id": "cli-system-prompt",
+   "term": "System prompt",
+   "category": "cli",
+   "level": "avanzado",
+   "summary": "Las instrucciones que Claude Code manda antes de tu conversación, en cada petición.",
+   "body": "Cubren cómo usa las herramientas, cómo se comporta de forma segura y cómo formatea. Puedes añadirle cosas con `--append-system-prompt` o reemplazarlo entero con `--system-prompt`. Detalle que importa para el costo: es la primera capa del caché de prompts, así que cambiarlo invalida el caché de todo lo que viene después.",
+   "example": "claude --append-system-prompt \"Responde siempre en español.\"",
+   "why": "Es la palanca más profunda para cambiar el comportamiento, y la que más fácil rompe el caché.",
+   "source": "https://code.claude.com/docs/en/costs",
+   "related": [
+    "cli-output-style"
+   ],
+   "updated": "2026-09-28"
+  },
+  {
+   "id": "cli-tool",
+   "term": "Tool",
+   "category": "cli",
+   "level": "basico",
+   "summary": "Una acción que Claude puede ejecutar: leer, editar, correr un comando, buscar en la web.",
+   "body": "Las herramientas son lo que hace a Claude Code *agéntico*. Sin ellas solo podría responder con texto que tú aplicas a mano. Cada uso devuelve un resultado que informa la decisión siguiente dentro del bucle. También son la unidad sobre la que trabajan los permisos y los hooks: cuando escribes `Bash(git push *)` en una regla, estás nombrando una herramienta y su argumento.",
+   "why": "Es la unidad de todo lo demás: permisos, hooks y reglas se escriben sobre herramientas.",
+   "source": "https://code.claude.com/docs/en/tools-reference",
+   "related": [
+    "cli-agentic-loop",
+    "permisos-deny-rule"
+   ],
+   "updated": "2026-09-28"
+  },
+  {
+   "id": "configuracion-env-vars",
+   "term": "Variables de entorno",
+   "category": "configuracion",
+   "level": "avanzado",
+   "summary": "Ajustan Claude Code desde el entorno, útil en CI y para cosas que no van en un archivo.",
+   "body": "Controlan cosas como el modelo, los límites de tokens de pensamiento o el apagado de ciertas funciones. Son especialmente útiles donde no quieres comprometer un archivo de configuración: un runner de CI, un contenedor, una prueba puntual. Se pueden fijar también desde el bloque `env` de `settings.json`, que es más reproducible que exportarlas a mano.",
+   "example": "MAX_THINKING_TOKENS=8000 claude",
+   "why": "Es la vía para configurar Claude Code donde no hay un settings.json que puedas commitear.",
+   "source": "https://code.claude.com/docs/en/env-vars",
+   "related": [
+    "configuracion-settings-json"
+   ],
+   "updated": "2026-09-28"
+  },
+  {
+   "id": "configuracion-frontmatter",
+   "term": "Frontmatter",
+   "category": "configuracion",
+   "level": "intermedio",
+   "summary": "Bloque YAML entre --- al inicio de un archivo Markdown, con su configuración.",
+   "body": "Las skills, los subagentes, los output styles y las rules leen su configuración de ahí: el `description` de una skill, las `tools` de un subagente, los `paths` de una regla. Todo lo que va después del `---` de cierre son las instrucciones. Una trampa que cuesta tiempo: el `---` de apertura tiene que ser **la primera línea del archivo**. Un salto de línea antes y el frontmatter deja de existir.",
+   "example": "---\nname: deploy\ndescription: Pasos de despliegue del proyecto.\n---\nLas instrucciones van acá.",
+   "why": "Es la sintaxis compartida por skills, subagentes y reglas; equivocarla los vuelve invisibles.",
+   "source": "https://code.claude.com/docs/en/skills",
+   "related": [
+    "skills-skill-md",
+    "contexto-rules"
+   ],
+   "updated": "2026-09-28"
+  },
+  {
+   "id": "configuracion-managed-settings",
+   "term": "Managed settings",
+   "category": "configuracion",
+   "level": "avanzado",
+   "summary": "Configuración que fija la organización y que ningún ajuste local puede pisar.",
+   "body": "Es el nivel más alto de la precedencia: por encima de la línea de comandos, del proyecto y del usuario. Se entrega por MDM, por `managed-settings.json` o desde la consola de administración. Si trabajas en una empresa y un ajuste tuyo 'no hace nada', este es el primer sospechoso: no está roto, está pisado a propósito.",
+   "example": "/doctor   # muestra la configuración efectiva y su origen",
+   "why": "Explica por qué en un equipo tu configuración a veces simplemente no se aplica.",
+   "source": "https://code.claude.com/docs/en/managed-settings",
+   "related": [
+    "configuracion-settings-json",
+    "cli-doctor"
+   ],
+   "updated": "2026-09-28"
+  },
+  {
    "id": "configuracion-settings-json",
    "term": "settings.json",
    "category": "configuracion",
@@ -48,6 +293,22 @@
    "related": [
     "permisos-deny-rule",
     "hooks-eventos"
+   ],
+   "updated": "2026-09-28"
+  },
+  {
+   "id": "contexto-agents-md",
+   "term": "AGENTS.md",
+   "category": "contexto",
+   "level": "intermedio",
+   "summary": "Archivo de instrucciones estándar entre herramientas de IA. Claude lo lee si no hay CLAUDE.md.",
+   "body": "Si tu repo ya tiene un `AGENTS.md` y no tiene CLAUDE.md, Claude lo usa como instrucciones del proyecto sin que agregues un segundo archivo. En `/config`, el ajuste **Project instructions** decide si lee ambos o solo CLAUDE.md. Sirve cuando el equipo usa varias herramientas de IA y no quieres mantener el mismo contenido duplicado en dos archivos.",
+   "example": "/config    # ajuste: Project instructions",
+   "why": "Evita duplicar las mismas reglas en dos archivos si tu equipo usa más de una herramienta.",
+   "source": "https://code.claude.com/docs/en/memory",
+   "related": [
+    "contexto-claude-md",
+    "contexto-rules"
    ],
    "updated": "2026-09-28"
   },
@@ -83,6 +344,54 @@
    "updated": "2026-09-28"
   },
   {
+   "id": "contexto-compaction",
+   "term": "Compaction",
+   "category": "contexto",
+   "level": "intermedio",
+   "summary": "Resumen automático de la conversación cuando el contexto se acerca a su límite.",
+   "body": "Primero se descartan las salidas de herramientas más viejas y después se resume la conversación. Lo importante es qué sobrevive: el CLAUDE.md de la raíz del proyecto y la auto memory se recargan desde disco, pero **las instrucciones que diste solo hablando pueden perderse**. Si algo tiene que sobrevivir, escríbelo en CLAUDE.md en lugar de decirlo. Puedes dispararla tú con `/compact`, y enfocarla.",
+   "example": "/compact enfócate en los cambios de la API",
+   "why": "Explica por qué a veces se pierde una instrucción que diste al inicio de una sesión larga.",
+   "source": "https://code.claude.com/docs/en/costs",
+   "related": [
+    "contexto-context-window",
+    "contexto-claude-md"
+   ],
+   "updated": "2026-09-28"
+  },
+  {
+   "id": "contexto-context-window",
+   "term": "Context window",
+   "category": "contexto",
+   "level": "basico",
+   "summary": "La memoria de trabajo de la sesión. Cuando se llena, la conversación se comprime.",
+   "body": "Contiene todo lo que Claude tiene presente: la conversación, los archivos que leyó, las salidas de comandos, CLAUDE.md, la auto memory, las skills cargadas y las instrucciones del sistema. No es infinita: a medida que trabajas se va llenando hasta que la compactación la resume. Por eso una sesión larga sobre un tema terminado empeora el siguiente. `/context` te muestra qué la está ocupando, que casi siempre sorprende.",
+   "example": "/context",
+   "why": "Saber qué la llena explica por qué a veces Claude 'olvida' algo que dijiste hace rato.",
+   "source": "https://code.claude.com/docs/en/context-window",
+   "related": [
+    "contexto-compaction",
+    "cli-clear"
+   ],
+   "updated": "2026-09-28"
+  },
+  {
+   "id": "contexto-rules",
+   "term": "Rules",
+   "category": "contexto",
+   "level": "intermedio",
+   "summary": "Archivos de instrucciones en .claude/rules/ que pueden cargarse solo para ciertas rutas.",
+   "body": "Se cargan junto a CLAUDE.md, pero con una ventaja: con `paths:` en el frontmatter, una regla se carga **solo** cuando Claude lee un archivo que coincide. Así las convenciones de tus tests no ocupan contexto mientras trabajas en el frontend. Es la forma de partir un CLAUDE.md que creció demasiado sin perder las reglas.",
+   "example": "# .claude/rules/tests.md\n---\npaths: [\"**/*.test.ts\"]\n---\nUsa Vitest, nunca Jest.",
+   "why": "Mantiene el contexto liviano: cada regla aparece solo cuando es relevante.",
+   "source": "https://code.claude.com/docs/en/memory",
+   "related": [
+    "contexto-claude-md",
+    "configuracion-frontmatter"
+   ],
+   "updated": "2026-09-28"
+  },
+  {
    "id": "hooks-eventos",
    "term": "Hook event",
    "category": "hooks",
@@ -95,6 +404,22 @@
    "related": [
     "hooks-pretooluse",
     "configuracion-settings-json"
+   ],
+   "updated": "2026-09-28"
+  },
+  {
+   "id": "hooks-posttooluse",
+   "term": "PostToolUse hook",
+   "category": "hooks",
+   "level": "intermedio",
+   "summary": "Corre después de cada llamada a una herramienta, cuando ya hay resultado.",
+   "body": "Su compañero `PreToolUse` puede bloquear; este no, porque la acción ya ocurrió. Lo que puede es reaccionar: formatear el archivo que se acaba de editar, correr el linter, registrar lo que pasó. El patrón más común y más rentable es exactamente ese: formateo automático después de cada edición, para que no se te acumule ruido en el diff.",
+   "example": "// .claude/settings.json — el hook recibe JSON por stdin, de ahí el jq\n{ \"hooks\": { \"PostToolUse\": [ { \"matcher\": \"Edit|Write\",\n    \"hooks\": [ { \"type\": \"command\",\n      \"command\": \"jq -r '.tool_input.file_path' | xargs npx prettier --write\" } ] } ] } }",
+   "why": "Automatiza lo que harías después de cada edición: formatear, lintar, registrar.",
+   "source": "https://code.claude.com/docs/en/hooks",
+   "related": [
+    "hooks-pretooluse",
+    "hooks-eventos"
    ],
    "updated": "2026-09-28"
   },
@@ -112,6 +437,101 @@
     "hooks-eventos",
     "permisos-deny-rule",
     "contexto-claude-md"
+   ],
+   "updated": "2026-09-28"
+  },
+  {
+   "id": "hooks-userpromptsubmit",
+   "term": "UserPromptSubmit hook",
+   "category": "hooks",
+   "level": "intermedio",
+   "summary": "Corre cuando envías un prompt, antes de que Claude lo procese. Es de cadencia por turno.",
+   "body": "Puede inspeccionar lo que escribiste y añadir contexto antes de que llegue al modelo: el estado de git, la rama actual, el ticket en el que estás. Al ser por turno y no por herramienta, es barato: corre una vez por mensaje, no decenas de veces dentro del bucle. Es el lugar correcto para inyectar contexto dinámico que cambia entre un prompt y otro: con salida 0, lo que el hook imprima en stdout se agrega al contexto de Claude como texto.",
+   "example": "// .claude/settings.json\n{ \"hooks\": { \"UserPromptSubmit\": [ { \"hooks\":\n    [ { \"type\": \"command\", \"command\": \"git branch --show-current\" } ] } ] } }",
+   "why": "Le da a Claude contexto fresco en cada mensaje sin que tú lo escribas cada vez.",
+   "source": "https://code.claude.com/docs/en/hooks",
+   "related": [
+    "hooks-eventos",
+    "hooks-pretooluse"
+   ],
+   "updated": "2026-09-28"
+  },
+  {
+   "id": "mcp-connector",
+   "term": "Connector",
+   "category": "mcp",
+   "level": "intermedio",
+   "summary": "Servidor MCP agregado a tu cuenta de claude.ai, no configurado en Claude Code.",
+   "body": "Cuando inicias sesión en Claude Code con esa cuenta, tus conectores aparecen en `/mcp` junto a los servidores que agregaste localmente. La distinción importa al diagnosticar: si una herramienta aparece pero no funciona, primero hay que saber si vive en tu máquina o en tu cuenta, porque se arreglan en lugares distintos. Las organizaciones también pueden proveerlos y controlarlos por herramienta.",
+   "example": "/mcp",
+   "why": "Explica por qué aparecen herramientas que nunca configuraste en este proyecto.",
+   "source": "https://code.claude.com/docs/en/mcp",
+   "related": [
+    "mcp-servidor"
+   ],
+   "updated": "2026-09-28"
+  },
+  {
+   "id": "mcp-protocolo",
+   "term": "MCP",
+   "category": "mcp",
+   "level": "intermedio",
+   "summary": "Protocolo abierto para conectar Claude con herramientas y datos externos.",
+   "body": "Model Context Protocol. En lugar de que cada integración se programe a mano, un servidor MCP expone sus herramientas de forma estándar y Claude las usa como usa las propias. Es la diferencia entre 'Claude puede leer tu código' y 'Claude puede leer tu Notion, tu base de datos y tus tickets'. `/mcp` te muestra los servidores conectados y sus herramientas.",
+   "example": "/mcp",
+   "why": "Es cómo Claude deja de estar limitado a tu sistema de archivos.",
+   "source": "https://code.claude.com/docs/en/mcp",
+   "related": [
+    "mcp-servidor",
+    "mcp-connector"
+   ],
+   "updated": "2026-09-28"
+  },
+  {
+   "id": "mcp-servidor",
+   "term": "MCP server",
+   "category": "mcp",
+   "level": "intermedio",
+   "summary": "Programa que expone herramientas a Claude por MCP. Se configura por proyecto o global.",
+   "body": "Puede correr local (un proceso en tu máquina) o remoto (un servicio por HTTP). Se agregan con `claude mcp add` y se ven con `/mcp`. Ojo con el alcance: un servidor agregado al proyecto vive en el `.mcp.json` del repo y lo comparte tu equipo; uno agregado a nivel de usuario es solo tuyo. Confundirlos es la causa habitual de 'a mí me funciona'.",
+   "example": "claude mcp add --help\nclaude mcp list",
+   "why": "Es la unidad que instalas y la que hay que revisar cuando una herramienta externa no aparece.",
+   "source": "https://code.claude.com/docs/en/mcp",
+   "related": [
+    "mcp-protocolo",
+    "mcp-tool-search"
+   ],
+   "updated": "2026-09-28"
+  },
+  {
+   "id": "mcp-tool-search",
+   "term": "MCP Tool Search",
+   "category": "mcp",
+   "level": "avanzado",
+   "summary": "Difiere los esquemas de las herramientas MCP hasta que se necesitan, para ahorrar contexto.",
+   "body": "Al arrancar solo se cargan los nombres de las herramientas y las instrucciones del servidor; el esquema completo se pide cuando Claude decide usar una. Es lo que evita que diez servidores MCP conectados te coman la ventana de contexto antes de escribir el primer prompt. Si tienes muchos servidores y notas el contexto lleno desde el inicio, esto es lo que hay que revisar.",
+   "example": "/context   # ver cuánto contexto ocupan los servidores MCP",
+   "why": "Permite tener muchos servidores conectados sin pagar el contexto de todos a la vez.",
+   "source": "https://code.claude.com/docs/en/mcp",
+   "related": [
+    "mcp-servidor",
+    "contexto-context-window"
+   ],
+   "updated": "2026-09-28"
+  },
+  {
+   "id": "permisos-auto-mode",
+   "term": "Auto mode",
+   "category": "permisos",
+   "level": "basico",
+   "summary": "Modo donde un modelo clasificador revisa las acciones en tu lugar, en vez de preguntarte.",
+   "body": "Claude Code ejecuta la mayoría de acciones sin preguntar, pero no a ciegas: un clasificador aparte las revisa y bloquea escalamiento de alcance, infraestructura no confiable e inyección de prompts. Detalle de diseño que vale conocer: al clasificador se le quitan los resultados de las herramientas, así que el contenido hostil de un archivo o una web no puede manipularlo. Tus reglas `ask` explícitas siguen preguntando.",
+   "example": "claude --permission-mode auto",
+   "why": "Es cómo bajar la fatiga de aprobar todo sin quedarte sin ninguna revisión.",
+   "source": "https://code.claude.com/docs/en/permission-modes",
+   "related": [
+    "permisos-modos",
+    "permisos-prompt-injection"
    ],
    "updated": "2026-09-28"
   },
@@ -149,6 +569,22 @@
    "updated": "2026-09-28"
   },
   {
+   "id": "permisos-permission-rule",
+   "term": "Permission rule",
+   "category": "permisos",
+   "level": "intermedio",
+   "summary": "Regla que permite, pregunta o niega una herramienta según su nombre y sus argumentos.",
+   "body": "Se evalúan en orden **deny → ask → allow**, y gana la primera que coincida. Ese orden es lo que hay que recordar: una regla `deny` siempre le gana a una `allow`, por específica que sea la segunda. Son control fino que se apila sobre el modo de permiso, que es el control grueso.",
+   "example": "// .claude/settings.json\n{ \"permissions\": {\n    \"allow\": [\"Bash(npm test)\"],\n    \"ask\":   [\"Bash(git push *)\"],\n    \"deny\":  [\"Read(./.env)\"] } }",
+   "why": "Te deja pre-aprobar lo rutinario y bloquear lo peligroso sin renunciar a la velocidad.",
+   "source": "https://code.claude.com/docs/en/permissions",
+   "related": [
+    "permisos-deny-rule",
+    "permisos-modos"
+   ],
+   "updated": "2026-09-28"
+  },
+  {
    "id": "permisos-plan-mode",
    "term": "Plan mode",
    "category": "permisos",
@@ -161,6 +597,188 @@
    "related": [
     "permisos-modos",
     "permisos-deny-rule"
+   ],
+   "updated": "2026-09-28"
+  },
+  {
+   "id": "permisos-project-trust",
+   "term": "Project trust",
+   "category": "permisos",
+   "level": "intermedio",
+   "summary": "El diálogo que acepta un directorio antes de que Claude Code cargue su configuración.",
+   "body": "Hasta que confías en una carpeta, Claude Code retiene parte de lo que el repositorio aporta: por ejemplo sus reglas `allow` y sus marketplaces desde `.claude/settings.json`. Existe porque clonar un repo ajeno no debería bastar para que su configuración corra en tu máquina. La aceptación se guarda por directorio, salvo tu carpeta personal, donde vale solo para la sesión actual.",
+   "why": "Es la razón por la que un repo recién clonado no aplica de inmediato su propia configuración.",
+   "source": "https://code.claude.com/docs/en/permissions",
+   "related": [
+    "permisos-prompt-injection",
+    "configuracion-settings-json"
+   ],
+   "updated": "2026-09-28"
+  },
+  {
+   "id": "permisos-prompt-injection",
+   "term": "Prompt injection",
+   "category": "permisos",
+   "level": "intermedio",
+   "summary": "Instrucciones hostiles escondidas en un archivo o web que intentan redirigir a Claude.",
+   "body": "El vector es simple: Claude lee un archivo, una página o el resultado de una herramienta, y ese contenido trae instrucciones que tú nunca diste. Las defensas son el sistema de permisos, la detección de inyección en comandos y la verificación de confianza. El auto mode añade un sondeo que escanea resultados y un clasificador al que se le ocultan esos resultados. Ninguna defensa sustituye leer lo que apruebas.",
+   "why": "Es el riesgo real de darle acceso a contenido externo, y explica por qué existen los permisos.",
+   "source": "https://code.claude.com/docs/en/security",
+   "related": [
+    "permisos-auto-mode",
+    "permisos-project-trust"
+   ],
+   "updated": "2026-09-28"
+  },
+  {
+   "id": "permisos-sandboxing",
+   "term": "Sandboxing",
+   "category": "permisos",
+   "level": "intermedio",
+   "summary": "Aislamiento del sistema de archivos y la red para la herramienta Bash.",
+   "body": "Los comandos corren dentro de un límite que defines por adelantado, así Claude trabaja libre dentro de él sin pedirte aprobación comando por comando. Es una capa **distinta** de las reglas de permisos: el sandbox decide qué puede alcanzar una acción una vez que corre; los permisos deciden si corre. Combinarlos es lo que da velocidad sin bajar la guardia.",
+   "example": "/sandbox",
+   "why": "Menos interrupciones que aprobar cada comando, y más seguro que aprobar todo.",
+   "source": "https://code.claude.com/docs/en/sandboxing",
+   "related": [
+    "permisos-modos",
+    "permisos-permission-rule"
+   ],
+   "updated": "2026-09-28"
+  },
+  {
+   "id": "plataforma-artifacts",
+   "term": "Artifact",
+   "category": "plataforma",
+   "level": "basico",
+   "summary": "Página web interactiva que Claude Code publica desde tu sesión a una URL privada.",
+   "body": "Sirve cuando el resultado se entiende mejor viéndolo que leyéndolo en la terminal: un gráfico, un tablero, una demo. La página se actualiza en su sitio cuando la sesión vuelve a publicar, así que el enlace no cambia. Empiezan privados; compartirlos depende de tu plan.",
+   "why": "Convierte una salida de terminal en algo que de verdad puedes mandarle a alguien.",
+   "source": "https://code.claude.com/docs/en/artifacts",
+   "related": [
+    "plataforma-cloud-session"
+   ],
+   "updated": "2026-09-28"
+  },
+  {
+   "id": "plataforma-bare-mode",
+   "term": "Bare mode",
+   "category": "plataforma",
+   "level": "avanzado",
+   "summary": "Arranca sin cargar hooks, skills, comandos, subagentes, plugins, MCP, memoria ni CLAUDE.md.",
+   "body": "Con `--bare` no se carga nada de tu configuración. Es lo recomendado para CI y llamadas desde scripts, donde necesitas el mismo resultado en cualquier máquina y no quieres que la configuración personal de alguien cambie la salida. También es la forma más rápida de saber si un problema lo causa tu propia configuración.",
+   "example": "claude --bare -p \"...\"",
+   "why": "Es el control: si el problema desaparece con --bare, lo estaba causando tu configuración.",
+   "source": "https://code.claude.com/docs/en/headless",
+   "related": [
+    "plataforma-non-interactive",
+    "configuracion-settings-json"
+   ],
+   "updated": "2026-09-28"
+  },
+  {
+   "id": "plataforma-cloud-session",
+   "term": "Cloud session",
+   "category": "plataforma",
+   "level": "intermedio",
+   "summary": "Sesión que corre en infraestructura remota y sigue trabajando aunque cierres la laptop.",
+   "body": "Se arranca desde claude.ai/code, la app móvil, la app de escritorio o `claude --cloud`. Diferencia que importa: una sesión en la nube parte de un clon fresco de tu repositorio y **no** lee el `~/.claude/` de tu máquina, así que tus skills y ajustes personales no están ahí. Lo que viaja es lo que está commiteado en el repo.",
+   "example": "claude --cloud",
+   "why": "Para tareas largas que no quieres tener atadas a que tu laptop esté abierta.",
+   "source": "https://code.claude.com/docs/en/cloud-environments",
+   "related": [
+    "plataforma-remote-control",
+    "cli-session"
+   ],
+   "updated": "2026-09-28"
+  },
+  {
+   "id": "plataforma-github-actions",
+   "term": "GitHub Actions",
+   "category": "plataforma",
+   "level": "avanzado",
+   "summary": "Correr Claude Code en CI para que reaccione a PRs e issues del repositorio.",
+   "body": "Se usa el modo no interactivo dentro del workflow. La recomendación importante es correrlo con `--bare`: en CI necesitas el mismo resultado en cada máquina, y no quieres que la configuración personal de alguien cambie la salida. Los permisos hay que definirlos explícitamente, porque en CI no hay nadie para aprobar un diálogo.",
+   "why": "Lleva la revisión y las tareas repetitivas al repositorio, sin que nadie las dispare a mano.",
+   "source": "https://code.claude.com/docs/en/github-actions",
+   "related": [
+    "plataforma-non-interactive",
+    "plataforma-bare-mode",
+    "permisos-modos"
+   ],
+   "updated": "2026-09-28"
+  },
+  {
+   "id": "plataforma-non-interactive",
+   "term": "Non-interactive mode",
+   "category": "plataforma",
+   "level": "avanzado",
+   "summary": "Ejecuta un solo prompt y termina, sin sesión interactiva. Se invoca con -p.",
+   "body": "Es lo que usas en CI, en scripts y cuando quieres encadenar la salida con una tubería. La corrida igual se guarda como sesión retomable, salvo que pases `--no-session-persistence`. Antes se llamaba headless mode. Su equivalente en Python y TypeScript es el Agent SDK.",
+   "example": "claude -p \"resume los cambios de este diff\" < diff.txt",
+   "why": "Es la puerta para meter Claude Code en scripts y pipelines, no solo en tu terminal.",
+   "source": "https://code.claude.com/docs/en/headless",
+   "related": [
+    "plataforma-bare-mode"
+   ],
+   "updated": "2026-09-28"
+  },
+  {
+   "id": "plataforma-plugin",
+   "term": "Plugin",
+   "category": "plataforma",
+   "level": "intermedio",
+   "summary": "Paquete instalable con skills, hooks, subagentes y servidores MCP juntos.",
+   "body": "Sirve para distribuir una configuración completa en lugar de pedirle a cada persona que copie archivos. Las skills de un plugin quedan con espacio de nombres, `nombre-plugin:nombre-skill`, así que dos plugins pueden traer una skill con el mismo nombre sin chocar. Se reparten por marketplaces, que es como un equipo estandariza su configuración.",
+   "example": "/plugin",
+   "why": "Es cómo un equipo comparte su forma de trabajar sin un instructivo de diez pasos.",
+   "source": "https://code.claude.com/docs/en/plugin-evals",
+   "related": [
+    "skills-skill-md",
+    "mcp-servidor"
+   ],
+   "updated": "2026-09-28"
+  },
+  {
+   "id": "plataforma-remote-control",
+   "term": "Remote Control",
+   "category": "plataforma",
+   "level": "intermedio",
+   "summary": "Continuar desde el teléfono o el navegador una sesión que corre en tu máquina.",
+   "body": "Tu código y tus archivos se quedan donde están; lo único remoto es la interfaz. Es lo contrario de una sesión en la nube, donde lo que se mueve es la ejecución. Aquí la ejecución sigue en tu laptop y tú te mueves. Útil para revisar cómo va algo largo sin volver al escritorio.",
+   "why": "Te deja mirar y redirigir una tarea larga desde el celular sin mover el trabajo de sitio.",
+   "source": "https://code.claude.com/docs/en/remote-control",
+   "related": [
+    "plataforma-cloud-session"
+   ],
+   "updated": "2026-09-28"
+  },
+  {
+   "id": "plataforma-routines",
+   "term": "Routine",
+   "category": "plataforma",
+   "level": "avanzado",
+   "summary": "Configuración guardada de Claude Code que corre sola: por horario, por API o por GitHub.",
+   "body": "Empaqueta un prompt, uno o más repositorios y un conjunto de conectores, y se ejecuta en infraestructura en la nube, así que sigue funcionando con la laptop cerrada. La diferencia con una sesión en la nube es que una routine se **repite**: se dispara por calendario, por llamada a la API o por un evento de GitHub. Está en vista previa de investigación; puede cambiar.",
+   "why": "Para tareas que deberían ocurrir sin que tú te acuerdes: revisiones, reportes, mantenimiento.",
+   "source": "https://code.claude.com/docs/en/routines",
+   "related": [
+    "plataforma-cloud-session"
+   ],
+   "updated": "2026-09-28"
+  },
+  {
+   "id": "plataforma-vs-code",
+   "term": "Extensión de VS Code",
+   "category": "plataforma",
+   "level": "basico",
+   "summary": "Claude Code dentro del editor, con el mismo motor que la CLI y diffs integrados.",
+   "body": "Comparte el mismo motor y la misma configuración que la terminal: tus CLAUDE.md, skills y ajustes valen igual. Lo que aporta es la integración visual: ver los cambios como diffs del editor, el indicador de modo de permiso, y la selección de código como contexto. Hay extensión equivalente para JetBrains.",
+   "why": "Si vives en el editor, evita saltar a la terminal para cada cambio.",
+   "source": "https://code.claude.com/docs/en/vs-code",
+   "related": [
+    "cli-session",
+    "permisos-modos"
    ],
    "updated": "2026-09-28"
   },
@@ -181,6 +799,22 @@
    "updated": "2026-09-28"
   },
   {
+   "id": "skills-control-invocacion",
+   "term": "disable-model-invocation",
+   "category": "skills",
+   "level": "intermedio",
+   "summary": "Campo del frontmatter que hace que una skill solo la puedas invocar tú, no Claude.",
+   "body": "Por defecto, tú y Claude pueden invocar cualquier skill. `disable-model-invocation: true` la reserva para ti: es lo correcto para todo lo que tiene efectos secundarios o donde el momento importa, como `/deploy` o `/commit`. No quieres que Claude decida desplegar porque el código *parece* listo. El opuesto es `user-invocable: false`, para conocimiento de fondo que Claude debe tener pero que no es una acción que tú ejecutarías.",
+   "example": "---\nname: deploy\ndescription: Despliega a producción.\ndisable-model-invocation: true\n---",
+   "why": "Evita que Claude ejecute por su cuenta algo cuyo momento debes decidir tú.",
+   "source": "https://code.claude.com/docs/en/skills",
+   "related": [
+    "skills-skill-md",
+    "configuracion-frontmatter"
+   ],
+   "updated": "2026-09-28"
+  },
+  {
    "id": "skills-skill-md",
    "term": "SKILL.md",
    "category": "skills",
@@ -193,6 +827,114 @@
    "related": [
     "contexto-claude-md",
     "skills-bundled"
+   ],
+   "updated": "2026-09-28"
+  },
+  {
+   "id": "subagentes-agent-teams",
+   "term": "Agent teams",
+   "category": "subagentes",
+   "level": "avanzado",
+   "summary": "Varias sesiones de Claude Code coordinadas por un líder, con lista de tareas compartida.",
+   "body": "A diferencia de los subagentes, que viven dentro de una sesión y solo le reportan al padre, cada compañero de equipo tiene su propia ventana de contexto y puedes hablarle directamente a cualquiera. Se comunican entre pares y comparten una lista de tareas. Es experimental y viene desactivado: hay que habilitarlo a propósito.",
+   "why": "Para trabajo paralelo de verdad, donde quieres intervenir en cada rama sin perder el hilo.",
+   "source": "https://code.claude.com/docs/en/agent-teams",
+   "related": [
+    "subagentes-subagent"
+   ],
+   "updated": "2026-09-28"
+  },
+  {
+   "id": "subagentes-subagent",
+   "term": "Subagent",
+   "category": "subagentes",
+   "level": "intermedio",
+   "summary": "Asistente especializado que corre en su propio contexto y devuelve un resumen.",
+   "body": "Tiene system prompt propio, acceso a herramientas específico y permisos independientes. Trabaja en una tarea delegada y al terminar devuelve un resumen a la conversación principal. Su valor real es el contexto: una exploración grande que llenaría tu ventana ocurre en la del subagente, y a ti solo te llega la conclusión. Límite: un subagente no sale de la sesión que lo creó.",
+   "example": "ls .claude/agents/",
+   "why": "Mantiene las búsquedas largas fuera de tu contexto, que es el recurso que siempre escasea.",
+   "source": "https://code.claude.com/docs/en/sub-agents",
+   "related": [
+    "subagentes-agent-teams",
+    "contexto-context-window"
+   ],
+   "updated": "2026-09-28"
+  },
+  {
+   "id": "workflow-best-practices",
+   "term": "Best practices",
+   "category": "workflow",
+   "level": "basico",
+   "summary": "La página de docs con los patrones que más rinden al trabajar con Claude Code.",
+   "body": "Cubre cómo estructurar CLAUDE.md, cuándo usar plan mode, cómo dar contexto suficiente sin saturar, y cómo pedir verificación. Vale releerla cada cierto tiempo: los patrones útiles cambian conforme la herramienta gana funciones, y lo que era necesario hace seis meses hoy puede ser innecesario.",
+   "why": "Es el atajo para no descubrir por prueba y error cosas que ya están documentadas.",
+   "source": "https://code.claude.com/docs/en/best-practices",
+   "related": [
+    "workflow-verification-loop",
+    "contexto-claude-md"
+   ],
+   "updated": "2026-09-28"
+  },
+  {
+   "id": "workflow-code-review",
+   "term": "/code-review",
+   "category": "workflow",
+   "level": "basico",
+   "summary": "Skill incluida que revisa el diff actual, una rama o un PR buscando errores.",
+   "body": "Acepta un nivel de esfuerzo: los bajos dan pocos hallazgos de alta confianza, los altos amplían la cobertura a costa de incluir cosas inciertas. Con `--fix` aplica los hallazgos al árbol de trabajo; con `--comment` los publica como comentarios en el PR. No es lo mismo que `/simplify`, que solo busca limpieza y no caza errores.",
+   "example": "/code-review\n/code-review high --fix",
+   "why": "Una segunda lectura de tu diff antes de que la haga otra persona, o la producción.",
+   "source": "https://code.claude.com/docs/en/code-review",
+   "related": [
+    "skills-bundled",
+    "workflow-verification-loop"
+   ],
+   "updated": "2026-09-28"
+  },
+  {
+   "id": "workflow-large-codebases",
+   "term": "Trabajar en un repo grande",
+   "category": "workflow",
+   "level": "intermedio",
+   "summary": "En un repo grande el cuello de botella es el contexto, no el modelo.",
+   "body": "La estrategia es la misma en todos los casos: no metas el repo entero en la ventana. Delega la exploración a subagentes, apóyate en CLAUDE.md para las convenciones, usa rules con `paths:` para lo específico de cada zona, y deja que Claude busque en lugar de darle archivos. El error típico es pegar demasiado código 'por si acaso': llena el contexto y empeora las respuestas.",
+   "why": "Es la diferencia entre que Claude te sirva o no en el repo donde de verdad trabajas.",
+   "source": "https://code.claude.com/docs/en/large-codebases",
+   "related": [
+    "subagentes-subagent",
+    "contexto-context-window",
+    "contexto-rules"
+   ],
+   "updated": "2026-09-28"
+  },
+  {
+   "id": "workflow-verification-loop",
+   "term": "Verification loop",
+   "category": "workflow",
+   "level": "intermedio",
+   "summary": "Darle a Claude una prueba que pueda correr, para que itere hasta que pase.",
+   "body": "Es cómo una sesión sabe que el trabajo está *hecho* y no solo que *parece* hecho: le das un chequeo ejecutable —una suite de tests, un build, una comparación de capturas— y Claude itera hasta que pase, en vez de parar al primer intento. Es el prerrequisito de las corridas desatendidas: sin un bucle de verificación, lo único que decide que el agente terminó es el propio agente.",
+   "example": "claude \"arregla el bug y corre npm test hasta que pase\"",
+   "why": "Es la diferencia entre código que compila en tu cabeza y código que de verdad pasa las pruebas.",
+   "source": "https://code.claude.com/docs/en/goal",
+   "related": [
+    "workflow-best-practices"
+   ],
+   "updated": "2026-09-28"
+  },
+  {
+   "id": "workflow-worktrees",
+   "term": "Worktree isolation",
+   "category": "workflow",
+   "level": "avanzado",
+   "summary": "Corre Claude en un git worktree aparte, para que varios agentes no se pisen.",
+   "body": "Se activa con `-w` o con `isolation: worktree` en la configuración de un subagente. Los cambios quedan en una rama y un directorio separados, bajo `.claude/worktrees/`. Es lo que hace viable el trabajo en paralelo: sin esto, dos agentes editando el mismo archivo se sobrescriben entre sí y el resultado es peor que haberlo hecho en serie.",
+   "example": "claude -w",
+   "why": "Permite lanzar varias tareas a la vez sin que se destruyan los cambios mutuamente.",
+   "source": "https://code.claude.com/docs/en/worktrees",
+   "related": [
+    "subagentes-subagent",
+    "subagentes-agent-teams"
    ],
    "updated": "2026-09-28"
   }

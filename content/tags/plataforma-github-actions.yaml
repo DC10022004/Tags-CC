@@ -1,0 +1,15 @@
+id: plataforma-github-actions
+term: "GitHub Actions"
+category: plataforma
+level: avanzado
+summary: "Correr Claude Code en CI para que reaccione a PRs e issues del repositorio."
+body: |
+  Se usa el modo no interactivo dentro del workflow.
+  La recomendación importante es correrlo con `--bare`: en CI necesitas el mismo resultado
+  en cada máquina, y no quieres que la configuración personal de alguien cambie la salida.
+  Los permisos hay que definirlos explícitamente, porque en CI no hay nadie para aprobar
+  un diálogo.
+why: "Lleva la revisión y las tareas repetitivas al repositorio, sin que nadie las dispare a mano."
+source: https://code.claude.com/docs/en/github-actions
+related: [plataforma-non-interactive, plataforma-bare-mode, permisos-modos]
+updated: 2026-09-28

@@ -1,0 +1,15 @@
+id: cli-extended-thinking
+term: "Extended thinking"
+category: cli
+level: basico
+summary: "El razonamiento paso a paso que el modelo hace antes de responder, visible en gris."
+body: |
+  Aparece en cursiva gris en la terminal, antes de la respuesta.
+  Se ajusta con el effort level, o se acota con `MAX_THINKING_TOKENS` en los modelos con
+  presupuesto fijo de pensamiento.
+  Leerlo es la forma más barata de detectar que Claude entendió mal algo: si el
+  razonamiento parte de una premisa falsa, la respuesta también va a estar mal.
+why: "Leer el razonamiento te deja corregir el rumbo antes de que escriba código equivocado."
+source: https://code.claude.com/docs/en/model-config
+related: [cli-effort-level]
+updated: 2026-09-28

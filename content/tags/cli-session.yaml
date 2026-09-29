@@ -1,0 +1,18 @@
+id: cli-session
+term: "Session"
+category: cli
+level: basico
+summary: "Una conversación atada a tu directorio actual, con su propio contexto. Se puede retomar."
+body: |
+  Se retoma con `claude -c`, se bifurca con `--fork-session` para conservar el historial
+  bajo un id nuevo, y puedes correr varias en paralelo en distintas terminales.
+  `/clear` empieza una sesión nueva; la anterior no se pierde y sigue disponible en
+  `/resume`.
+  Cada transcripción se guarda en `~/.claude/projects/`.
+example: |
+  claude -c              # retomar la última
+  claude --resume        # elegir cuál retomar
+why: "Cerrar la terminal no pierde el trabajo: casi siempre puedes volver a donde estabas."
+source: https://code.claude.com/docs/en/sessions
+related: [cli-clear, cli-claude-directory]
+updated: 2026-09-28

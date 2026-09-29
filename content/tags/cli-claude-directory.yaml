@@ -1,0 +1,19 @@
+id: cli-claude-directory
+term: ".claude"
+category: cli
+level: intermedio
+summary: "La carpeta donde vive todo: skills, comandos, ajustes, sesiones y auto memory."
+body: |
+  Existe en dos lugares y la distinción importa: `~/.claude/` es tuya y aplica a todo, y
+  `.claude/` dentro de un repo aplica solo a ese proyecto y normalmente se commitea.
+  Ahí viven `settings.json`, `skills/`, `commands/`, `rules/`, `agents/` y las
+  transcripciones en `projects/`.
+  Si algo se comporta distinto entre dos proyectos, la respuesta casi siempre está en
+  comparar estas dos carpetas.
+example: |
+  ls ~/.claude/          # tu configuración global
+  ls .claude/            # la del proyecto
+why: "Es el primer lugar donde mirar cuando algo funciona en un proyecto y en otro no."
+source: https://code.claude.com/docs/en/claude-directory
+related: [configuracion-settings-json, cli-session]
+updated: 2026-09-28

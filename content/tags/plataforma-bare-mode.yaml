@@ -1,0 +1,16 @@
+id: plataforma-bare-mode
+term: "Bare mode"
+category: plataforma
+level: avanzado
+summary: "Arranca sin cargar hooks, skills, comandos, subagentes, plugins, MCP, memoria ni CLAUDE.md."
+body: |
+  Con `--bare` no se carga nada de tu configuración.
+  Es lo recomendado para CI y llamadas desde scripts, donde necesitas el mismo resultado en
+  cualquier máquina y no quieres que la configuración personal de alguien cambie la salida.
+  También es la forma más rápida de saber si un problema lo causa tu propia configuración.
+example: |
+  claude --bare -p "..."
+why: "Es el control: si el problema desaparece con --bare, lo estaba causando tu configuración."
+source: https://code.claude.com/docs/en/headless
+related: [plataforma-non-interactive, configuracion-settings-json]
+updated: 2026-09-28

@@ -1,0 +1,17 @@
+id: cli-doctor
+term: "/doctor"
+category: cli
+level: basico
+summary: "Diagnostica tu instalación y configuración, y dice de dónde sale cada valor."
+body: |
+  Es lo primero que conviene correr cuando algo no funciona y no sabes por qué: revisa la
+  instalación, la configuración efectiva y los puntos de extensión cargados.
+  Sirve especialmente con la precedencia de `settings.json`, donde un ajuste puede estar
+  pisado por otro nivel y no es evidente cuál.
+  Sigue disponible aunque apagues las skills incluidas.
+example: |
+  /doctor
+why: "Es el primer paso de cualquier diagnóstico, y evita adivinar dónde está el problema."
+source: https://code.claude.com/docs/en/commands
+related: [configuracion-settings-json, skills-bundled]
+updated: 2026-09-28

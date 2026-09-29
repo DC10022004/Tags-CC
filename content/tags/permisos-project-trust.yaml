@@ -1,0 +1,16 @@
+id: permisos-project-trust
+term: "Project trust"
+category: permisos
+level: intermedio
+summary: "El diálogo que acepta un directorio antes de que Claude Code cargue su configuración."
+body: |
+  Hasta que confías en una carpeta, Claude Code retiene parte de lo que el repositorio
+  aporta: por ejemplo sus reglas `allow` y sus marketplaces desde `.claude/settings.json`.
+  Existe porque clonar un repo ajeno no debería bastar para que su configuración corra en
+  tu máquina.
+  La aceptación se guarda por directorio, salvo tu carpeta personal, donde vale solo para
+  la sesión actual.
+why: "Es la razón por la que un repo recién clonado no aplica de inmediato su propia configuración."
+source: https://code.claude.com/docs/en/permissions
+related: [permisos-prompt-injection, configuracion-settings-json]
+updated: 2026-09-28

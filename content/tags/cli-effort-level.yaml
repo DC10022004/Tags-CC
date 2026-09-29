@@ -1,0 +1,17 @@
+id: cli-effort-level
+term: "Effort level"
+category: cli
+level: intermedio
+summary: "Ajuste que controla cuánto razona el modelo antes de responder. Más esfuerzo, más lento."
+body: |
+  Activa razonamiento adaptativo: el modelo decide si piensa y cuánto en cada paso.
+  Más esfuerzo significa más tokens de pensamiento y razonamiento más profundo; menos es
+  más rápido y más barato.
+  No siempre conviene subirlo: para tareas mecánicas es gasto sin beneficio. Súbelo cuando
+  el problema es de diseño o de diagnóstico, no de tecleo.
+example: |
+  /config
+why: "Es la perilla entre rapidez y profundidad; la mayoría nunca la toca y debería."
+source: https://code.claude.com/docs/en/model-config
+related: [cli-extended-thinking]
+updated: 2026-09-28

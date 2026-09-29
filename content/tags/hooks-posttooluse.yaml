@@ -1,0 +1,20 @@
+id: hooks-posttooluse
+term: "PostToolUse hook"
+category: hooks
+level: intermedio
+summary: "Corre después de cada llamada a una herramienta, cuando ya hay resultado."
+body: |
+  Su compañero `PreToolUse` puede bloquear; este no, porque la acción ya ocurrió. Lo que
+  puede es reaccionar: formatear el archivo que se acaba de editar, correr el linter,
+  registrar lo que pasó.
+  El patrón más común y más rentable es exactamente ese: formateo automático después de
+  cada edición, para que no se te acumule ruido en el diff.
+example: |
+  // .claude/settings.json — el hook recibe JSON por stdin, de ahí el jq
+  { "hooks": { "PostToolUse": [ { "matcher": "Edit|Write",
+      "hooks": [ { "type": "command",
+        "command": "jq -r '.tool_input.file_path' | xargs npx prettier --write" } ] } ] } }
+why: "Automatiza lo que harías después de cada edición: formatear, lintar, registrar."
+source: https://code.claude.com/docs/en/hooks
+related: [hooks-pretooluse, hooks-eventos]
+updated: 2026-09-28

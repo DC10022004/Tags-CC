@@ -1,0 +1,17 @@
+id: cli-system-prompt
+term: "System prompt"
+category: cli
+level: avanzado
+summary: "Las instrucciones que Claude Code manda antes de tu conversación, en cada petición."
+body: |
+  Cubren cómo usa las herramientas, cómo se comporta de forma segura y cómo formatea.
+  Puedes añadirle cosas con `--append-system-prompt` o reemplazarlo entero con
+  `--system-prompt`.
+  Detalle que importa para el costo: es la primera capa del caché de prompts, así que
+  cambiarlo invalida el caché de todo lo que viene después.
+example: |
+  claude --append-system-prompt "Responde siempre en español."
+why: "Es la palanca más profunda para cambiar el comportamiento, y la que más fácil rompe el caché."
+source: https://code.claude.com/docs/en/costs
+related: [cli-output-style]
+updated: 2026-09-28

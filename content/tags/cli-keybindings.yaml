@@ -1,0 +1,16 @@
+id: cli-keybindings
+term: "Atajos de teclado"
+category: cli
+level: basico
+summary: "Shift+Tab cambia el modo de permiso; Esc interrumpe; Esc dos veces abre /rewind."
+body: |
+  Los tres que más rinden: **Shift+Tab** rota el modo de permiso sin salir de la sesión,
+  **Esc** interrumpe a Claude a mitad de una acción, y **Esc Esc** con el input vacío abre
+  el menú de rewind.
+  Interrumpir es una habilidad subestimada: es más barato redirigir a los diez segundos que
+  dejar que termine algo que iba mal.
+  Se pueden personalizar en `~/.claude/keybindings.json`.
+why: "Redirigir a tiempo cuesta menos que deshacer, y son tres teclas que ya tienes."
+source: https://code.claude.com/docs/en/keybindings
+related: [permisos-modos, cli-rewind]
+updated: 2026-09-28

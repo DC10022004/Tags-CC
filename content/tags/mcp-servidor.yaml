@@ -1,0 +1,18 @@
+id: mcp-servidor
+term: "MCP server"
+category: mcp
+level: intermedio
+summary: "Programa que expone herramientas a Claude por MCP. Se configura por proyecto o global."
+body: |
+  Puede correr local (un proceso en tu máquina) o remoto (un servicio por HTTP).
+  Se agregan con `claude mcp add` y se ven con `/mcp`.
+  Ojo con el alcance: un servidor agregado al proyecto vive en el `.mcp.json` del repo y lo
+  comparte tu equipo; uno agregado a nivel de usuario es solo tuyo. Confundirlos es la
+  causa habitual de 'a mí me funciona'.
+example: |
+  claude mcp add --help
+  claude mcp list
+why: "Es la unidad que instalas y la que hay que revisar cuando una herramienta externa no aparece."
+source: https://code.claude.com/docs/en/mcp
+related: [mcp-protocolo, mcp-tool-search]
+updated: 2026-09-28

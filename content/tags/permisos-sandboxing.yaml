@@ -1,0 +1,17 @@
+id: permisos-sandboxing
+term: "Sandboxing"
+category: permisos
+level: intermedio
+summary: "Aislamiento del sistema de archivos y la red para la herramienta Bash."
+body: |
+  Los comandos corren dentro de un límite que defines por adelantado, así Claude trabaja
+  libre dentro de él sin pedirte aprobación comando por comando.
+  Es una capa **distinta** de las reglas de permisos: el sandbox decide qué puede alcanzar
+  una acción una vez que corre; los permisos deciden si corre.
+  Combinarlos es lo que da velocidad sin bajar la guardia.
+example: |
+  /sandbox
+why: "Menos interrupciones que aprobar cada comando, y más seguro que aprobar todo."
+source: https://code.claude.com/docs/en/sandboxing
+related: [permisos-modos, permisos-permission-rule]
+updated: 2026-09-28

@@ -1,0 +1,16 @@
+id: plataforma-non-interactive
+term: "Non-interactive mode"
+category: plataforma
+level: avanzado
+summary: "Ejecuta un solo prompt y termina, sin sesión interactiva. Se invoca con -p."
+body: |
+  Es lo que usas en CI, en scripts y cuando quieres encadenar la salida con una tubería.
+  La corrida igual se guarda como sesión retomable, salvo que pases
+  `--no-session-persistence`.
+  Antes se llamaba headless mode. Su equivalente en Python y TypeScript es el Agent SDK.
+example: |
+  claude -p "resume los cambios de este diff" < diff.txt
+why: "Es la puerta para meter Claude Code en scripts y pipelines, no solo en tu terminal."
+source: https://code.claude.com/docs/en/headless
+related: [plataforma-bare-mode]
+updated: 2026-09-28

@@ -1,0 +1,16 @@
+id: workflow-worktrees
+term: "Worktree isolation"
+category: workflow
+level: avanzado
+summary: "Corre Claude en un git worktree aparte, para que varios agentes no se pisen."
+body: |
+  Se activa con `-w` o con `isolation: worktree` en la configuración de un subagente.
+  Los cambios quedan en una rama y un directorio separados, bajo `.claude/worktrees/`.
+  Es lo que hace viable el trabajo en paralelo: sin esto, dos agentes editando el mismo
+  archivo se sobrescriben entre sí y el resultado es peor que haberlo hecho en serie.
+example: |
+  claude -w
+why: "Permite lanzar varias tareas a la vez sin que se destruyan los cambios mutuamente."
+source: https://code.claude.com/docs/en/worktrees
+related: [subagentes-subagent, subagentes-agent-teams]
+updated: 2026-09-28

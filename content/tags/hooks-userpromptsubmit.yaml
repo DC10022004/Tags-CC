@@ -1,0 +1,20 @@
+id: hooks-userpromptsubmit
+term: "UserPromptSubmit hook"
+category: hooks
+level: intermedio
+summary: "Corre cuando envías un prompt, antes de que Claude lo procese. Es de cadencia por turno."
+body: |
+  Puede inspeccionar lo que escribiste y añadir contexto antes de que llegue al modelo:
+  el estado de git, la rama actual, el ticket en el que estás.
+  Al ser por turno y no por herramienta, es barato: corre una vez por mensaje, no decenas
+  de veces dentro del bucle.
+  Es el lugar correcto para inyectar contexto dinámico que cambia entre un prompt y otro:
+  con salida 0, lo que el hook imprima en stdout se agrega al contexto de Claude como texto.
+example: |
+  // .claude/settings.json
+  { "hooks": { "UserPromptSubmit": [ { "hooks":
+      [ { "type": "command", "command": "git branch --show-current" } ] } ] } }
+why: "Le da a Claude contexto fresco en cada mensaje sin que tú lo escribas cada vez."
+source: https://code.claude.com/docs/en/hooks
+related: [hooks-eventos, hooks-pretooluse]
+updated: 2026-09-28

@@ -1,0 +1,20 @@
+id: permisos-permission-rule
+term: "Permission rule"
+category: permisos
+level: intermedio
+summary: "Regla que permite, pregunta o niega una herramienta según su nombre y sus argumentos."
+body: |
+  Se evalúan en orden **deny → ask → allow**, y gana la primera que coincida. Ese orden
+  es lo que hay que recordar: una regla `deny` siempre le gana a una `allow`, por
+  específica que sea la segunda.
+  Son control fino que se apila sobre el modo de permiso, que es el control grueso.
+example: |
+  // .claude/settings.json
+  { "permissions": {
+      "allow": ["Bash(npm test)"],
+      "ask":   ["Bash(git push *)"],
+      "deny":  ["Read(./.env)"] } }
+why: "Te deja pre-aprobar lo rutinario y bloquear lo peligroso sin renunciar a la velocidad."
+source: https://code.claude.com/docs/en/permissions
+related: [permisos-deny-rule, permisos-modos]
+updated: 2026-09-28

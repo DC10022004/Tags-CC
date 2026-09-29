@@ -1,0 +1,15 @@
+id: cli-agentic-loop
+term: "Agentic loop"
+category: cli
+level: basico
+summary: "El ciclo que Claude repite: reunir contexto, actuar, verificar, y otra vez hasta terminar."
+body: |
+  Cada uso de una herramienta devuelve información que decide el paso siguiente. Puedes
+  interrumpirlo en cualquier momento para redirigir.
+  Entenderlo sirve para algo concreto: casi todos los puntos de extensión —hooks, skills,
+  MCP— se enganchan a una fase específica de este ciclo.
+  Si sabes en qué fase quieres intervenir, sabes qué mecanismo usar.
+why: "Es el modelo mental que hace que hooks, skills y MCP dejen de parecer cosas sueltas."
+source: https://code.claude.com/docs/en/how-claude-code-works
+related: [hooks-eventos, cli-tool]
+updated: 2026-09-28

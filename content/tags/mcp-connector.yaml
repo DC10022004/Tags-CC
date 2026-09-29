@@ -1,0 +1,18 @@
+id: mcp-connector
+term: "Connector"
+category: mcp
+level: intermedio
+summary: "Servidor MCP agregado a tu cuenta de claude.ai, no configurado en Claude Code."
+body: |
+  Cuando inicias sesión en Claude Code con esa cuenta, tus conectores aparecen en `/mcp`
+  junto a los servidores que agregaste localmente.
+  La distinción importa al diagnosticar: si una herramienta aparece pero no funciona,
+  primero hay que saber si vive en tu máquina o en tu cuenta, porque se arreglan en lugares
+  distintos.
+  Las organizaciones también pueden proveerlos y controlarlos por herramienta.
+example: |
+  /mcp
+why: "Explica por qué aparecen herramientas que nunca configuraste en este proyecto."
+source: https://code.claude.com/docs/en/mcp
+related: [mcp-servidor]
+updated: 2026-09-28

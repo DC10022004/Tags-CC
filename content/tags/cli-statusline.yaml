@@ -1,0 +1,16 @@
+id: cli-statusline
+term: "Status line"
+category: cli
+level: intermedio
+summary: "Barra inferior configurable que corre un script tuyo y muestra lo que imprima."
+body: |
+  Recibe los datos de la sesión como JSON por stdin y muestra la salida de tu script.
+  Lo más útil que se puede poner ahí es el uso de la ventana de contexto y el costo
+  acumulado: son las dos cosas que te afectan y que de otro modo no ves hasta que duelen.
+  También suele llevarse la rama de git.
+example: |
+  /statusline
+why: "Te deja ver el contexto y el gasto mientras trabajas, en vez de descubrirlos tarde."
+source: https://code.claude.com/docs/en/statusline
+related: [contexto-context-window]
+updated: 2026-09-28

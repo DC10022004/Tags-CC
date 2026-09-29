@@ -1,0 +1,18 @@
+id: configuracion-env-vars
+term: "Variables de entorno"
+category: configuracion
+level: avanzado
+summary: "Ajustan Claude Code desde el entorno, útil en CI y para cosas que no van en un archivo."
+body: |
+  Controlan cosas como el modelo, los límites de tokens de pensamiento o el apagado de
+  ciertas funciones.
+  Son especialmente útiles donde no quieres comprometer un archivo de configuración: un
+  runner de CI, un contenedor, una prueba puntual.
+  Se pueden fijar también desde el bloque `env` de `settings.json`, que es más reproducible
+  que exportarlas a mano.
+example: |
+  MAX_THINKING_TOKENS=8000 claude
+why: "Es la vía para configurar Claude Code donde no hay un settings.json que puedas commitear."
+source: https://code.claude.com/docs/en/env-vars
+related: [configuracion-settings-json]
+updated: 2026-09-28
