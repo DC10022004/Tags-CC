@@ -16,6 +16,20 @@ Formato de cada entrada:
 
 ---
 
+## 2026-09-29 — Scriptable no tiene TextEncoder
+
+**Hecho:** al correr el script en el iPhone falló con `ReferenceError: Can't find
+variable: TextEncoder`. El motor de Scriptable no trae esa API web, y el hash la usaba
+para pasar la clave a bytes UTF-8. Se reemplazó por `utf8Bytes`, una conversión escrita
+a mano.
+
+**Lección:** `validate.mjs` probaba el selector de iOS con Node, que sí tiene
+`TextEncoder`, así que el test pasaba y el teléfono fallaba. Probar el código de un
+cliente en un runtime distinto oculta las APIs que ese cliente no tiene. Se verificó
+`utf8Bytes` contra `TextEncoder` con acentos y emojis, sin `TextEncoder` disponible.
+
+---
+
 ## 2026-09-29 — Corpus v2: programación general (207 tarjetas nuevas)
 
 **Hecho:** se sumaron 207 tarjetas en 12 categorías nuevas (ADR 0005), a partir del

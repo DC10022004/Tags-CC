@@ -25,14 +25,27 @@ const CACHE_NAME = "tagscc-corpus.json";
 
 function fnv1a32(s) {
   let h = 0x811c9dc5;
-  const bytes = new TextEncoder().encode(s);
-  for (const b of bytes) {
+  for (const b of utf8Bytes(s)) {
     h ^= b;
     // Math.imul es obligatorio: con `*` el producto excede los 53 bits exactos de un
     // double y el hash se corrompe en silencio.
     h = Math.imul(h, 0x01000193) >>> 0;
   }
   return h >>> 0;
+}
+
+// UTF-8 a mano: Scriptable no trae TextEncoder. Debe dar los mismos bytes que
+// String.utf8 en Swift; los vectores de conformidad de validate.mjs lo comprueban.
+function utf8Bytes(s) {
+  const out = [];
+  for (const ch of s) {
+    const c = ch.codePointAt(0);
+    if (c < 0x80) out.push(c);
+    else if (c < 0x800) out.push(0xc0 | (c >> 6), 0x80 | (c & 0x3f));
+    else if (c < 0x10000) out.push(0xe0 | (c >> 12), 0x80 | ((c >> 6) & 0x3f), 0x80 | (c & 0x3f));
+    else out.push(0xf0 | (c >> 18), 0x80 | ((c >> 12) & 0x3f), 0x80 | ((c >> 6) & 0x3f), 0x80 | (c & 0x3f));
+  }
+  return out;
 }
 
 function localDateKey(d) {
