@@ -16,6 +16,21 @@ Formato de cada entrada:
 
 ---
 
+## 2026-09-28 — El build no era tan determinista como decía
+
+**Hecho:** `manifest.json` se reescribía en cada corrida porque `generated_at` avanzaba
+siempre, así que un build sin cambios dejaba `dist/` modificado en Git. El SDD prometía
+un diff vacío y la promesa era falsa.
+
+**Decidido:** `generated_at` ahora solo avanza cuando el hash del contenido cambió.
+Verificado con dos builds seguidos y `git status` limpio.
+
+**Lección:** el hash ya excluía la marca de tiempo, que era la mitad del problema; la
+otra mitad era no escribirla. Excluir un campo del hash no sirve de nada si igual se
+escribe en el archivo.
+
+---
+
 ## 2026-09-28 — Corpus v1: 60 tarjetas
 
 **Hecho:** el corpus llegó a las 60 tarjetas del objetivo, en 10 categorías

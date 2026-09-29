@@ -80,9 +80,19 @@ if (existsSync(manifestPath)) {
 
 const corpus = { schema: SCHEMA, version, count: tags.length, tags };
 writeFileSync(join(distDir, "tags.json"), JSON.stringify(corpus, null, 1) + "\n");
+
+// generated_at solo avanza cuando el contenido cambió. Si se reescribiera siempre, un
+// build sin cambios dejaría dist/ modificado en Git y la promesa de "diff vacío" sería
+// falsa — que es justo lo que pasaba antes de esta línea.
+let generated_at = new Date().toISOString();
+if (existsSync(manifestPath)) {
+  try {
+    const prev = JSON.parse(readFileSync(manifestPath, "utf8"));
+    if (prev.hash === hash && prev.generated_at) generated_at = prev.generated_at;
+  } catch { /* manifiesto ilegible: se regenera entero */ }
+}
 writeFileSync(manifestPath, JSON.stringify(
-  { schema: SCHEMA, version, count: tags.length, hash, generated_at: new Date().toISOString() },
-  null, 1) + "\n");
+  { schema: SCHEMA, version, count: tags.length, hash, generated_at }, null, 1) + "\n");
 
 console.log(`✓ dist/tags.json — ${tags.length} tarjetas · versión ${version}`);
 console.log(`  hash ${hash.slice(0, 16)}…`);
