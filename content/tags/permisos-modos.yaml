@@ -1,0 +1,19 @@
+id: permisos-modos
+term: Permission mode
+category: permisos
+level: basico
+summary: "Define qué puede hacer Claude sin preguntarte. Se cambia en vivo con Shift+Tab."
+body: |
+  Cada modo es un punto distinto entre comodidad y supervisión:
+  `default` (Manual) solo lee sin preguntar; `acceptEdits` acepta ediciones de archivos;
+  `plan` lee y planifica sin editar; `auto` deja pasar todo con un clasificador revisando
+  por detrás; `dontAsk` permite solo lo pre-aprobado y niega el resto; `bypassPermissions`
+  no revisa nada y es solo para contenedores aislados.
+  El modo pone la línea base y las reglas de permisos se apilan encima.
+example: |
+  # cambiar de modo en vivo: Shift+Tab
+  claude --permission-mode default   # revisar cada acción
+why: "Es la perilla principal entre 'me preguntas todo' y 'avanza solo'; saber moverla evita fatiga y sustos."
+source: https://code.claude.com/docs/en/permission-modes
+related: [permisos-plan-mode, permisos-deny-rule, configuracion-settings-json]
+updated: 2026-09-28

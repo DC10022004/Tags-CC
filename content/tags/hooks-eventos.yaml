@@ -1,0 +1,21 @@
+id: hooks-eventos
+term: Hook event
+category: hooks
+level: intermedio
+summary: "Punto del ciclo de vida donde Claude Code dispara tu script. Hay tres cadencias."
+body: |
+  Los eventos se agrupan por cada cuánto ocurren:
+  por sesión, `SessionStart` y `SessionEnd`;
+  por turno, `UserPromptSubmit`, `Stop` y `StopFailure`;
+  y por llamada a herramienta, `PreToolUse` y `PostToolUse`.
+  Elegir bien la cadencia es casi todo el diseño: un chequeo por turno que pusiste por
+  llamada corre decenas de veces y te vuelve la sesión lenta.
+  Los mismos eventos se disparan en terminal, extensiones de IDE, app de escritorio y web.
+example: |
+  # ver qué hooks tienes activos y por qué no corren
+  claude
+  /hooks
+why: "Saber la cadencia te dice dónde enganchar una automatización sin que se ejecute de más."
+source: https://code.claude.com/docs/en/hooks
+related: [hooks-pretooluse, configuracion-settings-json]
+updated: 2026-09-28

@@ -1,0 +1,17 @@
+id: contexto-auto-memory
+term: Auto memory
+category: contexto
+level: intermedio
+summary: "Notas que Claude se escribe a sí mismo a partir de tus correcciones y preferencias."
+body: |
+  El complemento de CLAUDE.md: lo mismo se carga en cada sesión, pero lo escribe Claude,
+  no tú. Guarda aprendizajes y patrones —tus preferencias, las correcciones que le diste,
+  contexto del proyecto que no se deduce del código— con alcance por repositorio y
+  compartido entre worktrees.
+  Se carga acotado: las primeras 200 líneas o 25 KB.
+  La división de trabajo es clara: CLAUDE.md para guiar la conducta a propósito, auto
+  memory para que aprenda de tus correcciones sin que hagas nada.
+why: "Para que corregir algo una vez sirva en las siguientes sesiones, sin escribir la regla a mano."
+source: https://code.claude.com/docs/en/memory
+related: [contexto-claude-md]
+updated: 2026-09-28

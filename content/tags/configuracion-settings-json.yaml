@@ -1,0 +1,21 @@
+id: configuracion-settings-json
+term: settings.json
+category: configuracion
+level: intermedio
+summary: "Archivo de configuración de Claude Code. El mismo ajuste vive en 5 niveles con precedencia."
+body: |
+  Ahí configuras permisos, hooks, modelo, variables de entorno y el resto del
+  comportamiento. Lo que casi siempre causa confusión no es la sintaxis sino la
+  precedencia: de mayor a menor manda la configuración gestionada por tu organización,
+  luego `claude --settings`, luego `.claude/settings.local.json` (tú, este proyecto),
+  luego `.claude/settings.json` (compartido, se commitea) y al final la de usuario en
+  `~/.claude/settings.json`.
+  Un ajuste en un nivel más alto pisa el mismo ajuste más abajo. Si un cambio "no hace
+  nada", casi siempre es que algo arriba lo está pisando.
+example: |
+  claude config list        # ver la configuración efectiva
+  /doctor                   # diagnosticar de dónde sale cada valor
+why: "Es donde vive todo lo que configuras, y la precedencia explica por qué a veces tu cambio se ignora."
+source: https://code.claude.com/docs/en/settings
+related: [permisos-deny-rule, hooks-eventos]
+updated: 2026-09-28

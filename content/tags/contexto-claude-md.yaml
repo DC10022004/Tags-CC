@@ -1,0 +1,20 @@
+id: contexto-claude-md
+term: CLAUDE.md
+category: contexto
+level: basico
+summary: "Archivo con instrucciones que Claude lee al inicio de cada sesión. Lo escribes tú."
+body: |
+  Cada sesión arranca con la ventana de contexto en blanco; CLAUDE.md es lo que la
+  rellena con lo que no quieres volver a explicar. Puede tener alcance de proyecto,
+  de usuario o de organización.
+  La señal para agregar algo: Claude cometió el mismo error dos veces.
+  Límite importante: Claude lo trata como contexto, no como configuración obligatoria.
+  Si necesitas impedir una acción pase lo que pase, eso es un `PreToolUse` hook.
+  Entre más específico y corto, más consistentemente se cumple.
+example: |
+  claude
+  /init      # genera un CLAUDE.md inicial a partir del código del proyecto
+why: "Es el lugar donde dejas de repetirte: convenciones, comandos y arquitectura del proyecto."
+source: https://code.claude.com/docs/en/memory
+related: [contexto-auto-memory, hooks-pretooluse, skills-skill-md]
+updated: 2026-09-28

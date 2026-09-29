@@ -1,0 +1,26 @@
+id: skills-skill-md
+term: SKILL.md
+category: skills
+level: intermedio
+summary: "Archivo que define una skill: instrucciones que Claude carga solo cuando las necesita."
+body: |
+  Creas un `SKILL.md` con instrucciones y Claude lo suma a su repertorio: lo usa cuando
+  es relevante o lo invocas tú con `/nombre-de-la-skill`.
+  La diferencia con CLAUDE.md es el costo: el cuerpo de una skill se carga solo al usarse,
+  así que material de referencia largo no te cuesta contexto hasta que hace falta.
+  Los comandos propios se fusionaron con las skills: `.claude/commands/deploy.md` y
+  `.claude/skills/deploy/SKILL.md` producen el mismo `/deploy`.
+  Señal para crear una: pegas las mismas instrucciones otra vez, o una sección de
+  CLAUDE.md se convirtió en un procedimiento.
+example: |
+  mkdir -p .claude/skills/deploy && cat > .claude/skills/deploy/SKILL.md <<'MD'
+  ---
+  name: deploy
+  description: Pasos de despliegue de este proyecto.
+  ---
+  1. ...
+  MD
+why: "Para mover procedimientos largos fuera de CLAUDE.md sin pagar contexto en cada sesión."
+source: https://code.claude.com/docs/en/skills
+related: [contexto-claude-md, skills-bundled]
+updated: 2026-09-28

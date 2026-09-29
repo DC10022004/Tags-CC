@@ -1,0 +1,34 @@
+# Categorías y niveles válidos. validate.mjs falla si una tarjeta usa algo que no está aquí.
+categories:
+  - id: cli
+    nombre: CLI y sesión
+    descripcion: Comandos, flags, atajos y manejo de la sesión interactiva.
+  - id: contexto
+    nombre: Contexto y memoria
+    descripcion: CLAUDE.md, auto memory, ventana de contexto, compactación.
+  - id: hooks
+    nombre: Hooks
+    descripcion: Eventos del ciclo de vida que ejecutan tus scripts.
+  - id: skills
+    nombre: Skills y comandos
+    descripcion: SKILL.md, comandos propios, skills incluidas.
+  - id: subagentes
+    nombre: Subagentes
+    descripcion: Delegación a agentes con su propio contexto.
+  - id: mcp
+    nombre: MCP e integraciones
+    descripcion: Model Context Protocol, servidores, conectores.
+  - id: permisos
+    nombre: Permisos y seguridad
+    descripcion: Modos de permiso, reglas, sandbox.
+  - id: configuracion
+    nombre: Configuración
+    descripcion: settings.json, variables de entorno, precedencia.
+  - id: workflow
+    nombre: Flujos de trabajo
+    descripcion: Patrones de uso, worktrees, revisión de código.
+  - id: plataforma
+    nombre: Plataforma
+    descripcion: SDK, plugins, IDE, web, escritorio, CI.
+
+levels: [basico, intermedio, avanzado]

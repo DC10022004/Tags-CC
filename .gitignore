@@ -1,0 +1,8 @@
+# Estado local de aprendizaje: no se comparte ni se versiona
+state/
+.cache/
+# Borradores intermedios del pipeline (se regeneran)
+content/drafts/
+# Artefactos de compilación de macOS
+macos/build/
+.DS_Store

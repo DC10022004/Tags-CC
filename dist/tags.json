@@ -1,0 +1,200 @@
+{
+ "schema": 1,
+ "version": "2026-09-28.1",
+ "count": 12,
+ "tags": [
+  {
+   "id": "cli-clear",
+   "term": "/clear",
+   "category": "cli",
+   "level": "basico",
+   "summary": "Vacía la conversación y arranca de cero, sin cerrar Claude Code.",
+   "body": "Cada sesión tiene una ventana de contexto finita, y una conversación larga sobre un tema\nya terminado empeora las respuestas del siguiente. `/clear` la vacía sin salir del\nprograma: cambio de tarea, contexto limpio.\nNo borra CLAUDE.md ni la auto memory, que se recargan al inicio de la conversación nueva.\nDato útil: si corriste `/clear` y te arrepientes, el menú de `/rewind` muestra arriba una\nentrada para volver a la conversación anterior, disponible hasta que salgas de Claude Code.",
+   "example": "/clear",
+   "why": "Para que el trabajo anterior no contamine la tarea siguiente ni te coma la ventana de contexto.",
+   "source": "https://code.claude.com/docs/en/checkpointing",
+   "related": [
+    "cli-rewind",
+    "contexto-auto-memory"
+   ],
+   "updated": "2026-09-28"
+  },
+  {
+   "id": "cli-rewind",
+   "term": "/rewind",
+   "category": "cli",
+   "level": "basico",
+   "summary": "Deshace los cambios de Claude y la conversación hasta un punto anterior de la sesión.",
+   "body": "Claude Code guarda un checkpoint del estado de tu código antes de cada prompt que\ninicia un turno, y conserva los últimos 100 de la sesión.\nAbres el menú con `/rewind` o con doble Esc cuando el input está vacío, eliges un\nmensaje y decides: restaurar código y conversación, solo la conversación, solo el\ncódigo, o resumir desde/hasta ahí para liberar contexto.\nOjo: si el input tiene texto, el doble Esc lo borra en lugar de abrir el menú.",
+   "example": "/rewind        # o presiona Esc dos veces con el input vacío",
+   "why": "Es tu deshacer cuando la sesión se desvió, sin tener que reconstruir a mano lo que cambió.",
+   "source": "https://code.claude.com/docs/en/checkpointing",
+   "related": [
+    "cli-clear",
+    "contexto-claude-md"
+   ],
+   "updated": "2026-09-28"
+  },
+  {
+   "id": "configuracion-settings-json",
+   "term": "settings.json",
+   "category": "configuracion",
+   "level": "intermedio",
+   "summary": "Archivo de configuración de Claude Code. El mismo ajuste vive en 5 niveles con precedencia.",
+   "body": "Ahí configuras permisos, hooks, modelo, variables de entorno y el resto del\ncomportamiento. Lo que casi siempre causa confusión no es la sintaxis sino la\nprecedencia: de mayor a menor manda la configuración gestionada por tu organización,\nluego `claude --settings`, luego `.claude/settings.local.json` (tú, este proyecto),\nluego `.claude/settings.json` (compartido, se commitea) y al final la de usuario en\n`~/.claude/settings.json`.\nUn ajuste en un nivel más alto pisa el mismo ajuste más abajo. Si un cambio \"no hace\nnada\", casi siempre es que algo arriba lo está pisando.",
+   "example": "claude config list        # ver la configuración efectiva\n/doctor                   # diagnosticar de dónde sale cada valor",
+   "why": "Es donde vive todo lo que configuras, y la precedencia explica por qué a veces tu cambio se ignora.",
+   "source": "https://code.claude.com/docs/en/settings",
+   "related": [
+    "permisos-deny-rule",
+    "hooks-eventos"
+   ],
+   "updated": "2026-09-28"
+  },
+  {
+   "id": "contexto-auto-memory",
+   "term": "Auto memory",
+   "category": "contexto",
+   "level": "intermedio",
+   "summary": "Notas que Claude se escribe a sí mismo a partir de tus correcciones y preferencias.",
+   "body": "El complemento de CLAUDE.md: lo mismo se carga en cada sesión, pero lo escribe Claude,\nno tú. Guarda aprendizajes y patrones —tus preferencias, las correcciones que le diste,\ncontexto del proyecto que no se deduce del código— con alcance por repositorio y\ncompartido entre worktrees.\nSe carga acotado: las primeras 200 líneas o 25 KB.\nLa división de trabajo es clara: CLAUDE.md para guiar la conducta a propósito, auto\nmemory para que aprenda de tus correcciones sin que hagas nada.",
+   "why": "Para que corregir algo una vez sirva en las siguientes sesiones, sin escribir la regla a mano.",
+   "source": "https://code.claude.com/docs/en/memory",
+   "related": [
+    "contexto-claude-md"
+   ],
+   "updated": "2026-09-28"
+  },
+  {
+   "id": "contexto-claude-md",
+   "term": "CLAUDE.md",
+   "category": "contexto",
+   "level": "basico",
+   "summary": "Archivo con instrucciones que Claude lee al inicio de cada sesión. Lo escribes tú.",
+   "body": "Cada sesión arranca con la ventana de contexto en blanco; CLAUDE.md es lo que la\nrellena con lo que no quieres volver a explicar. Puede tener alcance de proyecto,\nde usuario o de organización.\nLa señal para agregar algo: Claude cometió el mismo error dos veces.\nLímite importante: Claude lo trata como contexto, no como configuración obligatoria.\nSi necesitas impedir una acción pase lo que pase, eso es un `PreToolUse` hook.\nEntre más específico y corto, más consistentemente se cumple.",
+   "example": "claude\n/init      # genera un CLAUDE.md inicial a partir del código del proyecto",
+   "why": "Es el lugar donde dejas de repetirte: convenciones, comandos y arquitectura del proyecto.",
+   "source": "https://code.claude.com/docs/en/memory",
+   "related": [
+    "contexto-auto-memory",
+    "hooks-pretooluse",
+    "skills-skill-md"
+   ],
+   "updated": "2026-09-28"
+  },
+  {
+   "id": "hooks-eventos",
+   "term": "Hook event",
+   "category": "hooks",
+   "level": "intermedio",
+   "summary": "Punto del ciclo de vida donde Claude Code dispara tu script. Hay tres cadencias.",
+   "body": "Los eventos se agrupan por cada cuánto ocurren:\npor sesión, `SessionStart` y `SessionEnd`;\npor turno, `UserPromptSubmit`, `Stop` y `StopFailure`;\ny por llamada a herramienta, `PreToolUse` y `PostToolUse`.\nElegir bien la cadencia es casi todo el diseño: un chequeo por turno que pusiste por\nllamada corre decenas de veces y te vuelve la sesión lenta.\nLos mismos eventos se disparan en terminal, extensiones de IDE, app de escritorio y web.",
+   "example": "# ver qué hooks tienes activos y por qué no corren\nclaude\n/hooks",
+   "why": "Saber la cadencia te dice dónde enganchar una automatización sin que se ejecute de más.",
+   "source": "https://code.claude.com/docs/en/hooks",
+   "related": [
+    "hooks-pretooluse",
+    "configuracion-settings-json"
+   ],
+   "updated": "2026-09-28"
+  },
+  {
+   "id": "hooks-pretooluse",
+   "term": "PreToolUse hook",
+   "category": "hooks",
+   "level": "intermedio",
+   "summary": "Corre justo antes de cada llamada a una herramienta y puede bloquearla.",
+   "body": "Los hooks son comandos, endpoints HTTP, prompts o subagentes que Claude Code dispara en\npuntos del ciclo de vida. `PreToolUse` es de cadencia por llamada: se ejecuta en cada\nuso de herramienta dentro del bucle del agente.\nRecibe el contexto del evento como JSON por stdin y puede devolver una decisión, así que\nes el punto donde de verdad puedes impedir algo.\nDiferencia clave con CLAUDE.md: el hook lo ejecuta el harness, no Claude. CLAUDE.md es\ncontexto que Claude puede interpretar; un hook se cumple.",
+   "example": "// .claude/settings.json\n{ \"hooks\": { \"PreToolUse\": [ { \"matcher\": \"Bash\",\n    \"hooks\": [ { \"type\": \"command\", \"command\": \"~/.claude/guard.sh\" } ] } ] } }",
+   "why": "Para imponer una regla de verdad en lugar de pedírsela a Claude y esperar que la siga.",
+   "source": "https://code.claude.com/docs/en/hooks",
+   "related": [
+    "hooks-eventos",
+    "permisos-deny-rule",
+    "contexto-claude-md"
+   ],
+   "updated": "2026-09-28"
+  },
+  {
+   "id": "permisos-deny-rule",
+   "term": "Deny rule",
+   "category": "permisos",
+   "level": "intermedio",
+   "summary": "Regla que bloquea una herramienta en TODOS los modos, incluido bypassPermissions.",
+   "body": "Las reglas de permisos se apilan sobre el modo: `allow` pre-aprueba, `ask` fuerza\npregunta, `deny` bloquea. La asimetría importa: las reglas `deny` aplican en todos los\nmodos, incluso `bypassPermissions`, mientras que las `allow` no tienen efecto ahí.\nPor eso `deny` es el único freno que sobrevive a un modo permisivo.",
+   "example": "// .claude/settings.json\n{ \"permissions\": { \"deny\": [\"Bash(git push *)\", \"Read(./.env)\"] } }",
+   "why": "Es la red de seguridad que sigue puesta cuando bajas la guardia con un modo permisivo.",
+   "source": "https://code.claude.com/docs/en/permissions",
+   "related": [
+    "permisos-modos",
+    "configuracion-settings-json"
+   ],
+   "updated": "2026-09-28"
+  },
+  {
+   "id": "permisos-modos",
+   "term": "Permission mode",
+   "category": "permisos",
+   "level": "basico",
+   "summary": "Define qué puede hacer Claude sin preguntarte. Se cambia en vivo con Shift+Tab.",
+   "body": "Cada modo es un punto distinto entre comodidad y supervisión:\n`default` (Manual) solo lee sin preguntar; `acceptEdits` acepta ediciones de archivos;\n`plan` lee y planifica sin editar; `auto` deja pasar todo con un clasificador revisando\npor detrás; `dontAsk` permite solo lo pre-aprobado y niega el resto; `bypassPermissions`\nno revisa nada y es solo para contenedores aislados.\nEl modo pone la línea base y las reglas de permisos se apilan encima.",
+   "example": "# cambiar de modo en vivo: Shift+Tab\nclaude --permission-mode default   # revisar cada acción",
+   "why": "Es la perilla principal entre 'me preguntas todo' y 'avanza solo'; saber moverla evita fatiga y sustos.",
+   "source": "https://code.claude.com/docs/en/permission-modes",
+   "related": [
+    "permisos-plan-mode",
+    "permisos-deny-rule",
+    "configuracion-settings-json"
+   ],
+   "updated": "2026-09-28"
+  },
+  {
+   "id": "permisos-plan-mode",
+   "term": "Plan mode",
+   "category": "permisos",
+   "level": "basico",
+   "summary": "Modo donde Claude investiga y propone un plan, pero no puede editar hasta que lo apruebes.",
+   "body": "Uno de los modos de permiso de Claude Code. En plan mode Claude lee el código y\nescribe un plan, y los cambios quedan bloqueados hasta que apruebes ese plan.\nCambias de modo con Shift+Tab en la terminal, o arrancas directo con el flag.\nSu valor de configuración es `plan`; los otros son `default` (Manual), `acceptEdits`,\n`auto`, `dontAsk` y `bypassPermissions`.\nSirve para lo contrario de ir rápido: forzar que se entienda antes de tocar.",
+   "example": "claude --permission-mode plan",
+   "why": "Para que Claude no empiece a cambiar archivos antes de que ambos entiendan qué hay que hacer.",
+   "source": "https://code.claude.com/docs/en/permission-modes",
+   "related": [
+    "permisos-modos",
+    "permisos-deny-rule"
+   ],
+   "updated": "2026-09-28"
+  },
+  {
+   "id": "skills-bundled",
+   "term": "Bundled skill",
+   "category": "skills",
+   "level": "basico",
+   "summary": "Skills que ya vienen con Claude Code, como /code-review, /debug, /loop o /doctor.",
+   "body": "Vienen incluidas y se invocan igual que cualquier otra: `/` más el nombre.\nSon basadas en prompt: le dan a Claude instrucciones detalladas y lo dejan orquestar el\ntrabajo con sus herramientas, a diferencia de los comandos integrados, que ejecutan\nlógica fija.\nAlgunas las invoca Claude solo cuando son relevantes; otras, como `/verify`, corren solo\nsi tú las pides, para que tú decidas cuándo gastar ese tiempo y esos tokens.\nSe apagan todas con el ajuste `disableBundledSkills`.",
+   "example": "/code-review      # revisa el diff actual\n/doctor           # diagnostica tu instalación y configuración",
+   "why": "Hay funcionalidad potente ya instalada que nunca vas a descubrir si no sabes que existe.",
+   "source": "https://code.claude.com/docs/en/skills",
+   "related": [
+    "skills-skill-md",
+    "cli-rewind"
+   ],
+   "updated": "2026-09-28"
+  },
+  {
+   "id": "skills-skill-md",
+   "term": "SKILL.md",
+   "category": "skills",
+   "level": "intermedio",
+   "summary": "Archivo que define una skill: instrucciones que Claude carga solo cuando las necesita.",
+   "body": "Creas un `SKILL.md` con instrucciones y Claude lo suma a su repertorio: lo usa cuando\nes relevante o lo invocas tú con `/nombre-de-la-skill`.\nLa diferencia con CLAUDE.md es el costo: el cuerpo de una skill se carga solo al usarse,\nasí que material de referencia largo no te cuesta contexto hasta que hace falta.\nLos comandos propios se fusionaron con las skills: `.claude/commands/deploy.md` y\n`.claude/skills/deploy/SKILL.md` producen el mismo `/deploy`.\nSeñal para crear una: pegas las mismas instrucciones otra vez, o una sección de\nCLAUDE.md se convirtió en un procedimiento.",
+   "example": "mkdir -p .claude/skills/deploy && cat > .claude/skills/deploy/SKILL.md <<'MD'\n---\nname: deploy\ndescription: Pasos de despliegue de este proyecto.\n---\n1. ...\nMD",
+   "why": "Para mover procedimientos largos fuera de CLAUDE.md sin pagar contexto en cada sesión.",
+   "source": "https://code.claude.com/docs/en/skills",
+   "related": [
+    "contexto-claude-md",
+    "skills-bundled"
+   ],
+   "updated": "2026-09-28"
+  }
+ ]
+}

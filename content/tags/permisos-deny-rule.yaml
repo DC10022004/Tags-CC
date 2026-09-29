@@ -1,0 +1,17 @@
+id: permisos-deny-rule
+term: Deny rule
+category: permisos
+level: intermedio
+summary: "Regla que bloquea una herramienta en TODOS los modos, incluido bypassPermissions."
+body: |
+  Las reglas de permisos se apilan sobre el modo: `allow` pre-aprueba, `ask` fuerza
+  pregunta, `deny` bloquea. La asimetría importa: las reglas `deny` aplican en todos los
+  modos, incluso `bypassPermissions`, mientras que las `allow` no tienen efecto ahí.
+  Por eso `deny` es el único freno que sobrevive a un modo permisivo.
+example: |
+  // .claude/settings.json
+  { "permissions": { "deny": ["Bash(git push *)", "Read(./.env)"] } }
+why: "Es la red de seguridad que sigue puesta cuando bajas la guardia con un modo permisivo."
+source: https://code.claude.com/docs/en/permissions
+related: [permisos-modos, configuracion-settings-json]
+updated: 2026-09-28

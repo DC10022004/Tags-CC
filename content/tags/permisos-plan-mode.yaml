@@ -1,0 +1,18 @@
+id: permisos-plan-mode
+term: Plan mode
+category: permisos
+level: basico
+summary: "Modo donde Claude investiga y propone un plan, pero no puede editar hasta que lo apruebes."
+body: |
+  Uno de los modos de permiso de Claude Code. En plan mode Claude lee el código y
+  escribe un plan, y los cambios quedan bloqueados hasta que apruebes ese plan.
+  Cambias de modo con Shift+Tab en la terminal, o arrancas directo con el flag.
+  Su valor de configuración es `plan`; los otros son `default` (Manual), `acceptEdits`,
+  `auto`, `dontAsk` y `bypassPermissions`.
+  Sirve para lo contrario de ir rápido: forzar que se entienda antes de tocar.
+example: |
+  claude --permission-mode plan
+why: "Para que Claude no empiece a cambiar archivos antes de que ambos entiendan qué hay que hacer."
+source: https://code.claude.com/docs/en/permission-modes
+related: [permisos-modos, permisos-deny-rule]
+updated: 2026-09-28

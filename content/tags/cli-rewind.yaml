@@ -1,0 +1,18 @@
+id: cli-rewind
+term: /rewind
+category: cli
+level: basico
+summary: "Deshace los cambios de Claude y la conversación hasta un punto anterior de la sesión."
+body: |
+  Claude Code guarda un checkpoint del estado de tu código antes de cada prompt que
+  inicia un turno, y conserva los últimos 100 de la sesión.
+  Abres el menú con `/rewind` o con doble Esc cuando el input está vacío, eliges un
+  mensaje y decides: restaurar código y conversación, solo la conversación, solo el
+  código, o resumir desde/hasta ahí para liberar contexto.
+  Ojo: si el input tiene texto, el doble Esc lo borra en lugar de abrir el menú.
+example: |
+  /rewind        # o presiona Esc dos veces con el input vacío
+why: "Es tu deshacer cuando la sesión se desvió, sin tener que reconstruir a mano lo que cambió."
+source: https://code.claude.com/docs/en/checkpointing
+related: [cli-clear, contexto-claude-md]
+updated: 2026-09-28

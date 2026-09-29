@@ -1,0 +1,21 @@
+id: hooks-pretooluse
+term: PreToolUse hook
+category: hooks
+level: intermedio
+summary: "Corre justo antes de cada llamada a una herramienta y puede bloquearla."
+body: |
+  Los hooks son comandos, endpoints HTTP, prompts o subagentes que Claude Code dispara en
+  puntos del ciclo de vida. `PreToolUse` es de cadencia por llamada: se ejecuta en cada
+  uso de herramienta dentro del bucle del agente.
+  Recibe el contexto del evento como JSON por stdin y puede devolver una decisión, así que
+  es el punto donde de verdad puedes impedir algo.
+  Diferencia clave con CLAUDE.md: el hook lo ejecuta el harness, no Claude. CLAUDE.md es
+  contexto que Claude puede interpretar; un hook se cumple.
+example: |
+  // .claude/settings.json
+  { "hooks": { "PreToolUse": [ { "matcher": "Bash",
+      "hooks": [ { "type": "command", "command": "~/.claude/guard.sh" } ] } ] } }
+why: "Para imponer una regla de verdad en lugar de pedírsela a Claude y esperar que la siga."
+source: https://code.claude.com/docs/en/hooks
+related: [hooks-eventos, permisos-deny-rule, contexto-claude-md]
+updated: 2026-09-28

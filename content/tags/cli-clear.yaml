@@ -1,0 +1,18 @@
+id: cli-clear
+term: /clear
+category: cli
+level: basico
+summary: "Vacía la conversación y arranca de cero, sin cerrar Claude Code."
+body: |
+  Cada sesión tiene una ventana de contexto finita, y una conversación larga sobre un tema
+  ya terminado empeora las respuestas del siguiente. `/clear` la vacía sin salir del
+  programa: cambio de tarea, contexto limpio.
+  No borra CLAUDE.md ni la auto memory, que se recargan al inicio de la conversación nueva.
+  Dato útil: si corriste `/clear` y te arrepientes, el menú de `/rewind` muestra arriba una
+  entrada para volver a la conversación anterior, disponible hasta que salgas de Claude Code.
+example: |
+  /clear
+why: "Para que el trabajo anterior no contamine la tarea siguiente ni te coma la ventana de contexto."
+source: https://code.claude.com/docs/en/checkpointing
+related: [cli-rewind, contexto-auto-memory]
+updated: 2026-09-28

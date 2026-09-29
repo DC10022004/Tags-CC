@@ -1,0 +1,20 @@
+id: skills-bundled
+term: Bundled skill
+category: skills
+level: basico
+summary: "Skills que ya vienen con Claude Code, como /code-review, /debug, /loop o /doctor."
+body: |
+  Vienen incluidas y se invocan igual que cualquier otra: `/` más el nombre.
+  Son basadas en prompt: le dan a Claude instrucciones detalladas y lo dejan orquestar el
+  trabajo con sus herramientas, a diferencia de los comandos integrados, que ejecutan
+  lógica fija.
+  Algunas las invoca Claude solo cuando son relevantes; otras, como `/verify`, corren solo
+  si tú las pides, para que tú decidas cuándo gastar ese tiempo y esos tokens.
+  Se apagan todas con el ajuste `disableBundledSkills`.
+example: |
+  /code-review      # revisa el diff actual
+  /doctor           # diagnostica tu instalación y configuración
+why: "Hay funcionalidad potente ya instalada que nunca vas a descubrir si no sabes que existe."
+source: https://code.claude.com/docs/en/skills
+related: [skills-skill-md, cli-rewind]
+updated: 2026-09-28
