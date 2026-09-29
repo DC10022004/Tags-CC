@@ -12,7 +12,7 @@
 // ─────────────────────────────────────────────────────────────────────────────
 
 // URL raw del corpus. Cámbiala por la de tu repo tras publicarlo.
-const RAW_URL = "https://raw.githubusercontent.com/USUARIO/REPO/main/dist/tags.json";
+const RAW_URL = "https://raw.githubusercontent.com/DC10022004/Tags-CC/main/dist/tags.json";
 
 const INTERVAL_HOURS = 4;     // debe coincidir con intervalHours de la Mac
 const CACHE_NAME = "tagscc-corpus.json";
