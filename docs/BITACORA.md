@@ -16,6 +16,42 @@ Formato de cada entrada:
 
 ---
 
+## 2026-09-28 — Fases 2 y 3: pipeline de contenido y cliente de iPhone
+
+**Hecho:** `fetch-docs.mjs`, `extract-local.mjs` y `draft-cards.mjs`; el script de
+Scriptable `ios/TagsCC.scriptable.js` y su guía de instalación.
+
+**El caché por ETag del plan no era posible.** El servidor de docs no envía `ETag` y su
+`Last-Modified` es la hora de cada petición, porque las páginas se generan al vuelo. Se
+verificó descargando la misma página dos veces: el contenido es idéntico pero las
+cabeceras no permiten revalidar. El caché quedó local, por antigüedad (`--max-age`, 24 h
+por defecto) más un SHA-256 del contenido para distinguir lo que cambió de verdad.
+Medido: 209 páginas en ~10 s en frío, ~1 s desde caché.
+
+**Decidido:**
+- `draft-cards.mjs` prioriza lo que Diego **no** usa todavía. El inventario local mostró
+  cero hooks configurados, cero subagentes, cero comandos propios y ningún
+  `~/.claude/CLAUDE.md`: justo las áreas donde una tarjeta rinde más.
+- El validador ahora **importa las funciones del propio script de iOS** y compara su
+  `pick()` contra la referencia en las seis ventanas de un día. Era el punto débil del
+  ADR 0003: un contrato duplicado cuya divergencia no falla sola. Se comprobó que
+  cambiar un dígito de la constante FNV hace fallar el validador.
+- `extract-local.mjs` registra solo nombres y claves, nunca valores de configuración,
+  porque el repo es público. Se revisó la salida para confirmarlo.
+
+**Verificado:** Swift, el `pipeline/lib.mjs` de referencia y el script de iOS producen
+los mismos índices (2, 2, 1, 4, 3, 6, 5) en las siete horas de prueba de un día.
+
+**Abierto:**
+- El repo aún no se publica en GitHub, así que `RAW_URL` del script de iOS sigue con el
+  marcador `USUARIO/REPO`. Publicar es una acción hacia afuera y queda a decisión de Diego.
+- El widget en el iPhone no está probado en un dispositivo real; requiere los pasos
+  manuales de `ios/INSTALACION-IPHONE.md`.
+- Hay una página `glossary` en los docs con definiciones de los conceptos centrales:
+  buena fuente para curar en volumen.
+
+---
+
 ## 2026-09-28 — Fase 1: agente de macOS
 
 **Hecho:** `macos/` completo: `Selector`, `Corpus`, `Store`, `Scheduler`, `CardPanel`,

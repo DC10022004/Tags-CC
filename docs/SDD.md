@@ -238,11 +238,19 @@ eventos, un refresco tardío muestra el tag correcto para el momento en que ocur
 
 | Script | Entrada | Salida | Idempotente |
 |---|---|---|---|
-| `fetch-docs.mjs` | sitemap de code.claude.com | `.cache/docs/*.md` + `.cache/index.json` | sí (ETag) |
+| `fetch-docs.mjs` | sitemap de code.claude.com | `.cache/docs/*.md` + `.cache/index.json` | sí (caché local por antigüedad) |
 | `extract-local.mjs` | `~/.claude` | `.cache/local-inventory.json` | sí |
 | `draft-cards.mjs` | la caché | `content/drafts/*.yaml` | sí |
 | `validate.mjs` | `content/` | código de salida + reporte | sí, no escribe |
 | `build.mjs` | `content/` | `dist/tags.json`, `dist/manifest.json` | sí |
+
+**Sobre el caché de `fetch-docs`**: se intentó revalidación HTTP y **no es posible**.
+El servidor de docs no envía `ETag`, y su `Last-Modified` es la hora de cada petición
+porque las páginas se generan al vuelo. El caché es por tanto local: no se vuelve a pedir
+una página descargada hace menos de `--max-age` horas (24 por defecto), y un SHA-256 del
+contenido distingue lo que cambió de verdad de lo que solo se volvió a bajar igual. Ese
+`changed_at` es lo que permite saber qué tarjetas re-auditar tras una actualización de los
+docs. Verificado: 209 páginas en ~10 s en frío, ~1 s desde caché.
 
 `extract-local.mjs` lee `~/.claude` solo para **decidir qué enseñar** (qué skills y hooks
 ya tiene Diego instalados). Registra nombres y rutas, nunca valores de configuración, y
@@ -301,6 +309,12 @@ entrada en el log: una mala configuración no debe impedir que el sistema arranq
 **Automatizable** (`node pipeline/validate.mjs`): schema de las tarjetas, unicidad de
 `id`, integridad de `related`, límite de `summary`, vectores de conformidad de
 `fnv1a32`, y estabilidad del hash del manifiesto entre dos builds.
+
+El validador además **importa las funciones puras del propio `ios/TagsCC.scriptable.js`**
+—no una copia— y compara su `pick()` contra la implementación de referencia en las seis
+ventanas de un día. Es la defensa del contrato duplicado del ADR 0003: una divergencia
+entre clientes no falla sola, solo hace que muestren tags distintos. Comprobado que un
+cambio de un dígito en la constante FNV hace fallar el validador.
 
 **Manual en Mac**: la tarjeta se ve legible en claro y oscuro; Esc la cierra; bloquear y
 desbloquear la dispara; desbloquear otra vez a los 5 minutos **no** la dispara; "Siguiente"

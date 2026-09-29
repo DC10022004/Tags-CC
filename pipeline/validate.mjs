@@ -1,7 +1,9 @@
 #!/usr/bin/env node
 // Valida content/ contra el schema del SDD §1.1. No escribe nada.
 // Sale con 1 si algo falla, para que se pueda encadenar en un hook o en CI.
-import { loadCards, loadTaxonomy, fnv1a32, CONFORMANCE_VECTORS, SUMMARY_MAX, REQUIRED } from "./lib.mjs";
+import { readFileSync } from "node:fs";
+import { join } from "node:path";
+import { loadCards, loadTaxonomy, fnv1a32, CONFORMANCE_VECTORS, SUMMARY_MAX, REQUIRED, ROOT } from "./lib.mjs";
 
 const errors = [];
 const warnings = [];
@@ -14,6 +16,37 @@ for (const [input, expected] of CONFORMANCE_VECTORS) {
   if (got !== expected) {
     err("fnv1a32", `${JSON.stringify(input)} dio 0x${got.toString(16)}, se esperaba 0x${expected.toString(16)}`);
   }
+}
+
+// 2. El selector del cliente de iOS debe coincidir con el de referencia. Es un contrato
+//    duplicado (ADR 0003) y una divergencia no falla sola: los dos dispositivos
+//    simplemente mostrarían tags distintos. Se importan las funciones del archivo real,
+//    no una copia, porque probar una copia no probaría nada.
+try {
+  const src = readFileSync(join(ROOT, "ios/TagsCC.scriptable.js"), "utf8");
+  const start = src.indexOf("function fnv1a32");
+  const end = src.indexOf("// \u2500", start);
+  if (start < 0 || end < 0) throw new Error("no se encontró el bloque del selector");
+  const ios = await import("data:text/javascript," +
+    encodeURIComponent(src.slice(start, end) + "\nexport { fnv1a32, pick };"));
+
+  for (const [input, expected] of CONFORMANCE_VECTORS) {
+    const got = ios.fnv1a32(input);
+    if (got !== expected) err("ios/TagsCC.scriptable.js", `fnv1a32(${JSON.stringify(input)}) dio 0x${got.toString(16)}, se esperaba 0x${expected.toString(16)}`);
+  }
+  // Un día completo de ventanas horarias, comparado contra la implementación de referencia.
+  for (const [h, m] of [[0, 10], [3, 59], [4, 0], [9, 30], [13, 0], [19, 45], [23, 59]]) {
+    const d = new Date(2026, 8, 28, h, m, 0);
+    const slot = Math.floor((h * 60 + m) / 240);
+    const reference = fnv1a32(`2026-09-28.1|2026-09-28|${slot}`) % 12;
+    const got = ios.pick("2026-09-28.1", d, 4, 12);
+    if (got !== reference) {
+      err("ios/TagsCC.scriptable.js", `pick a las ${h}:${String(m).padStart(2, "0")} dio ${got}, la referencia da ${reference} — Mac e iPhone mostrarían tags distintos`);
+    }
+  }
+  if (ios.pick("v", new Date(), 4, 0) !== null) err("ios/TagsCC.scriptable.js", "pick con corpus vacío debe devolver null");
+} catch (e) {
+  err("ios/TagsCC.scriptable.js", `no se pudo verificar el selector: ${e.message}`);
 }
 
 const { categories, levels } = loadTaxonomy();
@@ -70,5 +103,5 @@ if (errors.length) {
   for (const e of errors) console.error(`  ${e}`);
   process.exit(1);
 }
-console.log(`✓ ${cards.length} tarjetas válidas · ${categories.length} categorías · vectores fnv1a32 correctos`);
+console.log(`✓ ${cards.length} tarjetas válidas · ${categories.length} categorías · selector Swift/JS/iOS en acuerdo`);
 if (warnings.length) console.log(`  (${warnings.length} aviso(s), no bloquean el build)`);

@@ -11,6 +11,7 @@ verificados el 2026-09-28.
 | El SDK de CLT **sí** incluye `SwiftUI`, `AppKit` y `UserNotifications` | La tarjeta de Mac puede ser nativa |
 | iOS sin Xcode y sin pagar | El widget de lock screen se hace con Scriptable |
 | `code.claude.com/docs/en/<slug>.md` devuelve markdown puro (209 páginas en el sitemap) | El pipeline no parsea HTML |
+| Ese servidor no manda `ETag` y su `Last-Modified` es la hora de cada petición | El caché de docs es local, por antigüedad y hash |
 
 ## Vista de componentes
 

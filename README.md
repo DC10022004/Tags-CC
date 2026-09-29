@@ -40,5 +40,5 @@ Para el iPhone: ver [ios/INSTALACION-IPHONE.md](ios/INSTALACION-IPHONE.md)
 
 ## Estado
 
-Fases 0 y 1 completas: documentación, pipeline, 12 tarjetas y el agente de macOS.
-Siguiente: pipeline de contenido y widget de iPhone.
+Fases 0–3 completas: documentación, pipeline de contenido, agente de macOS y widget de iPhone.
+Pendiente: publicar el repo para que el iPhone lea el corpus, y curar el corpus hacia ~60 tarjetas.
